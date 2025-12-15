@@ -53,6 +53,7 @@ public class CSV_Database : MonoBehaviour
 
     private void Start()
     {
+        /*
         // Dictionary를 순회하는 예시
         foreach (var kvp in DataMap)
         {
@@ -61,5 +62,6 @@ public class CSV_Database : MonoBehaviour
 
             Debug.Log($"Key: {Key}, Keyname: {dataEntry["Keyname"]}, Value_Content: {dataEntry["Value_Content"]}, Value_Price: {(int)dataEntry["Value_Price"]}");
         }
+        */
     }
 }
