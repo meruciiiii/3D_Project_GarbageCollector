@@ -42,6 +42,6 @@ public class DataManger : MonoBehaviour
     {
         string Jsondata = JsonMapper.ToJson(data);
 
-        File.WriteAllText(path, Jsondata); //경로 파일 안에 
+        File.WriteAllText(path, Jsondata); //경로 파일 안에 json파일로 저장
     }
 }
