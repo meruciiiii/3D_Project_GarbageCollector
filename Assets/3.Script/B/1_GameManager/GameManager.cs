@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     {
         P_CurrentHP = Mathf.Clamp(P_CurrentHP + HPindecrease, 0, P_MaxHP);//최대 최소 체력 제한
     }
-    //P_Str,P_Spd,P_Money,P_Maxbag은 그냥 사용
+    //P_Str,P_Spd,P_Money,P_Maxbag은 참조해서 사용
 
     public bool LoadComplete { get; private set; } = false;
 

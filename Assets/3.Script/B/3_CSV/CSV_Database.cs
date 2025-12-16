@@ -94,15 +94,4 @@ public class CSV_Database : MonoBehaviour
         
         IsLoaded = true;
     }
-
-    /*
-       // Dictionary를 순회하는 예시
-       foreach (var kvp in DataMap)
-       {
-           string Key = kvp.Key; // Key
-           var dataEntry = kvp.Value; // 해당 Key의 모든 데이터 딕셔너리
-
-           Debug.Log($"Key: {Key}, Keyname: {dataEntry["Keyname"]}, Value_Content: {dataEntry["Value_Content"]}, Value_Price: {(int)dataEntry["Value_Price"]}");
-       }
-       */
 }

@@ -25,11 +25,6 @@ public class Text_CSV_Read : MonoBehaviour
         }
         if (CSV_Database.instance == null || CSV_Database.instance.DataMap == null)
         {
-            /*
-            CSV_Database.instance 싱글톤으로 뺄거고 메인 화면에서 설정하고 인게임에선 null이 아닐거기 때문에 인게임에서 UI불러오는데 문제 없을겁니다.
-            언어 선택 창에서는 언어 변경돼는 Text UI가 있으면 안돼겠네요.
-            -> 이거 코루틴으로 null이면 계속 대기 시켜서 처리 했습니다. 문제 없습니다.
-            */
             Debug.LogError($"CSV_Database.instance, DatamAmp이 null입니다. {gameObject.name} Text 업데이트 불가능합니다..");
             yield break;
         }
@@ -39,7 +34,6 @@ public class Text_CSV_Read : MonoBehaviour
             {
                 if (text_component != null)
                 {
-                    // 데이터 안전하게 ToString() 처리
                     text_component.text = Data[Key2].ToString();
                 }
             }

@@ -21,8 +21,6 @@ public class CSV_GarbageData_Example : MonoBehaviour
             if (!CSV_Database.instance.IsLoaded)
             {
                 Debug.LogWarning("데이터 로딩이 아직 완료되지 않았습니다. 잠시 후 다시 시도하세요.");
-                // 선택적으로 여기서 CSV_Database.instance.LoadData();를 호출할 수 있지만, 
-                // 데이터 로딩은 보통 게임 시작 시 한 번만 하는 것이 좋습니다.
                 return;
             }
 
