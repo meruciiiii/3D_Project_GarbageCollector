@@ -12,8 +12,6 @@ public class CSV_Database : MonoBehaviour
     public Dictionary<string, Dictionary<string, object>> DataMap;
     public bool IsLoaded { get; private set; } = false;
 
-    public bool isEnglish;
-
     private void Awake() //스타트 화면이랑 인게임 씬에서도 쓸것이기에 싱글톤으로 빼겠습니다.
     {
         if (instance == null)
@@ -28,13 +26,21 @@ public class CSV_Database : MonoBehaviour
         }
     }
 
-    private void OnEnable() //한영 패치시 이 게임 오브젝트 비활성화 했다가 다시 키기 //text 표시 gamepbject도 똑같이 Enable에서 데이터를 불러옵시다.
+    public void LoadData()
     {
         List<Dictionary<string, object>> Language_data = null; //CSV를 담을 공간입니다.
 
         // 1. CSVReader를 통해 List 형태로 원본 데이터를 읽습니다.
-        if (!isEnglish) { Language_data = CSVReader.Read("CSV_DataKR"); } //Resources 안에 있는 CSV_DataKR 읽기
-        else { Language_data = CSVReader.Read("CSV_DataEN"); } //영문 CSV 파일 읽기
+        if (!GameManager.instance.P_isEnglish) 
+        { 
+            Language_data = CSVReader.Read("CSV_DataKR");
+            Debug.Log("CSVKR읽기 완료");
+        } //Resources 안에 있는 CSV_DataKR 읽기
+        else 
+        {
+            Language_data = CSVReader.Read("CSV_DataEN");
+            Debug.Log("CSVEN읽기 완료");
+        } //영문 CSV 파일 읽기
 
         // 2. 새로운 Dictionary를 만듭니다. 위에선 변수 즉 공간만 선언했었습니다.
         DataMap = new Dictionary<string, Dictionary<string, object>>();

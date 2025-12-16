@@ -8,11 +8,12 @@ using System.IO;
 [Serializable]
 public class PlayerData
 {
-    public int MaxHP;
-    public int Str;
-    public int Spd;
-    public int Money;
-    public int bag;
+    public int MaxHP = 100;
+    public int Str = 1;
+    public int Spd = 5;
+    public int Money = 1000;
+    public int bag = 100;
+    public bool isEnglish = false;
 }
 public class DataManger : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class DataManger : MonoBehaviour
     {
         if (!File.Exists(path))
         {
-            //제이슨 저장해주세요.
+            SavetoJson(new PlayerData());
         }
     }
 
@@ -43,5 +44,25 @@ public class DataManger : MonoBehaviour
         string Jsondata = JsonMapper.ToJson(data);
 
         File.WriteAllText(path, Jsondata); //경로 파일 안에 json파일로 저장
+        Debug.Log("Playerdata Wirte완료");
+    }
+
+    public PlayerData LoadformJson()//데이터 불러오기 메서드
+    {
+        if (!File.Exists(path))
+        {
+            PlayerData newPlayerdata = new PlayerData();
+            return newPlayerdata;
+        }
+        string Jsondata = File.ReadAllText(path);
+        PlayerData jsonPlayerdata = JsonMapper.ToObject<PlayerData>(Jsondata);
+        Debug.Log("Playerdatajson Load완료");
+        return jsonPlayerdata;
+    }
+
+    public void SetPlayerdata(PlayerData newData)
+    {
+        SavetoJson(newData);
+        Debug.Log("데이터 저장 완료");
     }
 }

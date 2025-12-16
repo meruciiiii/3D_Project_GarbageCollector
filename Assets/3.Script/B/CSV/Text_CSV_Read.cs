@@ -22,9 +22,11 @@ public class Text_CSV_Read : MonoBehaviour
         else if (isValue_Content) Key2 = "Value_Content";
         else if (isValue_Price) Key2 = "Value_Price";
     }
+
     private IEnumerator WaitForDataAndApplyText()
     {
-        while(CSV_Database.instance==null||!CSV_Database.instance.IsLoaded) yield return null;
+        while (GameManager.instance == null || !GameManager.instance.IsInitialLoadComplete) yield return null;
+        while (CSV_Database.instance==null || !CSV_Database.instance.IsLoaded) yield return null;
 
         if (string.IsNullOrEmpty(inputkey) || string.IsNullOrEmpty(Key2))
         {
