@@ -15,9 +15,9 @@ public class PlayerData
     public int bag = 100;
     public bool isEnglish = false;
 }
-public class DataManger : MonoBehaviour
+public class JsonDataManger : MonoBehaviour
 {
-    public static DataManger instance;
+    public static JsonDataManger instance;
 
     private string filename = "Player_data.json";
     private static string path; //파일 저장 경로

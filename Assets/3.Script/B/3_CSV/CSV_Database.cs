@@ -34,12 +34,12 @@ public class CSV_Database : MonoBehaviour
         if (!GameManager.instance.P_isEnglish) 
         { 
             Language_data = CSVReader.Read("CSV_DataKR");
-            Debug.Log("CSVKR읽기 완료");
+            Debug.Log("CSV_DataKR 읽기 완료");
         } //Resources 안에 있는 CSV_DataKR 읽기
         else 
         {
             Language_data = CSVReader.Read("CSV_DataEN");
-            Debug.Log("CSVEN읽기 완료");
+            Debug.Log("CSV_DataEN 읽기 완료");
         } //영문 CSV 파일 읽기
 
         // 2. 새로운 Dictionary를 만듭니다. 위에선 변수 즉 공간만 선언했었습니다.
@@ -57,17 +57,14 @@ public class CSV_Database : MonoBehaviour
         IsLoaded = true;
     }
 
-    private void Start()
-    {
-        /*
-        // Dictionary를 순회하는 예시
-        foreach (var kvp in DataMap)
-        {
-            string Key = kvp.Key; // Key
-            var dataEntry = kvp.Value; // 해당 Key의 모든 데이터 딕셔너리
+    /*
+       // Dictionary를 순회하는 예시
+       foreach (var kvp in DataMap)
+       {
+           string Key = kvp.Key; // Key
+           var dataEntry = kvp.Value; // 해당 Key의 모든 데이터 딕셔너리
 
-            Debug.Log($"Key: {Key}, Keyname: {dataEntry["Keyname"]}, Value_Content: {dataEntry["Value_Content"]}, Value_Price: {(int)dataEntry["Value_Price"]}");
-        }
-        */
-    }
+           Debug.Log($"Key: {Key}, Keyname: {dataEntry["Keyname"]}, Value_Content: {dataEntry["Value_Content"]}, Value_Price: {(int)dataEntry["Value_Price"]}");
+       }
+       */
 }

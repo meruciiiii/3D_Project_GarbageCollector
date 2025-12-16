@@ -6,21 +6,26 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public int P_MaxHP = 100; //최대체력
-    public int P_CurrentHP = 100; //현재체력
-    public int P_Str = 1; //현재 힘
-    public int P_Spd = 5; //현재 속도
-    public int P_Money = 1000; //현재 돈
-    public int P_Maxbag = 100; //현재 가방최대무게
-    public int P_weight = 0;
-    public bool P_isEnglish;
-    public int P_Remainweight //남은 가방무게 일단 넣어두기
+    public int P_CurrentHP; //현재체력
+    public int P_Str = 1; //힘
+    public int P_Spd = 5; //속도
+    public int P_Money = 1000; //소지 돈
+    public int P_Maxbag = 100; //가방최대무게
+
+    public int P_Weight = 0; //현재 무게
+
+    public float interact_distance = 3f; // 우진님 피드백 GameObject 상호작용 최소 거리
+
+    public bool P_isEnglish; //한 영문전환
+
+    public int P_RemainWeight //남은 가방무게 일단 넣어두기
     {
         get
         {
-            return P_Maxbag - P_weight;
+            return P_Maxbag - P_Weight;
         }
     }
-    public bool IsInitialLoadComplete { get; private set; } = false;
+    public bool LoadComplete { get; private set; } = false;
 
     public static GameManager instance = null;
     private void Awake()
@@ -44,7 +49,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator WaitForDataManagerAndLoad()
     {
         // DataManger 인스턴스가 생성될 때까지 기다립니다.
-        while (DataManger.instance == null)
+        while (JsonDataManger.instance == null)
         {
             yield return null;
         }
@@ -58,10 +63,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void LoadGamedata()
+    public void LoadGamedata()//게임을 다시 켰을때 초기화 값들
     {
-        if (DataManger.instance == null) return;
-        PlayerData loadData = DataManger.instance.LoadformJson();
+        if (JsonDataManger.instance == null) return;
+        PlayerData loadData = JsonDataManger.instance.LoadformJson();
         P_MaxHP = loadData.MaxHP;
         P_Str = loadData.Str;
         P_Spd = loadData.Spd;
@@ -69,15 +74,15 @@ public class GameManager : MonoBehaviour
         P_Maxbag = loadData.bag;
 
         P_CurrentHP = P_MaxHP;
-        P_weight = 0; //들고 있던 쓰레기 무게 초기화
+        P_Weight = 0; //들고 있던 쓰레기 무게 초기화
 
         P_isEnglish = loadData.isEnglish;
-        IsInitialLoadComplete = true;
+        LoadComplete = true;
     }
 
     public void SaveAllGamedata()
     {
-        if (DataManger.instance == null) return;
+        if (JsonDataManger.instance == null) return;
         PlayerData datatosave = new PlayerData
         {
             MaxHP = P_MaxHP,
@@ -87,7 +92,7 @@ public class GameManager : MonoBehaviour
             bag = P_Maxbag,
             isEnglish = P_isEnglish
         };
-        DataManger.instance.SetPlayerdata(datatosave);
+        JsonDataManger.instance.SetPlayerdata(datatosave);
     }
 
     public void ChangeHP(int HPindecrease)
