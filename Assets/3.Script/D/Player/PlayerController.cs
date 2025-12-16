@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField] private PlayerInput input;
 
 	[Header("플레이어 이동속도")]
-	public float movementSpeed;
+	public float moveSpeed;
 	[SerializeField] private float walkSpeed;
 	[SerializeField] private float runSpeed;
 	[SerializeField] private float minSpeed = 0.1f;
@@ -72,10 +72,10 @@ public class PlayerController : MonoBehaviour {
 		playerRB.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 	}
 	private void Run() {
-		movementSpeed = runSpeed;
+		moveSpeed = runSpeed;
 	}
 	private void Walk() {
-		movementSpeed = walkSpeed;
+		moveSpeed = walkSpeed;
 	}
 
 	[Header("테스트")]
@@ -85,11 +85,16 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 Calc_Speed(Vector3 vector) {
 		//총 무게 가져오기
 
-		//무게 계산 = movementSpeed에 무게로 인한 무게 90% + 최소한의 이동속도 10%
-		float Speed = movementSpeed * ((1 - inventory / max_inventory) * 0.9f + minSpeed);
+		//무게 계산 = moveSpeed에 무게로 인한 무게 90% + 최소한의 이동속도 10%
+		float Speed = moveSpeed * ((1 - inventory / max_inventory) * 0.9f + minSpeed);
 		//만약 내가 큰 쓰레기를 들었을 경우,,,
 		//Speed *= 0.5f;
 		vector *= Speed * Time.deltaTime;
 		return vector;
 	}
+
+
+	//1. 멈췄을때 바로멈추는거
+	//2. 달리다가 걸을때나 멈출때 살짝 관성
+	//3. 최대한 그 에셋이랑 비슷한 조작감으로.
 }
