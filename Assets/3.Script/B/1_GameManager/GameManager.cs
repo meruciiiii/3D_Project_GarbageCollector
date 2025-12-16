@@ -14,9 +14,9 @@ public class GameManager : MonoBehaviour
 
     public int P_Weight = 0; //현재 무게
 
-    public float interact_distance = 3f; // 우진님 피드백 GameObject 상호작용 최소 거리
-
     public bool P_isEnglish; //한 영문전환
+
+    public float interact_distance = 3f; // 우진님 피드백 GameObject 상호작용 최소 거리
 
     public int P_RemainWeight //남은 가방무게 일단 넣어두기
     {
@@ -102,6 +102,13 @@ public class GameManager : MonoBehaviour
 
     //P_Str,P_Spd,P_Money,P_Maxbag은 그냥 사용  
 
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            SaveAllGamedata();//일시 정지되거나 백그라운드로 전환될 때 모든 값 세이브 합니다.
+        }
+    }
     private void OnApplicationQuit()
     {
         SaveAllGamedata();//꺼지기 전에 모든 값 세이브 합니다.
