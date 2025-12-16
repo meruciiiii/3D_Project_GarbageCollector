@@ -55,25 +55,19 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WaitForDataManagerAndLoad()
     {
-        // JsonDataManger 인스턴스가 생성될 때까지 기다립니다.
-        while (JsonDataManger.instance == null) 
-            // 여기 우진님 연결시키면서 확인했습니다. JsonDataManger,CSV_Database, GameManager 전부 한 씬에서 필요합니다 3개다 프리펩 해놓았으니 다 넣어주세요.
+        //우진님 피드백으로 일단 싱글톤 제거할 수 있었던 jsondatamanager제거
+        LoadGamedata();
+
+        while (CSV_Database.instance == null)
         {
             yield return null;
         }
-        // JsonDataManger 준비된 후에 로드를 시도
-        LoadGamedata();
-
-        if (CSV_Database.instance != null)
-        {
-            CSV_Database.instance.LoadData();
-        }
+        CSV_Database.instance.LoadData();
     }
 
     public void LoadGamedata()//게임을 다시 켰을때 초기화 값들
     {
-        if (JsonDataManger.instance == null) return;
-        PlayerData loadData = JsonDataManger.instance.LoadformJson();
+        PlayerData loadData = JsonDataManger.LoadformJson();
         P_MaxHP = loadData.MaxHP;
         P_Str = loadData.Str;
         P_Spd = loadData.Spd;
@@ -90,7 +84,6 @@ public class GameManager : MonoBehaviour
 
     public void SaveAllGamedata()
     {
-        if (JsonDataManger.instance == null) return;
         PlayerData datatosave = new PlayerData
         {
             MaxHP = P_MaxHP,
@@ -100,7 +93,7 @@ public class GameManager : MonoBehaviour
             bag = P_Maxbag,
             isEnglish = P_isEnglish
         };
-        JsonDataManger.instance.SavetoJson(datatosave);
+        JsonDataManger.SavetoJson(datatosave);
     }
 
     private void OnApplicationPause(bool pause)

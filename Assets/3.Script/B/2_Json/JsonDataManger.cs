@@ -17,30 +17,12 @@ public class PlayerData
 }
 public class JsonDataManger : MonoBehaviour
 {
-    public static JsonDataManger instance = null;
-
-    private string filename = "Player_data.json";
+    private static string filename = "Player_data.json";
     private static string path; //파일 저장 경로
-    private bool pathbool = false;
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        if (!pathbool)
-        {
-            path = Path.Combine(Application.persistentDataPath, filename);
-            pathbool = true;
-        }
-
+        path = Path.Combine(Application.persistentDataPath, filename);
         //파일 경로에 파일 이름을 합쳐서 string화
         //persistentDataPath 경로
         //C:\Users\[user name]\AppData\LocalLow\[company name]\[product name]
@@ -54,7 +36,7 @@ public class JsonDataManger : MonoBehaviour
         }
     }
 
-    public void SavetoJson(PlayerData data)
+    public static void SavetoJson(PlayerData data)
     {
         string Jsondata = JsonMapper.ToJson(data);
 
@@ -62,7 +44,7 @@ public class JsonDataManger : MonoBehaviour
         Debug.Log("Playerdata Wirte완료");
     }
 
-    public PlayerData LoadformJson()//데이터 불러오기 메서드
+    public static PlayerData LoadformJson()//데이터 불러오기 메서드
     {
         if (!File.Exists(path))
         {
