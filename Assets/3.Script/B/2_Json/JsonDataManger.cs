@@ -15,7 +15,7 @@ public class PlayerData
     public int bag = 100;
     public bool isEnglish = false;
 }
-public class JsonDataManger
+public static class JsonDataManger
 {
     private static string filename = "Player_data.json";
     private static string path => Path.Combine(Application.persistentDataPath, filename);
