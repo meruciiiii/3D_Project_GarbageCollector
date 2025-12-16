@@ -15,26 +15,11 @@ public class PlayerData
     public int bag = 100;
     public bool isEnglish = false;
 }
-public class JsonDataManger : MonoBehaviour
+public class JsonDataManger
 {
     private static string filename = "Player_data.json";
-    private static string path; //파일 저장 경로
-
-    private void Awake()
-    {
-        path = Path.Combine(Application.persistentDataPath, filename);
-        //파일 경로에 파일 이름을 합쳐서 string화
-        //persistentDataPath 경로
-        //C:\Users\[user name]\AppData\LocalLow\[company name]\[product name]
-    }
-
-    private void Start()
-    {
-        if (!File.Exists(path))//파일이 경로에 없다면
-        {
-            SavetoJson(new PlayerData());//새로운 데이터 저장
-        }
-    }
+    private static string path => Path.Combine(Application.persistentDataPath, filename);
+    // 호출되는 순간 경로를 계산해서 반환함
 
     public static void SavetoJson(PlayerData data)
     {
@@ -46,9 +31,10 @@ public class JsonDataManger : MonoBehaviour
 
     public static PlayerData LoadformJson()//데이터 불러오기 메서드
     {
-        if (!File.Exists(path))
+        if (!File.Exists(path))//파일이 경로에 없다면
         {
             PlayerData newPlayerdata = new PlayerData();
+            SavetoJson(newPlayerdata);
             return newPlayerdata;
         }
         string Jsondata = File.ReadAllText(path);
