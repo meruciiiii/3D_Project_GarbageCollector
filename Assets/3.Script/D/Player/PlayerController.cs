@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
 	public float movementSpeed;
 	[SerializeField] private float walkSpeed;
 	[SerializeField] private float runSpeed;
+	[SerializeField] private float minSpeed = 0.1f;
 
 	[Header("플레이어 점프력")]
 	[SerializeField] private float jumpPower;
@@ -83,9 +84,12 @@ public class PlayerController : MonoBehaviour {
 
 	private Vector3 Calc_Speed(Vector3 vector) {
 		//총 무게 가져오기
-		float Speed = movementSpeed * (1 - (inventory / max_inventory));
+
+		//무게 계산 = movementSpeed에 무게로 인한 무게 90% + 최소한의 이동속도 10%
+		float Speed = movementSpeed * ((1 - inventory / max_inventory) * 0.9f + minSpeed);
+		//만약 내가 큰 쓰레기를 들었을 경우,,,
+		//Speed *= 0.5f;
 		vector *= Speed * Time.deltaTime;
 		return vector;
 	}
-
 }
