@@ -7,7 +7,7 @@ public enum garbagedata
 {
     name, // 0 이름
     explaination, // 1 설명
-    size, // 2 크기(라지 스몰)
+    size, // 2 크기(라지 스몰 S L)
     region, // 3 스폰지역
     weight, // 4 무게
     requireSrt, // 5 요구 힘

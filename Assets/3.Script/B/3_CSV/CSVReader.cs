@@ -12,7 +12,8 @@ public class CSVReader
 
     static char COMMENT_CHAR = '#'; //주석행 추가
 
-    public static List<Dictionary<string, object>> Read(string file)
+    public static List<Dictionary<string, object>> Read(string file) 
+        //전역 메서드 반환값 List<Dictionary<string, object>>, a매개변수 string (plane text file)
     {
         var list = new List<Dictionary<string, object>>();
 
