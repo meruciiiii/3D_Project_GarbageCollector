@@ -37,57 +37,6 @@ public class CSV_Database : MonoBehaviour
     public Dictionary<string, Dictionary<string, object>> GarbageMap;
     public bool IsLoaded { get; private set; } = false;
 
-    //피드백 요구 메서드 key값만 주면 바로 값 내뱉을 수 있게
-    public string getname(string key)
-    {
-        string value = "";
-        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = data["name"].ToString();
-        else Debug.Log("key가 없습니다.");
-        return value;
-    }
-    public string getexplaination(string key)
-    {
-        string value = "";
-        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = data["explaination"].ToString();
-        else Debug.Log("key가 없습니다.");
-        return value;
-    }
-    public string getsize(string key)
-    {
-        string value = "";
-        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = data["size"].ToString();
-        else Debug.Log("key가 없습니다.");
-        return value;
-    }
-    public string getregion(string key)
-    {
-        string value = "";
-        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = data["region"].ToString();
-        else Debug.Log("key가 없습니다.");
-        return value;
-    }
-    public int getweight(string key)
-    {
-        int value = 0;
-        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = (int)data["weight"];
-        else Debug.Log("key가 없습니다.");
-        return value;
-    }
-    public int getrequireSrt(string key)
-    {
-        int value = 0;
-        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = (int)data["requireSrt"];
-        else Debug.Log("key가 없습니다.");
-        return value;
-    }
-    public int getHpdecrease(string key)
-    {
-        int value = 0;
-        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = (int)data["Hpdecrease"];
-        else Debug.Log("key가 없습니다.");
-        return value;
-    }
-
     public void LoadData()
     {
         //첫번째 text UI용 CSV 이중 dictionary
@@ -143,5 +92,57 @@ public class CSV_Database : MonoBehaviour
         }
         
         IsLoaded = true;
+    }
+
+    //피드백 요구 메서드 key값만 주면 바로 값 내뱉을 수 있게
+    //Garbage 데이터입니다.
+    public string getname(string key)
+    {
+        string value = "";
+        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = data["name"].ToString();
+        else Debug.Log("key가 없습니다.");
+        return value;
+    }
+    public string getexplaination(string key)
+    {
+        string value = "";
+        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = data["explaination"].ToString();
+        else Debug.Log("key가 없습니다.");
+        return value;
+    }
+    public string getsize(string key)
+    {
+        string value = "";
+        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = data["size"].ToString();
+        else Debug.Log("key가 없습니다.");
+        return value;
+    }
+    public string getregion(string key)
+    {
+        string value = "";
+        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = data["region"].ToString();
+        else Debug.Log("key가 없습니다.");
+        return value;
+    }
+    public int getweight(string key)
+    {
+        int value = 0;
+        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = (int)data["weight"];
+        else Debug.Log("key가 없습니다.");
+        return value;
+    }
+    public int getrequireSrt(string key)
+    {
+        int value = 0;
+        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = (int)data["requireSrt"];
+        else Debug.Log("key가 없습니다.");
+        return value;
+    }
+    public int getHpdecrease(string key)
+    {
+        int value = 0;
+        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = (int)data["Hpdecrease"];
+        else Debug.Log("key가 없습니다.");
+        return value;
     }
 }
