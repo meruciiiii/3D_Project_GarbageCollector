@@ -16,9 +16,9 @@ public class GameManager : MonoBehaviour
 
     public bool P_isEnglish; //한 영문전환
 
-    public float interact_distance = 3f; // 우진님 피드백 GameObject 상호작용 최소 거리
+    public int grab_limit = 1;
 
-    public int P_RemainWeight //남은 가방무게 일단 넣어두기
+    public float P_RemainWeight //남은 가방무게 일단 넣어두기
     {
         get
         {
