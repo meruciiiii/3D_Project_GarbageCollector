@@ -10,15 +10,15 @@ public class GameManager : MonoBehaviour
     public int P_Str = 1; //힘
     public int P_Spd = 5; //속도
     public int P_Money = 1000; //소지 돈
-    public int P_Maxbag = 100; //가방최대무게
+    public float P_Maxbag = 100; //가방최대무게
 
-    public int P_Weight = 0; //현재 무게
+    public float P_Weight = 0; //현재 무게
 
     public bool P_isEnglish; //한 영문전환
 
-    public float interact_distance = 3f; // 우진님 피드백 GameObject 상호작용 최소 거리
+    public int grab_limit = 1;//집을 수 있는 최댓수
 
-    public int P_RemainWeight //남은 가방무게 일단 넣어두기
+    public float P_RemainWeight //남은 가방무게 일단 넣어두기
     {
         get
         {
@@ -55,41 +55,35 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WaitForDataManagerAndLoad()
     {
-        // DataManger 인스턴스가 생성될 때까지 기다립니다.
-        while (JsonDataManger.instance == null)
+        //우진님 피드백으로 일단 싱글톤 제거할 수 있었던 jsondatamanager제거
+        LoadGamedata();
+
+        while (CSV_Database.instance == null)
         {
             yield return null;
         }
-        // DataManger가 준비된 후에 로드를 시도
-        LoadGamedata();
-
-        // CSV_Database도 초기 로드를 시작하도록 명령 (CSV_Database가 GameManager를 기다린다고 가정)
-        if (CSV_Database.instance != null)
-        {
-            CSV_Database.instance.LoadData();
-        }
+        CSV_Database.instance.LoadData();
     }
 
     public void LoadGamedata()//게임을 다시 켰을때 초기화 값들
     {
-        if (JsonDataManger.instance == null) return;
-        PlayerData loadData = JsonDataManger.instance.LoadformJson();
+        PlayerData loadData = JsonDataManger.LoadformJson();
         P_MaxHP = loadData.MaxHP;
         P_Str = loadData.Str;
         P_Spd = loadData.Spd;
         P_Money = loadData.Money;
         P_Maxbag = loadData.bag;
 
-        P_CurrentHP = P_MaxHP;
+        P_CurrentHP = P_MaxHP;//체력은 풀로
         P_Weight = 0; //들고 있던 쓰레기 무게 초기화
 
         P_isEnglish = loadData.isEnglish;
         LoadComplete = true;
+        Debug.Log("LoadGamedata");
     }
 
     public void SaveAllGamedata()
     {
-        if (JsonDataManger.instance == null) return;
         PlayerData datatosave = new PlayerData
         {
             MaxHP = P_MaxHP,
@@ -99,7 +93,7 @@ public class GameManager : MonoBehaviour
             bag = P_Maxbag,
             isEnglish = P_isEnglish
         };
-        JsonDataManger.instance.SetPlayerdata(datatosave);
+        JsonDataManger.SavetoJson(datatosave);
     }
 
     private void OnApplicationPause(bool pause)

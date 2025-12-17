@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
+
 public class SoundController : MonoBehaviour
 {
     public AudioMixer audioMixer;
@@ -31,18 +32,20 @@ public class SoundController : MonoBehaviour
         float volumeValue = 0f;
         string parameter = "";
 
+        float snap = 5f;
+
         switch (audioGroup)
         {
             case "BGM":
-                volumeValue = sliders[0].value;
+                volumeValue = Mathf.Round(sliders[0].value / snap)*snap;
+                sliders[0].value = volumeValue;
                 parameter = "BGM";
-                //audioMixer.SetFloat("BGM", sliders[0].value);
                 break;
 
             case "SFX":
-                volumeValue = sliders[1].value;
+                volumeValue = Mathf.Round(sliders[1].value / snap) * snap;
+                sliders[1].value = volumeValue;
                 parameter = "SFX";
-                //audioMixer.SetFloat("SFX", sliders[1].value);
                 break;
         }
         audioMixer.SetFloat(parameter, volumeValue);
