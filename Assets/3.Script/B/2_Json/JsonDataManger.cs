@@ -12,7 +12,7 @@ public class PlayerData
     public int Str = 1;
     public int Spd = 5;
     public int Money = 1000;
-    public int bag = 100;
+    public float bag = 100;
     public bool isEnglish = false;
 }
 public static class JsonDataManger
