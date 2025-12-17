@@ -7,11 +7,20 @@ public class GarbageSpawner : MonoBehaviour
     [Header("Prefab Settings")]
     public GameObject[] prefabsToSpawn;
 
+    [Tooltip("스폰된 오브젝트들이 들어갈 부모 오브젝트입니다. 비워두면 이 오브젝트의 자식으로 들어갑니다.")]
+    public Transform parentTransform;
+
     [Header("Spawn Settings")]
     public int spawnCount = 10;
 
     void Start()
     {
+        // 부모를 지정하지 않았다면 이 스크립트가 붙은 오브젝트를 부모로 설정
+        if (parentTransform == null)
+        {
+            parentTransform = this.transform;
+        }
+
         // 1. 렌더러만 비활성화 (오브젝트는 파괴하지 않음)
         if (TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer))
         {
@@ -40,7 +49,7 @@ public class GarbageSpawner : MonoBehaviour
             // 높이(Y)는 Plane의 현재 높이로 고정
             Vector3 spawnPosition = transform.position + new Vector3(randomX, 0, randomZ);
 
-            Instantiate(prefabsToSpawn[randomIndex], spawnPosition, Quaternion.identity);
+            Instantiate(prefabsToSpawn[randomIndex], spawnPosition, Quaternion.identity, parentTransform);
         }
     }
 }
