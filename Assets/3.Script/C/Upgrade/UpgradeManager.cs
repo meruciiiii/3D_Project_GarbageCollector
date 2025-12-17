@@ -10,7 +10,7 @@ public class UpgradeManager : MonoBehaviour
 {
     [Header("업그레이드 가격 설정")]
     [SerializeField] private int baseStrengthCost = 1000;
-    [SerializeField] private float baseBagCost = 500;
+    [SerializeField] private int baseBagCost = 500;
     [SerializeField] private int baseSpeedCost = 2000;
 
     public int GetUpgradeCost(UpgradeType type)
