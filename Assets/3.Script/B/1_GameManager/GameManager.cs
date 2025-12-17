@@ -10,13 +10,17 @@ public class GameManager : MonoBehaviour
     public int P_Str = 1; //힘
     public int P_Spd = 5; //속도
     public int P_Money = 1000; //소지 돈
-    public int P_Maxbag = 100; //가방최대무게
+    public int P_Maxbag = 5000; //가방최대무게
 
     public int P_Weight = 0; //현재 무게
 
     public bool P_isEnglish; //한 영문전환
 
     public int grab_limit = 1;//집을 수 있는 최댓수
+
+    //큰 쓰레기 전용 값 2종류
+    public bool isGrabBigGarbage = false;
+    public int BigGarbageWeight = 0;
 
     public float P_RemainWeight //남은 가방무게 일단 넣어두기
     {
