@@ -14,39 +14,59 @@ public class CatchSmallGarbage : MonoBehaviour
     private int trashNum;
     private int[] Weight = new int[9];
     private int BagWeight;
+    private int MaxWeight;
     private void Awake()
     {
         for(int i = 0; i < Weight.Length; i++)
         {
-            string trashName = "small_"+(i+1);
+            string trashName = "small_"+(i);
             StartCoroutine(FindCsvData_co(trashName,i));
         }
         
     }
     public void CatchTrash(GameObject trash)
     {
+        GameManager.instance.P_Maxbag = 5000;
         this.trash = trash;
-        AddBackpack();
-        removeTrash();
+        if (AddBackpack())
+        {
+            removeTrash();
+        }
     }
     public void removeTrash()
     {
         Destroy(trash);
+        //cachedObjects.Remove(trash);
     }
-    public void AddBackpack()
+    public bool AddBackpack()
     {
+        // 최대 가방 데이터를 가져온다
+        BagWeight = GameManager.instance.P_Weight;
+        Debug.Log(BagWeight + " : 게임매니저에 저장된 현재 무게");
+
+        // 최대 가방 데이터를 가져온다
+        MaxWeight = GameManager.instance.P_Maxbag;
+        Debug.Log(MaxWeight + " : 게임매니저에 저장된 최대 보유 무게");
+
         // 쓰레기의 무게 데이터를 가져온다
-        Debug.Log(GameManager.instance.P_Weight + " : 게임매니저에 저장된 현재 무게");
         trashNum = trash.GetComponent<SmallTrash>().getTrashNum();
         Debug.Log(trashNum + " : 번 쓰레기");
-        // 현재 가방 데이터를 가져온다
-        BagWeight = GameManager.instance.P_Weight;
-        Debug.Log(BagWeight + " : 현재 무게");
+
         // 현재 가방 무게에 쓰레기의 무게를 더한다
-        BagWeight += Weight[trashNum];
+        if (MaxWeight >= BagWeight + Weight[trashNum])
+        {
+            BagWeight += Weight[trashNum];
+        }
+        else
+        {
+            Debug.Log("이 것을 담기에는 용량이 초과됩니다.");
+            return false;
+        }
         Debug.Log(BagWeight + " : 추가된 현재 무게");
         GameManager.instance.P_Weight = BagWeight;
+        // 제대로 저장 되었는지 확인
         Debug.Log(GameManager.instance.P_Weight + " : 게임매니저에 저장된 현재 무게");
+        return true;
     }
     private IEnumerator FindCsvData_co(string trashName, int i)
     {

@@ -43,7 +43,7 @@ public class PlayerInput : MonoBehaviour {
 	//플레이어 좌클릭(줍기)
 	public void Event_PickUp(InputAction.CallbackContext context) {
 		if (context.phase.Equals(InputActionPhase.Started)) {
-			//onPickUp();
+			onPickUp();
 		}
 	}
 	//플레이어 상호작용
