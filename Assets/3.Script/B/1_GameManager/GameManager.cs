@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public bool P_isEnglish; //한 영문전환
 
-    public int grab_limit = 1;
+    public int grab_limit = 1;//집을 수 있는 최댓수
 
     public float P_RemainWeight //남은 가방무게 일단 넣어두기
     {
