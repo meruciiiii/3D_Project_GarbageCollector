@@ -13,7 +13,7 @@ public class CatchSmallGarbage : MonoBehaviour
     public GameObject trash;
     private int trashNum;
     private int[] Weight = new int[9];
-    private int BagWeight;
+    private float BagWeight;
     private void Awake()
     {
         for(int i = 0; i < Weight.Length; i++)
