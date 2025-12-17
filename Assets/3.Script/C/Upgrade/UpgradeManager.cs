@@ -24,9 +24,9 @@ public class UpgradeManager : MonoBehaviour
                 // 예: 현재 힘 * 기본가격 (점점 비싸짐)
                 return GameManager.instance.P_Str * baseStrengthCost;
 
-            case UpgradeType.BagWeight:
-                // 예: (현재 가방크기 / 10) * 기본가격
-                return (GameManager.instance.P_Maxbag / 10) * baseBagCost;
+            //case UpgradeType.BagWeight:
+            //    // 예: (현재 가방크기 / 10) * 기본가격
+            //    return (GameManager.instance.P_Maxbag / 10) * baseBagCost;
 
             case UpgradeType.Speed:
                 return baseSpeedCost; // 고정 가격
