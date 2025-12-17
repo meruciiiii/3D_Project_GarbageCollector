@@ -21,19 +21,24 @@ public class PlayerWork : MonoBehaviour
     private float Distance = 3f;       //플레이어 작업 거리
     private LineRenderer lineRenderer; //플레이어 작업 위치 그리기
     private Camera playerCamera;
+    //private HitPointState hitPointState;
     private Vector3 HitPosition;
+    private GameObject[] target;
     public LayerMask interactionMask;
+    
+    
+    public HitsSort sorting;
+    //[SerializeField] private PlayerInput input;
 
 
-    //State 구현시 State와 연결
-    private CatchSmallGarbage catchSmall;
 
 
     public void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
         playerCamera = Camera.main;
-        catchSmall = FindObjectOfType<CatchSmallGarbage>();
+        //hitPointState = FindObjectOfType<HitPointState>();
+
 
         //점의 개수
         if (lineRenderer == null)
@@ -50,31 +55,47 @@ public class PlayerWork : MonoBehaviour
         }
         lineRenderer.positionCount = 2;
         lineRenderer.useWorldSpace = true;
-        lineRenderer.enabled = true;
+        lineRenderer.enabled = false;
+        //input.onPickUp += Check;
     }
     private void Update()
     {
+        
         Check();
-        DrawLine();
+        //DrawLine();
     }
     public void Check()
     {
         // 상호작용 -> raycast
-        RaycastHit hit;
         Vector3 origin = playerCamera.transform.position;
         Vector3 direction = playerCamera.transform.forward;
-        
+        RaycastHit[] hits = Physics.RaycastAll(origin, direction, Distance, interactionMask);
+        hits = sorting.SortingHits(hits);
+        if(hits == null)
+        {
+            Debug.Log("hits가 널이네요");
+            return;
+        }
+        target = new GameObject[hits.Length];
+        for (int i = 0; i < hits.Length; i++)
+        {
+            target[i] = hits[i].collider.gameObject;
+        }
+        /*
+        RaycastHit hit;
         if (Physics.Raycast(origin, direction, out hit, Distance, interactionMask))
         {
             Debug.Log(interactionMask.ToString() + " : 레이어 마스크");
             Debug.Log("쓰레기(큰쓰레기, 작은쓰레기 포함)");
-            HandleInteraction(hit.collider.gameObject);
+            //hitPointState.HandleInteraction(hit.collider.gameObject);
+            target = hit.collider.gameObject;
             HitPosition = hit.point;
         }
         else
         {
             HitPosition = origin + direction * Distance;
         }
+         */
     }
     private void DrawLine()
     {
@@ -86,24 +107,12 @@ public class PlayerWork : MonoBehaviour
         lineRenderer.SetPosition(0, playerCamera.transform.position);
         lineRenderer.SetPosition(1, HitPosition);
     }
-
-    private void HandleInteraction(GameObject target)  //스테이트 에서~
+    public GameObject[] GetGameObject()
     {
-        switch (target.layer)
-        {
-            case int layer when layer == LayerMask.NameToLayer("SmallTrash"):
-                //작은 쓰레기 일 경우 구현
-                //HandleSmallTrash(target);
-                catchSmall.CatchTrash(target);
-
-                break;
-
-            case int layer when layer == LayerMask.NameToLayer("BigTrash"):
-                //큰 쓰레기 일 경우 구현
-                //HandleBigTrash(target);
-                break;
-        }
+        return target;
     }
+
+    
     //스테이트 에서~
     //private void HandleSmallTrash(GameObject target)
     //{
