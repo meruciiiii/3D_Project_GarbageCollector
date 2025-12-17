@@ -1003,6 +1003,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c8f929a49e74ad4488c238560b2e7af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
+--- !u!114 &207818313 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2357304253962886181, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+  m_PrefabInstance: {fileID: 1075056160}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207818305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
 --- !u!1001 &215725704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2558,6 +2569,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5850049434601701821, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: FirstPersonMovement
+      value: 
+      objectReference: {fileID: 207818313}
+    - target: {fileID: 6267145059257737875, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 7210037128221806783, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 7539257671593611161, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.47199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395702627891024247, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395702627891024247, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395702627891024247, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395702627891024247, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395702627891024247, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8458082373420546898, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2923,6 +2974,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5653073563824068037, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5653073563824068037, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6875371760015618421, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
