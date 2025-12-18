@@ -6,9 +6,7 @@ public class SellUI : MonoBehaviour
     [Header("매니저 연결")]
     [SerializeField] private SellManager sellManager;
 
-    // 협업 중인 플레이어 이동 스크립트 이름을 정확히 적어야 합니다.
-    // 만약 이름이 다르다면 FirstPersonMovement를 해당 클래스명으로 바꾸세요.
-    [SerializeField] private MonoBehaviour FirstPersonMovement;
+    [SerializeField] private PlayerController playerController;
 
     [Header("UI 패널 연결")]
     [SerializeField] private GameObject tradePanel;   // 거래 대기 창
@@ -32,12 +30,12 @@ public class SellUI : MonoBehaviour
         if (confirmButton != null) confirmButton.onClick.AddListener(CloseAllPanels);
 
         // 플레이어 컨트롤러 자동 찾기 (혹시 연결 안했을 경우)
-        if (FirstPersonMovement == null)
+        if (playerController == null)
         {
             // 주의: 팀원의 스크립트 이름이 FirstPersonMovement가 맞는지 확인 필요
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player != null)
-                FirstPersonMovement = player.GetComponent<FirstPersonMovement>(); // 혹은 다른 이동 스크립트
+                playerController = player.GetComponent<PlayerController>(); // 혹은 다른 이동 스크립트
         }
     }
 
@@ -107,8 +105,20 @@ public class SellUI : MonoBehaviour
     private void SetPlayerControl(bool isActive)
     {
         // 1. 플레이어 이동 스크립트 켜고 끄기
-        if (FirstPersonMovement != null)
-            FirstPersonMovement.enabled = isActive;
+        if (playerController != null)
+        {
+            if (!isActive)
+            {
+                Rigidbody rb = playerController.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.linearVelocity = Vector3.zero; // Unity 6 (구버전은 velocity)
+                    rb.angularVelocity = Vector3.zero;
+                }
+            }
+
+            playerController.enabled = isActive;
+        }
 
         // 2. 마우스 커서 설정
         if (isActive)

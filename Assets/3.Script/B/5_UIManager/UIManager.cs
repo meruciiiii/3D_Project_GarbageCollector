@@ -22,10 +22,17 @@ public class UIManager : MonoBehaviour
         }
         else Destroy(gameObject);
         input.onPickUp += change_Value;
+        input.onInteract += change_Value;
     }
 
     public void change_Value()
     {
-        if(UIValueChange != null) UIValueChange();
+        StartCoroutine(wait());
+    }
+
+    private IEnumerator wait()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (UIValueChange != null) UIValueChange();//이벤트 호출!
     }
 }
