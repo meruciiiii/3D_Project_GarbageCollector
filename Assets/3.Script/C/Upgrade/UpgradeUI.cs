@@ -10,9 +10,9 @@ public class UpgradeUI : MonoBehaviour
     [SerializeField] public Text moneyText;
     [SerializeField] public Text strPriceText;
     [SerializeField] public Text bagPriceText;
+    [SerializeField] public Text maxHPPriceText;
 
     [Header("플레이어 연결")]
-    // MonoBehaviour 대신 실제 클래스 이름(FirstPersonMovement)을 쓰는 것이 좋습니다.
     public PlayerController playerController;
 
     private void Awake()
@@ -52,7 +52,7 @@ public class UpgradeUI : MonoBehaviour
 
             playerController.enabled = isGameActive;
 
-            // [중요] 이동 멈출 때 잔여 속도가 남지 않게 하려면 Rigidbody 초기화 등을 고려해야 하지만,
+            // 이동 멈출 때 잔여 속도가 남지 않게 하려면 Rigidbody 초기화 등을 고려해야 하지만,
             // 보통 스크립트를 끄면 Update가 멈춰서 시선과 이동이 멈춥니다.
         }
 
@@ -74,7 +74,11 @@ public class UpgradeUI : MonoBehaviour
     // ... (나머지 버튼 함수들은 기존 유지) ...
     public void OnClick_UpgradeStrength()
     {
-        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.Strength)) UpdateUI();
+        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.Strength)) 
+        {
+            UpdateUI();
+            Debug.Log("힘 업그레이드 성공");
+        }
     }
 
     public void OnClick_BagButton()
@@ -85,14 +89,29 @@ public class UpgradeUI : MonoBehaviour
             Debug.Log("가방 업그레이드 성공");
         }
     }
+    public void OnClick_MaxHPButton()
+    {
+        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.MaxHP))
+        {
+            UpdateUI();
+            Debug.Log("최대 청결도 업그레이드 성공");
+        }
+    }
 
     public void UpdateUI()
     {
         if (GameManager.instance == null || upgradeManager == null) return;
 
         moneyText.text = $"보유 자원: {GameManager.instance.P_Money}";
-        strPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.Strength)}";
-        bagPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.BagWeight)}";
+
+        if (strPriceText != null)
+            strPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.Strength)}";
+
+        if (bagPriceText != null)
+            bagPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.BagWeight)}";
+
+        if (maxHPPriceText != null)
+            maxHPPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.MaxHP)}";
     }
 }
 
