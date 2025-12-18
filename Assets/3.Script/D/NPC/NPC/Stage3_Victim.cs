@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Stage3_Victim : NPC_Controller {
-	[Header("쓰레기 드랍 확률")]
-	[SerializeField] [Range(0, 100)] private int cultive_percent;
-
 	[Header("쓰레기 버림 갯수")]
 	[SerializeField] private int cultive_count;
 	[SerializeField] private int max_cultive_count;

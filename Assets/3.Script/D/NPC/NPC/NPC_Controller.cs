@@ -17,6 +17,9 @@ public class NPC_Controller : MonoBehaviour {
 	[Header("NPC 속도")]
 	[SerializeField] private float moveSpeed = 150f;
 
+	[Header("쓰레기 생성 확률")]
+	[SerializeField] [Range(0, 100)] protected int cultive_percent;
+
 	private void Awake() {
 		TryGetComponent(out npc_create_trash);
 	}
