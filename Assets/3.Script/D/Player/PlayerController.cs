@@ -66,13 +66,12 @@ public class PlayerController : MonoBehaviour {
 		//playerRB.linearVelocity = playerMoveVector;
 
 		// 1. 목표로 하는 속도 계산
-		Vector3 targetVelocity = (transform.forward * input.direction.y + transform.right * input.direction.x) * moveSpeed;
-
 		// 2. 현재 속도에서 목표 속도로 서서히 변화 (Lerp 사용)
+		// 3. Y축(중력) 유지 및 적용
+		Vector3 targetVelocity = (transform.forward * input.direction.y + transform.right * input.direction.x) * moveSpeed;
 		Vector3 currentVelocity = playerRB.linearVelocity;
 		Vector3 nextVelocity = Vector3.Lerp(currentVelocity, targetVelocity, Time.deltaTime * moveSpeed);
 
-		// 3. Y축(중력) 유지 및 적용
 		nextVelocity.y = playerRB.linearVelocity.y;
 		playerRB.linearVelocity = nextVelocity;
 	}
