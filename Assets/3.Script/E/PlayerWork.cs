@@ -58,6 +58,7 @@ public class PlayerWork : MonoBehaviour
     public void Check()
     {
         // 상호작용 -> raycast
+        target = null;
         Vector3 origin = playerCamera.transform.position;
         Vector3 direction = playerCamera.transform.forward;
         RaycastHit[] hits = Physics.SphereCastAll(origin, radius, direction, Distance, interactionMask);

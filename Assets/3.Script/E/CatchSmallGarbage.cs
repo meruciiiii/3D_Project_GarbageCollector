@@ -15,6 +15,8 @@ public class CatchSmallGarbage : MonoBehaviour
     private int[] Weight = new int[9];
     private int BagWeight;
     private int MaxWeight;
+    [SerializeField] private CleanPlayer cleanPlayer;
+
     private void Awake()
     {
         for(int i = 0; i < Weight.Length; i++)
@@ -22,7 +24,6 @@ public class CatchSmallGarbage : MonoBehaviour
             string trashName = "small_"+(i);
             StartCoroutine(FindCsvData_co(trashName,i));
         }
-        
     }
     public void CatchTrash(GameObject trash)
     {
@@ -30,8 +31,10 @@ public class CatchSmallGarbage : MonoBehaviour
         this.trash = trash;
         if (AddBackpack())
         {
+            cleanPlayer.Clean(trashNum);
             removeTrash();
         }
+        this.trash = null;
     }
     public void removeTrash()
     {
