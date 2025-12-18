@@ -4,14 +4,14 @@ public enum UpgradeType
 {
     Strength,   // 힘
     BagWeight,  // 가방 무게
-    Speed       // 이동 속도
+    MaxHP      // 이동 속도
 }
 public class UpgradeManager : MonoBehaviour
 {
     [Header("업그레이드 가격 설정")]
     [SerializeField] private int baseStrengthCost = 1000;
     [SerializeField] private int baseBagCost = 500;
-    [SerializeField] private int baseSpeedCost = 2000;
+    [SerializeField] private int baseMaxHPCost = 1500;
 
     public int GetUpgradeCost(UpgradeType type)
     {
@@ -28,8 +28,8 @@ public class UpgradeManager : MonoBehaviour
             //    // 예: (현재 가방크기 / 10) * 기본가격
                 return (GameManager.instance.P_Maxbag / 10) * baseBagCost;
 
-            case UpgradeType.Speed:
-                return baseSpeedCost; // 고정 가격
+            case UpgradeType.MaxHP:
+                return (GameManager.instance.P_MaxHP / 10) * baseMaxHPCost;
 
             default:
                 return 0;
@@ -67,8 +67,14 @@ public class UpgradeManager : MonoBehaviour
                 Debug.Log($"가방 확장! 현재 용량: {GameManager.instance.P_Maxbag}");
                 break;
 
-            case UpgradeType.Speed:
-                GameManager.instance.P_Spd += 1;
+            case UpgradeType.MaxHP:
+                // [변경] 최대 청결도 10 증가
+                GameManager.instance.P_MaxHP += 10;
+
+                // (선택사항) 업그레이드 기념으로 현재 청결도도 꽉 채워주기
+                GameManager.instance.P_CurrentHP = GameManager.instance.P_MaxHP;
+
+                Debug.Log($"최대 청결도 확장 완료! 현재 Max: {GameManager.instance.P_MaxHP}");
                 break;
         }
 
