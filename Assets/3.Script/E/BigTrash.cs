@@ -4,11 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmallTrash : MonoBehaviour
+public class BigTrash : MonoBehaviour
 {
-    [SerializeField] private int smallTrashNum;
+    [SerializeField] private int BigTrashNum;
     public int getTrashNum()
     {
-        return smallTrashNum;
+        return BigTrashNum;
     }
 }

@@ -71,7 +71,7 @@ public class PlayerWork : MonoBehaviour
         {
             HitPosition = origin + direction * Distance;
         }
-        hits = sorting.SortingHits(hits, HitPosition);
+        hits = sorting.SortingHits(hits, hit);
         if(hits == null)
         {
             Debug.Log("hits가 널이네요");

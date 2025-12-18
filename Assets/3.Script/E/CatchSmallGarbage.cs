@@ -27,7 +27,6 @@ public class CatchSmallGarbage : MonoBehaviour
     }
     public void CatchTrash(GameObject trash)
     {
-        GameManager.instance.P_Maxbag = 5000;
         this.trash = trash;
         if (AddBackpack())
         {
@@ -75,7 +74,7 @@ public class CatchSmallGarbage : MonoBehaviour
     {
         while (CSV_Database.instance == null || CSV_Database.instance.GarbageMap == null)
         {
-            Debug.Log("null 이랍니다");
+            //Debug.Log("null 이랍니다");
             yield return null;
         }
         if (CSV_Database.instance.GarbageMap.TryGetValue(trashName, out Dictionary<string, object> data))
