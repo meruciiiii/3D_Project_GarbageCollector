@@ -13,11 +13,10 @@ public class HitPointState : MonoBehaviour
 
 
     [SerializeField] private CatchSmallGarbage catchSmall;
-    [SerializeField] private CatchSmallGarbage catchLarge;
+    [SerializeField] private CatchBigGarbage catchLarge;
     [SerializeField] private PlayerWork playerWork;
     [SerializeField] private PlayerInput input;
 
-    private bool isOnList = false;
 
     //이벤트 등록 
     private void Start()
@@ -27,9 +26,6 @@ public class HitPointState : MonoBehaviour
     }
     private void Awake()
     {
-        catchSmall = FindObjectOfType<CatchSmallGarbage>();
-        catchSmall = FindObjectOfType<CatchSmallGarbage>();
-        playerWork = FindObjectOfType<PlayerWork>();
     }
     public void isTrash()
     {
@@ -43,8 +39,9 @@ public class HitPointState : MonoBehaviour
         {
             if (target[i] != null && target[i].layer == LayerMask.NameToLayer("BigTrash"))
             {
-                isOnList = true;
-                break;
+                // Bigtrash 처리
+                catchLarge.CatchTrash(target[i]);
+                return;
             }
         }
         for (int i = 0; i < target.Length; i++)

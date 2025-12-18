@@ -6,9 +6,10 @@ using UnityEngine;
 
 public class HitsSort : MonoBehaviour
 {
-    private int grabLimit = 1;
-    public RaycastHit[] SortingHits(RaycastHit[] hits, RaycastHit hitPoint)
+    private int grabLimit;
+    public RaycastHit[] SortingHits(RaycastHit[] hits, Vector3 hitPoint, int layerNum)
     {
+        grabLimit = GameManager.instance.grab_limit;
         if (hits == null || hits.Length == 0)
         {
             Debug.Log("RaycastHit에 입력된 대상이 없습니다.");
@@ -17,17 +18,16 @@ public class HitsSort : MonoBehaviour
         // 거리 순으로 정렬 
         Array.Sort(hits, (hitsA, hitsB) =>
         {
-            float distanceA = (hitPoint.point - hitsA.point).sqrMagnitude;
-            float distanceB = (hitPoint.point - hitsB.point).sqrMagnitude;
+            float distanceA = (hitPoint - hitsA.point).sqrMagnitude;
+            float distanceB = (hitPoint - hitsB.point).sqrMagnitude;
             return distanceA.CompareTo(distanceB);
         });
 
         // 가장 가까운 요소의 레이어 파악
-        int targetLayer = hitPoint.collider.gameObject.layer;
-        Debug.Log($"가장 가까운 레이어: {LayerMask.LayerToName(targetLayer)}");
+        Debug.Log($"가장 가까운 레이어: {LayerMask.LayerToName(layerNum)}");
 
         // 해당 레이어와 일치하는 요소만 선택
-        RaycastHit[] sameLayerHits = Array.FindAll(hits, h => h.collider.gameObject.layer == targetLayer);
+        RaycastHit[] sameLayerHits = Array.FindAll(hits, h => h.collider.gameObject.layer == layerNum);
 
         int finalCount = Mathf.Min(sameLayerHits.Length, grabLimit);
 

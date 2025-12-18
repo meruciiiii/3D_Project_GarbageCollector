@@ -10,7 +10,7 @@ public class CatchSmallGarbage : MonoBehaviour
     //작은 쓰레기의 경우 해당 오브젝트가 사라진다.
     //작은 쓰레기의 경우 인벤토리에 들어간다.
     //인벤토리에 들어가면 인벤토리의 무게가 늘어난다.
-    public GameObject trash;
+    private GameObject trash;
     private int trashNum;
     private int[] Weight = new int[9];
     private int BagWeight;
