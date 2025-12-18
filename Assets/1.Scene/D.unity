@@ -1167,8 +1167,8 @@ MonoBehaviour:
   jumpPower: 5
   sensitive: 0.1
   cameraObject: {fileID: 447818066}
-  cur_weight: 0
-  max_weight: 0
+  cur_weight: 5
+  max_weight: 20
   slow_start_bag_weight: 0.5
   slow_percent: 0.8
 --- !u!54 &472260675
@@ -2377,7 +2377,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2337849877060200106, guid: da23270a05a0fdb48876ccc01025db54, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3260261001487503809, guid: da23270a05a0fdb48876ccc01025db54, type: 3}
       propertyPath: m_Name

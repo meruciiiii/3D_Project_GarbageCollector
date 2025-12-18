@@ -23,7 +23,6 @@ public class Stage3_Victim : NPC_Controller {
 	protected override IEnumerator routine_co() {
 		if(middle_pos_array != null) {
 			for(int i = 0; i<middle_pos_array.Length; i++) {
-				Debug.Log(i);
 				yield return StartCoroutine(Move_co(middle_pos_array[i]));
 			}
 		}
@@ -37,6 +36,7 @@ public class Stage3_Victim : NPC_Controller {
 			if(Random.Range(0, 101) < cultive_percent) {
 				Debug.Log($"스레기 투척 : [{cultive_count}]번 버림용");
 				//쓰레기 드랍
+				cultive_count++;
 			}
 			yield return seconds;
 		}

@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour {
 	//움직임
 	private void FixedUpdate() {
 		Move();
+		
 	}
 	//시야
 	private void LateUpdate() {
@@ -87,8 +88,10 @@ public class PlayerController : MonoBehaviour {
 		transform.eulerAngles += new Vector3(0, input.mouseDelta.x * sensitive, 0);
 	}
 	private void Jump() {
-		if(isCanJump) {
-			playerRB.linearVelocity = Vector3.zero;
+		//BoxCast로 플레이어의 하단의 넓적한 네모만큼 범위를 탐색하여, 뭔가라도 아래에 있는(밟은) 상태면 점프 가능.
+		if(isCanJump && Physics.BoxCast(transform.position, new Vector3(0.25f, 0.01f, 0.25f), Vector3.down, 
+											Quaternion.identity, 0.01f + transform.localScale.y)) {
+			//playerRB.linearVelocity = Vector3.zero;
 			playerRB.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 		}
 	}
