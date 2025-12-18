@@ -40,13 +40,12 @@ public class ShowerSystem : MonoBehaviour
         Debug.Log("샤워 시작...");
         if (guideText != null) guideText.SetActive(false);
 
-        // 2. 씻는 시간 대기
-        yield return new WaitForSeconds(showerDuration);
-
-        // 3. 데이터 처리
         GameManager.instance.P_Money -= showerCost;
         GameManager.instance.ChangeHP(GameManager.instance.P_MaxHP);
         GameManager.instance.SaveAllGamedata();
+
+        // 2. 씻는 시간 대기
+        yield return new WaitForSeconds(showerDuration);
 
         Debug.Log("샤워 완료!");
 
