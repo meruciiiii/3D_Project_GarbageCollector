@@ -2848,6 +2848,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dadd016a403d9b94c828fbfd2edee62e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+--- !u!114 &1075056162 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4076259103573898125, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+  m_PrefabInstance: {fileID: 1075056160}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c8f929a49e74ad4488c238560b2e7af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
 --- !u!1001 &1117735597
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3927,6 +3938,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7239511340591275237, guid: 69b2c4b4aabf7404ea54ace48491379f, type: 3}
+      propertyPath: input
+      value: 
+      objectReference: {fileID: 1075056162}
     - target: {fileID: 7646844342069146247, guid: 69b2c4b4aabf7404ea54ace48491379f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.05031
