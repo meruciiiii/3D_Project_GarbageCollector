@@ -4,51 +4,79 @@ using UnityEngine.UI;
 public class UpgradeUI : MonoBehaviour
 {
     [Header("시스템 연결")]
-    [SerializeField] private UpgradeManager upgradeManager; // 인스펙터에서 드래그 앤 드롭
+    [SerializeField] private UpgradeManager upgradeManager;
 
     [Header("UI 연결")]
-    [SerializeField] public Text moneyText;       // 현재 돈 표시
-    [SerializeField] public Text strPriceText;    // 힘 업그레이드 가격 표시
-    [SerializeField] public Text bagPriceText;    // 가방 업그레이드 가격 표시
+    [SerializeField] public Text moneyText;
+    [SerializeField] public Text strPriceText;
+    [SerializeField] public Text bagPriceText;
 
     [Header("플레이어 연결")]
-    // UI가 켜지면 플레이어를 멈추기 위해 필요합니다.
-    public FirstPersonMovement playerController;
+    // MonoBehaviour 대신 실제 클래스 이름(FirstPersonMovement)을 쓰는 것이 좋습니다.
+    public PlayerController playerController;
+
+    private void Awake()
+    {
+        // 안전장치: 플레이어가 연결 안 되어 있으면 자동으로 찾기
+        if (playerController == null)
+            playerController = FindAnyObjectByType<PlayerController>();
+    }
 
     private void OnEnable()
     {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-
-        if (playerController != null)
-        {
-            playerController.enabled = false;
-            // PlayerController의 Update들이 멈춰서 시점이 고정됩니다.
-        }
-
-        // UI가 켜질 때 텍스트 갱신
+        // UI가 켜질 때: 커서 보이기 + 조작 정지
+        SetPlayerState(false);
         UpdateUI();
     }
+
     private void OnDisable()
     {
-        // 1. 커서 숨기기 & 중앙 고정 (다시 게임 플레이 모드)
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
-        // 2. 플레이어 움직임/회전 다시 켜기
+        // UI가 꺼질 때: 커서 숨기기 + 조작 재개
+        SetPlayerState(true);
+    }
+   
+    private void SetPlayerState(bool isGameActive)
+    {
+        // 1. 플레이어 이동/회전 스크립트 끄기/켜기
         if (playerController != null)
         {
-            playerController.enabled = true;
+            if (!isGameActive)
+            {
+                Rigidbody rb = playerController.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.linearVelocity = Vector3.zero; // Unity 6 (구버전은 velocity)
+                    rb.angularVelocity = Vector3.zero;
+                }
+            }
+
+            playerController.enabled = isGameActive;
+
+            // [중요] 이동 멈출 때 잔여 속도가 남지 않게 하려면 Rigidbody 초기화 등을 고려해야 하지만,
+            // 보통 스크립트를 끄면 Update가 멈춰서 시선과 이동이 멈춥니다.
+        }
+
+        // 2. 마우스 커서 상태 설정
+        if (isGameActive)
+        {
+            // 게임 중: 커서 숨기고 중앙 고정
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            // UI 사용 중: 커서 보이고 자유 이동
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
+
+    // ... (나머지 버튼 함수들은 기존 유지) ...
     public void OnClick_UpgradeStrength()
     {
-        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.Strength))
-        {
-            UpdateUI(); // 구매 성공 시 UI 갱신 (돈 줄어들고 가격 오름)
-            
-        }
+        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.Strength)) UpdateUI();
     }
+
     public void OnClick_BagButton()
     {
         if (upgradeManager.TryPurchaseUpgrade(UpgradeType.BagWeight))
@@ -57,19 +85,15 @@ public class UpgradeUI : MonoBehaviour
             Debug.Log("가방 업그레이드 성공");
         }
     }
+
     public void UpdateUI()
     {
-        // GameManager가 아직 로딩 안됐으면 무시 (안전장치)
         if (GameManager.instance == null || upgradeManager == null) return;
 
-        // 돈 표시
         moneyText.text = $"보유 자원: {GameManager.instance.P_Money}";
-
-        // 가격 표시 (UpgradeSystem에게 현재 가격 물어보기)
-        int strCost = upgradeManager.GetUpgradeCost(UpgradeType.Strength);
-        int bagCost = upgradeManager.GetUpgradeCost(UpgradeType.BagWeight);
-
-        strPriceText.text = $"비용: {strCost}";
-        bagPriceText.text = $"비용: {bagCost}";
+        strPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.Strength)}";
+        bagPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.BagWeight)}";
     }
 }
+
+

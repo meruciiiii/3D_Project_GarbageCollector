@@ -49,7 +49,7 @@ public class PlayerInput : MonoBehaviour {
 	//플레이어 상호작용
 	public void Event_Interact(InputAction.CallbackContext context) {
 		if (context.phase.Equals(InputActionPhase.Started)) {
-			//onInteract();
+			onInteract();
 		}
 	}
 }
