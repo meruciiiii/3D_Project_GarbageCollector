@@ -195,7 +195,7 @@ namespace PrivateLT.CharacterCustomization
             DrawCustomizationSelection();
             DrawPreviewIcons();
 
-            GUI.Label(_copyrightRect, "© 2024 | Asset Pack By Lutor Games LLC, All rights reserved.", _copyrightStyle);
+            GUI.Label(_copyrightRect, "?2024 | Asset Pack By Lutor Games LLC, All rights reserved.", _copyrightStyle);
 
             GUI.enabled = true;
 
