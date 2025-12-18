@@ -16,7 +16,7 @@ public class HitPointState : MonoBehaviour
     private PlayerWork playerWork;
     [SerializeField] private PlayerInput input;
 
-    //이벤트 등록
+    //이벤트 등록 
     private void Start()
     {
         input.onPickUp += isSmallTrash;
