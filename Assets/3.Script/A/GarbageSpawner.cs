@@ -49,7 +49,14 @@ public class GarbageSpawner : MonoBehaviour
             // 높이(Y)는 Plane의 현재 높이로 고정
             Vector3 spawnPosition = transform.position + new Vector3(randomX, 0, randomZ);
 
-            Instantiate(prefabsToSpawn[randomIndex], spawnPosition, Quaternion.identity, parentTransform);
+            // 2. 랜덤 회전값 생성 
+            Quaternion randomRotation = Quaternion.Euler(
+                Random.Range(0f, 360f),
+                Random.Range(0f, 360f),
+                Random.Range(0f, 360f)
+            );
+
+            Instantiate(prefabsToSpawn[randomIndex], spawnPosition, randomRotation, parentTransform);
         }
     }
 }

@@ -36,7 +36,7 @@ public class CatchSmallGarbage : MonoBehaviour
     public void removeTrash()
     {
         Destroy(trash);
-        //cachedObjects.Remove(trash);
+        //cachedObjects.Remove(trash); 
     }
     public bool AddBackpack()
     {

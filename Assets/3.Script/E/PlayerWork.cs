@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(LineRenderer))]
+//[RequireComponent(typeof(LineRenderer))]
 
 public class PlayerWork : MonoBehaviour
 {
@@ -19,7 +19,8 @@ public class PlayerWork : MonoBehaviour
     // 한 번에 처리할 수 있는 범위도 늘어난다.(예시 1개 - 2개 - 3개 - 5개 - 10개)
     //
     private float Distance = 3f;       //플레이어 작업 거리
-    private LineRenderer lineRenderer; //플레이어 작업 위치 그리기
+    private float radius = 0.2f;                // raycast 두께 - 청소 가능 범위
+    //private LineRenderer lineRenderer; //플레이어 작업 위치 그리기
     private Camera playerCamera;
     //private HitPointState hitPointState;
     private Vector3 HitPosition;
@@ -31,32 +32,22 @@ public class PlayerWork : MonoBehaviour
     //[SerializeField] private PlayerInput input;
 
 
+    [SerializeField] private PlayerInput input;
 
 
     public void Awake()
     {
-        lineRenderer = GetComponent<LineRenderer>();
+        //lineRenderer = GetComponent<LineRenderer>();
         playerCamera = Camera.main;
         //hitPointState = FindObjectOfType<HitPointState>();
 
-
-        //점의 개수
-        if (lineRenderer == null)
-        {
-            Debug.LogError("LineRenderer가 Player에 없습니다!");
-            enabled = false;
-            return;
-        }
         if(playerCamera == null)
         {
             Debug.LogError("MainCamera가 없습니다!");
             enabled = false;
             return;
         }
-        lineRenderer.positionCount = 2;
-        lineRenderer.useWorldSpace = true;
-        lineRenderer.enabled = false;
-        //input.onPickUp += Check;
+        input.onPickUp += Check;
     }
     private void Update()
     {
@@ -69,8 +60,17 @@ public class PlayerWork : MonoBehaviour
         // 상호작용 -> raycast
         Vector3 origin = playerCamera.transform.position;
         Vector3 direction = playerCamera.transform.forward;
-        RaycastHit[] hits = Physics.RaycastAll(origin, direction, Distance, interactionMask);
-        hits = sorting.SortingHits(hits);
+        RaycastHit[] hits = Physics.SphereCastAll(origin, radius, direction, Distance, interactionMask);
+        RaycastHit hit;
+        if(Physics.Raycast(origin, direction, out hit, Distance, interactionMask))
+        {
+            HitPosition = hit.point;
+        }
+        else
+        {
+            HitPosition = origin + direction * Distance;
+        }
+        hits = sorting.SortingHits(hits, HitPosition);
         if(hits == null)
         {
             Debug.Log("hits가 널이네요");
@@ -81,45 +81,9 @@ public class PlayerWork : MonoBehaviour
         {
             target[i] = hits[i].collider.gameObject;
         }
-        /*
-        RaycastHit hit;
-        if (Physics.Raycast(origin, direction, out hit, Distance, interactionMask))
-        {
-            Debug.Log(interactionMask.ToString() + " : 레이어 마스크");
-            Debug.Log("쓰레기(큰쓰레기, 작은쓰레기 포함)");
-            //hitPointState.HandleInteraction(hit.collider.gameObject);
-            target = hit.collider.gameObject;
-            HitPosition = hit.point;
-        }
-        else
-        {
-            HitPosition = origin + direction * Distance;
-        }
-         */
-    }
-    private void DrawLine()
-    {
-        //라인렌더러 설정  
-
-        //lineRenderer.SetPosition(0, PlayerPosition.position);
-        //lineRenderer.SetPosition(1, HitPosition);
-
-        lineRenderer.SetPosition(0, playerCamera.transform.position);
-        lineRenderer.SetPosition(1, HitPosition);
     }
     public GameObject[] GetGameObject()
     {
         return target;
     }
-
-    
-    //스테이트 에서~
-    //private void HandleSmallTrash(GameObject target)
-    //{
-        
-    //}
-    //private void HandleBigTrash(GameObject target)
-    //{
-        
-    //}
 }
