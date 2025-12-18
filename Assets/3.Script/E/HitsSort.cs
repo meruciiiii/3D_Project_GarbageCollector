@@ -23,7 +23,7 @@ public class HitsSort : MonoBehaviour
         });
 
         // 가장 가까운 요소의 레이어 파악
-        int targetLayer = hits.collider.gameObject.layer;
+        int targetLayer = hits[0].collider.gameObject.layer;
         Debug.Log($"가장 가까운 레이어: {LayerMask.LayerToName(targetLayer)}");
 
         // 해당 레이어와 일치하는 요소만 선택
