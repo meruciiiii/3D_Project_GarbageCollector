@@ -4,6 +4,8 @@ using System.Linq;
 using UnityEngine;
 
 public class NPC_Controller : MonoBehaviour {
+	protected NPC_Create_Trash npc_create_trash;
+
 	[Header("NPC 이동 경로 Vector")]
 	[SerializeField] protected Vector3 start_pos;
 	[SerializeField] protected Vector3[] middle_pos_array;
@@ -14,6 +16,10 @@ public class NPC_Controller : MonoBehaviour {
 
 	[Header("NPC 속도")]
 	[SerializeField] private float moveSpeed = 150f;
+
+	private void Awake() {
+		TryGetComponent(out npc_create_trash);
+	}
 
 	//중간 포인트가 없을 경우
 	public void set_pos(Vector3 start_pos, Vector3 end_pos) {
@@ -62,7 +68,7 @@ public class NPC_Controller : MonoBehaviour {
 		yield return null;
 	}
 	protected IEnumerator Move_co(Vector3 target_point) {
-		while(Vector3.SqrMagnitude(transform.position - target_point) >= 0.1f) {
+		while(Vector3.SqrMagnitude(transform.position - target_point) >= 0.00001f) {
 			transform.position = Vector3.MoveTowards(transform.position, target_point, moveSpeed * Time.deltaTime);
 			yield return null;
 		}

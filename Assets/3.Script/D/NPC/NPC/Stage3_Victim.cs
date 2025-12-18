@@ -34,8 +34,7 @@ public class Stage3_Victim : NPC_Controller {
 		while(cultive_count < max_cultive_count) {
 			seconds = new WaitForSeconds(Random.Range(min_sec, max_sec));
 			if(Random.Range(0, 101) < cultive_percent) {
-				Debug.Log($"스레기 투척 : [{cultive_count}]번 버림용");
-				//쓰레기 드랍
+				npc_create_trash.Throw_Trash();
 				cultive_count++;
 			}
 			yield return seconds;
