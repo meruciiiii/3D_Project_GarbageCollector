@@ -13,7 +13,7 @@ public class UpgradeUI : MonoBehaviour
 
     [Header("플레이어 연결")]
     // UI가 켜지면 플레이어를 멈추기 위해 필요합니다.
-    public FirstPersonMovement playerController;
+    public PlayerController playerController;
 
     private void OnEnable()
     {

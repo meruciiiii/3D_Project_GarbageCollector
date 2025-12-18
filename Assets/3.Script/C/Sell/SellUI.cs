@@ -37,7 +37,7 @@ public class SellUI : MonoBehaviour
             // 주의: 팀원의 스크립트 이름이 FirstPersonMovement가 맞는지 확인 필요
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player != null)
-                FirstPersonMovement = player.GetComponent<FirstPersonMovement>(); // 혹은 다른 이동 스크립트
+                FirstPersonMovement = player.GetComponent<PlayerController>(); // 혹은 다른 이동 스크립트
         }
     }
 
