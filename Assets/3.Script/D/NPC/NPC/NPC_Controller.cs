@@ -55,7 +55,7 @@ public class NPC_Controller : MonoBehaviour {
 	}
 	private void revese() {
 		//50% 확률로 역순으로 가는 경우도 하기.
-		if(UnityEngine.Random.Range(0,2).Equals(0)) {
+		if(Random.Range(0,2).Equals(0)) {
 			Vector3 temp_pos = start_pos;
 			start_pos = end_pos;
 			end_pos = temp_pos;

@@ -22,7 +22,7 @@ public class NPC_Spawner : MonoBehaviour {
 		if(childCount != 2) {
 			middle_pos_array = new Vector3[childCount-2];
 			for(int i = 1; i < childCount - 1; i++) {
-				Debug.Log(transform.GetChild(i).transform.name);
+				//Debug.Log(transform.GetChild(i).transform.name);
 				middle_pos_array[i-1] = transform.GetChild(i).transform.position;
 			}
 		}
