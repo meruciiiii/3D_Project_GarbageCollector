@@ -49,5 +49,4 @@ public class UIValue : MonoBehaviour
         int MaxHP = GameManager.instance.P_MaxHP;
         HPtext.text = $"HP : {currentHP} / {MaxHP} kg";
     }
-    //여기서 돈, 가방, 청결도 합친 메서드 만들기?
 }
