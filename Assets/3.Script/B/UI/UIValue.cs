@@ -15,6 +15,14 @@ public class UIValue : MonoBehaviour
         UIManager uimanager = FindFirstObjectByType<UIManager>();
         uimanager.UIValueChange += moneyandweight;
         uimanager.UIValueChange += HP;
+
+        StartCoroutine(waitforvalue());
+    }
+
+    private IEnumerator waitforvalue()
+    {
+        while(!GameManager.instance.LoadComplete) yield return null;
+        UIManager.instance.change_Value();
     }
     
     public void moneyandweight()
