@@ -7,7 +7,7 @@ using UnityEngine;
 public class HitsSort : MonoBehaviour
 {
     private int grabLimit = 1;
-    public RaycastHit[] SortingHits(RaycastHit[] hits, RaycastHit hitPoint)
+    public RaycastHit[] SortingHits(RaycastHit[] hits, Vector3 hitPoint)
     {
         if (hits == null || hits.Length == 0)
         {
@@ -17,13 +17,13 @@ public class HitsSort : MonoBehaviour
         // 거리 순으로 정렬 
         Array.Sort(hits, (hitsA, hitsB) =>
         {
-            float distanceA = (hitPoint.point - hitsA.point).sqrMagnitude;
-            float distanceB = (hitPoint.point - hitsB.point).sqrMagnitude;
+            float distanceA = (hitPoint - hitsA.point).sqrMagnitude;
+            float distanceB = (hitPoint - hitsB.point).sqrMagnitude;
             return distanceA.CompareTo(distanceB);
         });
 
         // 가장 가까운 요소의 레이어 파악
-        int targetLayer = hitPoint.collider.gameObject.layer;
+        int targetLayer = hits.collider.gameObject.layer;
         Debug.Log($"가장 가까운 레이어: {LayerMask.LayerToName(targetLayer)}");
 
         // 해당 레이어와 일치하는 요소만 선택
