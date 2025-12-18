@@ -36,7 +36,7 @@ public class HitsSort : MonoBehaviour
         RaycastHit[] finalCountLayerHits = new RaycastHit[finalCount];
         for (int i = 0; i < finalCount; i++)
         {
-            Debug.Log($"{i + 1}위: {sameLayerHits[i].collider.gameObject.name}, 거리: {sameLayerHits[i].distance:F2}");
+            //Debug.Log($"{i + 1}위: {sameLayerHits[i].collider.gameObject.name}, 거리: {sameLayerHits[i].distance:F2}");
             finalCountLayerHits[i] = sameLayerHits[i];
         }
         Debug.Log("finalCountLayerHits 개수 : " + finalCountLayerHits.Length);
