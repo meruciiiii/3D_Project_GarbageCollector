@@ -9,7 +9,7 @@ public class UIValue : MonoBehaviour
     [SerializeField] private Text moneytext;
     [SerializeField] private Text weighttext;
     [SerializeField] private Text HPtext;
-
+    
     private void Start()
     {
         UIManager uimanager = FindFirstObjectByType<UIManager>();
@@ -55,6 +55,6 @@ public class UIValue : MonoBehaviour
     {
         int currentHP = GameManager.instance.P_CurrentHP;
         int MaxHP = GameManager.instance.P_MaxHP;
-        HPtext.text = $"HP : {currentHP} / {MaxHP} kg";
+        HPtext.text = $"HP : {currentHP} / {MaxHP}";
     }
 }
