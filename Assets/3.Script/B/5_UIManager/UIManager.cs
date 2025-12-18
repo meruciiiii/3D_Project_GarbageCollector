@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     // 이벤트 호출시키면 해당 메서드 실행하게 하겠습니다.
 
     public event Action UIValueChange;
+    [SerializeField] private PlayerInput input;
 
     public static UIManager instance = null;
     private void Awake()
@@ -20,6 +21,7 @@ public class UIManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
+        input.onPickUp += change_Value;
     }
 
     public void change_Value()
