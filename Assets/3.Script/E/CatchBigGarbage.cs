@@ -47,7 +47,7 @@ public class CatchBigGarbage : MonoBehaviour
         }
         else
         {
-            Debug.LogError("GarbageMap에서 키 '"+ trashName + "'을 찾을 수 없습니다.");
+            Debug.LogError("GarbageMap에서 키 '" + trashName + "'을 찾을 수 없습니다.");
         }
     }
     public void CatchTrash(GameObject trash)
@@ -61,13 +61,12 @@ public class CatchBigGarbage : MonoBehaviour
             setBitGarbageWeight();
             removeTrash();
         }
-        this.trash = null;
     }
     private bool CanLift()
     {
         trashNum = trash.GetComponent<BigTrash>().getTrashNum();
         nowStrength = GameManager.instance.P_Str;
-        if(nowStrength>= Strength[trashNum])
+        if (nowStrength >= Strength[trashNum])
             return true; //들 수 있다.
         else
             return false; //들 수 없다.
@@ -91,5 +90,15 @@ public class CatchBigGarbage : MonoBehaviour
             Debug.LogError("GarbageMap에서 키 '" + trashName + "'을 찾을 수 없습니다.");
         }
         GameManager.instance.BigGarbageWeight = bigGarbageWeight;
+        Debug.Log(GameManager.instance.BigGarbageWeight + " 큰거 무게 확인");
+    }
+    public void DestroyTrash()
+    {
+        Destroy(trash);
+        trash = null;
+    }
+    private void LiftGarbage()
+    {
     }
 }
+
