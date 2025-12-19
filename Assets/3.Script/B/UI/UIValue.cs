@@ -12,6 +12,9 @@ public class UIValue : MonoBehaviour
     [SerializeField] private Slider weightSlider;
     [SerializeField] private Slider HPSlider;
 
+    private float currentDisplayMoney = 0f;//UI에 표시되고 있는 가짜돈
+    private Coroutine moneycoroutine;
+
     [Header("HP Slider Setting")]
     [SerializeField] private Image hpfill;//fill 할당
     private Color Hp_origin;
@@ -42,13 +45,19 @@ public class UIValue : MonoBehaviour
     private IEnumerator waitforvalue()
     {
         while(!GameManager.instance.LoadComplete) yield return null;
+
+        currentDisplayMoney = GameManager.instance.P_Money / 100.0f;
+        moneytext.text = $"{currentDisplayMoney:F2}$";
+
         UIManager.instance.change_Value();
     }
     
     public void moneyandweight()
     {
-        float displayMoney = GameManager.instance.P_Money / 100.0f;
-        moneytext.text = $"{displayMoney:F2}$";
+        float targetMoney = GameManager.instance.P_Money / 100.0f;
+
+        if (moneycoroutine != null) StopCoroutine(moneycoroutine);
+        moneycoroutine = StartCoroutine(AnimateMoney(targetMoney));
 
         // 무게도 동일하게 100.0f로 나누어 소수점 두 자리를 표현합니다.
         float currentWeight = GameManager.instance.P_Weight / 100.0f;
@@ -65,6 +74,27 @@ public class UIValue : MonoBehaviour
             UpdateColorWeight(currentWeight, maxWeight);
         }
     }
+
+    private IEnumerator AnimateMoney(float target)
+    {
+        float duration = 0.5f; // 0.5초 동안 올라감, 사운드 길이에 따라 바꿔주세요
+        float elapsed = 0f;
+        float startValue = currentDisplayMoney; // 현재 화면에 찍힌 값에서 시작
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            // Lerp를 사용하여 부드럽게 값 증가
+            currentDisplayMoney = Mathf.Lerp(startValue, target, elapsed / duration);
+            moneytext.text = $"{currentDisplayMoney:F2}$";
+            yield return null;
+        }
+
+        // 마지막 오차 보정
+        currentDisplayMoney = target;
+        moneytext.text = $"{currentDisplayMoney:F2}$";
+    }
+
     private void UpdateColorWeight(float current, float max)
     {
         if (weightfill == null) return;
