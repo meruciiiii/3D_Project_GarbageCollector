@@ -15,7 +15,7 @@ public class CatchBigGarbage : MonoBehaviour
     // 들어올린 상태는 프리팹화 한 값을 보여줍니다
     // 내려 놓으면
     private GameObject trash;
-    private int[] Strength = new int[5];
+    private int[] Strength = new int[6];
     private int trashNum;
     private int bigGarbageWeight;
     private string trashName;
@@ -99,6 +99,7 @@ public class CatchBigGarbage : MonoBehaviour
     public void DestroyTrash()
     {
         Destroy(trash);
+        transform.GetChild(trashNum + 1).gameObject.SetActive(false);
         trash = null;
     }
     private void LiftGarbage()
