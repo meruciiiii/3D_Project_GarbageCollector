@@ -23,15 +23,17 @@ public class HitPointState : MonoBehaviour
     {
         input.onPickUp += Grab;
         //Debug.Log("이벤트 추가 됐어?");
-    }
-    private void Awake()
-    {
-    }
-    private void OnEnable()
-    {
+        //Debug.Log(GameManager.instance);
         TimebetGrab = GameManager.instance.grab_speed;
         //TimebetGrab = 1.5f;
         LastGrabTime = 0f;
+    }
+    private void Awake()
+    {
+        
+    }
+    private void OnEnable()
+    {
     }
 
     public void Grab()
@@ -51,7 +53,6 @@ public class HitPointState : MonoBehaviour
             if (!Cursor.visible)
             {
                 catchLarge.DrobGarbage();
-                LastGrabTime = Time.time;
             }
             return;
         }
@@ -67,7 +68,6 @@ public class HitPointState : MonoBehaviour
                 // Bigtrash 처리
                 Debug.Log("큰 쓰레기 발견");
                 catchLarge.CatchTrash(target[i]);
-                LastGrabTime = Time.time;
                 return;
             }
         }
