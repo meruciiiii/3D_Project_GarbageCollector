@@ -12,28 +12,38 @@ public class HitPointState : MonoBehaviour
     //현 상태에 따라 실행하는 부분이 다르다
 
 
-    private CatchSmallGarbage catchSmall;
-    private PlayerWork playerWork;
+    [SerializeField] private CatchSmallGarbage catchSmall;
+    [SerializeField] private CatchBigGarbage catchLarge;
+    [SerializeField] private PlayerWork playerWork;
     [SerializeField] private PlayerInput input;
+
 
     //이벤트 등록 
     private void Start()
     {
-        input.onPickUp += isSmallTrash;
-        Debug.Log("이벤트 추가 됐어?");
+        input.onPickUp += isTrash;
+        //Debug.Log("이벤트 추가 됐어?");
     }
     private void Awake()
     {
-        catchSmall = FindObjectOfType<CatchSmallGarbage>();
-        playerWork = FindObjectOfType<PlayerWork>();
     }
-    public void isSmallTrash()
+    public void isTrash()
     {
         GameObject[] target = playerWork.GetGameObject();
         if (target == null)
         {
             Debug.Log("null이라서 나갈게");
             return;
+        }
+        for (int i = 0; i < target.Length; i++)
+        {
+            if (target[i] != null && target[i].layer == LayerMask.NameToLayer("BigTrash"))
+            {
+                // Bigtrash 처리
+                Debug.Log("큰 쓰레기 발견");
+                catchLarge.CatchTrash(target[i]);
+                return;
+            }
         }
         for (int i = 0; i < target.Length; i++)
         {

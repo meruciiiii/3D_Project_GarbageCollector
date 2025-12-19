@@ -23,7 +23,6 @@ public class CleanPlayer : MonoBehaviour
     }
     public void Clean(int trashNum)
     {
-        
         currentHP = GameManager.instance.P_CurrentHP;
         this.trashNum = trashNum;
         currentHP -= Hpdecrease[trashNum];
@@ -34,7 +33,6 @@ public class CleanPlayer : MonoBehaviour
             Debug.Log("이건 너무 더럽잖아요!!");
         }
         GameManager.instance.P_CurrentHP = currentHP;
-
     }
     private IEnumerator FindCsvData_co(string trashName, int i)
     {
@@ -46,11 +44,11 @@ public class CleanPlayer : MonoBehaviour
         {
             object sample = data["Hpdecrease"]; ;
             Hpdecrease[i] = (int)sample;
-            Debug.Log(trashName + " : " + Hpdecrease[i]);
+            //Debug.Log(trashName + " : " + Hpdecrease[i]);
         }
         else
         {
-            Debug.LogError("GarbageMap에서 키 'small_"+i+"'을 찾을 수 없습니다.");
+            //Debug.LogError("GarbageMap에서 키 'small_"+i+"'을 찾을 수 없습니다.");
         }
     }
 }
