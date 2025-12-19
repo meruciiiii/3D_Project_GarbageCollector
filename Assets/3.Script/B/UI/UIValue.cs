@@ -49,7 +49,6 @@ public class UIValue : MonoBehaviour
         currentDisplayMoney = GameManager.instance.P_Money / 100.0f;
         moneytext.text = $"{currentDisplayMoney:F2}$";
 
-        while (UIManager.instance==null) yield return null;
         UIManager.instance.change_Value();
     }
     
