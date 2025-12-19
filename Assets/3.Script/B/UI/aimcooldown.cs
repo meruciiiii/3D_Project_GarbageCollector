@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class aimcooldown : MonoBehaviour
 {
     [SerializeField] private Slider cooldownSlider;
+    private Coroutine chargeCourutine;
 
-    private bool isgoing = false;
-
-    public void isGoing()
+    public void StartCharging()
     {
-
+        if (chargeCourutine != null) StopCoroutine(chargeCourutine);
+        //chargeCourutine = StartCoroutine();
     }
     
 }
