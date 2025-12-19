@@ -16,6 +16,7 @@ public class HitPointState : MonoBehaviour
     [SerializeField] private CatchBigGarbage catchLarge;
     [SerializeField] private PlayerWork playerWork;
     [SerializeField] private PlayerInput input;
+    [SerializeField] private SellStation sellUI;
 
     //이벤트 등록 
     private void Start()
@@ -32,7 +33,10 @@ public class HitPointState : MonoBehaviour
         if (GameManager.instance.isGrabBigGarbage)
         {
             Debug.Log("큰 쓰레기 들고있는걸?!");
-            catchLarge.DrobGarbage();
+            if (sellUI.sellUI == null)
+            {
+                catchLarge.DrobGarbage();
+            }
             return;
         }
         if (target == null)
