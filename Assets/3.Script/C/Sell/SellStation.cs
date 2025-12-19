@@ -3,7 +3,7 @@ using UnityEngine;
 public class SellStation : MonoBehaviour
 {
     [Header("UI 연결")]
-    [SerializeField] private SellUI sellUI;
+    [SerializeField] public SellUI sellUI;
     [SerializeField] private GameObject guideText; // "F키를 눌러 상점 열기" 텍스트 오브젝트
 
     private bool isPlayerNearby = false;
