@@ -80,12 +80,12 @@ public class CatchSmallGarbage : MonoBehaviour
         if (CSV_Database.instance.GarbageMap.TryGetValue(trashName, out Dictionary<string, object> data))
         {
             object sample = data["weight"]; ;
-            Debug.Log(trashName+" : "+(int)sample);
+            //Debug.Log(trashName+" : "+(int)sample);
             Weight[i] = (int)sample;
         }
         else
         {
-            Debug.LogError("GarbageMap에서 키 'small_1'을 찾을 수 없습니다.");
+            Debug.LogError("GarbageMap에서 키 '" + trashName + "'을 찾을 수 없습니다.");
         }
     }
 }

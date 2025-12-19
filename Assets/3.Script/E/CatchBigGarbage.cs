@@ -15,9 +15,10 @@ public class CatchBigGarbage : MonoBehaviour
     // 들어올린 상태는 프리팹화 한 값을 보여줍니다
     // 내려 놓으면
     private GameObject trash;
-    private int[] Strength = new int[6];
+    private int[] Strength = new int[5];
     private int trashNum;
     private string trashName;
+    private int nowStrength;
     [SerializeField] private CleanPlayer cleanPlayer;
 
 
@@ -26,11 +27,12 @@ public class CatchBigGarbage : MonoBehaviour
         for (int i = 0; i < Strength.Length; i++)
         {
             trashName = "large_" + (i);
-            StartCoroutine(FindCsvData_co(i));
+            StartCoroutine(FindCsvData_co(trashName, i));
+            //Debug.Log(trashName + " : " + i);
         }
     }
-    //csv에 접근해서 Weight 배열에 큰 쓰레기 들의 무게들 값을 저장 해 둔다.
-    private IEnumerator FindCsvData_co(int i)
+    //csv에 requireSrt로 접근해서 Strength 배열에 큰 쓰레기 들의 무게들 값을 저장 해 둔다.
+    private IEnumerator FindCsvData_co(string trashName, int i)
     {
         while (CSV_Database.instance == null || CSV_Database.instance.GarbageMap == null)
         {
@@ -39,20 +41,18 @@ public class CatchBigGarbage : MonoBehaviour
         if (CSV_Database.instance.GarbageMap.TryGetValue(trashName, out Dictionary<string, object> data))
         {
             object sample = data["requireSrt"]; ;
-            Debug.Log(trashName + " : " + (int)sample);
+            //Debug.Log(trashName + " : " + (int)sample);
             Strength[i] = (int)sample;
         }
         else
         {
-            Debug.LogError("GarbageMap에서 키 'small_1'을 찾을 수 없습니다.");
+            Debug.LogError("GarbageMap에서 키 '"+ trashName + "'을 찾을 수 없습니다.");
         }
     }
     public void CatchTrash(GameObject trash)
     {
         //메니저에 있는 현재 상태 변경
         GameManager.instance.isGrabBigGarbage = true;
-
-        trashNum = trash.GetComponent<BigTrash>().getTrashNum();
         this.trash = trash;
         if (CanLift())
         {
@@ -63,10 +63,16 @@ public class CatchBigGarbage : MonoBehaviour
     }
     private bool CanLift()
     {
-        return true;
+        trashNum = trash.GetComponent<BigTrash>().getTrashNum();
+        nowStrength = GameManager.instance.P_Str;
+        if(nowStrength>= Strength[trashNum])
+            return true; //들 수 있다.
+        else
+            return false; //들 수 없다.
+
     }
     public void removeTrash()
     {
-        Destroy(trash);
+        trash.SetActive(false);
     }
 }

@@ -22,7 +22,7 @@ public class HitPointState : MonoBehaviour
     private void Start()
     {
         input.onPickUp += isTrash;
-        Debug.Log("이벤트 추가 됐어?");
+        //Debug.Log("이벤트 추가 됐어?");
     }
     private void Awake()
     {
@@ -40,6 +40,7 @@ public class HitPointState : MonoBehaviour
             if (target[i] != null && target[i].layer == LayerMask.NameToLayer("BigTrash"))
             {
                 // Bigtrash 처리
+                Debug.Log("큰 쓰레기 발견");
                 catchLarge.CatchTrash(target[i]);
                 return;
             }

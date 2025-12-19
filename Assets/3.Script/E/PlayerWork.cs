@@ -69,7 +69,7 @@ public class PlayerWork : MonoBehaviour
         }
         else
         {
-            HitPosition = origin + direction * Distance;
+            return;
         }
         hits = sorting.SortingHits(hits, HitPosition, hit.collider.gameObject.layer);
         if(hits == null)
