@@ -666,7 +666,7 @@ MonoBehaviour:
   end_pos: {x: 0, y: 0, z: 0}
   npc_height: 0
   moveSpeed: 1.5
-  cultive_percent: 5
+  cultive_percent: 30
   cultive_count: 0
   max_cultive_count: 3
   min_sec: 3
@@ -685,7 +685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPC_Create_Trash
   trash_prefabs:
   - {fileID: 9165539489263935864, guid: ad91b1409df817f419b73da095588eeb, type: 3}
-  throw_vector: {x: 0, y: 0, z: 0}
+  throw_vector: {x: 0, y: 1, z: 0}
   throw_power: 0
 --- !u!1 &2980602663962159888
 GameObject:
