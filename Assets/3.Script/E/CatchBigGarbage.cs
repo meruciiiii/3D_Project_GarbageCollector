@@ -99,6 +99,7 @@ public class CatchBigGarbage : MonoBehaviour
     public void DestroyTrash()
     {
         Destroy(trash);
+        transform.GetChild(trashNum + 1).gameObject.SetActive(false);
         trash = null;
     }
     private void LiftGarbage()
