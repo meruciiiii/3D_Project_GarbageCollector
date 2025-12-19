@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 150895054004240778}
   - component: {fileID: 4737030572138024943}
   - component: {fileID: 6673050931868217215}
-  m_Layer: 0
+  - component: {fileID: 4221960343284889800}
+  m_Layer: 7
   m_Name: Large_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,3 +178,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hided: 1
+--- !u!114 &4221960343284889800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6143884570269887538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a42a04c70b352d449b7115179e7736de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BigTrash
+  BigTrashNum: 3

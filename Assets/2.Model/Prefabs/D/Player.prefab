@@ -466,6 +466,7 @@ GameObject:
   - component: {fileID: 1467396829818393056}
   - component: {fileID: 440305980709591236}
   - component: {fileID: 3227231357700357438}
+  - component: {fileID: 5712761856223967927}
   - component: {fileID: 8912951419528745372}
   m_Layer: 0
   m_Name: Player
@@ -747,8 +748,8 @@ MonoBehaviour:
   jumpPower: 5
   sensitive: 0.1
   cameraObject: {fileID: 4923363421550768917}
-  inventory: 0
-  max_inventory: 20
+  cur_weight: 0
+  max_weight: 0
   slow_start_bag_weight: 0.5
   slow_percent: 0.8
 --- !u!114 &4076259103573898125
@@ -779,7 +780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWork
   interactionMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   sorting: {fileID: 1467396829818393056}
   input: {fileID: 4076259103573898125}
 --- !u!114 &1467396829818393056
@@ -806,6 +807,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1289bc3b4e436dd4fa88af3384584d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitPointState
+  catchSmall: {fileID: 3227231357700357438}
+  catchLarge: {fileID: 5712761856223967927}
+  playerWork: {fileID: 8968073341749195394}
   input: {fileID: 4076259103573898125}
 --- !u!114 &3227231357700357438
 MonoBehaviour:
@@ -819,7 +823,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f12eee881a020a6438db2f7b75e5ddf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CatchSmallGarbage
-  trash: {fileID: 0}
+  cleanPlayer: {fileID: 8912951419528745372}
+--- !u!114 &5712761856223967927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5653073563824068037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb80c4eb10b191f4d962c94070b2ba1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CatchBigGarbage
   cleanPlayer: {fileID: 8912951419528745372}
 --- !u!114 &8912951419528745372
 MonoBehaviour:

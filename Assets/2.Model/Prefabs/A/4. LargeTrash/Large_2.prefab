@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3217123755086417471}
   - component: {fileID: 4894952502178524051}
   - component: {fileID: 4381901954732507468}
-  m_Layer: 0
+  - component: {fileID: -153625743708865735}
+  m_Layer: 7
   m_Name: Large_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,3 +113,16 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4550351465693196171, guid: 21dcce55c86292045bea0f90846915e0, type: 3}
+--- !u!114 &-153625743708865735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7704796825697572423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a42a04c70b352d449b7115179e7736de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BigTrash
+  BigTrashNum: 2

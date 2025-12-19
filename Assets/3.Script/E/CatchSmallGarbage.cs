@@ -10,7 +10,7 @@ public class CatchSmallGarbage : MonoBehaviour
     //작은 쓰레기의 경우 해당 오브젝트가 사라진다.
     //작은 쓰레기의 경우 인벤토리에 들어간다.
     //인벤토리에 들어가면 인벤토리의 무게가 늘어난다.
-    public GameObject trash;
+    private GameObject trash;
     private int trashNum;
     private int[] Weight = new int[9];
     private int BagWeight;
@@ -27,7 +27,6 @@ public class CatchSmallGarbage : MonoBehaviour
     }
     public void CatchTrash(GameObject trash)
     {
-        GameManager.instance.P_Maxbag = 5000;
         this.trash = trash;
         if (AddBackpack())
         {
@@ -75,18 +74,18 @@ public class CatchSmallGarbage : MonoBehaviour
     {
         while (CSV_Database.instance == null || CSV_Database.instance.GarbageMap == null)
         {
-            Debug.Log("null 이랍니다");
+            //Debug.Log("null 이랍니다");
             yield return null;
         }
         if (CSV_Database.instance.GarbageMap.TryGetValue(trashName, out Dictionary<string, object> data))
         {
             object sample = data["weight"]; ;
-            Debug.Log(trashName+" : "+(int)sample);
+            //Debug.Log(trashName+" : "+(int)sample);
             Weight[i] = (int)sample;
         }
         else
         {
-            Debug.LogError("GarbageMap에서 키 'small_1'을 찾을 수 없습니다.");
+            Debug.LogError("GarbageMap에서 키 '" + trashName + "'을 찾을 수 없습니다.");
         }
     }
 }
