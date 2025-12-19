@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6069206361422373724}
   m_Layer: 0
-  m_Name: Start_Location
+  m_Name: Location 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,11 +25,11 @@ Transform:
   m_GameObject: {fileID: 415646295329785616}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.94903, y: 0, z: -23.34418}
+  m_LocalPosition: {x: 11, y: 0, z: -25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4849337336146115895}
+  m_Father: {fileID: 9026196468480850725}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3260261001487503809
 GameObject:
@@ -40,8 +40,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9026196468480850725}
+  - component: {fileID: 2656299357611520446}
   m_Layer: 0
-  m_Name: Stage1_NPC_Route
+  m_Name: Stage1_NPC_Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,10 +61,30 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6069206361422373724}
   - {fileID: 1095916454311530085}
-  - {fileID: 4849337336146115895}
+  - {fileID: 8304010587840974170}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2656299357611520446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3260261001487503809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7746d204ae78b7047af1f5a61ef6a1c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Stage1_Spawner
+  NPC: {fileID: 2970450682493004797, guid: d1d2703cc2b174848ba1e7d94c5d2b98, type: 3}
+  spawn_locations:
+  - {fileID: 6069206361422373724}
+  - {fileID: 8304010587840974170}
+  min_sec: 2
+  max_sec: 5
+  cultive_pos: {fileID: 6591786844843564866}
 --- !u!1 &4151166677607437949
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8304010587840974170}
   m_Layer: 0
-  m_Name: End_Location
+  m_Name: Location 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,11 +110,11 @@ Transform:
   m_GameObject: {fileID: 4151166677607437949}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.94903, y: 0, z: 23.65582}
+  m_LocalPosition: {x: 11, y: 0, z: 22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4849337336146115895}
+  m_Father: {fileID: 9026196468480850725}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6591786844843564866
 GameObject:
@@ -126,56 +147,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9026196468480850725}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8976571348621747339
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4849337336146115895}
-  - component: {fileID: 2337849877060200106}
-  m_Layer: 0
-  m_Name: Stage1_NPC_Spawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4849337336146115895
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8976571348621747339}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.05097, y: 0, z: -1.65582}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6069206361422373724}
-  - {fileID: 8304010587840974170}
-  m_Father: {fileID: 9026196468480850725}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2337849877060200106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8976571348621747339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7746d204ae78b7047af1f5a61ef6a1c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Stage1_Spawner
-  NPC: {fileID: 2970450682493004797, guid: d1d2703cc2b174848ba1e7d94c5d2b98, type: 3}
-  start_pos: {x: 0, y: 0, z: 0}
-  middle_pos_array: []
-  end_pos: {x: 0, y: 0, z: 0}
-  min_sec: 2
-  max_sec: 5
-  cultive_pos: {fileID: 6591786844843564866}

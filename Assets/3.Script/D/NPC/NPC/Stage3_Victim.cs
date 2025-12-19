@@ -18,11 +18,6 @@ public class Stage3_Victim : NPC_Controller {
 	}
 
 	protected override IEnumerator routine_co() {
-		if(middle_pos_array != null) {
-			for(int i = 0; i<middle_pos_array.Length; i++) {
-				yield return StartCoroutine(Move_co(middle_pos_array[i]));
-			}
-		}
 		yield return StartCoroutine(Move_co(end_pos));
 		Destroy(gameObject);
 	}

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using LitJson;
 using System.IO;
 
 [Serializable]
@@ -11,9 +10,11 @@ public class PlayerData
     public int MaxHP = 100;
     public int Str = 1;
     public int Spd = 5;
-    public int Money = 1000;
-    public int bag = 100;
+    public int Money = 0;
+    public int bag = 5000;
     public bool isEnglish = false;
+    public int grab = 1;
+    public float grabspd = 1.5f;
 }
 public static class JsonDataManger
 {
@@ -23,7 +24,7 @@ public static class JsonDataManger
 
     public static void SavetoJson(PlayerData data)
     {
-        string Jsondata = JsonMapper.ToJson(data);
+        string Jsondata = JsonUtility.ToJson(data);
 
         File.WriteAllText(path, Jsondata); //경로 파일 안에 json파일로 저장
         Debug.Log("Playerdata Wirte완료");
@@ -38,7 +39,7 @@ public static class JsonDataManger
             return newPlayerdata;
         }
         string Jsondata = File.ReadAllText(path);
-        PlayerData jsonPlayerdata = JsonMapper.ToObject<PlayerData>(Jsondata);
+        PlayerData jsonPlayerdata = JsonUtility.FromJson<PlayerData>(Jsondata);
         Debug.Log("Playerdatajson Load완료");
         return jsonPlayerdata;
     }
