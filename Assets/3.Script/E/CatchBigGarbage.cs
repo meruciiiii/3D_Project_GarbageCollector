@@ -17,6 +17,7 @@ public class CatchBigGarbage : MonoBehaviour
     private GameObject trash;
     private int[] Strength = new int[5];
     private int trashNum;
+    private int bigGarbageWeight;
     private string trashName;
     private int nowStrength;
     [SerializeField] private CleanPlayer cleanPlayer;
@@ -57,6 +58,7 @@ public class CatchBigGarbage : MonoBehaviour
         if (CanLift())
         {
             cleanPlayer.Clean(trashNum);
+            setBitGarbageWeight();
             removeTrash();
         }
         this.trash = null;
@@ -71,8 +73,23 @@ public class CatchBigGarbage : MonoBehaviour
             return false; //들 수 없다.
 
     }
-    public void removeTrash()
+    private void removeTrash()
     {
         trash.SetActive(false);
+    }
+    private void setBitGarbageWeight()
+    {
+        trashName = "large_" + trashNum;
+        if (CSV_Database.instance.GarbageMap.TryGetValue(trashName, out Dictionary<string, object> data))
+        {
+            object sample = data["weight"]; ;
+            //Debug.Log(trashName + " : " + (int)sample);
+            bigGarbageWeight = (int)sample;
+        }
+        else
+        {
+            Debug.LogError("GarbageMap에서 키 '" + trashName + "'을 찾을 수 없습니다.");
+        }
+        GameManager.instance.BigGarbageWeight = bigGarbageWeight;
     }
 }

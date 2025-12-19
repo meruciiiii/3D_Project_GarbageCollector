@@ -30,6 +30,11 @@ public class HitPointState : MonoBehaviour
     public void isTrash()
     {
         GameObject[] target = playerWork.GetGameObject();
+        if (GameManager.instance.isGrabBigGarbage)
+        {
+            Debug.Log("큰 쓰레기 들고있는걸?!");
+            return;
+        }
         if (target == null)
         {
             Debug.Log("null이라서 나갈게");
