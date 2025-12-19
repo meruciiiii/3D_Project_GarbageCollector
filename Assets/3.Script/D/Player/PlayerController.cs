@@ -13,15 +13,15 @@ public class PlayerController : MonoBehaviour
     //--------------------------------
     //이동 관련
     private bool isCanRun = true;
-    private bool isCanJump = true;
+    //private bool isCanJump = true;
 
     [Header("플레이어 이동속도")]
     public float moveSpeed;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
 
-    [Header("플레이어 점프력")]
-    [SerializeField] private float jumpPower;
+    //[Header("플레이어 점프력")]
+    //[SerializeField] private float jumpPower;
 
     //--------------------------------
     //시점 관련
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     //이벤트 등록
     private void Start()
     {
-        input.onJump += Jump;
+        //input.onJump += Jump;
         input.onRun += Run;
         input.onWalk += Walk;
     }
@@ -93,16 +93,16 @@ public class PlayerController : MonoBehaviour
         cameraObject.transform.localEulerAngles = new Vector3(-newY, 0, 0);
         transform.eulerAngles += new Vector3(0, input.mouseDelta.x * sensitive, 0);
     }
-    private void Jump()
-    {
-        //BoxCast로 플레이어의 하단의 넓적한 네모만큼 범위를 탐색하여, 뭔가라도 아래에 있는(밟은) 상태면 점프 가능.
-        if (isCanJump && Physics.BoxCast(transform.position, new Vector3(0.25f, 0.01f, 0.25f), Vector3.down,
-                                   Quaternion.identity, 0.01f + transform.localScale.y))
-        {
-            //playerRB.linearVelocity = Vector3.zero;
-            playerRB.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-        }
-    }
+    //private void Jump()
+    //{
+    //    //BoxCast로 플레이어의 하단의 넓적한 네모만큼 범위를 탐색하여, 뭔가라도 아래에 있는(밟은) 상태면 점프 가능.
+    //    if (isCanJump && Physics.BoxCast(transform.position, new Vector3(0.25f, 0.01f, 0.25f), Vector3.down,
+    //                               Quaternion.identity, 0.01f + transform.localScale.y))
+    //    {
+    //        //playerRB.linearVelocity = Vector3.zero;
+    //        playerRB.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+    //    }
+    //}
     private void Run()
     {
         if (isCanRun)
@@ -138,12 +138,12 @@ public class PlayerController : MonoBehaviour
             //이동속도 = 플레이어속도 x (무게 비례 속도 저하 비율 + 최소속도)
             //         = 플레이어속도 x ((1 - 무게 비율) * 최저속도 비율) + 최소속도)
             Speed = moveSpeed * ((1 - cur_weight / max_weight) * slow_percent + (1 - slow_percent));
-            isCanJump = false;
+            //isCanJump = false;
             isCanRun = false;
         }
         else
         {
-            isCanJump = true;
+            //isCanJump = true;
             isCanRun = true;
         }
         /*

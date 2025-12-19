@@ -7,11 +7,6 @@ using UnityEngine;
 
 public class HitPointState : MonoBehaviour
 {
-    public enum State
-    {
-        Ready,
-        Collecting
-    }
     //현재 적용된 콜라이더의 오브젝트를 받아서
     //오브젝트가 사용된 부분을 구분하고 현 상태로 지정한다
     //현 상태에 따라 실행하는 부분이 다르다
@@ -21,15 +16,33 @@ public class HitPointState : MonoBehaviour
     [SerializeField] private CatchBigGarbage catchLarge;
     [SerializeField] private PlayerWork playerWork;
     [SerializeField] private PlayerInput input;
-    public State state { get; private set; }
+    private float LastGrabTime;
+    [SerializeField] private float TimebetGrab;
     //이벤트 등록 
     private void Start()
     {
-        input.onPickUp += isTrash;
+        input.onPickUp += Grab;
         //Debug.Log("이벤트 추가 됐어?");
+        //Debug.Log(GameManager.instance);
+        TimebetGrab = GameManager.instance.grab_speed;
+        //TimebetGrab = 1.5f;
+        LastGrabTime = 0f;
     }
     private void Awake()
     {
+        
+    }
+    private void OnEnable()
+    {
+    }
+
+    public void Grab()
+    {
+        if (LastGrabTime + TimebetGrab <= Time.time)
+        {
+            isTrash();
+            
+        }
     }
     public void isTrash()
     {
@@ -63,6 +76,7 @@ public class HitPointState : MonoBehaviour
             if (target[i] != null && target[i].layer == LayerMask.NameToLayer("SmallTrash"))
             {
                 catchSmall.CatchTrash(target[i]);
+                LastGrabTime = Time.time;
             }
         }
     }
