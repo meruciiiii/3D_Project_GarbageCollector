@@ -17,7 +17,6 @@ public class HitPointState : MonoBehaviour
     [SerializeField] private PlayerWork playerWork;
     [SerializeField] private PlayerInput input;
 
-
     //이벤트 등록 
     private void Start()
     {
@@ -33,6 +32,7 @@ public class HitPointState : MonoBehaviour
         if (GameManager.instance.isGrabBigGarbage)
         {
             Debug.Log("큰 쓰레기 들고있는걸?!");
+            catchLarge.DrobGarbage();
             return;
         }
         if (target == null)
