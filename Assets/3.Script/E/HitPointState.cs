@@ -7,6 +7,11 @@ using UnityEngine;
 
 public class HitPointState : MonoBehaviour
 {
+    public enum State
+    {
+        Ready,
+        Collecting
+    }
     //현재 적용된 콜라이더의 오브젝트를 받아서
     //오브젝트가 사용된 부분을 구분하고 현 상태로 지정한다
     //현 상태에 따라 실행하는 부분이 다르다
@@ -16,7 +21,7 @@ public class HitPointState : MonoBehaviour
     [SerializeField] private CatchBigGarbage catchLarge;
     [SerializeField] private PlayerWork playerWork;
     [SerializeField] private PlayerInput input;
-
+    public State state { get; private set; }
     //이벤트 등록 
     private void Start()
     {
@@ -32,7 +37,10 @@ public class HitPointState : MonoBehaviour
         if (GameManager.instance.isGrabBigGarbage)
         {
             Debug.Log("큰 쓰레기 들고있는걸?!");
-            catchLarge.DrobGarbage();
+            if (!Cursor.visible)
+            {
+                catchLarge.DrobGarbage();
+            }
             return;
         }
         if (target == null)
