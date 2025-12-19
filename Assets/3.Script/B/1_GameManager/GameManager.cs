@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public bool P_isEnglish; //한 영문전환
 
     public int grab_limit = 1;//집을 수 있는 최댓수
+    public float grab_speed = 1.5f;//집는 속도
 
     //큰 쓰레기 전용 값 2종류
     public bool isGrabBigGarbage = false;
@@ -79,6 +80,9 @@ public class GameManager : MonoBehaviour
         P_Money = loadData.Money;
         P_Maxbag = loadData.bag;
 
+        grab_limit = loadData.grab;
+        grab_speed = loadData.grabspd;
+
         P_CurrentHP = P_MaxHP;//체력은 풀로
         P_Weight = 0; //들고 있던 쓰레기 무게 초기화
 
@@ -96,7 +100,9 @@ public class GameManager : MonoBehaviour
             Spd = P_Spd,
             Money = P_Money,
             bag = P_Maxbag,
-            isEnglish = P_isEnglish
+            isEnglish = P_isEnglish,
+            grab = grab_limit,
+            grabspd =grab_speed
         };
         JsonDataManger.SavetoJson(datatosave);
     }
