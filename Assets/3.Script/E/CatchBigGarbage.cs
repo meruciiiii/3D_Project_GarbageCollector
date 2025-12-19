@@ -20,8 +20,11 @@ public class CatchBigGarbage : MonoBehaviour
     private int bigGarbageWeight;
     private string trashName;
     private int nowStrength;
+    private Vector3 PlayerPosition;
+    private Rigidbody trash_r;
+    private Transform trashRotation;
     [SerializeField] private CleanPlayer cleanPlayer;
-
+    public float porce;
 
     private void Awake()
     {
@@ -47,7 +50,7 @@ public class CatchBigGarbage : MonoBehaviour
         }
         else
         {
-            Debug.LogError("GarbageMap에서 키 '" + trashName + "'을 찾을 수 없습니다.");
+            Debug.LogError("GarbageMap에서 키 '"+ trashName + "'을 찾을 수 없습니다.");
         }
     }
     public void CatchTrash(GameObject trash)
@@ -60,13 +63,14 @@ public class CatchBigGarbage : MonoBehaviour
             cleanPlayer.Clean(trashNum);
             setBitGarbageWeight();
             removeTrash();
+            LiftGarbage();
         }
     }
     private bool CanLift()
     {
         trashNum = trash.GetComponent<BigTrash>().getTrashNum();
         nowStrength = GameManager.instance.P_Str;
-        if (nowStrength >= Strength[trashNum])
+        if(nowStrength>= Strength[trashNum])
             return true; //들 수 있다.
         else
             return false; //들 수 없다.
@@ -90,7 +94,7 @@ public class CatchBigGarbage : MonoBehaviour
             Debug.LogError("GarbageMap에서 키 '" + trashName + "'을 찾을 수 없습니다.");
         }
         GameManager.instance.BigGarbageWeight = bigGarbageWeight;
-        Debug.Log(GameManager.instance.BigGarbageWeight + " 큰거 무게 확인");
+        Debug.Log(GameManager.instance.BigGarbageWeight+" 큰거 무게 확인");
     }
     public void DestroyTrash()
     {
@@ -99,6 +103,32 @@ public class CatchBigGarbage : MonoBehaviour
     }
     private void LiftGarbage()
     {
+        transform.GetChild(trashNum+1).gameObject.SetActive(true);
+    }
+    public void DrobGarbage()
+    {
+        if (GameManager.instance.isGrabBigGarbage)
+        {
+            trashRotation = trash.transform;
+            trashRotation.rotation = transform.GetChild(trashNum + 1).gameObject.transform.rotation;
+            transform.GetChild(trashNum + 1).gameObject.SetActive(false);
+            PlayerPosition = transform.position;
+            Vector3 direction = (transform.forward + transform.right*0.5f).normalized;
+            trash.transform.position = PlayerPosition + direction * 1.5f;
+            trash.transform.rotation = trashRotation.rotation;
+            trash.SetActive(true);
+            trash.TryGetComponent<Rigidbody>(out trash_r);
+            trash_r.isKinematic = false;
+            trash_r.useGravity = true;
+            trash_r.AddForce(direction * porce, ForceMode.Impulse);
+            trash_r.AddTorque(Vector3.Cross(Vector3.up, direction) * 1f);
+            Debug.Log(trash.transform.position);
+            GameManager.instance.isGrabBigGarbage = false;
+        }
+        else
+        {
+            return;
+        }
+        
     }
 }
-
