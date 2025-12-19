@@ -12,18 +12,7 @@ public class UIManager : MonoBehaviour
     public event Action UIValueChange;
     [SerializeField] private PlayerInput input;
 
-    public static UIManager instance = null;
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else Destroy(gameObject);
-        input.onPickUp += change_Value;
-        input.onInteract += change_Value;
-    }
+    public static UIManager instance;
 
     public void change_Value()
     {
