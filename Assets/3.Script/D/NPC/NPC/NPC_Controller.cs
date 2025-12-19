@@ -71,6 +71,7 @@ public class NPC_Controller : MonoBehaviour {
 		yield return null;
 	}
 	protected IEnumerator Move_co(Vector3 target_point) {
+		transform.LookAt(target_point);
 		while(Vector3.SqrMagnitude(transform.position - target_point) >= 0.00001f) {
 			transform.position = Vector3.MoveTowards(transform.position, target_point, moveSpeed * Time.deltaTime);
 			yield return null;

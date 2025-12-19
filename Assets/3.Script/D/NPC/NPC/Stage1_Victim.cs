@@ -16,8 +16,12 @@ public class Stage1_Victim : NPC_Controller {
 	protected override IEnumerator routine_co() {
 		yield return StartCoroutine(Move_co(cultive_pos));
 		if(Random.Range(0,101) < cultive_percent) {
+			Vector3 throw_dir = npc_create_trash.throw_vector;
+			transform.LookAt(new Vector3(throw_dir.x, 0f, throw_dir.z));
+			//플레이어 쓰레기 던지는 모션
+			yield return new WaitForSeconds(1f);
 			npc_create_trash.Throw_Trash();
-			yield return new WaitForSeconds(2f);
+			yield return new WaitForSeconds(1f);
 		}
 		yield return StartCoroutine(Move_co(end_pos));
 		Destroy(gameObject);
