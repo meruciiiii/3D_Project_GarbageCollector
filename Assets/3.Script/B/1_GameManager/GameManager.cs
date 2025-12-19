@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public int P_Str = 1; //힘
     public int P_Spd = 5; //속도
 
-    public int P_Money = 1000; //소지 돈
+    public int P_Money = 0; //소지 돈
     public int P_Maxbag = 5000; //가방최대무게
 
     public int P_Weight = 0; //현재 무게

@@ -10,8 +10,8 @@ public class PlayerData
     public int MaxHP = 100;
     public int Str = 1;
     public int Spd = 5;
-    public int Money = 1000;
-    public int bag = 100;
+    public int Money = 0;
+    public int bag = 5000;
     public bool isEnglish = false;
     public int grab = 1;
     public float grabspd = 1.5f;
