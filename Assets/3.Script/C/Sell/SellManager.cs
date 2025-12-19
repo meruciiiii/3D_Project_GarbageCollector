@@ -3,37 +3,71 @@ using UnityEngine;
 public class SellManager : MonoBehaviour
 {
     [Header("정산 설정")]
-    [Tooltip("1 무게당 얼마를 줄 것인가?")]
-    [SerializeField] private int pricePerWeight = 15; // 예: 1kg당 15원
+    [Tooltip("1kg당 판매 가격")]
+    [SerializeField] private int pricePerWeight = 15;
 
-    // 예상 금액 계산
-    public int CalculatePotentialEarnings()
+    // 1. 소형 쓰레기(가방) 예상 금액만 계산하는 함수
+    public int GetSmallTrashEarnings()
     {
         if (GameManager.instance == null) return 0;
         return GameManager.instance.P_Weight * pricePerWeight;
     }
 
-    // 실제 판매 및 데이터 저장
+    // 2. 대형 쓰레기(손) 예상 금액만 계산하는 함수
+    public int GetBigTrashEarnings()
+    {
+        if (GameManager.instance == null) return 0;
+
+        // 들고 있을 때만 계산
+        if (GameManager.instance.isGrabBigGarbage)
+        {
+            return GameManager.instance.BigGarbageWeight * pricePerWeight;
+        }
+        return 0;
+    }
+
+    // 3. 총 합계 계산 (기존 함수 유지하되 내부에서 위 함수들 활용)
+    public int CalculatePotentialEarnings()
+    {
+        return GetSmallTrashEarnings() + GetBigTrashEarnings();
+    }
+
+    // 실제 판매 로직 (기존 코드 유지 + 삭제 로직 포함)
     public int SellAllTrash()
     {
         if (GameManager.instance == null) return 0;
 
-        int currentWeight = GameManager.instance.P_Weight;
+        int smallEarn = GetSmallTrashEarnings();
+        int bigEarn = GetBigTrashEarnings();
+        int totalEarnings = smallEarn + bigEarn;
 
-        // 판매할 게 없으면 0 리턴
-        if (currentWeight <= 0) return 0;
+        // --- 데이터 초기화 및 삭제 로직 ---
 
-        // 가격 계산
-        int earnings = currentWeight * pricePerWeight;
+        // [A] 소형 정산
+        if (smallEarn > 0)
+        {
+            GameManager.instance.P_Weight = 0;
+        }
 
-        // 데이터 적용 (돈 추가, 무게 초기화)
-        GameManager.instance.P_Money += earnings;
-        GameManager.instance.P_Weight = 0;
+        // [B] 대형 정산
+        if (bigEarn > 0)
+        {
+            // 오브젝트 삭제
+            CatchBigGarbage catcher = FindAnyObjectByType<CatchBigGarbage>();
+            if (catcher != null) catcher.DestroyTrash();
 
-        // 저장
-        GameManager.instance.SaveAllGamedata();
-        Debug.Log($"[SellManager] 정산 완료: {earnings}원 획득 / 무게 초기화됨");
+            GameManager.instance.isGrabBigGarbage = false;
+            GameManager.instance.BigGarbageWeight = 0;
+        }
 
-        return earnings;
+        // --- 돈 지급 및 저장 ---
+        if (totalEarnings > 0)
+        {
+            GameManager.instance.P_Money += totalEarnings;
+            GameManager.instance.SaveAllGamedata();
+            Debug.Log($"정산 완료: 소형({smallEarn}) + 대형({bigEarn}) = {totalEarnings}원");
+        }
+
+        return totalEarnings;
     }
 }
