@@ -48943,6 +48943,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1195083166459186004}
   - component: {fileID: 1159765808868977642}
+  - component: {fileID: 3749640234118398037}
   m_Layer: 5
   m_Name: Aim
   m_TagString: Untagged
@@ -48950,6 +48951,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3749640234118398037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3749640234118398036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61495f387a773684980c6a578383dbae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::aimcooldown
+  cooldownSlider: {fileID: 1159765808868977642}
+  input: {fileID: 1075056162}
 --- !u!33 &3749653439652129469
 MeshFilter:
   m_ObjectHideFlags: 0
