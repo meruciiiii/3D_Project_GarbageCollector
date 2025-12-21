@@ -18,13 +18,14 @@ public class BSceneManager : MonoBehaviour
         }
     }
 
+    //void Start()와는 다르게, 시작하자마자 코루틴(Coroutine)처럼 동작
     IEnumerator Start()
     {
-        // 1. 이 상태에서 이미 B씬의 물리(쓰레기 낙하)는 작동 중입니다.
+        // 1. 이 상태에서 이미 B씬의 물리(쓰레기 낙하)는 작동 중
         Debug.Log("쓰레기 낙하 시작 (화면 가려짐)");
 
         // 2. 쓰레기가 충분히 떨어질 때까지 기다림
-        yield return new WaitForSeconds(waitTimeForTrash);
+        yield return new WaitForSeconds(waitTimeForTrash);//IEnumerator 처럼  yield return new WaitForSeconds 사용가능
 
         // 3. 서서히 화면을 밝게 함 (페이드 인)
         if (fadeImage != null)

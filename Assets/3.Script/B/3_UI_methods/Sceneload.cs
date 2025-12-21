@@ -29,7 +29,6 @@ public class Sceneload : MonoBehaviour
 
         AsyncOperation op = SceneManager.LoadSceneAsync(finalSceneName);
         op.allowSceneActivation = false; // 로딩이 완료되어도 자동으로 넘어가지 않게 설정
-        // ---------------------------------------------------------
 
         // 2. 페이드 아웃 연출 시작
         if (fadeImage != null)
@@ -50,13 +49,19 @@ public class Sceneload : MonoBehaviour
         }
 
         // 3. 로딩 상태 확인 및 씬 전환 허용
-        // op.progress가 0.9일 때 로딩이 완료된 것으로 간주합니다 (allowSceneActivation이 false일 때)
+        /*
+         유니티의 AsyncOperation은 로딩 과정을 크게 두 단계
+
+         데이터 로딩 (0% ~ 90%): 하드디스크에서 씬 데이터를 읽어오고 메모리에 올리는 실제 로딩 과정
+
+         씬 활성화 (90% ~ 100%): 데이터를 다 읽은 후, 이전 씬을 메모리에서 지우고 새 씬의 오브젝트들을 화면에 배치하는 최종 마무리 과정
+         */
         while (op.progress < 0.9f)
         {
             yield return null;
         }
 
-        // 이제 모든 준비가 끝났으므로 씬 전환을 허락합니다.
+        // 이제 모든 준비가 끝났으므로 씬 전환을 허락
         op.allowSceneActivation = true;
 
         // 최종적으로 전환될 때까지 대기
@@ -64,7 +69,8 @@ public class Sceneload : MonoBehaviour
         {
             yield return null;
         }
-
+    }
+}
         /*
         //기존방식
         // 2. 페이드 아웃 (점점 어두워짐)
@@ -97,5 +103,3 @@ public class Sceneload : MonoBehaviour
             yield return null;
         }
         */
-    }
-}

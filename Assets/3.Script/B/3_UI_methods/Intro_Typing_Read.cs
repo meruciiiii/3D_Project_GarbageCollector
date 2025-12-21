@@ -23,7 +23,7 @@ public class Intro_Typing_Read : MonoBehaviour
 
     private IEnumerator WaitForDataAndTyping()
     {
-        // 1. 데이터 로딩 대기 (기존 로직 유지)
+        // 1. 데이터 로딩 대기
         while (GameManager.instance == null || !GameManager.instance.LoadComplete) yield return null;
         while (CSV_Database.instance == null || !CSV_Database.instance.IsLoaded) yield return null;
         Debug.Log("intro");
@@ -35,7 +35,7 @@ public class Intro_Typing_Read : MonoBehaviour
         {
             if (Data.ContainsKey(Key2))
             {
-                string fullText = Data[Key2].ToString();
+                string fullText = Data[Key2].ToString();//데이터 값 빼오기
 
                 yield return StartCoroutine(TypeText(fullText));
 
