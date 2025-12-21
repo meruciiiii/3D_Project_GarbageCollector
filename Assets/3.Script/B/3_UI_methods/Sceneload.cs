@@ -15,12 +15,13 @@ public class Sceneload : MonoBehaviour
         StartCoroutine(LoadAsync(scenename));
     }
 
-    IEnumerator LoadAsync(string scenename)
+    private IEnumerator LoadAsync(string scenename)
     {
         // 1. 버튼 사운드 대기
         yield return new WaitForSeconds(buttonDelay);
 
         string finalSceneName = scenename;
+
         if (GameManager.instance != null && GameManager.instance.P_intro)
         {
             finalSceneName = "B_Intro";
@@ -39,10 +40,13 @@ public class Sceneload : MonoBehaviour
             {
                 timer += Time.deltaTime;
                 Color c = fadeImage.color;
-                c.a = Mathf.Clamp01(timer / fadeDuration);
+                c.a = timer / fadeDuration;
                 fadeImage.color = c;
                 yield return null;
             }
+            Color finalColor = fadeImage.color;
+            finalColor.a = 1f;
+            fadeImage.color = finalColor;
         }
 
         // 3. 로딩 상태 확인 및 씬 전환 허용
