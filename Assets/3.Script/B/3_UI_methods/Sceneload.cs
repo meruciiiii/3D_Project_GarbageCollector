@@ -40,7 +40,6 @@ public class Sceneload : MonoBehaviour
         if (GameManager.instance != null && GameManager.instance.P_intro)
         {
             finalSceneName = "B_Intro"; // 인트로 씬의 이름은 추후 수정가능
-            GameManager.instance.P_intro = false;
         }
 
         // 3. 비동기 씬 로드

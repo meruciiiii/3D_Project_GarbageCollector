@@ -17,7 +17,7 @@ public class PlayerData
     public float grabspd = 1.5f;
 
     public bool isEnglish = false;
-    public bool intro = false;
+    public bool intro = true;
 }
 public static class JsonDataManger
 {

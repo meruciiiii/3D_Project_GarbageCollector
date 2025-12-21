@@ -106,7 +106,8 @@ public class GameManager : MonoBehaviour
             bag = P_Maxbag,
             isEnglish = P_isEnglish,
             grab = grab_limit,
-            grabspd =grab_speed
+            grabspd =grab_speed,
+            intro = P_intro
         };
         JsonDataManger.SavetoJson(datatosave);
     }

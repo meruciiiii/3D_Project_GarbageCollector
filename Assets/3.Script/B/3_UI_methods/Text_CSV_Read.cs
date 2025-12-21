@@ -34,7 +34,8 @@ public class Text_CSV_Read : MonoBehaviour
             {
                 if (text_component != null)
                 {
-                    text_component.text = Data[Key2].ToString();
+                    string rawText = Data[Key2].ToString();
+                    text_component.text = rawText.Replace("|", "\n");
                 }
             }
         }
