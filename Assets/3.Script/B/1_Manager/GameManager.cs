@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public int P_Weight = 0; //현재 무게
 
     public bool P_isEnglish; //한 영문전환
+    public bool P_intro = true; //게임 첫 시작시 intro
 
     public int grab_limit = 1;//집을 수 있는 최댓수
     public float grab_speed = 1.5f;//집는 속도
@@ -88,6 +89,8 @@ public class GameManager : MonoBehaviour
         P_Weight = 0; //들고 있던 쓰레기 무게 초기화
 
         P_isEnglish = loadData.isEnglish;
+        P_intro = loadData.intro;
+
         LoadComplete = true;
         Debug.Log("LoadGamedata");
     }
