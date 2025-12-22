@@ -9,6 +9,7 @@ public class pause : MonoBehaviour
     [SerializeField] private GameObject Pause_UI;
     [SerializeField] private GameObject fullmap;
     [SerializeField] private GameObject minimap;
+    [SerializeField] private GameObject sellUI;
 
     [Header("플레이어 연결")] private PlayerController controller;
 
@@ -31,6 +32,19 @@ public class pause : MonoBehaviour
     public void TogglePause() // UI 버튼에 할당도 가능
     {
         if (Pause_UI == null) return;
+
+        UpgradeUI shopUI = FindAnyObjectByType<UpgradeUI>();
+        if (shopUI != null && shopUI.gameObject.activeInHierarchy)
+        {
+            Debug.Log("업그레이드가 열려있어 일시정지를 할 수 없습니다.");
+            return;
+        }
+
+        if (sellUI != null && sellUI.gameObject.activeInHierarchy)
+        {
+            Debug.Log("상점이 열려있어 일시정지를 할 수 없습니다.");
+            return;
+        }
 
         bool isCurrentlyActive = Pause_UI.activeSelf;
         bool targetState = !isCurrentlyActive;

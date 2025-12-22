@@ -475,6 +475,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4939056245614376529, guid: 2f58eb50abdfcdf4db0209a5c2908c5e, type: 3}
   m_PrefabInstance: {fileID: 423070491}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &398326417 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2890492438197504734, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+  m_PrefabInstance: {fileID: 921746898}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &407479224
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -855,6 +860,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 188346424}
     m_Modifications:
     - target: {fileID: 2561573111184878301, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
+      propertyPath: sellUI
+      value: 
+      objectReference: {fileID: 2012720941}
+    - target: {fileID: 2561573111184878301, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
       propertyPath: fullmap
       value: 
       objectReference: {fileID: 1611175523}
@@ -862,6 +871,10 @@ PrefabInstance:
       propertyPath: minimap
       value: 
       objectReference: {fileID: 413000377}
+    - target: {fileID: 2561573111184878301, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
+      propertyPath: upgradeUI
+      value: 
+      objectReference: {fileID: 398326417}
     - target: {fileID: 5302026856618652459, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
       propertyPath: m_Name
       value: Pause_ob
@@ -1579,6 +1592,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c587aceb4c9e57b429fbd4bc2caae7bd, type: 3}
+--- !u!1 &2012720941 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4041067204921753691, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+  m_PrefabInstance: {fileID: 921746898}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2134346269
 PrefabInstance:
   m_ObjectHideFlags: 0
