@@ -11,6 +11,7 @@ public class UpgradeUI : MonoBehaviour
     [SerializeField] public Text strPriceText;
     [SerializeField] public Text bagPriceText;
     [SerializeField] public Text maxHPPriceText;
+    [SerializeField] public Text speedPriceText;
 
     [Header("플레이어 연결")]
     public PlayerController playerController;
@@ -97,6 +98,14 @@ public class UpgradeUI : MonoBehaviour
             Debug.Log("최대 청결도 업그레이드 성공");
         }
     }
+    public void OnClick_UpgradeSpeed()
+    {
+        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.PickSpeed))
+        {
+            UpdateUI();
+            Debug.Log("속도 업그레이드 성공");
+        }
+    }
 
     public void UpdateUI()
     {
@@ -112,6 +121,19 @@ public class UpgradeUI : MonoBehaviour
 
         if (maxHPPriceText != null)
             maxHPPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.MaxHP)}";
+
+        if (speedPriceText != null)
+        {
+            // 속도가 거의 최대치(0.25 이하)라면 MAX 표시
+            if (GameManager.instance.grab_speed <= 0.25f)
+            {
+                speedPriceText.text = "MAX LEVEL";
+            }
+            else
+            {
+                speedPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.PickSpeed)}";
+            }
+        }
     }
 }
 

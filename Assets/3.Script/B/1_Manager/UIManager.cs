@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator wait()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return null;
         if (UIValueChange != null) UIValueChange();//이벤트 호출!
     }
 }

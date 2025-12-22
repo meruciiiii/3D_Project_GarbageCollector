@@ -4,7 +4,8 @@ public enum UpgradeType
 {
     Strength,   // 힘
     BagWeight,  // 가방 무게
-    MaxHP      // 이동 속도
+    MaxHP,      // 이동 속도
+    PickSpeed // 줍기 속도
 }
 public class UpgradeManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private int baseStrengthCost = 1000;
     [SerializeField] private int baseBagCost = 500;
     [SerializeField] private int baseMaxHPCost = 1500;
+    [SerializeField] private int baseSpeedCost = 2000;
 
     public int GetUpgradeCost(UpgradeType type)
     {
@@ -31,6 +33,12 @@ public class UpgradeManager : MonoBehaviour
             case UpgradeType.MaxHP:
                 return (GameManager.instance.P_MaxHP / 10) * baseMaxHPCost;
 
+            case UpgradeType.PickSpeed:
+                float progress = 1.5f - GameManager.instance.grab_speed;
+                int level = Mathf.RoundToInt(progress * 10);
+
+                return baseSpeedCost + (level * 500);
+
             default:
                 return 0;
         }
@@ -41,6 +49,12 @@ public class UpgradeManager : MonoBehaviour
 
         int cost = GetUpgradeCost(type);
         int currentMoney = GameManager.instance.P_Money;
+
+        if (type == UpgradeType.PickSpeed && GameManager.instance.grab_speed <= 0.25f)
+        {
+            Debug.Log("더 이상 속도를 업그레이드할 수 없습니다. (MAX)");
+            return false;
+        }
 
         // 돈 확인
         if (currentMoney < cost)
@@ -75,6 +89,16 @@ public class UpgradeManager : MonoBehaviour
                 GameManager.instance.P_CurrentHP = GameManager.instance.P_MaxHP;
 
                 Debug.Log($"최대 청결도 확장 완료! 현재 Max: {GameManager.instance.P_MaxHP}");
+                break;
+
+            case UpgradeType.PickSpeed:
+                // [NEW] 쿨타임 0.1초 감소
+                GameManager.instance.grab_speed -= 0.1f;
+
+                // 부동 소수점 오차 방지 및 하한선 고정
+                if (GameManager.instance.grab_speed < 0.2f) GameManager.instance.grab_speed = 0.2f;
+
+                Debug.Log($"줍기 속도 강화! 현재 딜레이: {GameManager.instance.grab_speed}초");
                 break;
         }
 
