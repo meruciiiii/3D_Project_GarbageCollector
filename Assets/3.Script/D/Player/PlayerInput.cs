@@ -5,11 +5,10 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour {
 	//public Action onMove;
 	//public Action onLook;
-	//public Action onJump;
+	public Action onJump;
 	public Action onRun;
 	public Action onWalk;
 	public Action onPickUp;
-	public Action offPickUp;
 	public Action onInteract;
 
 	public Vector2 direction = Vector2.zero;
@@ -28,11 +27,11 @@ public class PlayerInput : MonoBehaviour {
 		mouseDelta = context.ReadValue<Vector2>();
 	}
 	//플레이어 점프
-	//public void Event_Jump(InputAction.CallbackContext context) {
-	//	if (context.phase.Equals(InputActionPhase.Started)) {
-	//		onJump();
-	//	}
-	//}
+	public void Event_Jump(InputAction.CallbackContext context) {
+		if (context.phase.Equals(InputActionPhase.Started)) {
+			onJump();
+		}
+	}
 	//플레이어 달리기
 	public void Event_Run(InputAction.CallbackContext context) {
 		if (context.phase.Equals(InputActionPhase.Started)) {
@@ -45,9 +44,6 @@ public class PlayerInput : MonoBehaviour {
 	public void Event_PickUp(InputAction.CallbackContext context) {
 		if (context.phase.Equals(InputActionPhase.Started)) {
 			onPickUp();
-		}
-		else if (context.phase.Equals(InputActionPhase.Canceled)) {
-			//offPickUp();
 		}
 	}
 	//플레이어 상호작용

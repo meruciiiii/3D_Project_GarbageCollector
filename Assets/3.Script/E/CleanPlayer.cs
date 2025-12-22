@@ -6,12 +6,17 @@ using UnityEngine;
 
 public class CleanPlayer : MonoBehaviour
 {
+    [SerializeField] private VignetteController vignetteController;
+    [SerializeField] private PlayerIsDirty playerIsDirty;
+    
     private int currentHP;
+    private float cleanliness;
 
     private int[] Hpdecrease = new int[9];
     private int trashNum;
 
     private bool isTooDirty;
+    private bool isDirty;
 
     private void Awake()
     {
@@ -31,6 +36,13 @@ public class CleanPlayer : MonoBehaviour
         if (isTooDirty)
         {
             Debug.Log("이건 너무 더럽잖아요!!");
+        }
+        cleanliness = (currentHP * 100) / GameManager.instance.P_MaxHP;
+        isDirty = cleanliness <= 30;
+        if (isDirty)
+        {
+            vignetteController.SetVignetteByCleanliness(cleanliness);
+            playerIsDirty.CalDelay(cleanliness);
         }
         GameManager.instance.P_CurrentHP = currentHP;
     }

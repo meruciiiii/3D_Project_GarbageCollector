@@ -28,14 +28,6 @@ public class HitPointState : MonoBehaviour
         //TimebetGrab = 1.5f;
         LastGrabTime = 0f;
     }
-    private void Awake()
-    {
-        
-    }
-    private void OnEnable()
-    {
-    }
-
     public void Grab()
     {
         if (LastGrabTime + TimebetGrab <= Time.time)

@@ -7,6 +7,8 @@ using UnityEngine;
 public class HitsSort : MonoBehaviour
 {
     private int grabLimit;
+    private RaycastHit[] currentHits;
+    private RaycastHit[] lastHits;
     public RaycastHit[] SortingHits(RaycastHit[] hits, Vector3 hitPoint, int layerNum)
     {
         grabLimit = GameManager.instance.grab_limit;
@@ -41,5 +43,24 @@ public class HitsSort : MonoBehaviour
         }
         Debug.Log("finalCountLayerHits °³¼ö : " + finalCountLayerHits.Length);
         return finalCountLayerHits;
+    }
+    public void lastHistCheck(RaycastHit[] finalCountLayerHits)
+    {
+        currentHits = finalCountLayerHits;
+        if(lastHits == null)
+        {
+            lastHits = currentHits;
+        }
+        else
+        {
+            if(lastHits == currentHits)
+            {
+                lastHits = currentHits;
+            }
+            else
+            {
+
+            }
+        }
     }
 }

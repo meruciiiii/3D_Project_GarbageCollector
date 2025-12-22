@@ -12,9 +12,12 @@ public class PlayerData
     public int Spd = 5;
     public int Money = 0;
     public int bag = 5000;
-    public bool isEnglish = false;
+
     public int grab = 1;
     public float grabspd = 1.5f;
+
+    public bool isEnglish = false;
+    public bool intro = true;
 }
 public static class JsonDataManger
 {
@@ -40,7 +43,7 @@ public static class JsonDataManger
         }
         string Jsondata = File.ReadAllText(path);
         PlayerData jsonPlayerdata = JsonUtility.FromJson<PlayerData>(Jsondata);
-        Debug.Log("Playerdatajson Load완료");
+        //Debug.Log("Playerdatajson Load완료");
         return jsonPlayerdata;
     }
 }
