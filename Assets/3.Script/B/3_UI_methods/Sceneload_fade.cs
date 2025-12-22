@@ -19,10 +19,48 @@ public class BSceneManager : MonoBehaviour
         }
         playerController = FindAnyObjectByType<PlayerController>();
     }
-
+        
     //void Start()와는 다르게, 시작하자마자 코루틴(Coroutine)처럼 동작
-    private IEnumerator Start()
+    private void OnEnable()
     {
+        StartCoroutine(fade());
+    }
+
+    private void SetPlayerFreeze(bool isFrozen)
+    {
+        if (playerController != null)
+        {
+            if (isFrozen)
+            {
+                Rigidbody rb = playerController.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.linearVelocity = Vector3.zero; // Unity 6 (구버전은 velocity)
+                    rb.angularVelocity = Vector3.zero;
+                }
+            }
+            playerController.enabled = !isFrozen;
+        }
+
+        // 커서 코드는 건드리지 않거나, 확실하게 잠급니다.
+        if (isFrozen)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
+    private IEnumerator fade()
+    {
+        if (fadeImage != null)
+        {
+            fadeImage.gameObject.SetActive(true);
+            Color c = fadeImage.color;
+            c.a = 1f; // 다시 검은색으로
+            fadeImage.color = c;
+        }
+
+        yield return null;
         SetPlayerFreeze(true);
         // 1. 이 상태에서 이미 B씬의 물리(쓰레기 낙하)는 작동 중
         Debug.Log("쓰레기 낙하 시작 (화면 가려짐)");
@@ -46,32 +84,6 @@ public class BSceneManager : MonoBehaviour
         }
         Debug.Log("연출 완료, 화면 공개");
         SetPlayerFreeze(false);
-    }
-
-    private void SetPlayerFreeze(bool isFrozen)
-    {
-        if (playerController != null)
-        {
-            if (isFrozen)
-            {
-                Rigidbody rb = playerController.GetComponent<Rigidbody>();
-                if (rb != null)
-                {
-                    rb.linearVelocity = Vector3.zero; // Unity 6 (구버전은 velocity)
-                    rb.angularVelocity = Vector3.zero;
-                }
-            }
-
-            // 얼릴 때(true)는 enabled = false
-            // 녹일 때(false)는 enabled = true
-            playerController.enabled = !isFrozen;
-        }
-
-        // 커서 코드는 건드리지 않거나, 확실하게 잠급니다.
-        if (isFrozen)
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
+        this.gameObject.SetActive(false);
     }
 }
