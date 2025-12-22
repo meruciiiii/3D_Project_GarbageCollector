@@ -69,6 +69,7 @@ public class PlayerWork : MonoBehaviour
         }
         else
         {
+            sorting.lastHitsOffOutline();
             return;
         }
         hits = sorting.SortingHits(hits, HitPosition, hit.collider.gameObject.layer);

@@ -73,19 +73,4 @@ public class HitPointState : MonoBehaviour
             }
         }
     }
-    public void HandleInteraction(GameObject target)
-    {
-        switch (target.layer)
-        {
-            case int layer when layer == LayerMask.NameToLayer("SmallTrash"):
-                //작은 쓰레기 일 경우 구현
-                //catchSmall.CatchTrash(target);
-
-                break;
-
-            case int layer when layer == LayerMask.NameToLayer("BigTrash"):
-                //큰 쓰레기 일 경우 구현
-                break;
-        }
-    }
 }

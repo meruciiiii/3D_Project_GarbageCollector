@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 150895054004240778}
   - component: {fileID: 4737030572138024943}
   - component: {fileID: 6673050931868217215}
-  - component: {fileID: 4221960343284889800}
   - component: {fileID: 5852360407336199439}
+  - component: {fileID: -5450332217588193721}
   m_Layer: 7
   m_Name: Large_3
   m_TagString: Untagged
@@ -179,19 +179,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hided: 1
---- !u!114 &4221960343284889800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6143884570269887538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a42a04c70b352d449b7115179e7736de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BigTrash
-  BigTrashNum: 3
 --- !u!54 &5852360407336199439
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -219,3 +206,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-5450332217588193721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6143884570269887538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Trash
+  smallTrashNum: 0
+  outline_material: {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
