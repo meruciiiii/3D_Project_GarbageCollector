@@ -118,6 +118,10 @@ public class UpgradeManager : MonoBehaviour
             case UpgradeType.MultiGrab:
                 // [핵심] 줍는 개수 제한을 1 늘립니다.
                 GameManager.instance.grab_limit += 1;
+                float newRange = 0.2f + ((GameManager.instance.grab_limit - 1) * 0.15f);
+
+                // GameManager 변수에 값 주입
+                GameManager.instance.grab_range = newRange;
                 Debug.Log($"흡입구 확장! 한 번에 {GameManager.instance.grab_limit}개 수거 가능");
                 break;
         }
