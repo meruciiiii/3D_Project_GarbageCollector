@@ -24,7 +24,7 @@ public class pause : MonoBehaviour
 
     private void Start()
     {
-        input.onInteract += TogglePause; //차후 ESC 인풋 이벤트에 등록
+        input.onEsc += TogglePause; //차후 ESC 인풋 이벤트에 등록
     }
 
     public void TogglePause() // UI 버튼에 할당도 가능
