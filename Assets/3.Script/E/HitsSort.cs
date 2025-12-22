@@ -88,7 +88,10 @@ public class HitsSort : MonoBehaviour
         }
         for (int i = 0; i < lastHits.Length; i++)
         {
-            lastHits[i].collider.gameObject.TryGetComponent<Trash>(out trash);
+            if(lastHits[i].collider == null ||lastHits[i].collider.gameObject.TryGetComponent<Trash>(out trash))
+            {
+                return;
+            }
             trash.offOutline();
         }
     }
