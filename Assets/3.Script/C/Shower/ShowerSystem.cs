@@ -13,6 +13,7 @@ public class ShowerSystem : MonoBehaviour
     [SerializeField] private ParticleSystem waterFX; // 물방울 파티클
     [SerializeField] private ParticleSystem steamFX; // 수증기 파티클
     [SerializeField] private AudioSource showerAudio; // 물소리 오디오
+    [SerializeField] private EyeOpenClose showerEyeEffect;
 
     // FirstPersonMovement로 타입 명시 추천
     [SerializeField] private PlayerController playerController;
@@ -57,6 +58,7 @@ public class ShowerSystem : MonoBehaviour
         if (waterFX != null) waterFX.Play();
         if (steamFX != null) steamFX.Play();
         if (showerAudio != null) showerAudio.Play();
+        if (showerEyeEffect != null) showerEyeEffect.CloseEyes();
 
         Debug.Log("샤워 시작...");
         if (guideText != null) guideText.SetActive(false);
@@ -71,9 +73,8 @@ public class ShowerSystem : MonoBehaviour
 
         // 4. 화면 효과 초기화
         if (vignetteController != null) vignetteController.OnWash();
-        // playerIsDirty.StopDirtyEffect() 대신 CalDelay(100)을 호출하는 게 더 안전할 수 있음 (상태 동기화)
-        // 일단 기존 코드 유지
         if (playerIsDirty != null) playerIsDirty.CalDelay(100f); // 혹은 StopDirtyEffect();
+        if (showerEyeEffect != null) showerEyeEffect.OpenEyes();
 
         Debug.Log("샤워 완료!");
 
