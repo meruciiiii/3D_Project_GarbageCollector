@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class BSceneManager : MonoBehaviour
 {
     [SerializeField] private Image fadeImage; // 화면을 가릴 UI 이미지 (검은색)
-    [SerializeField] private float waitTimeForTrash = 2.5f; // 쓰레기가 떨어질 때까지 기다릴 시간
+    [SerializeField] private float waitTime = 2.5f; // 기다릴 시간
 
     private PlayerController playerController;
     private bool isFirstLoad = false;
@@ -37,7 +37,7 @@ public class BSceneManager : MonoBehaviour
                 Rigidbody rb = playerController.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
-                    rb.linearVelocity = Vector3.zero; // Unity 6 (구버전은 velocity)
+                    rb.linearVelocity = Vector3.zero;
                     rb.angularVelocity = Vector3.zero;
                 }
             }
@@ -87,7 +87,7 @@ public class BSceneManager : MonoBehaviour
         Debug.Log("쓰레기 낙하 시작 (화면 가려짐)");
 
         // 2. 쓰레기가 충분히 떨어질 때까지 기다림
-        yield return new WaitForSeconds(waitTimeForTrash);//IEnumerator 처럼  yield return new WaitForSeconds 사용가능
+        yield return new WaitForSeconds(waitTime);//IEnumerator 처럼  yield return new WaitForSeconds 사용가능
 
         // 3. 서서히 화면을 밝게 함 (페이드 인)
         if (fadeImage != null)
