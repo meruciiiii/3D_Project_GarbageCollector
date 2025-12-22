@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour {
 	//public Action onMove;
 	//public Action onLook;
-	public Action onJump;
+	//public Action onJump;
 	public Action onRun;
 	public Action onWalk;
 	public Action onPickUp;
@@ -28,11 +28,11 @@ public class PlayerInput : MonoBehaviour {
 		mouseDelta = context.ReadValue<Vector2>();
 	}
 	//플레이어 점프
-	public void Event_Jump(InputAction.CallbackContext context) {
-		if (context.phase.Equals(InputActionPhase.Started)) {
-			onJump();
-		}
-	}
+	//public void Event_Jump(InputAction.CallbackContext context) {
+	//	if (context.phase.Equals(InputActionPhase.Started)) {
+	//		onJump();
+	//	}
+	//}
 	//플레이어 달리기
 	public void Event_Run(InputAction.CallbackContext context) {
 		if (context.phase.Equals(InputActionPhase.Started)) {
