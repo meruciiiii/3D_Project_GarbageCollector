@@ -1,0 +1,52 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class pause : MonoBehaviour
+{
+
+    [SerializeField] private GameObject InGame_UI;
+    [SerializeField] private GameObject Pause_UI;
+
+    private PlayerInput input;
+    private bool ispause = false;
+
+    private void Awake()
+    {
+        input = FindAnyObjectByType<PlayerInput>();
+        if (input == null) Debug.Log("input null임");
+        else Debug.Log("input 받아옴");
+    }
+
+    private void Start()
+    {
+        //input.onPickUp += pasue; //차후 ESC 인풋 이벤트에 등록
+    }
+
+    public void pasue() // UI 버튼에 할당도 가능
+    {
+        if (!ispause) 
+        { 
+            Time.timeScale = 0;
+            InGame_UI.SetActive(false);
+            Pause_UI.SetActive(true);
+            ispause = false;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            InGame_UI.SetActive(true);
+            Pause_UI.SetActive(false);
+            ispause = true;
+        }
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1;
+        InGame_UI.SetActive(true);
+        Pause_UI.SetActive(false);
+        ispause = true;
+    }
+}

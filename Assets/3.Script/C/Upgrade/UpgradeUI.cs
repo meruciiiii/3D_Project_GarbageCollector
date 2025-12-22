@@ -12,6 +12,7 @@ public class UpgradeUI : MonoBehaviour
     [SerializeField] public Text bagPriceText;
     [SerializeField] public Text maxHPPriceText;
     [SerializeField] public Text speedPriceText;
+    [SerializeField] public Text multiGrabPriceText;
 
     [Header("플레이어 연결")]
     public PlayerController playerController;
@@ -35,7 +36,7 @@ public class UpgradeUI : MonoBehaviour
         // UI가 꺼질 때: 커서 숨기기 + 조작 재개
         SetPlayerState(true);
     }
-   
+
     private void SetPlayerState(bool isGameActive)
     {
         // 1. 플레이어 이동/회전 스크립트 끄기/켜기
@@ -75,7 +76,7 @@ public class UpgradeUI : MonoBehaviour
     // ... (나머지 버튼 함수들은 기존 유지) ...
     public void OnClick_UpgradeStrength()
     {
-        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.Strength)) 
+        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.Strength))
         {
             UpdateUI();
             Debug.Log("힘 업그레이드 성공");
@@ -107,6 +108,16 @@ public class UpgradeUI : MonoBehaviour
         }
     }
 
+    public void OnClick_UpgradeMultiGrab()
+    {
+        // UpgradeType.MultiGrab은 UpgradeManager에서 정의해야 함
+        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.MultiGrab))
+        {
+            UpdateUI();
+            Debug.Log("흡입구 확장(다중 줍기) 업그레이드 성공");
+        }
+    }
+
     public void UpdateUI()
     {
         if (GameManager.instance == null || upgradeManager == null) return;
@@ -132,6 +143,20 @@ public class UpgradeUI : MonoBehaviour
             else
             {
                 speedPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.PickSpeed)}";
+            }
+        }
+
+        if (multiGrabPriceText != null)
+        {
+            // 최대 개수 제한 (예: 5개) 도달 시 MAX 표시
+            // UpgradeManager에서 설정한 제한(5)과 맞춰주세요.
+            if (GameManager.instance.grab_limit >= 5)
+            {
+                multiGrabPriceText.text = "MAX LEVEL";
+            }
+            else
+            {
+                multiGrabPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.MultiGrab)}";
             }
         }
     }

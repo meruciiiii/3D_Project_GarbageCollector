@@ -11,6 +11,8 @@ public class ShowerSystem : MonoBehaviour
 
     // FirstPersonMovement로 타입 명시 추천
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private VignetteController vignetteController;
+    [SerializeField] private PlayerIsDirty playerIsDirty;
 
     private PlayerInput targetInput;
     private bool isWashing = false;
@@ -46,6 +48,9 @@ public class ShowerSystem : MonoBehaviour
 
         // 2. 씻는 시간 대기
         yield return new WaitForSeconds(showerDuration);
+
+        vignetteController.OnWash();
+        playerIsDirty.StopDirtyEffect();
 
         Debug.Log("샤워 완료!");
 

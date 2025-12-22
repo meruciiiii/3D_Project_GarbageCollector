@@ -41,7 +41,7 @@ public class PlayerIsDirty : MonoBehaviour
         zoomDelayCoroutine = StartCoroutine(zoomDelay_co());
     }
 
-    private void StopDirtyEffect()
+    public void StopDirtyEffect()
     {
         isDirtyEffectActive = false;
 
