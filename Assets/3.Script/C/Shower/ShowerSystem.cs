@@ -22,7 +22,7 @@ public class ShowerSystem : MonoBehaviour
         if (guideText != null) guideText.SetActive(false);
     }
 
-    private void TryShower()
+    public void TryShower()
     {
         if (GameManager.instance == null) return;
         if (GameManager.instance.P_Money < showerCost) return; // 돈 부족 등 예외처리
