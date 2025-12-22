@@ -14,6 +14,8 @@ public class UIValue : MonoBehaviour
 
     private float currentDisplayMoney = 0f;//UI에 표시되고 있는 가짜돈
     private Coroutine moneycoroutine;
+    private Coroutine weightCoroutine;
+    private Coroutine hpCoroutine;
 
     [Header("HP Slider Setting")]
     [SerializeField] private Image hpfill;//fill 할당
@@ -60,21 +62,42 @@ public class UIValue : MonoBehaviour
         moneycoroutine = StartCoroutine(AnimateMoney(targetMoney));
 
         // 무게도 동일하게 100.0f로 나누어 소수점 두 자리를 표현합니다.
-        float currentWeight = GameManager.instance.P_Weight / 100.0f;
+        float targetWeight = GameManager.instance.P_Weight / 100.0f;
         float maxWeight = GameManager.instance.P_Maxbag / 100.0f;
 
-        weighttext.text = $"{currentWeight:F1} / {maxWeight:F1} kg";
+        if (weightSlider != null) weightSlider.maxValue = maxWeight;
 
-        if (weightSlider != null)
-        {
-            weightSlider.maxValue = maxWeight;
+        if (weightCoroutine != null) StopCoroutine(weightCoroutine);
+        weightCoroutine = StartCoroutine(AnimateWeight(targetWeight, maxWeight));
+    }
+    public void HP()
+    {
+        int targetHP = GameManager.instance.P_CurrentHP;
+        int maxHP = GameManager.instance.P_MaxHP;
 
-            // 반대로 줄어드는 연출: (최대치 - 현재 사용량) = 남은 공간
-            weightSlider.value = currentWeight;
-            UpdateColorWeight(currentWeight, maxWeight);
-        }
+        if (HPSlider != null) HPSlider.maxValue = maxHP;
+
+        if (hpCoroutine != null) StopCoroutine(hpCoroutine);
+        hpCoroutine = StartCoroutine(AnimateHP(targetHP, maxHP));
     }
 
+    private void UpdateColorWeight(float current, float max)
+    {
+        if (weightfill == null) return;
+        float average = (float)current / max;
+        if (average > 0.75f) weightfill.color = weight_warning2;
+        else if (average > 0.5f) weightfill.color = weight_warning1;
+        else weightfill.color = weight_origin;
+    }
+
+    private void UpdateColorHP(int current, int max)
+    {
+        if (hpfill == null) return;
+        float average = (float)current / max;
+        if (average < 0.25f) hpfill.color = hp_warning2;
+        else if (average < 0.7f) hpfill.color = hp_warning1;
+        else hpfill.color = Hp_origin;
+    }
     private IEnumerator AnimateMoney(float target)
     {
         float duration = 0.5f; // 0.5초 동안 올라감, 사운드 길이에 따라 바꿔주세요
@@ -95,35 +118,49 @@ public class UIValue : MonoBehaviour
         moneytext.text = $"{currentDisplayMoney:F2}$";
     }
 
-    private void UpdateColorWeight(float current, float max)
+    private IEnumerator AnimateWeight(float target, float max)
     {
-        if (weightfill == null) return;
-        float average = (float)current / max;
-        if (average > 0.75f) weightfill.color = weight_warning2;
-        else if (average > 0.5f) weightfill.color = weight_warning1;
-        else weightfill.color = weight_origin;
-    }
+        float duration = 0.5f;
+        float elapsed = 0f;
+        // 현재 슬라이더 값에서 시작 (텍스트도 이에 맞춤)
+        float startValue = weightSlider.value;
 
-    public void HP()
-    {
-        int currentHP = GameManager.instance.P_CurrentHP;
-        int MaxHP = GameManager.instance.P_MaxHP;
-        HPtext.text = $"{currentHP} / {MaxHP}";
-
-        if (HPSlider != null)
+        while (elapsed < duration)
         {
-            HPSlider.maxValue = MaxHP; // 최대 체력 설정
-            HPSlider.value = currentHP; // 현재 체력 설정
-            UpdateColorHP(currentHP,MaxHP);
+            elapsed += Time.deltaTime;
+            float currentValue = Mathf.Lerp(startValue, target, elapsed / duration);
+
+            weighttext.text = $"{currentValue:F1} / {max:F1} kg";
+            weightSlider.value = currentValue;
+            UpdateColorWeight(currentValue, max);
+            yield return null;
         }
+
+        weightSlider.value = target;
+        weighttext.text = $"{target:F1} / {max:F1} kg";
+        UpdateColorWeight(target, max);
     }
 
-    private void UpdateColorHP(int current, int max)
+    private IEnumerator AnimateHP(int target, int max)
     {
-        if (hpfill == null) return;
-        float average = (float)current / max;
-        if (average < 0.25f) hpfill.color = hp_warning2;
-        else if (average < 0.7f) hpfill.color = hp_warning1;
-        else hpfill.color = Hp_origin;
+        float duration = 0.5f;
+        float elapsed = 0f;
+        float startValue = HPSlider.value;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            // 체력은 보통 정수로 보이므로 float로 계산 후 int로 캐스팅
+            float currentValue = Mathf.Lerp(startValue, (float)target, elapsed / duration);
+
+            HPtext.text = $"{(int)currentValue} / {max}";
+            HPSlider.value = currentValue;
+            UpdateColorHP((int)currentValue, max);
+            yield return null;
+        }
+
+        HPSlider.value = target;
+        HPtext.text = $"{target} / {max}";
+        UpdateColorHP(target, max);
     }
 }
