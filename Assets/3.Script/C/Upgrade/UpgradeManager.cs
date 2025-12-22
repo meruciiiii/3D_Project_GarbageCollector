@@ -5,7 +5,8 @@ public enum UpgradeType
     Strength,   // 힘
     BagWeight,  // 가방 무게
     MaxHP,      // 이동 속도
-    PickSpeed // 줍기 속도
+    PickSpeed, // 줍기 속도
+    MultiGrab // 줍기 개수
 }
 public class UpgradeManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private int baseBagCost = 500;
     [SerializeField] private int baseMaxHPCost = 1500;
     [SerializeField] private int baseSpeedCost = 2000;
+    [SerializeField] private int baseMultiGrabCost = 3000;
 
     public int GetUpgradeCost(UpgradeType type)
     {
@@ -36,8 +38,14 @@ public class UpgradeManager : MonoBehaviour
             case UpgradeType.PickSpeed:
                 float progress = 1.5f - GameManager.instance.grab_speed;
                 int level = Mathf.RoundToInt(progress * 10);
-
                 return baseSpeedCost + (level * 500);
+
+            case UpgradeType.MultiGrab:
+                // 현재 줍기 개수 제한에 따라 가격 증가
+                // 1개(기본) -> 2개(레벨1) -> 3개...
+                int currentLimit = GameManager.instance.grab_limit;
+                // 예: (현재개수 - 1) * 1000원 추가
+                return baseMultiGrabCost + ((currentLimit - 1) * 1000);
 
             default:
                 return 0;
@@ -53,6 +61,12 @@ public class UpgradeManager : MonoBehaviour
         if (type == UpgradeType.PickSpeed && GameManager.instance.grab_speed <= 0.25f)
         {
             Debug.Log("더 이상 속도를 업그레이드할 수 없습니다. (MAX)");
+            return false;
+        }
+
+        if (type == UpgradeType.MultiGrab && GameManager.instance.grab_limit >= 5)
+        {
+            Debug.Log("더 이상 흡입구를 확장할 수 없습니다.");
             return false;
         }
 
@@ -99,6 +113,16 @@ public class UpgradeManager : MonoBehaviour
                 if (GameManager.instance.grab_speed < 0.2f) GameManager.instance.grab_speed = 0.2f;
 
                 Debug.Log($"줍기 속도 강화! 현재 딜레이: {GameManager.instance.grab_speed}초");
+                break;
+
+            case UpgradeType.MultiGrab:
+                // [핵심] 줍는 개수 제한을 1 늘립니다.
+                GameManager.instance.grab_limit += 1;
+                float newRange = 0.2f + ((GameManager.instance.grab_limit - 1) * 0.15f);
+
+                // GameManager 변수에 값 주입
+                GameManager.instance.grab_range = newRange;
+                Debug.Log($"흡입구 확장! 한 번에 {GameManager.instance.grab_limit}개 수거 가능");
                 break;
         }
 
