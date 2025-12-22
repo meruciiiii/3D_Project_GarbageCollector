@@ -68,7 +68,7 @@ public class CatchBigGarbage : MonoBehaviour
     }
     private bool CanLift()
     {
-        trashNum = trash.GetComponent<BigTrash>().getTrashNum();
+        trashNum = trash.GetComponent<Trash>().getTrashNum();
         nowStrength = GameManager.instance.P_Str;
         if(nowStrength>= Strength[trashNum])
             return true; //들 수 있다.

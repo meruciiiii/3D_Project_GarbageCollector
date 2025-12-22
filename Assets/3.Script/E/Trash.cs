@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SmallTrash : MonoBehaviour
+public class Trash : MonoBehaviour
 {
     [SerializeField] private int smallTrashNum;
     public int getTrashNum()

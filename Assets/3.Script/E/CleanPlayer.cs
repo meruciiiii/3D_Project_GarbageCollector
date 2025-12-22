@@ -37,7 +37,7 @@ public class CleanPlayer : MonoBehaviour
         {
             Debug.Log("이건 너무 더럽잖아요!!");
         }
-        cleanliness = (currentHP * 100) / GameManager.instance.P_MaxHP;
+        cleanliness = (float)(currentHP * 100) / (float)GameManager.instance.P_MaxHP;
         isDirty = cleanliness <= 30;
         if (isDirty)
         {

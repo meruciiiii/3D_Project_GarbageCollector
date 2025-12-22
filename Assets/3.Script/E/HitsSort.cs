@@ -9,6 +9,7 @@ public class HitsSort : MonoBehaviour
     private int grabLimit;
     private RaycastHit[] currentHits;
     private RaycastHit[] lastHits;
+    private Trash trash;
     public RaycastHit[] SortingHits(RaycastHit[] hits, Vector3 hitPoint, int layerNum)
     {
         grabLimit = GameManager.instance.grab_limit;
@@ -47,20 +48,35 @@ public class HitsSort : MonoBehaviour
     public void lastHistCheck(RaycastHit[] finalCountLayerHits)
     {
         currentHits = finalCountLayerHits;
-        if(lastHits == null)
+        if (lastHits == null)
         {
+            for (int i = 0; i < currentHits.Length; i++)
+            {
+                currentHits[i].collider.gameObject.TryGetComponent<Trash>(out trash);
+                trash.onOutline();
+            }
             lastHits = currentHits;
         }
         else
         {
-            if(lastHits == currentHits)
-            {
-                lastHits = currentHits;
-            }
-            else
+            if (lastHits == currentHits)
             {
 
             }
+            else
+            {
+                for (int i = 0; i < currentHits.Length; i++)
+                {
+                    currentHits[i].collider.gameObject.TryGetComponent<Trash>(out trash);
+                    trash.onOutline();
+                }
+                for (int i = 0; i < lastHits.Length; i++)
+                {
+                    currentHits[i].collider.gameObject.TryGetComponent<Trash>(out trash);
+                    trash.offOutline();
+                }
+            }
+            lastHits = currentHits;
         }
     }
 }
