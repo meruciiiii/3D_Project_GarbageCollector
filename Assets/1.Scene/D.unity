@@ -1897,8 +1897,6 @@ MonoBehaviour:
   runSpeed: 7.5
   sensitive: 0.1
   cameraObject: {fileID: 447818066}
-  cur_weight: 0
-  max_weight: 0
   slow_start_bag_weight: 0.5
   slow_percent: 0.8
 --- !u!54 &472260675
@@ -4116,8 +4114,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1052613175820779248, guid: ad91b1409df817f419b73da095588eeb, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1052613175820779248, guid: ad91b1409df817f419b73da095588eeb, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 1125086955867291647, guid: ad91b1409df817f419b73da095588eeb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.6
@@ -4629,8 +4631,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1052613175820779248, guid: ad91b1409df817f419b73da095588eeb, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1052613175820779248, guid: ad91b1409df817f419b73da095588eeb, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 1125086955867291647, guid: ad91b1409df817f419b73da095588eeb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.42
