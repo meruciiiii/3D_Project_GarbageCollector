@@ -15,8 +15,11 @@ public class pause : MonoBehaviour
 
     private void Awake()
     {
+        if(ScreenHider !=null) ScreenHider.SetActive(false);
+
         input = FindAnyObjectByType<PlayerInput>();
-        ScreenHider.SetActive(false);
+        if (input == null) Debug.Log("input null임");
+        else Debug.Log("input 받아옴");
     }
 
     private void Start()
@@ -24,9 +27,9 @@ public class pause : MonoBehaviour
         //input.onPickUp += pasue; //차후 ESC 인풋 이벤트에 등록
     }
 
-    private void pasue()
+    private void pasue() // UI 버튼에 할당도 가능
     {
-        if (ispause) 
+        if (!ispause) 
         { 
             Time.timeScale = 0;
             InGame_UI.SetActive(false);

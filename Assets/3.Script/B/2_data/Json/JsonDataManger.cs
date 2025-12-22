@@ -15,6 +15,7 @@ public class PlayerData
 
     public int grab = 1;
     public float grabspd = 1.5f;
+    public float grab_range = 1f;
 
     public bool isEnglish = false;
     public bool intro = true;
