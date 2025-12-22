@@ -51,7 +51,7 @@ public class CatchSmallGarbage : MonoBehaviour
         Debug.Log(MaxWeight + " : 게임매니저에 저장된 최대 보유 무게");
 
         // 쓰레기의 무게 데이터를 가져온다
-        trashNum = trash.GetComponent<SmallTrash>().getTrashNum();
+        trashNum = trash.GetComponent<Trash>().getTrashNum();
         Debug.Log(trashNum + " : 번 쓰레기");
 
         // 현재 가방 무게에 쓰레기의 무게를 더한다

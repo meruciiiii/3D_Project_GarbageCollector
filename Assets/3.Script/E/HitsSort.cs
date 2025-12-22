@@ -9,12 +9,17 @@ public class HitsSort : MonoBehaviour
     private int grabLimit;
     private RaycastHit[] currentHits;
     private RaycastHit[] lastHits;
+    private Trash trash;
     public RaycastHit[] SortingHits(RaycastHit[] hits, Vector3 hitPoint, int layerNum)
     {
         grabLimit = GameManager.instance.grab_limit;
         if (hits == null || hits.Length == 0)
         {
             Debug.Log("RaycastHit에 입력된 대상이 없습니다.");
+            if (lastHits != null)
+            {
+                lastHitsOffOutline();
+            }
             return null;
         }
         // 거리 순으로 정렬 
@@ -42,25 +47,49 @@ public class HitsSort : MonoBehaviour
             finalCountLayerHits[i] = sameLayerHits[i];
         }
         Debug.Log("finalCountLayerHits 개수 : " + finalCountLayerHits.Length);
+        lastHistCheck(finalCountLayerHits);
         return finalCountLayerHits;
     }
     public void lastHistCheck(RaycastHit[] finalCountLayerHits)
     {
         currentHits = finalCountLayerHits;
-        if(lastHits == null)
+        if (lastHits == null)
         {
+            currentHitsOnOutline();
             lastHits = currentHits;
         }
         else
         {
-            if(lastHits == currentHits)
-            {
-                lastHits = currentHits;
-            }
-            else
+            if (lastHits == currentHits)
             {
 
             }
+            else
+            {
+                currentHitsOnOutline();
+                lastHitsOffOutline();
+            }
+            lastHits = currentHits;
+        }
+    }
+    public void currentHitsOnOutline()
+    {
+        for (int i = 0; i < currentHits.Length; i++)
+        {
+            currentHits[i].collider.gameObject.TryGetComponent<Trash>(out trash);
+            trash.onOutline();
+        }
+    }
+    public void lastHitsOffOutline()
+    {
+        if(lastHits == null)
+        {
+            return;
+        }
+        for (int i = 0; i < lastHits.Length; i++)
+        {
+            lastHits[i].collider.gameObject.TryGetComponent<Trash>(out trash);
+            trash.offOutline();
         }
     }
 }
