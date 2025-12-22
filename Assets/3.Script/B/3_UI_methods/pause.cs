@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class pause : MonoBehaviour
 {
-
     [SerializeField] private GameObject InGame_UI;
     [SerializeField] private GameObject Pause_UI;
 
@@ -31,14 +30,16 @@ public class pause : MonoBehaviour
             Time.timeScale = 0;
             InGame_UI.SetActive(false);
             Pause_UI.SetActive(true);
-            ispause = false;
+            ispause = true;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
         else
         {
             Time.timeScale = 1;
             InGame_UI.SetActive(true);
             Pause_UI.SetActive(false);
-            ispause = true;
+            ispause = false;
         }
     }
 
@@ -47,6 +48,6 @@ public class pause : MonoBehaviour
         Time.timeScale = 1;
         InGame_UI.SetActive(true);
         Pause_UI.SetActive(false);
-        ispause = true;
+        ispause = false;
     }
 }
