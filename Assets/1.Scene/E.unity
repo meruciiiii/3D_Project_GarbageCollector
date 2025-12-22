@@ -821,6 +821,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 413000378}
     m_Modifications:
+    - target: {fileID: 404597211939382020, guid: 2e7b648506ae2ea49827efb4b06e68f3, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1387900809699335769, guid: 2e7b648506ae2ea49827efb4b06e68f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.799988
@@ -878,10 +882,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 440305980709591236, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
-      propertyPath: TimebetGrab
-      value: 1.5
-      objectReference: {fileID: 0}
+    - target: {fileID: 2329628952549521008, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+      propertyPath: Sceneload_fade
+      value: 
+      objectReference: {fileID: 1639491568}
     - target: {fileID: 5475801769564018433, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
       propertyPath: volume
       value: 
@@ -1152,6 +1156,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e5e1a99be537c14f8bfa34fab9362fb, type: 3}
+--- !u!1 &1639491568 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7878090558710882884, guid: aeeb2a8d10dfd1e48af9b2244ccab6cc, type: 3}
+  m_PrefabInstance: {fileID: 407479224}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1780178714 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4588548507346268208, guid: 7e5e1a99be537c14f8bfa34fab9362fb, type: 3}

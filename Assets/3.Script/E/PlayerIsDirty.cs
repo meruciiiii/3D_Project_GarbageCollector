@@ -18,6 +18,7 @@ public class PlayerIsDirty : MonoBehaviour
     [SerializeField] private float zoomDuration = 0.2f;
     [SerializeField] private AnimationCurve zoomCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     [SerializeField] private VignetteController vignetteController;
+    [SerializeField] private PlayerIsFaint playerIsFaint;
 
     [SerializeField] private float maxBeat;
     [SerializeField] private float minBeat;
@@ -88,8 +89,8 @@ public class PlayerIsDirty : MonoBehaviour
     {
         if (cleanliness <= 0)
         {
-            Debug.Log("GameOver 상태로 전환");
             StopDirtyEffect();
+            playerIsFaint.StartPassOutEffect();
             return;
         }
         if (cleanliness > 30)
