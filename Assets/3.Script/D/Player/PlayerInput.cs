@@ -9,6 +9,7 @@ public class PlayerInput : MonoBehaviour {
 	public Action onRun;
 	public Action onWalk;
 	public Action onPickUp;
+	public Action offPickUp;
 	public Action onInteract;
 
 	public Vector2 direction = Vector2.zero;
@@ -44,6 +45,9 @@ public class PlayerInput : MonoBehaviour {
 	public void Event_PickUp(InputAction.CallbackContext context) {
 		if (context.phase.Equals(InputActionPhase.Started)) {
 			onPickUp();
+		}
+		else if (context.phase.Equals(InputActionPhase.Canceled)) {
+			offPickUp();
 		}
 	}
 	//플레이어 상호작용
