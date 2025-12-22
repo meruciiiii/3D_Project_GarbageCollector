@@ -11,6 +11,7 @@ public class PlayerInput : MonoBehaviour {
 	public Action onPickUp;
 	public Action offPickUp;
 	public Action onInteract;
+	public Action onEsc;
 
 	public Vector2 direction = Vector2.zero;
 	public Vector2 mouseDelta = Vector2.zero;
@@ -54,6 +55,14 @@ public class PlayerInput : MonoBehaviour {
 	public void Event_Interact(InputAction.CallbackContext context) {
 		if (context.phase.Equals(InputActionPhase.Started)) {
 			onInteract();
+		}
+	}
+	//플레이어 esc
+	public void Event_ESC(InputAction.CallbackContext context)
+	{
+		if (context.phase.Equals(InputActionPhase.Started))
+		{
+			onEsc();
 		}
 	}
 }
