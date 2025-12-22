@@ -51,14 +51,17 @@ public class aimcooldown : MonoBehaviour
     {
         cooldownSlider.value = 0; // 시작 시 초기화
 
-        while (cooldownSlider.value < cooldownSlider.maxValue)
+        float duration = GameManager.instance.grab_speed;
+        float timer = 0f;
+
+        while (timer < duration)
         {
-            float speed = GameManager.instance.grab_speed;
-            cooldownSlider.value += speed * Time.deltaTime;
+            timer += Time.deltaTime;
+            cooldownSlider.value = timer / duration; // 0에서 1까지 시간 비율로 채움
             yield return null;
         }
-        cooldownSlider.value = cooldownSlider.maxValue;
 
+        cooldownSlider.value = cooldownSlider.maxValue;
         OnComplete();
     }
 
