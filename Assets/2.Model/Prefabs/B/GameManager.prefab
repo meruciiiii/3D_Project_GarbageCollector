@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575471535013449041}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -49,7 +49,12 @@ MonoBehaviour:
   P_Str: 1
   P_Spd: 5
   P_Money: 1000
-  P_Maxbag: 100
+  P_Maxbag: 10000
   P_Weight: 0
-  interact_distance: 3
   P_isEnglish: 0
+  P_intro: 1
+  grab_limit: 1
+  grab_range: 1
+  grab_speed: 1.5
+  isGrabBigGarbage: 0
+  BigGarbageWeight: 0
