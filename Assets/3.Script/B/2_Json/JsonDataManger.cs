@@ -40,7 +40,7 @@ public static class JsonDataManger
         }
         string Jsondata = File.ReadAllText(path);
         PlayerData jsonPlayerdata = JsonUtility.FromJson<PlayerData>(Jsondata);
-        Debug.Log("Playerdatajson Load완료");
+        //Debug.Log("Playerdatajson Load완료");
         return jsonPlayerdata;
     }
 }
