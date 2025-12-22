@@ -61,6 +61,7 @@ public class PlayerWork : MonoBehaviour
         target = null;
         Vector3 origin = playerCamera.transform.position;
         Vector3 direction = playerCamera.transform.forward;
+        radius = GameManager.instance.grab_range;
         RaycastHit[] hits = Physics.SphereCastAll(origin, radius, direction, Distance, interactionMask);
         RaycastHit hit;
         if(Physics.Raycast(origin, direction, out hit, Distance, interactionMask))

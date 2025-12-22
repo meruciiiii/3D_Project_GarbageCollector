@@ -32,11 +32,6 @@ public class CleanPlayer : MonoBehaviour
         this.trashNum = trashNum;
         currentHP -= Hpdecrease[trashNum];
             Debug.Log(currentHP+"청결도가 떨어졌어요");
-        isTooDirty = currentHP <= 0;
-        if (isTooDirty)
-        {
-            Debug.Log("이건 너무 더럽잖아요!!");
-        }
         cleanliness = (float)(currentHP * 100) / (float)GameManager.instance.P_MaxHP;
         isDirty = cleanliness <= 30;
         if (isDirty)

@@ -34,7 +34,7 @@ public class ShowerSystem : MonoBehaviour
         if (showerAudio != null) showerAudio.Stop();
     }
 
-    private void TryShower()
+    public void TryShower()
     {
         if (GameManager.instance == null) return;
         if (GameManager.instance.P_Money < showerCost)
