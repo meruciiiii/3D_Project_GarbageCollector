@@ -117,9 +117,9 @@ public class PlayerController : MonoBehaviour
         Calc_Speed();
     }
 
-    [Header("테스트")]
-    [SerializeField] private float cur_weight;
-    [SerializeField] private float max_weight;
+    //[Header("테스트")]
+    //[SerializeField] private float cur_weight;
+    //[SerializeField] private float max_weight;
 
     [Header("플레이어 속도 조절 비율")]
     [SerializeField] [Range(0, 1)] private float slow_start_bag_weight; //플레이어가 얼마나 가방이 찼을때, 느려지는지 비율
@@ -129,8 +129,8 @@ public class PlayerController : MonoBehaviour
     {
         float Speed = moveSpeed;
         //총 무게 가져오기
-        //float cur_weight = GameManager.instance.P_Weight 직접참조로 불러오기.
-        //float max_weight = GameManager.instance.P_Maxbag 직접참조로 불러오기.
+        float cur_weight = GameManager.instance.P_Weight; //직접참조로 불러오기.
+        float max_weight = GameManager.instance.P_Maxbag; //직접참조로 불러오기.
 
         //만약 일정 비율보다 무게가 늘어난다면
         if (cur_weight > (max_weight * slow_start_bag_weight))
@@ -146,17 +146,17 @@ public class PlayerController : MonoBehaviour
             //isCanJump = true;
             isCanRun = true;
         }
-        /*
+        
         //만약 내가 큰 쓰레기를 들었을 경우,,,
-        if(큰 쓰레기 든 상태) {
+        if(GameManager.instance.isGrabBigGarbage) {
            float half_reduction = 0.5f;
-           int half_count = P_Str - 현재 든 물건;
+           int half_count = GameManager.instance.P_Str - GameManager.instance.BigGarbageWeight;
            for(int i = 0; i<half_count; i++) {
-              //힘 스탯이 현재 든 물건보다 half_count만큼 높을때, 속도 반감을 반감
-              half_reduction *= 0.5f
+                //힘 스탯이 현재 든 물건보다 half_count만큼 높을때, 속도 반감을 반감
+                half_reduction *= 0.5f;
            }
-           Speed *= half.reduction
-        }*/
+            Speed *= half_reduction;
+        }
         moveSpeed = Speed;
     }
 }
