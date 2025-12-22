@@ -6,7 +6,9 @@ public class BSceneManager : MonoBehaviour
 {
     [SerializeField] private Image fadeImage; // 화면을 가릴 UI 이미지 (검은색)
     [SerializeField] private float waitTimeForTrash = 2.5f; // 쓰레기가 떨어질 때까지 기다릴 시간
+
     private PlayerController playerController;
+    private bool isFirstLoad = false;
 
     private void Awake()
     {
@@ -55,13 +57,32 @@ public class BSceneManager : MonoBehaviour
         if (fadeImage != null)
         {
             fadeImage.gameObject.SetActive(true);
-            Color c = fadeImage.color;
-            c.a = 1f; // 다시 검은색으로
-            fadeImage.color = c;
+            if (isFirstLoad)
+            {
+                Color c = fadeImage.color;
+                c.a = 0f;
+                fadeImage.color = c;
+            }
         }
 
         yield return null;
         SetPlayerFreeze(true);
+
+        if (fadeImage != null&& isFirstLoad)
+        {
+            Debug.Log("화면 어두워지는 중 (Fade Out)");
+            float timer = 0f;
+            while (timer < 1f)
+            {
+                timer += Time.deltaTime; // 1초 동안 어두워짐
+                Color c = fadeImage.color;
+                c.a = timer; // 0(투명)에서 1(검정)로
+                fadeImage.color = c;
+                yield return null;
+            }
+        }
+        if(!isFirstLoad) isFirstLoad = true;
+
         // 1. 이 상태에서 이미 B씬의 물리(쓰레기 낙하)는 작동 중
         Debug.Log("쓰레기 낙하 시작 (화면 가려짐)");
 
@@ -83,7 +104,9 @@ public class BSceneManager : MonoBehaviour
             fadeImage.gameObject.SetActive(false);
         }
         Debug.Log("연출 완료, 화면 공개");
+        
         SetPlayerFreeze(false);
         this.gameObject.SetActive(false);
     }
+
 }
