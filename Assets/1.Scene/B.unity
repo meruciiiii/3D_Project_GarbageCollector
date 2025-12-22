@@ -679,10 +679,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 788458842324046051, guid: 112f2f76760e1dd45b4f45e953877a34, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 712142496}
     - target: {fileID: 1227669572972238987, guid: 112f2f76760e1dd45b4f45e953877a34, type: 3}
       propertyPath: m_Name
       value: Fullmap
@@ -697,7 +693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9153644234778657595, guid: 112f2f76760e1dd45b4f45e953877a34, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 500
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 9153644234778657595, guid: 112f2f76760e1dd45b4f45e953877a34, type: 3}
       propertyPath: m_LocalPosition.z
@@ -866,10 +862,6 @@ PrefabInstance:
       propertyPath: fullmap
       value: 
       objectReference: {fileID: 1611175523}
-    - target: {fileID: 2561573111184878301, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
-      propertyPath: minimap
-      value: 
-      objectReference: {fileID: 413000377}
     - target: {fileID: 5302026856618652459, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
       propertyPath: m_Name
       value: Pause_ob
@@ -1064,6 +1056,10 @@ PrefabInstance:
       propertyPath: TimebetGrab
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2329628952549521008, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+      propertyPath: Sceneload_fade
+      value: 
+      objectReference: {fileID: 1302507334}
     - target: {fileID: 5475801769564018433, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
       propertyPath: volume
       value: 
@@ -1154,6 +1150,11 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5843738274850661033, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
   m_PrefabInstance: {fileID: 33962781}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1302507334 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7878090558710882884, guid: aeeb2a8d10dfd1e48af9b2244ccab6cc, type: 3}
+  m_PrefabInstance: {fileID: 407479224}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1381563198 stripped
 Transform:
@@ -1625,10 +1626,6 @@ PrefabInstance:
     - target: {fileID: 8219868553128016426, guid: 2af119bc682878a47810b9d317957377, type: 3}
       propertyPath: m_Name
       value: City
-      objectReference: {fileID: 0}
-    - target: {fileID: 8219868553128016426, guid: 2af119bc682878a47810b9d317957377, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
