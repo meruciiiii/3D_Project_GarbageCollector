@@ -2468,6 +2468,37 @@ MonoBehaviour:
   - {fileID: 6356834115478950209, guid: e333f88c9d5c2fc42a5ffbfb3129dab0, type: 3}
   parentTransform: {fileID: 0}
   spawnCount: 40
+--- !u!1 &3534478875684345418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4630750465252903020}
+  m_Layer: 0
+  m_Name: Area04
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4630750465252903020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3534478875684345418}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4040292759539384772}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3618077056499828740
 GameObject:
   m_ObjectHideFlags: 0
@@ -6107,6 +6138,7 @@ Transform:
   - {fileID: 5600952577436230240}
   - {fileID: 7262824595239517313}
   - {fileID: 1835643012748989052}
+  - {fileID: 4630750465252903020}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8900467187401340724
