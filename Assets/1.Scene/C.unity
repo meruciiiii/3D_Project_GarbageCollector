@@ -689,7 +689,7 @@ PrefabInstance:
     - target: {fileID: 741007803805863405, guid: 0bad6290ad155b64b95640969a3fc4a6, type: 3}
       propertyPath: playerIsDirty
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1794780336}
     - target: {fileID: 741007803805863405, guid: 0bad6290ad155b64b95640969a3fc4a6, type: 3}
       propertyPath: playerController
       value: 
@@ -698,6 +698,10 @@ PrefabInstance:
       propertyPath: vignetteController
       value: 
       objectReference: {fileID: 1994503897}
+    - target: {fileID: 6523471043072788932, guid: 0bad6290ad155b64b95640969a3fc4a6, type: 3}
+      propertyPath: m_Name
+      value: Shower_Fade
+      objectReference: {fileID: 0}
     - target: {fileID: 7527150274744898826, guid: 0bad6290ad155b64b95640969a3fc4a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.84
@@ -1178,6 +1182,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1684571036562991282, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
   m_PrefabInstance: {fileID: 33962781}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1794780336 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6112121132361723296, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+  m_PrefabInstance: {fileID: 1075056160}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d544d77c9635ac144980723f331c0bf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerIsDirty
 --- !u!1 &1815797867
 GameObject:
   m_ObjectHideFlags: 0
