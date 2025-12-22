@@ -30,6 +30,7 @@ public class HitPointState : MonoBehaviour
     }
     public void Grab()
     {
+        
         if (LastGrabTime + TimebetGrab <= Time.time)
         {
             isTrash();
