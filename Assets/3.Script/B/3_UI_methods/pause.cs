@@ -8,6 +8,7 @@ public class pause : MonoBehaviour
 {
     [SerializeField] private GameObject Pause_UI;
     [SerializeField] private GameObject fullmap;
+    [SerializeField] private GameObject minimap;
 
     [Header("플레이어 연결")] private PlayerController controller;
 
@@ -24,18 +25,19 @@ public class pause : MonoBehaviour
 
     private void Start()
     {
-        input.onInteract += TogglePause; //차후 ESC 인풋 이벤트에 등록
+        input.onEsc += TogglePause; //차후 ESC 인풋 이벤트에 등록
     }
 
     public void TogglePause() // UI 버튼에 할당도 가능
     {
-        if (Pause_UI == null || fullmap == null) return;
+        if (Pause_UI == null) return;
 
         bool isCurrentlyActive = Pause_UI.activeSelf;
         bool targetState = !isCurrentlyActive;
 
         Pause_UI.SetActive(targetState);
         fullmap.SetActive(targetState);
+        minimap.SetActive(!targetState);
 
         // [핵심] SellUI와 동일한 로직 적용
         SetPlayerControl(!targetState);

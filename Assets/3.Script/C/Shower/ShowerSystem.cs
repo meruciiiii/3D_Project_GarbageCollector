@@ -9,6 +9,12 @@ public class ShowerSystem : MonoBehaviour
     [SerializeField] private float showerDuration = 2.0f;
     [SerializeField] private GameObject guideText;
 
+    [Header("샤워 연출 (FX & Audio)")] // [NEW] 연출용 변수 추가
+    [SerializeField] private ParticleSystem waterFX; // 물방울 파티클
+    [SerializeField] private ParticleSystem steamFX; // 수증기 파티클
+    [SerializeField] private AudioSource showerAudio; // 물소리 오디오
+    [SerializeField] private EyeOpenClose showerEyeEffect;
+
     // FirstPersonMovement로 타입 명시 추천
     [SerializeField] private PlayerController playerController;
     [SerializeField] private VignetteController vignetteController;
@@ -22,12 +28,21 @@ public class ShowerSystem : MonoBehaviour
     private void Start()
     {
         if (guideText != null) guideText.SetActive(false);
+
+        // [NEW] 시작 시 이펙트가 켜져있다면 강제로 끔 (안전장치)
+        if (waterFX != null) waterFX.Stop();
+        if (steamFX != null) steamFX.Stop();
+        if (showerAudio != null) showerAudio.Stop();
     }
 
     public void TryShower()
     {
         if (GameManager.instance == null) return;
-        if (GameManager.instance.P_Money < showerCost) return; // 돈 부족 등 예외처리
+        if (GameManager.instance.P_Money < showerCost)
+        {
+            Debug.Log("돈이 부족합니다.");
+            return;
+        }
 
         StartCoroutine(ProcessShower());
     }
@@ -39,22 +54,36 @@ public class ShowerSystem : MonoBehaviour
         // 1. 플레이어 얼리기 (커서는 여전히 안 보여야 함!)
         SetPlayerFreeze(true);
 
+        // [NEW] 2. 샤워 연출 시작 (Play)
+        if (waterFX != null) waterFX.Play();
+        if (steamFX != null) steamFX.Play();
+        if (showerAudio != null) showerAudio.Play();
+        if (showerEyeEffect != null) showerEyeEffect.CloseEyes();
+
         Debug.Log("샤워 시작...");
         if (guideText != null) guideText.SetActive(false);
 
+        // 데이터 처리
         GameManager.instance.P_Money -= showerCost;
         GameManager.instance.ChangeHP(GameManager.instance.P_MaxHP);
         GameManager.instance.SaveAllGamedata();
 
-        // 2. 씻는 시간 대기
+        // 3. 씻는 시간 대기 (연출 감상 시간)
         yield return new WaitForSeconds(showerDuration);
 
-        vignetteController.OnWash();
-        playerIsDirty.StopDirtyEffect();
+        // 4. 화면 효과 초기화
+        if (vignetteController != null) vignetteController.OnWash();
+        if (playerIsDirty != null) playerIsDirty.CalDelay(100f); // 혹은 StopDirtyEffect();
+        if (showerEyeEffect != null) showerEyeEffect.OpenEyes();
 
         Debug.Log("샤워 완료!");
 
-        // 4. 플레이어 녹이기
+        // [NEW] 5. 샤워 연출 종료 (Stop)
+        if (waterFX != null) waterFX.Stop();
+        if (steamFX != null) steamFX.Stop(); // 수증기는 Stop하면 자연스럽게 잔상이 사라집니다.
+        if (showerAudio != null) showerAudio.Stop();
+
+        // 6. 플레이어 녹이기
         SetPlayerFreeze(false);
         isWashing = false;
 
