@@ -30,6 +30,7 @@ public class HitPointState : MonoBehaviour
     }
     public void Grab()
     {
+        TimebetGrab = GameManager.instance.grab_speed;
         if (LastGrabTime + TimebetGrab <= Time.time)
         {
             isTrash();

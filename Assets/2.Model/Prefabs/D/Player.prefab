@@ -138,6 +138,8 @@ GameObject:
   - component: {fileID: 4923363421550768917}
   - component: {fileID: 5268846639204889945}
   - component: {fileID: 1133666088544270964}
+  - component: {fileID: 2795366696379105930}
+  - component: {fileID: 5475801769564018433}
   m_Layer: 3
   m_Name: Camera
   m_TagString: MainCamera
@@ -263,6 +265,64 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &2795366696379105930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2569023078443640339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d544d77c9635ac144980723f331c0bf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerIsDirty
+  camera: {fileID: 4923363421550768917}
+  zoominFov: 59
+  zoomoutFov: 60
+  zoomDuration: 0.2
+  zoomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  vignetteController: {fileID: 5475801769564018433}
+  maxBeat: 0
+  minBeat: 0
+--- !u!114 &5475801769564018433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2569023078443640339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d2092c57215ad744aff99d651a267ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VignetteController
+  volume: {fileID: 0}
+  zoomVignetteIntensity: 0.47
+  vignetteLerpSpeed: 1
 --- !u!1 &2914692182540061752
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,7 +806,6 @@ MonoBehaviour:
   moveSpeed: 0
   walkSpeed: 5
   runSpeed: 6.5
-  jumpPower: 3
   sensitive: 0.1
   cameraObject: {fileID: 4923363421550768917}
   cur_weight: 0
@@ -812,6 +871,7 @@ MonoBehaviour:
   catchLarge: {fileID: 5712761856223967927}
   playerWork: {fileID: 8968073341749195394}
   input: {fileID: 4076259103573898125}
+  TimebetGrab: 0
 --- !u!114 &3227231357700357438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -851,6 +911,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cff354908ea84754bbf0388742bbfbe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CleanPlayer
+  vignetteController: {fileID: 5475801769564018433}
+  playerIsDirty: {fileID: 2795366696379105930}
 --- !u!1 &6265970743048524887
 GameObject:
   m_ObjectHideFlags: 0
