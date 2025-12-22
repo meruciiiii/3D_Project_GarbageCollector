@@ -108,5 +108,4 @@ public class BSceneManager : MonoBehaviour
         SetPlayerFreeze(false);
         this.gameObject.SetActive(false);
     }
-
 }
