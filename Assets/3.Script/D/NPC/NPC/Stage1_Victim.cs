@@ -24,6 +24,6 @@ public class Stage1_Victim : NPC_Controller {
 			yield return new WaitForSeconds(1f);
 		}
 		yield return StartCoroutine(Move_co(end_pos));
-		Destroy(gameObject);
+		gameObject.SetActive(false);
 	}
 }

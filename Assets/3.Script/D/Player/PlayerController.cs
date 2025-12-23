@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
 
     [Header("플레이어 이동속도")]
     public float moveSpeed;
+    private float current_mode_speed;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
     [SerializeField] private float accelSpeed;
@@ -108,11 +109,13 @@ public class PlayerController : MonoBehaviour {
     private void Run() {
         if (isCanRun) {
             moveSpeed = runSpeed;
+            current_mode_speed = runSpeed;
             Calc_Speed();
         }
     }
     private void Walk() {
         moveSpeed = walkSpeed;
+        current_mode_speed = walkSpeed;
         Calc_Speed();
     }
 
@@ -125,7 +128,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] [Range(0, 1)] private float slow_percent; //플레이어의 이동속도 감소 비율
 
     public void Calc_Speed() {
-        float Speed = moveSpeed;
+        float Speed = current_mode_speed;
         //총 무게 가져오기
         cur_weight = GameManager.instance.P_Weight; //직접참조로 불러오기.
         max_weight = GameManager.instance.P_Maxbag; //직접참조로 불러오기.

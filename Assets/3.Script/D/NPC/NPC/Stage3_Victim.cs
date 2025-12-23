@@ -12,6 +12,10 @@ public class Stage3_Victim : NPC_Controller {
 	[SerializeField] private float max_sec;
 	private WaitForSeconds seconds;
 
+	private void OnEnable() {
+		cultive_count = 0;
+	}
+
 	public override void start() {
 		base.start();
 		StartCoroutine(cultive_co());
@@ -19,7 +23,8 @@ public class Stage3_Victim : NPC_Controller {
 
 	protected override IEnumerator routine_co() {
 		yield return StartCoroutine(Move_co(end_pos));
-		Destroy(gameObject);
+		gameObject.SetActive(false);
+		transform.position = start_pos;
 	}
 
 	private IEnumerator cultive_co() {
