@@ -49,7 +49,6 @@ public class SellManager : MonoBehaviour
         if (smallEarn > 0)
         {
             GameManager.instance.P_Weight = 0;
-            playerController.Calc_Speed();
         }
 
         // [B] 대형 정산
@@ -63,8 +62,13 @@ public class SellManager : MonoBehaviour
             GameManager.instance.BigGarbageWeight = 0;
         }
 
-        // --- 돈 지급 및 저장 ---
-        if (totalEarnings > 0)
+        if (totalEarnings > 0 && playerController != null)
+        {
+            playerController.SendMessage("Walk", SendMessageOptions.DontRequireReceiver);
+        }
+
+            // --- 돈 지급 및 저장 ---
+            if (totalEarnings > 0)
         {
             GameManager.instance.P_Money += totalEarnings;
             GameManager.instance.SaveAllGamedata();

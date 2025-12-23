@@ -14,32 +14,33 @@ public class UpgradeUI : MonoBehaviour
     [SerializeField] public Text speedPriceText;
     [SerializeField] public Text multiGrabPriceText;
 
+    // [NEW] 히든 업그레이드 UI 연결
+    [Header("히든 업그레이드 (인간 들기)")]
+    [SerializeField] private Button btnPickNPC;     // 인간 들기 버튼
+    [SerializeField] private Text txtPickNPCInfo;   // 가격 및 정보 텍스트
+
     [Header("플레이어 연결")]
     public PlayerController playerController;
 
     private void Awake()
     {
-        // 안전장치: 플레이어가 연결 안 되어 있으면 자동으로 찾기
         if (playerController == null)
             playerController = FindAnyObjectByType<PlayerController>();
     }
 
     private void OnEnable()
     {
-        // UI가 켜질 때: 커서 보이기 + 조작 정지
         SetPlayerState(false);
         UpdateUI();
     }
 
     private void OnDisable()
     {
-        // UI가 꺼질 때: 커서 숨기기 + 조작 재개
         SetPlayerState(true);
     }
 
     private void SetPlayerState(bool isGameActive)
     {
-        // 1. 플레이어 이동/회전 스크립트 끄기/켜기
         if (playerController != null)
         {
             if (!isGameActive)
@@ -47,74 +48,55 @@ public class UpgradeUI : MonoBehaviour
                 Rigidbody rb = playerController.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
-                    rb.linearVelocity = Vector3.zero; // Unity 6 (구버전은 velocity)
+                    rb.linearVelocity = Vector3.zero;
                     rb.angularVelocity = Vector3.zero;
                 }
             }
-
             playerController.enabled = isGameActive;
-
-            // 이동 멈출 때 잔여 속도가 남지 않게 하려면 Rigidbody 초기화 등을 고려해야 하지만,
-            // 보통 스크립트를 끄면 Update가 멈춰서 시선과 이동이 멈춥니다.
         }
 
-        // 2. 마우스 커서 상태 설정
         if (isGameActive)
         {
-            // 게임 중: 커서 숨기고 중앙 고정
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
         else
         {
-            // UI 사용 중: 커서 보이고 자유 이동
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
     }
 
-    // ... (나머지 버튼 함수들은 기존 유지) ...
+    // --- 기존 버튼 함수들 ---
     public void OnClick_UpgradeStrength()
     {
-        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.Strength))
-        {
-            UpdateUI();
-            Debug.Log("힘 업그레이드 성공");
-        }
+        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.Strength)) UpdateUI();
     }
 
     public void OnClick_BagButton()
     {
-        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.BagWeight))
-        {
-            UpdateUI();
-            Debug.Log("가방 업그레이드 성공");
-        }
+        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.BagWeight)) UpdateUI();
     }
     public void OnClick_MaxHPButton()
     {
-        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.MaxHP))
-        {
-            UpdateUI();
-            Debug.Log("최대 청결도 업그레이드 성공");
-        }
+        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.MaxHP)) UpdateUI();
     }
     public void OnClick_UpgradeSpeed()
     {
-        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.PickSpeed))
-        {
-            UpdateUI();
-            Debug.Log("속도 업그레이드 성공");
-        }
+        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.PickSpeed)) UpdateUI();
     }
 
     public void OnClick_UpgradeMultiGrab()
     {
-        // UpgradeType.MultiGrab은 UpgradeManager에서 정의해야 함
-        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.MultiGrab))
+        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.MultiGrab)) UpdateUI();
+    }
+
+    // [NEW] 히든 업그레이드 버튼 함수
+    public void OnClick_PickNPC()
+    {
+        if (upgradeManager.TryPurchaseUpgrade(UpgradeType.PickNPC))
         {
-            UpdateUI();
-            Debug.Log("흡입구 확장(다중 줍기) 업그레이드 성공");
+            UpdateUI(); // 성공 시 UI 갱신 (버튼 잠그기 등)
         }
     }
 
@@ -124,39 +106,86 @@ public class UpgradeUI : MonoBehaviour
 
         moneyText.text = $"보유 자원: {GameManager.instance.P_Money}";
 
+        // 1. 힘 (Strength) - 6 도달 시 MAX 표시
         if (strPriceText != null)
-            strPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.Strength)}";
-
-        if (bagPriceText != null)
-            bagPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.BagWeight)}";
-
-        if (maxHPPriceText != null)
-            maxHPPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.MaxHP)}";
-
-        if (speedPriceText != null)
         {
-            // 속도가 거의 최대치(0.25 이하)라면 MAX 표시
-            if (GameManager.instance.grab_speed <= 0.25f)
+            if (GameManager.instance.P_Str >= 6)
             {
-                speedPriceText.text = "MAX LEVEL";
+                // 이미 히든까지 뚫었다면 ULTIMATE
+                if (GameManager.instance.P_Str >= 7)
+                    strPriceText.text = "ULTIMATE MAX";
+                else
+                    strPriceText.text = "MAX (한계 도달)";
             }
             else
             {
-                speedPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.PickSpeed)}";
+                strPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.Strength)}";
             }
         }
 
+        // 2. 가방 무게 (5100 도달 시 MAX)
+        if (bagPriceText != null)
+        {
+            // UpgradeManager의 MAX_BAG_WEIGHT 상수값(5100)과 맞춰야 함
+            if (GameManager.instance.P_Maxbag >= 5100)
+                bagPriceText.text = "MAX LEVEL";
+            else
+                bagPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.BagWeight)}";
+        }
+
+        // 3. 최대 청결도 (200 도달 시 MAX)
+        if (maxHPPriceText != null)
+        {
+            if (GameManager.instance.P_MaxHP >= 200)
+                maxHPPriceText.text = "MAX LEVEL";
+            else
+                maxHPPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.MaxHP)}";
+        }
+
+        // 4. 줍기 속도
+        if (speedPriceText != null)
+        {
+            if (GameManager.instance.grab_speed <= 0.25f)
+                speedPriceText.text = "MAX LEVEL";
+            else
+                speedPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.PickSpeed)}";
+        }
+
+        // 5. 다중 줍기
         if (multiGrabPriceText != null)
         {
-            // 최대 개수 제한 (예: 5개) 도달 시 MAX 표시
-            // UpgradeManager에서 설정한 제한(5)과 맞춰주세요.
             if (GameManager.instance.grab_limit >= 5)
-            {
                 multiGrabPriceText.text = "MAX LEVEL";
+            else
+                multiGrabPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.MultiGrab)}";
+        }
+
+        // [NEW] 6. 히든 업그레이드 (인간 들기) 버튼 제어
+        if (btnPickNPC != null && txtPickNPCInfo != null)
+        {
+            // UpgradeManager에 있는 '만렙 판독기' 함수 호출
+            if (upgradeManager.IsAllStatMaxed())
+            {
+                // 자격 조건 달성!
+                if (GameManager.instance.P_Str >= 7)
+                {
+                    // 이미 구매함
+                    txtPickNPCInfo.text = "구매 완료 (힘 7)";
+                    btnPickNPC.interactable = false; // 버튼 잠금
+                }
+                else
+                {
+                    // 구매 가능 상태 (아직 안 샀음)
+                    int cost = upgradeManager.GetUpgradeCost(UpgradeType.PickNPC);
+                    txtPickNPCInfo.text = $"인간 들기 (한계돌파)\n비용: {cost}";
+                    btnPickNPC.interactable = true; // 버튼 활성화
+                }
             }
             else
             {
-                multiGrabPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.MultiGrab)}";
+                // 자격 미달 (아직 다른 스탯 만렙 아님)
+                txtPickNPCInfo.text = "???\n(모든 능력 MAX 필요)";
+                btnPickNPC.interactable = false; // 버튼 잠금
             }
         }
     }
