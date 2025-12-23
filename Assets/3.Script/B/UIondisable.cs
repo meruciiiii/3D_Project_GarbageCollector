@@ -7,6 +7,9 @@ public class UIondisable : MonoBehaviour
 {
     [SerializeField] private GameObject UIvalue;
     [SerializeField] private GameObject minimap;
+    [SerializeField] private GameObject guide;
+    [SerializeField] private GameObject aim;
+    [SerializeField] private GameObject cross;
 
     // ÀÌ ¿ÀºêÁ§Æ®°¡ ÄÑÁú ¶§ ½ÇÇàµÊ
     private void OnEnable()
@@ -14,7 +17,10 @@ public class UIondisable : MonoBehaviour
         if (UIvalue != null&&minimap!=null)
         {
             UIvalue.SetActive(false); // UI¸¦ ²û
-            minimap.SetActive(false); // UI¸¦ ²û
+            minimap.SetActive(false);
+            guide.SetActive(false);
+            aim.SetActive(false);
+            cross.SetActive(false);
         }
     }
 
@@ -24,7 +30,10 @@ public class UIondisable : MonoBehaviour
         if (UIvalue != null)
         {
             UIvalue.SetActive(true); // UI¸¦ Å´
-            minimap.SetActive(true); // UI¸¦ Å´
+            minimap.SetActive(true);
+            guide.SetActive(true);
+            aim.SetActive(true);
+            cross.SetActive(true);
         }
     }
 }
