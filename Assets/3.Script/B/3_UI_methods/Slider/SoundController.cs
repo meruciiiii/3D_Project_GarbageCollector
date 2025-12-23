@@ -8,49 +8,48 @@ public class SoundController : MonoBehaviour
     public AudioMixer audioMixer;
     public Slider[] sliders;
 
+    private const float snapValue = 5f; // 5단위로 스냅
+
     void Start()
     {
-        // BGM 볼륨 로드 및 적용
-        if (PlayerPrefs.HasKey("volume_BGM"))
-        {
-            float bgmVolume = PlayerPrefs.GetFloat("volume_BGM");
-            audioMixer.SetFloat("BGM", bgmVolume);
-            sliders[0].value = bgmVolume; // 슬라이더 UI에도 적용
-        }
-        // SFX 볼륨 로드 및 적용
-        if (PlayerPrefs.HasKey("volume_SFX"))
-        {
-            float sfxVolume = PlayerPrefs.GetFloat("volume_SFX");
-            audioMixer.SetFloat("SFX", sfxVolume);
-            sliders[1].value = sfxVolume; // 슬라이더 UI에도 적용
-        }
-        // PlayerPrefs에 값이 없을 경우, Unity가 설정한 슬라이더의 초기값(Start 시점의 슬라이더 value)이 사용
+        LoadAndApplyVolume("BGM", 0);
+        LoadAndApplyVolume("SFX", 1);
+    }
+
+    private void LoadAndApplyVolume(string parameter, int SliderIndex)
+    {
+        string key = "volume_" + parameter;
+        float savedValue = PlayerPrefs.GetFloat(key, 75f); //기본값 75
+
+        sliders[SliderIndex].value = savedValue;
+
+        ApplyToMixer(parameter, savedValue);
+    }
+
+    private void ApplyToMixer(string parameter, float sliderValue)
+    {
+        // 0~100의 값을 0.0001~1 범위로 변환
+        float normalizeValue = Mathf.Clamp(sliderValue / 100f, 0.0001f, 1f);
+
+        // 로그 변환을 통해 인간의 귀에 자연스러운 dB 값으로 변경 (-80dB ~ 0dB)
+        float dB = Mathf.Log10(normalizeValue) * 20;
+
+        audioMixer.SetFloat(parameter, dB);
     }
 
     public void ControllVolume(string audioGroup)
     {
-        float volumeValue = 0f;
-        string parameter = "";
+        int index = 0;
+        if (audioGroup == "BGM") index = 0;
+        else if (audioGroup == "SFX") index = 1;
+        else { Debug.Log("audioGroup 이름이 없습니다."); return; }
 
-        float snap = 5f;
+        float snappedValue = Mathf.Round(sliders[index].value / snapValue) * snapValue; //5단위 반올림
+        sliders[index].value = snappedValue;
 
-        switch (audioGroup)
-        {
-            case "BGM":
-                volumeValue = Mathf.Round(sliders[0].value / snap)*snap;
-                sliders[0].value = volumeValue;
-                parameter = "BGM";
-                break;
+        ApplyToMixer(audioGroup, snappedValue);
 
-            case "SFX":
-                volumeValue = Mathf.Round(sliders[1].value / snap) * snap;
-                sliders[1].value = volumeValue;
-                parameter = "SFX";
-                break;
-        }
-        audioMixer.SetFloat(parameter, volumeValue);
-
-        PlayerPrefs.SetFloat("volume_" + parameter, volumeValue);//키 volume_BGM 밸류 volumeValue
+        PlayerPrefs.SetFloat("volume_" + audioGroup, snappedValue);
         PlayerPrefs.Save();
     }
 }
