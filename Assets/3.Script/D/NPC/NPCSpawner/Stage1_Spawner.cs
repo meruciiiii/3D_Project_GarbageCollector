@@ -16,7 +16,7 @@ public class Stage1_Spawner : NPC_Spawner {
 		while(true) {
 			seconds = new WaitForSeconds(Random.Range(min_sec, max_sec));
 			Rnd_Set_Pos();
-			GameObject victim_npc = Instantiate(NPC, start_pos);
+			GameObject victim_npc = Instantiate(NPC_prefabs, start_pos);
 			victim_npc.TryGetComponent(out Stage1_Victim victim_pattern);
 			victim_pattern.set_pos(start_pos.position, end_pos.position, cultive_pos.transform.position);
 			victim_pattern.start();

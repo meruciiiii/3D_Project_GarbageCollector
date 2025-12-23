@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class NPC_Spawner : MonoBehaviour {
 	[Header("NPC 프리팹")]
-	[SerializeField] protected GameObject NPC;
+	[SerializeField] protected GameObject NPC_prefabs;
+	protected GameObject[] npc_pooling;
+	protected GameObject NPC;
+	private int pool_count = 10;
 
 	[Header("이동 경로 Vector")]
 	protected Transform start_pos;
@@ -14,6 +17,10 @@ public class NPC_Spawner : MonoBehaviour {
 	[SerializeField] protected float min_sec;
 	[SerializeField] protected float max_sec;
 	protected WaitForSeconds seconds;
+
+	protected void Start() {
+		npc_pooling = new GameObject[pool_count];
+	}
 
 	protected void Rnd_Set_Pos() {
 		List<Transform> locations_list = new List<Transform>();
