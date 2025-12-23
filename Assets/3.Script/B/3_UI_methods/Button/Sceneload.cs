@@ -9,6 +9,7 @@ public class Sceneload : MonoBehaviour
     [SerializeField] private float buttonDelay = 0.68f; // 사운드 대기
     [SerializeField] private float fadeDuration = 0.5f; // 페이드 아웃 시간
     [SerializeField] private Image fadeImage;          // 화면을 가릴 검은색 이미지
+    [SerializeField] private string intro_name = "Main_intro";
 
     public void SceneLoader(string scenename)
     {
@@ -25,7 +26,7 @@ public class Sceneload : MonoBehaviour
 
         if (GameManager.instance != null && GameManager.instance.P_intro)
         {
-            finalSceneName = "B_Intro";
+            finalSceneName = intro_name;
         }
 
         AsyncOperation op = SceneManager.LoadSceneAsync(finalSceneName);

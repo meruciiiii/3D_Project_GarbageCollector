@@ -7,7 +7,7 @@ public class NPC_Random_Mesh : MonoBehaviour {
     public Customization_Data customizationData;
     [SerializeField] private List<CustomizationPart> _customizationParts;
 
-    private void Awake() {
+    private void OnEnable() {
         ApplyRandomLook();
     }
 

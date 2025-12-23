@@ -919,6 +919,7 @@ GameObject:
   - component: {fileID: 1585705891859306239}
   - component: {fileID: 3191342676425581269}
   - component: {fileID: 7099647208225657412}
+  - component: {fileID: 6861872121488826736}
   m_Layer: 5
   m_Name: UpgradePanel
   m_TagString: Untagged
@@ -1018,6 +1019,23 @@ MonoBehaviour:
   btnPickNPC: {fileID: 5109471209632746673}
   txtPickNPCInfo: {fileID: 7330244663974928763}
   playerController: {fileID: 0}
+--- !u!114 &6861872121488826736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2890492438197504734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4180d094c55efa47b104e9974828d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIondisable
+  UIvalue: {fileID: 0}
+  minimap: {fileID: 0}
+  guide: {fileID: 6337959457833692195}
+  aim: {fileID: 0}
+  cross: {fileID: 0}
 --- !u!1 &3580826142096831641
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,6 +1392,7 @@ GameObject:
   - component: {fileID: 5312004504207994213}
   - component: {fileID: 5806504345740726241}
   - component: {fileID: 4264154415858069340}
+  - component: {fileID: 3040938722156310887}
   m_Layer: 5
   m_Name: TradePanel
   m_TagString: Untagged
@@ -1441,6 +1460,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3040938722156310887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4041067204921753691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4180d094c55efa47b104e9974828d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIondisable
+  UIvalue: {fileID: 0}
+  minimap: {fileID: 0}
+  guide: {fileID: 6817179802234743114}
+  aim: {fileID: 0}
+  cross: {fileID: 0}
 --- !u!1 &4505620392680075670
 GameObject:
   m_ObjectHideFlags: 0
