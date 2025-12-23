@@ -6,47 +6,73 @@ using UnityEngine.UI;
 
 public class Status : MonoBehaviour
 {
-    public enum Statusenum
-    {
-        str,//0
-        spd,//1
-        amount//2
-    }
-    [SerializeField] private Statusenum s_enum;
-    private Slider slider; 
+    [Header("슬라이더 할당")]
+    [SerializeField] private Slider strSlider;
+    [SerializeField] private Slider spdSlider;
+    [SerializeField] private Slider amountSlider;
+
+    private UIManager uimanager;
+
     private void Awake()
     {
-        transform.TryGetComponent(out slider);
+        uimanager = FindAnyObjectByType<UIManager>();
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        if (slider == null || GameManager.instance == null)
+        if (uimanager != null)
         {
-            Debug.LogWarning("Status: Slider 또는 GameManager를 찾을 수 없습니다.");
-            return;
+            uimanager.UIValueChange += UpdateAllStatusUI;
+            // 초기값 반영
+            UpdateAllStatusUI();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (uimanager != null)
+        {
+            uimanager.UIValueChange -= UpdateAllStatusUI;
+        }
+    }
+
+    // 모든 슬라이더를 한 번에 갱신하는 함수
+    private void UpdateAllStatusUI()
+    {
+        if (GameManager.instance == null) return;
+
+        // 1. 힘(Str) 업데이트
+        if (strSlider != null)
+        {
+            int baseStr = 1; // 기본값
+            strSlider.wholeNumbers = true; // 코드로 정수 옵션 강제 활성화
+            strSlider.minValue = 0;
+            strSlider.maxValue = 6; // 1에서 7까지 총 6단계 업그레이드
+            strSlider.value = GameManager.instance.P_Str - baseStr;
         }
 
-        switch (s_enum)
+        // 2. 속도(Spd) 업데이트
+        if (spdSlider != null)
         {
-            case Statusenum.str:
-                    slider.maxValue = 7;
-                    slider.value = GameManager.instance.P_Str;
-                break;
+            float startVal = 1.55f;
+            float minVal = 0.25f;
+            float currentVal = GameManager.instance.grab_speed;
 
-            case Statusenum.spd :
-                    slider.maxValue = 7;
-                    slider.value = GameManager.instance.grab_speed;
-                    break;
+            spdSlider.wholeNumbers = false; // 소수점 사용
+            spdSlider.minValue = 0f;
+            spdSlider.maxValue = 1f;
+            float progress = (startVal - currentVal) / (startVal - minVal);
+            spdSlider.value = Mathf.Clamp01(progress);
+        }
 
-            case Statusenum.amount:
-                    slider.maxValue = 7;
-                    slider.value = GameManager.instance.grab_limit;
-                break;
-
-            default: 
-                Debug.Log("status 예외 발생");
-                break;
+        // 3. 수량(Amount) 업데이트
+        if (amountSlider != null)
+        {
+            int baseAmount = 1;
+            amountSlider.wholeNumbers = true; // 정수 옵션 활성화
+            amountSlider.minValue = 0;
+            amountSlider.maxValue = 4;
+            amountSlider.value = GameManager.instance.grab_limit - baseAmount;
         }
     }
 }
