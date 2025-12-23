@@ -36,11 +36,13 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private Sound[] BGM_clip;
     [Space(10f)]
     [SerializeField] private Sound[] SFX_clip;
+    [SerializeField] private Sound[] SFX_3D_clip;
 
     [Space(50f)]
     [Header("Audio Source")]
     [SerializeField] private AudioSource BGM_Player;
     [SerializeField] private AudioSource[] SFX_Player;
+    [SerializeField] private AudioSource[] SFX_3D_Player;
 
     [Space(50f)]
     [SerializeField] private float fadeDuration = 1.0f; // 페이드 속도 조절 변수
@@ -49,7 +51,8 @@ public class AudioManager : MonoBehaviour
     private void AutoSetting()
     {
         BGM_Player = transform.GetChild(0).GetComponent<AudioSource>();
-        SFX_Player = transform.GetChild(1).GetComponentsInChildren<AudioSource>();
+        SFX_Player = transform.GetChild(1).GetComponents<AudioSource>();
+        SFX_3D_Player = transform.GetChild(2).GetComponentsInChildren<AudioSource>();
     }
 
     public void PlayBGM(string name)
@@ -106,7 +109,7 @@ public class AudioManager : MonoBehaviour
         BGM_Player.volume = 1.0f;
     }
 
-    /*
+    
     public void PlaySFX(string name)
     {
         foreach(Sound s in SFX_clip)
@@ -128,29 +131,29 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
-    */
+    
 
-    public void PlaySFX(string name, Vector3 position) //AudioManager.instance.PlaySFX("사운드이름",transform.position)
+    public void Play3DSFX(string name, Vector3 position) //AudioManager.instance.PlaySFX("사운드이름",transform.position)
     {
-        foreach(Sound s in SFX_clip)
+        foreach(Sound s in SFX_3D_clip)
         {
             if (s.name.Equals(name))
             {
-                for (int i = 0; i < SFX_Player.Length; i++)
+                for (int i = 0; i < SFX_3D_Player.Length; i++)
                 {
-                    if (!SFX_Player[i].isPlaying)
+                    if (!SFX_3D_Player[i].isPlaying)
                     {
-                        SFX_Player[i].transform.position = position;
-                        SFX_Player[i].clip = s.clip;
-                        SFX_Player[i].outputAudioMixerGroup = SFX;
-                        SFX_Player[i].Play();
+                        SFX_3D_Player[i].transform.position = position;
+                        SFX_3D_Player[i].clip = s.clip;
+                        SFX_3D_Player[i].outputAudioMixerGroup = SFX;
+                        SFX_3D_Player[i].Play();
                         return;
                     }
                 }
-                Debug.Log("모든 슬롯이 사용 중입니다.");
+                Debug.Log("모든 3D SFX 슬롯이 사용 중입니다.");
                 return;
             }
         }
-        Debug.Log($"해당 name:[{name}] key를 가진 SFX가 없습니다.");
+        Debug.Log($"해당 name:[{name}] key를 가진 3DSFX가 없습니다.");
     }
 }
