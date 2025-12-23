@@ -11,15 +11,27 @@ public class Intro_Typing_Read : MonoBehaviour
     [SerializeField] private float typingSpeed = 0.05f; // 글자 출력 속도
     [SerializeField] private float lineWaitTime = 0.6f; // 줄바꿈 시 대기 시간
     [SerializeField] private float waitforstart = 0f; // 줄바꿈 시 대기 시간
+
+
     [SerializeField] private string nextSceneName = "B_Scene"; // 인트로 종료 후 갈 씬
     [SerializeField] private bool isclear = false;
-    
+    [SerializeField] private Image fadeImage; // 페이드용 UI 이미지
+    [SerializeField] private float fadeDuration = 1.5f; // 페이드 속도
+
 
     private string Key2 = "value";
     private Coroutine loadCoroutine;
 
     void OnEnable()
     {
+        if (fadeImage != null)
+        {
+            fadeImage.gameObject.SetActive(true);
+            Color c = fadeImage.color;
+            c.a = 0f;
+            fadeImage.color = c;
+        }
+
         if (loadCoroutine != null) StopCoroutine(loadCoroutine);
         loadCoroutine = StartCoroutine(WaitForDataAndTyping());
     }
@@ -46,9 +58,31 @@ public class Intro_Typing_Read : MonoBehaviour
                 GameManager.instance.P_intro = false;
                 yield return new WaitForSeconds(2.0f);
                 if (isclear) yield return new WaitForSeconds(5.0f);
+                yield return StartCoroutine(FadeOutRoutine());
                 SceneManager.LoadScene(nextSceneName);
             }
         }
+    }
+    private IEnumerator FadeOutRoutine()
+    {
+        if (fadeImage == null) yield break;
+
+        fadeImage.gameObject.SetActive(true); // 이미지 활성화
+        float timer = 0f;
+
+        while (timer < fadeDuration)
+        {
+            timer += Time.deltaTime;
+            Color c = fadeImage.color;
+            c.a = Mathf.Lerp(0f, 1f, timer / fadeDuration); // 0(투명) -> 1(검정)
+            fadeImage.color = c;
+            yield return null;
+        }
+
+        // 완전히 검게 확정
+        Color finalColor = fadeImage.color;
+        finalColor.a = 1f;
+        fadeImage.color = finalColor;
     }
 
     private IEnumerator TypeText(string message)
