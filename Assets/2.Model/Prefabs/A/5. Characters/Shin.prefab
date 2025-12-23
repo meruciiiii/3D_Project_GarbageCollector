@@ -2509,6 +2509,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9056764700211277319}
+  - component: {fileID: 2520812589855657498}
   m_Layer: 7
   m_Name: Shin
   m_TagString: Player
@@ -2532,6 +2533,28 @@ Transform:
   - {fileID: 791943577034755999}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!95 &2520812589855657498
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5782710689110561382}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: ed4213104c2cb174d9bda386431ff013, type: 3}
+  m_Controller: {fileID: 9100000, guid: 2e362439a8dd27549ba3f61b0d79cf8d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5840063375534782551
 GameObject:
   m_ObjectHideFlags: 0

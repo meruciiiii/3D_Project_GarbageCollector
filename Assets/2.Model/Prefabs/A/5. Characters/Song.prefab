@@ -106,6 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3545910310471721396}
   - component: {fileID: 7816822732388057388}
+  - component: {fileID: 7109627973255718026}
   m_Layer: 7
   m_Name: Song
   m_TagString: Player
@@ -156,6 +157,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!95 &7109627973255718026
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684862356332327031}
+  m_Enabled: 0
+  m_Avatar: {fileID: 9000000, guid: ed4213104c2cb174d9bda386431ff013, type: 3}
+  m_Controller: {fileID: 9100000, guid: c99416278f943c24e976f2b1d033bd5c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &776055540762757733
 GameObject:
   m_ObjectHideFlags: 0
