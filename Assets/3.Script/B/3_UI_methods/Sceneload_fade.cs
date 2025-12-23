@@ -6,6 +6,7 @@ public class BSceneManager : MonoBehaviour
 {
     [SerializeField] private Image fadeImage; // 화면을 가릴 UI 이미지 (검은색)
     [SerializeField] private float waitTime = 2.5f; // 기다릴 시간
+    [SerializeField] private bool DontLockCursor = false; // 커서 잠금
 
     private PlayerController playerController;
     private bool isFirstLoad = false;
@@ -47,8 +48,16 @@ public class BSceneManager : MonoBehaviour
         // 커서 코드는 건드리지 않거나, 확실하게 잠급니다.
         if (isFrozen)
         {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            if (!DontLockCursor) // 잠금 모드일 때 (일반 게임)
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            else // 잠금 안 함 모드일 때 (UI/메뉴 씬)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
         }
     }
 
