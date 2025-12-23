@@ -11,23 +11,24 @@ public enum UpgradeType
 }
 public class UpgradeManager : MonoBehaviour
 {
-    [Header("업그레이드 가격 설정")]
-    [SerializeField] private int baseStrengthCost = 1000;
-    [SerializeField] private int baseBagCost = 500;
-    [SerializeField] private int baseMaxHPCost = 1500;
-    [SerializeField] private int baseSpeedCost = 2000;
-    [SerializeField] private int baseMultiGrabCost = 3000;
-    [SerializeField] private int pickNpcCost = 50000; // [NEW] 인간 들기 비용 (최종 콘텐츠답게 비싸게 설정)
+    [Header("업그레이드 가격 설정 (Base Cost)")]
+    [SerializeField] private int baseStrengthCost = 50000; // 힘: 매우 비쌈 (새 지역 해금급)
+    [SerializeField] private int baseBagCost = 5000;       // 가방: 1/3 ~ 1회 수익
+    [SerializeField] private int baseMaxHPCost = 10000;    // 체력: 적당함
+    [SerializeField] private int baseSpeedCost = 15000;    // 속도: 체감 큼
+    [SerializeField] private int baseMultiGrabCost = 100000;// 멀티: 후반용
+    [SerializeField] private int pickNpcCost = 1000000;    // 히든: 100만 골드 (엔딩)
 
-    // [NEW] 각 능력치의 '최대 한계(졸업)' 기준 정의
-    private const int MAX_STR_NORMAL = 6;       // 일반적인 힘 단련 한계
-    private const int STR_ULTIMATE = 7;         // 인간 들기 해금 시 힘 수치
-    private const int MAX_BAG_WEIGHT = 5100;    // 가방 최대 무게 (예: 5000에서 10번 업그레이드 시)
-    private const int MAX_HP_LIMIT = 200;       // 최대 청결도 한계 (예: 100에서 10번 업그레이드 시)
-    private const float MIN_PICK_SPEED = 0.25f; // 속도 한계 (이 이하로 내려가면 MAX)
-    private const int MAX_GRAB_LIMIT = 5;       // 흡입구 개수 한계
+    // [데이터 기반 졸업 기준 재설정]
+    private const int MAX_STR_NORMAL = 6;
+    private const int STR_ULTIMATE = 7;
 
-    // [NEW] 모든 스탯이 최대치에 도달했는지 검사하는 함수
+    // [중요] small_9(12000) 2개는 담아야 함 -> 30,000까지 확장
+    private const int MAX_BAG_WEIGHT = 30000;
+    private const int MAX_HP_LIMIT = 200;
+    private const float MIN_PICK_SPEED = 0.25f;
+    private const int MAX_GRAB_LIMIT = 5;
+
     public bool IsAllStatMaxed()
     {
         if (GameManager.instance == null) return false;
@@ -46,117 +47,91 @@ public class UpgradeManager : MonoBehaviour
     public int GetUpgradeCost(UpgradeType type)
     {
         if (GameManager.instance == null) return 0;
+        int level = 0;
 
         switch (type)
         {
-            case UpgradeType.Strength:
-                // 이미 6 이상이면 비용 0 (구매 불가 UI 처리용)
+            case UpgradeType.Strength: // 힘 (1->2가 가장 중요)
                 if (GameManager.instance.P_Str >= MAX_STR_NORMAL) return 0;
-                return GameManager.instance.P_Str * baseStrengthCost;
+                // 1->2: 5만, 2->3: 20만, 3->4: 45만...
+                return baseStrengthCost * (GameManager.instance.P_Str * GameManager.instance.P_Str);
 
-            case UpgradeType.BagWeight:
+            case UpgradeType.BagWeight: // 가방 (5000 ~ 30000)
                 if (GameManager.instance.P_Maxbag >= MAX_BAG_WEIGHT) return 0;
-                return (GameManager.instance.P_Maxbag / 10) * baseBagCost;
+                // (현재 - 5000) / 2500 -> 단계 계산
+                level = (GameManager.instance.P_Maxbag - 5000) / 2500;
+                // 5000 + (단계 * 3000) -> 점진적 증가
+                return baseBagCost + (level * 3000);
 
             case UpgradeType.MaxHP:
                 if (GameManager.instance.P_MaxHP >= MAX_HP_LIMIT) return 0;
-                return (GameManager.instance.P_MaxHP / 10) * baseMaxHPCost;
+                level = (GameManager.instance.P_MaxHP - 100) / 10;
+                return baseMaxHPCost + (level * 5000);
 
-            case UpgradeType.PickSpeed:
+            case UpgradeType.PickSpeed: // 속도 (1.5 -> 0.25)
                 if (GameManager.instance.grab_speed <= MIN_PICK_SPEED) return 0;
-                float progress = 1.5f - GameManager.instance.grab_speed;
-                int level = Mathf.RoundToInt(progress * 10);
-                return baseSpeedCost + (level * 500);
+                // 안전장치 추가: 혹시 1.5보다 크면 0레벨로 취급
+                float startSpeed = 1.5f;
+                if (GameManager.instance.grab_speed > 1.5f) startSpeed = GameManager.instance.grab_speed;
+
+                // (1.5 - 현재) / 0.1 -> 약 12단계
+                level = Mathf.RoundToInt((startSpeed - GameManager.instance.grab_speed) / 0.1f);
+                if (level < 0) level = 0;
+                return baseSpeedCost + (level * 5000);
 
             case UpgradeType.MultiGrab:
                 if (GameManager.instance.grab_limit >= MAX_GRAB_LIMIT) return 0;
-                int currentLimit = GameManager.instance.grab_limit;
-                return baseMultiGrabCost + ((currentLimit - 1) * 1000);
+                // 10만, 20만, 30만...
+                return baseMultiGrabCost * GameManager.instance.grab_limit;
 
             case UpgradeType.PickNPC:
-                // 조건: 모든 스탯 만렙이고, 아직 힘이 7이 아닐 때만 가격 표시
                 if (IsAllStatMaxed() && GameManager.instance.P_Str < STR_ULTIMATE)
                     return pickNpcCost;
-                return 0; // 조건 불충족 시 0원
-
-            default:
                 return 0;
+
+            default: return 0;
         }
     }
 
     public bool TryPurchaseUpgrade(UpgradeType type)
     {
-        if (GameManager.instance == null) return false;
-
-        // 1. 최대치 제한 체크 (일반 업그레이드 막기)
-        if (type == UpgradeType.Strength && GameManager.instance.P_Str >= MAX_STR_NORMAL) return false;
-        if (type == UpgradeType.BagWeight && GameManager.instance.P_Maxbag >= MAX_BAG_WEIGHT) return false;
-        if (type == UpgradeType.MaxHP && GameManager.instance.P_MaxHP >= MAX_HP_LIMIT) return false;
-        if (type == UpgradeType.PickSpeed && GameManager.instance.grab_speed <= MIN_PICK_SPEED) return false;
-        if (type == UpgradeType.MultiGrab && GameManager.instance.grab_limit >= MAX_GRAB_LIMIT) return false;
-
-        // 2. 인간 들기 구매 조건 체크
-        if (type == UpgradeType.PickNPC)
-        {
-            if (!IsAllStatMaxed())
-            {
-                Debug.Log("조건 부족: 모든 능력을 한계까지 강화하십시오.");
-                return false;
-            }
-            if (GameManager.instance.P_Str >= STR_ULTIMATE)
-            {
-                Debug.Log("이미 인간을 들 수 있는 힘을 가졌습니다.");
-                return false;
-            }
-        }
-
-        // 3. 비용 확인 및 결제
+        // ... (조건 체크 및 결제 로직 기존 동일) ...
         int cost = GetUpgradeCost(type);
-        if (cost == 0) return false; // 구매 불가 상태
-
-        if (GameManager.instance.P_Money < cost)
-        {
-            Debug.Log($"돈이 부족합니다! (필요: {cost})");
-            return false;
-        }
+        if (cost == 0 || GameManager.instance.P_Money < cost) return false;
 
         GameManager.instance.P_Money -= cost;
 
-        // 4. 능력치 적용
         switch (type)
         {
             case UpgradeType.Strength:
                 GameManager.instance.P_Str += 1;
-                Debug.Log($"힘 증가: {GameManager.instance.P_Str}");
                 break;
 
             case UpgradeType.BagWeight:
-                GameManager.instance.P_Maxbag += 10;
+                // [변경] +50은 너무 적음. +2500씩 시원하게 확장 (약 10번 업글)
+                GameManager.instance.P_Maxbag += 2500;
                 Debug.Log($"가방 확장: {GameManager.instance.P_Maxbag}");
                 break;
 
             case UpgradeType.MaxHP:
                 GameManager.instance.P_MaxHP += 10;
-                GameManager.instance.P_CurrentHP = GameManager.instance.P_MaxHP; // 체력 회복 서비스
-                Debug.Log($"청결도 확장: {GameManager.instance.P_MaxHP}");
+                GameManager.instance.P_CurrentHP = GameManager.instance.P_MaxHP;
                 break;
 
             case UpgradeType.PickSpeed:
+                // [변경] 0.1씩 감소
                 GameManager.instance.grab_speed -= 0.1f;
-                if (GameManager.instance.grab_speed < 0.2f) GameManager.instance.grab_speed = 0.2f;
-                Debug.Log($"속도 강화: {GameManager.instance.grab_speed}");
+                if (GameManager.instance.grab_speed < MIN_PICK_SPEED)
+                    GameManager.instance.grab_speed = MIN_PICK_SPEED;
                 break;
 
             case UpgradeType.MultiGrab:
                 GameManager.instance.grab_limit += 1;
-                GameManager.instance.grab_range = 0.2f + ((GameManager.instance.grab_limit - 1) * 0.15f);
-                Debug.Log($"흡입구 확장: {GameManager.instance.grab_limit}개");
+                GameManager.instance.grab_range = 1f + ((GameManager.instance.grab_limit - 1) * 0.2f);
                 break;
 
             case UpgradeType.PickNPC:
-                // [핵심] 한계 돌파! 힘을 7로 설정
                 GameManager.instance.P_Str = STR_ULTIMATE;
-                Debug.Log(" 초월 업그레이드 완료! 인간을 들 수 있습니다! (힘 7 달성) ");
                 break;
         }
 
