@@ -27,31 +27,29 @@ public class ThashInfo : MonoBehaviour
 
     private void CheckObjectInFront()
     {
-        // 화면 정중앙으로 레이를 쏨
         Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
         RaycastHit hit;
 
-        // 레이캐스트 충돌 감지
+        // 1. 레이캐스트가 무언가에 맞았고 + 그게 쓰레기 레이어인가?
         if (Physics.Raycast(ray, out hit, checkDistance, trashLayerMask))
         {
-            // 최적화: 같은 대상을 계속 보고 있다면 UI 갱신 안 함
-            if (currentTarget == hit.transform) return;
-
-            // 쓰레기 컴포넌트가 있는지 확인
+            // 2. 그 물체에 Trash 컴포넌트가 있는가?
             if (hit.collider.TryGetComponent<Trash>(out Trash trash))
             {
+                // 최적화: 이미 같은 대상을 보고 있고 + 그 대상이 파괴되지 않았다면 리턴
+                if (currentTarget == hit.transform) return;
+
+                // 새로운 쓰레기를 봄 -> 타겟 갱신 및 UI 표시
                 currentTarget = hit.transform;
                 ShowInfo(trash, hit.collider.gameObject);
+
+                // [중요] 쓰레기를 찾았으면 여기서 함수를 끝냅니다. 
+                // 아래의 HideTooltip()이 실행되지 않도록!
                 return;
             }
         }
-
-        // 아무것도 없거나 쓰레기가 아니면 UI 끄기
-        if (currentTarget != null)
-        {
-            currentTarget = null;
-            HideTooltip();
-        }
+        HideTooltip();
+        currentTarget = null;
     }
 
     private void ShowInfo(Trash trash, GameObject obj)
