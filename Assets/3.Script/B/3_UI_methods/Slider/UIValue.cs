@@ -119,13 +119,13 @@ public class UIValue : MonoBehaviour
             elapsed += Time.deltaTime;
             // Lerp를 사용하여 부드럽게 값 증가
             currentDisplayMoney = Mathf.Lerp(startValue, target, elapsed / duration);
-            moneytext.text = $"{currentDisplayMoney:N2}$";
+            moneytext.text = $"{currentDisplayMoney:N2}";
             yield return null;
         }
 
         // 마지막 오차 보정
         currentDisplayMoney = target;
-        moneytext.text = $"{currentDisplayMoney:N2}$";
+        moneytext.text = $"{currentDisplayMoney:N2}";
     }
 
     private IEnumerator AnimateWeight(float target, float max)
