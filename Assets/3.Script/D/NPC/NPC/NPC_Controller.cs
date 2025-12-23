@@ -11,8 +11,8 @@ public class NPC_Controller : MonoBehaviour {
 	[SerializeField] protected Vector3 start_pos;
 	[SerializeField] protected Vector3 end_pos;
 
-	[Header("NPC 높이")]
-	[SerializeField] protected float npc_height = 0f;
+	//[Header("NPC 높이")]
+	//[SerializeField] protected float npc_height = 0f;
 
 	//[Header("NPC 속도")]
 	//[SerializeField] private float moveSpeed = 150f;
@@ -28,6 +28,7 @@ public class NPC_Controller : MonoBehaviour {
 	public void set_pos(Vector3 start_pos, Vector3 end_pos) {
 		this.start_pos = start_pos;
 		this.end_pos = end_pos;
+		npc_agent.Warp(start_pos);
 	}
 
 	public virtual void start() {

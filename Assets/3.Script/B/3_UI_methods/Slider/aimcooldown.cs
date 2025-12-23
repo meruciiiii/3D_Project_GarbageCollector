@@ -23,6 +23,7 @@ public class aimcooldown : MonoBehaviour
 
     public void StartCharging()
     {
+        if (!gameObject.activeInHierarchy) return;
         if (chargeCoroutine != null) return;
 
         StartCoroutine(WaitAndCheckWeight());
@@ -69,6 +70,26 @@ public class aimcooldown : MonoBehaviour
     {
         Debug.Log("충전 완료!");
         cooldownSlider.value = 0;
+        chargeCoroutine = null;
+    }
+
+    private void OnEnable()
+    {
+        // 1. 다시 켜질 때 슬라이더 초기화
+        cooldownSlider.value = 0;
+        chargeCoroutine = null;
+
+        // 2. 꺼져 있는 동안 변했을 무게 데이터를 최신화
+        if (GameManager.instance != null)
+        {
+            lastWeight = GameManager.instance.P_Weight;
+        }
+    }
+
+    private void OnDisable()
+    {
+        // 3. 오브젝트가 꺼지면 코루틴 변수 비우기 
+        // (오브젝트가 꺼지는 순간 실행 중이던 코루틴은 유니티가 알아서 멈춥니다)
         chargeCoroutine = null;
     }
 }
