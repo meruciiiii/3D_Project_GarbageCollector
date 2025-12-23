@@ -37,7 +37,10 @@ public class ShowerSystem : MonoBehaviour
 
     public void TryShower()
     {
-        if (GameManager.instance == null) return;
+        if (GameManager.instance != null && GameManager.instance.isPaused)
+        {
+            return;
+        }
         if (GameManager.instance.P_Money < showerCost)
         {
             Debug.Log("돈이 부족합니다.");
@@ -73,7 +76,7 @@ public class ShowerSystem : MonoBehaviour
 
         // 4. 화면 효과 초기화
         if (vignetteController != null) vignetteController.OnWash();
-        if (playerIsDirty != null) playerIsDirty.CalDelay(100f); // 혹은 StopDirtyEffect();
+        if (playerIsDirty != null) playerIsDirty.StopDirtyEffect();
         if (showerEyeEffect != null) showerEyeEffect.OpenEyes();
 
         Debug.Log("샤워 완료!");
