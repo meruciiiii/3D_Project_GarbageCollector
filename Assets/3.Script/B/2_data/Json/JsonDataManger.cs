@@ -11,10 +11,10 @@ public class PlayerData
     public int Str = 1;
     public int Spd = 5;
     public int Money = 0;
-    public int bag = 1000;
+    public int bag = 5000;
 
     public int grab = 1;
-    public float grabspd = 1f;
+    public float grabspd = 1.55f;
     public float grab_range = 1f;
 
     public bool isEnglish = false;

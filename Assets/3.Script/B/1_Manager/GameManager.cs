@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public int P_Spd = 5; //속도
 
     public int P_Money = 0; //소지 돈
-    public int P_Maxbag = 1000; //가방최대무게
+    public int P_Maxbag = 5000; //가방최대무게
 
     public int P_Weight = 0; //현재 무게
 
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     public int grab_limit = 1;//집을 수 있는 최댓수
     public float grab_range = 1f;//집을 수 있는 범위 임의값 float 1f
-    public float grab_speed = 1f;//집는 속도
+    public float grab_speed = 1.55f;//집는 속도
 
     //큰 쓰레기 전용 값 3종류
     public bool isGrabBigGarbage = false;
