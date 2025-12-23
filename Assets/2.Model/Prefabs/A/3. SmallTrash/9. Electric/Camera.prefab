@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7530970000645222245}
   - component: {fileID: 6624942482314708008}
   - component: {fileID: -6263779400293191985}
+  - component: {fileID: -71181103149266938}
   m_Layer: 6
   m_Name: Camera
   m_TagString: Untagged
@@ -188,3 +189,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Trash
   smallTrashNum: 9
   outline_material: {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
+--- !u!54 &-71181103149266938
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7757607139259466613}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
