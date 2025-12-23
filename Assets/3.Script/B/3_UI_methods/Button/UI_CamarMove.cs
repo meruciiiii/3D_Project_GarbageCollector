@@ -24,8 +24,6 @@ public class UI_CamarMove : MonoBehaviour
         camera_ob.transform.position = cameraStartTransform.position;
         camera_ob.transform.rotation = cameraStartTransform.rotation;
 
-        Debug.Log("카메라가 시작 위치로 즉시 설정되었습니다.");
-
         // 게임 시작 시: 현재 UI는 키고, 다음 UI는 끕니다.
         if (currentUIGroup != null)
             currentUIGroup.SetActive(true);
@@ -51,46 +49,43 @@ public class UI_CamarMove : MonoBehaviour
     private IEnumerator MoveCameraRoutine()
     {
         if (moveCamera) yield break;
+        moveCamera = true;
 
-        moveCamera = true; // 이동 시작 (WaitForBgAndShowUI를 위해)
+        // 시작 상태 저장
+        Vector3 startPos = camera_ob.transform.position;
+        Quaternion startRot = camera_ob.transform.rotation;
 
-        // 위치와 회전 중 하나라도 목표에 도달하지 않았으면 계속 반복합니다.
-        float positionThreshold = 0.05f; // 위치 이동 완료 임계값 (원래 0.2f였으나 더 작게 조정)
-        float rotationThreshold = 0.3f; // 회전 이동 완료 임계값 (원래와 동일)
+        // 목표 상태 저장 (Start/Target 교체 전의 현재 목표값)
+        Vector3 targetPos = camaraTargetTransform.position;
+        Quaternion targetRot = camaraTargetTransform.rotation;
 
-        while (Vector3.Distance(camera_ob.transform.position, camaraTargetTransform.position) > positionThreshold ||
-               Quaternion.Angle(camera_ob.transform.rotation, camaraTargetTransform.rotation) > rotationThreshold)
+        float elapsedTime = 0f;
+        float duration = 1.0f / moveSpeed;
+
+        while (elapsedTime < duration)
         {
-            // 1. 위치 이동 (Lerp로 감속 효과 적용)
-            camera_ob.transform.position = Vector3.Lerp(
-                camera_ob.transform.position,
-                camaraTargetTransform.position,
-                moveSpeed * Time.deltaTime);
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / duration;
 
-            // 2. 회전 이동 (Slerp로 감속 효과 적용)
-            camera_ob.transform.rotation = Quaternion.Slerp(
-                camera_ob.transform.rotation,
-                camaraTargetTransform.rotation,
-                rotationSpeed * Time.deltaTime);
+            camera_ob.transform.position = Vector3.Lerp(startPos, targetPos, t);
+            camera_ob.transform.rotation = Quaternion.Slerp(startRot, targetRot, t);
 
-            yield return null; // 한 프레임 대기
+            yield return null;
         }
 
-        // **이동 완료 후 스냅 (오차 제거)**
-        camera_ob.transform.position = camaraTargetTransform.position;
-        camera_ob.transform.rotation = camaraTargetTransform.rotation;
+        // 최종 위치 확정
+        camera_ob.transform.position = targetPos;
+        camera_ob.transform.rotation = targetRot;
 
-        // **목표와 시작 위치/회전 교체** (다음 이동을 위한 준비)
+        // 목표와 시작 위치/회전 교체 재활용을 위함
         Vector3 tempPos = cameraStartTransform.position;
         Quaternion tempRot = cameraStartTransform.rotation;
-
-        cameraStartTransform.position = camaraTargetTransform.position;
-        cameraStartTransform.rotation = camaraTargetTransform.rotation;
-
+        cameraStartTransform.position = targetPos;
+        cameraStartTransform.rotation = targetRot;
         camaraTargetTransform.position = tempPos;
         camaraTargetTransform.rotation = tempRot;
 
-        moveCamera = false; // 이동 종료
+        moveCamera = false;
     }
 
     // UI 전환 대기 코루틴

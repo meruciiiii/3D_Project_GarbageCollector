@@ -10,6 +10,7 @@ public class Intro_Typing_Read : MonoBehaviour
     [SerializeField] private string Key1;
     [SerializeField] private float typingSpeed = 0.05f; // 글자 출력 속도
     [SerializeField] private float lineWaitTime = 0.6f; // 줄바꿈 시 대기 시간
+    [SerializeField] private float waitforstart = 0f; // 줄바꿈 시 대기 시간
     [SerializeField] private string nextSceneName = "B_Scene"; // 인트로 종료 후 갈 씬
 
     private string Key2 = "value";
@@ -23,6 +24,7 @@ public class Intro_Typing_Read : MonoBehaviour
 
     private IEnumerator WaitForDataAndTyping()
     {
+        yield return new WaitForSeconds(waitforstart);
         // 1. 데이터 로딩 대기
         while (GameManager.instance == null || !GameManager.instance.LoadComplete) yield return null;
         while (CSV_Database.instance == null || !CSV_Database.instance.IsLoaded) yield return null;

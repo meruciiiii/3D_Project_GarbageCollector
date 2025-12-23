@@ -7,7 +7,6 @@ public class Resetdata : MonoBehaviour
 {
     private void OnEnable()
     {
-        while (GameManager.instance == null) continue;
-        GameManager.instance.ResetGameData();
+        if (GameManager.instance != null) GameManager.instance.ResetGameData();
     }
 }
