@@ -91,6 +91,7 @@ public class AudioManager : MonoBehaviour
         // 3. Fade In
         while (BGM_Player.volume < 1.0f)
         {
+           
             BGM_Player.volume += Time.deltaTime / fadeDuration;
             yield return null;
         }
@@ -99,8 +100,10 @@ public class AudioManager : MonoBehaviour
 
     public void StopBGM()
     {
+        if (bgmFadeCoroutine != null) StopCoroutine(bgmFadeCoroutine); // µ¹¾Æ°¡´ø ÆäÀÌµåµµ ¸ØÃçÁà¾ß ÇÔ
         BGM_Player.Stop();
         BGM_Player.clip = null;
+        BGM_Player.volume = 1.0f;
     }
 
     /*
