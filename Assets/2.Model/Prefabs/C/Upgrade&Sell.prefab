@@ -840,6 +840,7 @@ GameObject:
   - component: {fileID: 1585705891859306239}
   - component: {fileID: 3191342676425581269}
   - component: {fileID: 7099647208225657412}
+  - component: {fileID: 6861872121488826736}
   m_Layer: 5
   m_Name: UpgradePanel
   m_TagString: Untagged
@@ -935,6 +936,23 @@ MonoBehaviour:
   speedPriceText: {fileID: 8305753237891875599}
   multiGrabPriceText: {fileID: 6713401322762369444}
   playerController: {fileID: 0}
+--- !u!114 &6861872121488826736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2890492438197504734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4180d094c55efa47b104e9974828d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIondisable
+  UIvalue: {fileID: 0}
+  minimap: {fileID: 0}
+  guide: {fileID: 6337959457833692195}
+  aim: {fileID: 0}
+  cross: {fileID: 0}
 --- !u!1 &3580826142096831641
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,6 +1309,7 @@ GameObject:
   - component: {fileID: 5312004504207994213}
   - component: {fileID: 5806504345740726241}
   - component: {fileID: 4264154415858069340}
+  - component: {fileID: 3040938722156310887}
   m_Layer: 5
   m_Name: TradePanel
   m_TagString: Untagged
@@ -1358,6 +1377,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3040938722156310887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4041067204921753691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4180d094c55efa47b104e9974828d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIondisable
+  UIvalue: {fileID: 0}
+  minimap: {fileID: 0}
+  guide: {fileID: 6817179802234743114}
+  aim: {fileID: 0}
+  cross: {fileID: 0}
 --- !u!1 &4505620392680075670
 GameObject:
   m_ObjectHideFlags: 0
@@ -2606,7 +2642,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &6442641693610734569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2827,7 +2863,7 @@ Transform:
   m_GameObject: {fileID: 7836891249940164359}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.33, y: -1.3216553, z: 0.01}
+  m_LocalPosition: {x: -0.33, y: 72.551, z: 0.01}
   m_LocalScale: {x: 1.7, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
