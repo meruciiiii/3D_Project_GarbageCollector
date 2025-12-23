@@ -72,35 +72,3 @@ public class Sceneload : MonoBehaviour
         }
     }
 }
-        /*
-        //기존방식
-        // 2. 페이드 아웃 (점점 어두워짐)
-        if (fadeImage != null)
-        {
-            fadeImage.gameObject.SetActive(true);
-            float timer = 0f;
-            while (timer < fadeDuration)
-            {
-                timer += Time.deltaTime;
-                Color c = fadeImage.color;
-                c.a = timer / fadeDuration;
-                fadeImage.color = c;
-                yield return null;
-            }
-        }
-        
-        string finalSceneName = scenename;
-        
-        if (GameManager.instance != null && GameManager.instance.P_intro)
-        {
-            finalSceneName = "B_Intro"; // 인트로 씬의 이름은 추후 수정가능
-        }
-        
-        // 3. 비동기 씬 로드
-        AsyncOperation op = SceneManager.LoadSceneAsync(finalSceneName);
-        
-        while (!op.isDone)
-        {
-            yield return null;
-        }
-        */
