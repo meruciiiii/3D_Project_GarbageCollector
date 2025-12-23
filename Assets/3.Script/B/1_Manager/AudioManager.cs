@@ -41,6 +41,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource BGMPlayer;
     [SerializeField] private AudioSource[] SFXPlayer;
 
+    [Space(50f)]
     [SerializeField] private float fadeDuration = 1.0f; // 페이드 속도 조절 변수
     private Coroutine bgmFadeCoroutine; // 현재 실행 중인 페이드 관리
 
