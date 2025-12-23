@@ -6,8 +6,13 @@ using UnityEngine.UI;
 
 public class Status : MonoBehaviour
 {
-    [Header("Ç¥½Ã °ª 0 = str, 1= spd, 2 Amount")]
-    [SerializeField] private int num;
+    public enum Statusenum
+    {
+        str,
+        spd,
+        amount
+    }
+    [SerializeField] private Statusenum a;
     private Slider slider; 
     private void Awake()
     {
@@ -16,6 +21,6 @@ public class Status : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        //switch(a)
     }
 }
