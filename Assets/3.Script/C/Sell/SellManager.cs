@@ -49,7 +49,6 @@ public class SellManager : MonoBehaviour
         if (smallEarn > 0)
         {
             GameManager.instance.P_Weight = 0;
-            playerController.Calc_Speed();
         }
 
         // [B] 대형 정산
