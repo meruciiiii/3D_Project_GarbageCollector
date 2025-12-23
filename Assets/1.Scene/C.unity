@@ -125,7 +125,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 413000378}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -1350487838082944175, guid: 5eed33d985b965e46b56a89501ad7cf3, type: 3}
       propertyPath: player
@@ -569,9 +569,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1381563198}
-  - {fileID: 778028843}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &423070491
@@ -751,7 +749,7 @@ PrefabInstance:
     - target: {fileID: 741007803805863405, guid: 0bad6290ad155b64b95640969a3fc4a6, type: 3}
       propertyPath: vignetteController
       value: 
-      objectReference: {fileID: 1069564514}
+      objectReference: {fileID: 1030497692}
     - target: {fileID: 7527150274744898826, guid: 0bad6290ad155b64b95640969a3fc4a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.068
@@ -808,6 +806,10 @@ PrefabInstance:
     - target: {fileID: 2461491690715334360, guid: ef3ac1140b8f6d74b8744f86433867e0, type: 3}
       propertyPath: m_Name
       value: reset
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461491690715334360, guid: ef3ac1140b8f6d74b8744f86433867e0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2975650481030396027, guid: ef3ac1140b8f6d74b8744f86433867e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -873,7 +875,7 @@ PrefabInstance:
     - target: {fileID: 2561573111184878301, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
       propertyPath: minimap
       value: 
-      objectReference: {fileID: 413000377}
+      objectReference: {fileID: 860129282}
     - target: {fileID: 5302026856618652459, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
       propertyPath: m_Name
       value: Pause_ob
@@ -928,9 +930,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6875371760015618421, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
   m_PrefabInstance: {fileID: 1075056160}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &778028843 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2170708040281475043, guid: 5eed33d985b965e46b56a89501ad7cf3, type: 3}
+--- !u!1 &860129282 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5248039777925738861, guid: 5eed33d985b965e46b56a89501ad7cf3, type: 3}
   m_PrefabInstance: {fileID: 11675046}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &921746898
@@ -946,6 +948,10 @@ PrefabInstance:
       value: Upgrade&Sell
       objectReference: {fileID: 0}
     - target: {fileID: 6335749311304309509, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1075056161}
+    - target: {fileID: 7099647208225657412, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1075056161}
@@ -1004,13 +1010,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8609995893780747151, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
   m_PrefabInstance: {fileID: 683183849}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1030497692 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5475801769564018433, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+  m_PrefabInstance: {fileID: 1075056160}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d2092c57215ad744aff99d651a267ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VignetteController
 --- !u!1001 &1064709272
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 413000378}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1387900809699335769, guid: 2e7b648506ae2ea49827efb4b06e68f3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1061,17 +1078,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e7b648506ae2ea49827efb4b06e68f3, type: 3}
---- !u!114 &1069564514 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5475801769564018433, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
-  m_PrefabInstance: {fileID: 1075056160}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d2092c57215ad744aff99d651a267ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VignetteController
 --- !u!1001 &1075056160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1198,11 +1204,6 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7878090558710882884, guid: aeeb2a8d10dfd1e48af9b2244ccab6cc, type: 3}
   m_PrefabInstance: {fileID: 407479224}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1381563198 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1387900809699335769, guid: 2e7b648506ae2ea49827efb4b06e68f3, type: 3}
-  m_PrefabInstance: {fileID: 1064709272}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1392592151 stripped
 Transform:
@@ -1973,9 +1974,11 @@ SceneRoots:
   - {fileID: 31729492}
   - {fileID: 1075056160}
   - {fileID: 188346424}
-  - {fileID: 1974915484}
-  - {fileID: 623890936}
-  - {fileID: 8744605485279961500}
   - {fileID: 413000378}
   - {fileID: 444782680}
   - {fileID: 644726714}
+  - {fileID: 1064709272}
+  - {fileID: 11675046}
+  - {fileID: 1974915484}
+  - {fileID: 623890936}
+  - {fileID: 8744605485279961500}
