@@ -62,6 +62,7 @@ public class UIValue : MonoBehaviour
     
     public void moneyandweight()
     {
+        if (GameManager.instance == null || !GameManager.instance.LoadComplete) return;
         if (!gameObject.activeInHierarchy) return;
         float targetMoney = GameManager.instance.P_Money / 100.0f;
 
@@ -79,6 +80,7 @@ public class UIValue : MonoBehaviour
     }
     public void HP()
     {
+        if (GameManager.instance == null || !GameManager.instance.LoadComplete) return;
         if (!gameObject.activeInHierarchy) return;
         int targetHP = GameManager.instance.P_CurrentHP;
         int maxHP = GameManager.instance.P_MaxHP;
