@@ -6,6 +6,8 @@ public class SellManager : MonoBehaviour
     [Tooltip("1kg당 판매 가격")]
     [SerializeField] private int pricePerWeight = 15;
 
+    [SerializeField] private PlayerController playerController;
+
     // 1. 소형 쓰레기(가방) 예상 금액만 계산하는 함수
     public int GetSmallTrashEarnings()
     {
@@ -47,6 +49,7 @@ public class SellManager : MonoBehaviour
         if (smallEarn > 0)
         {
             GameManager.instance.P_Weight = 0;
+            playerController.Calc_Speed();
         }
 
         // [B] 대형 정산

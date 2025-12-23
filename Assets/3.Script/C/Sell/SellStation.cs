@@ -16,6 +16,11 @@ public class SellStation : MonoBehaviour
 
     private void TryOpenShop()
     {
+        if (GameManager.instance != null && GameManager.instance.isPaused)
+        {
+            return;
+        }
+
         if (sellUI != null) sellUI.OpenSellMenu();
     }
 
