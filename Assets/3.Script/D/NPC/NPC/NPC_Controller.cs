@@ -11,8 +11,8 @@ public class NPC_Controller : MonoBehaviour {
 	[SerializeField] protected Vector3 start_pos;
 	[SerializeField] protected Vector3 end_pos;
 
-	[Header("NPC 높이")]
-	[SerializeField] protected float npc_height = 0f;
+	//[Header("NPC 높이")]
+	//[SerializeField] protected float npc_height = 0f;
 
 	//[Header("NPC 속도")]
 	//[SerializeField] private float moveSpeed = 150f;
