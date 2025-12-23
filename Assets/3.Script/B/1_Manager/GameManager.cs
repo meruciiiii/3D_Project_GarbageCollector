@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     //큰 쓰레기 전용 값 3종류
     public bool isGrabBigGarbage = false;
     public int BigGarbageWeight = 0;
-    public int BigneedStr;
+    public int BigneedStr = 0;
 
     public float P_RemainWeight //남은 가방무게 일단 넣어두기
     {
