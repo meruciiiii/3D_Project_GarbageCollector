@@ -9,6 +9,7 @@ public class pause : MonoBehaviour
     [SerializeField] private GameObject Pause_UI;
     [SerializeField] private GameObject fullmap;
     [SerializeField] private GameObject minimap;
+    [SerializeField] private GameObject sellUI;
 
     [Header("플레이어 연결")] private PlayerController controller;
 
@@ -25,12 +26,25 @@ public class pause : MonoBehaviour
 
     private void Start()
     {
-        input.onEsc += TogglePause; //차후 ESC 인풋 이벤트에 등록
+        input.onEsc += TogglePause;
     }
 
     public void TogglePause() // UI 버튼에 할당도 가능
     {
         if (Pause_UI == null) return;
+
+        UpgradeUI shopUI = FindAnyObjectByType<UpgradeUI>();
+        if (shopUI != null && shopUI.gameObject.activeInHierarchy)
+        {
+            Debug.Log("업그레이드가 열려있어 일시정지를 할 수 없습니다.");
+            return;
+        }
+
+        if (sellUI != null && sellUI.gameObject.activeInHierarchy)
+        {
+            Debug.Log("상점이 열려있어 일시정지를 할 수 없습니다.");
+            return;
+        }
 
         bool isCurrentlyActive = Pause_UI.activeSelf;
         bool targetState = !isCurrentlyActive;
@@ -45,6 +59,8 @@ public class pause : MonoBehaviour
 
     private void SetPlayerControl(bool isActive)
     {
+        if (GameManager.instance != null) GameManager.instance.isPaused = !isActive; //퍼즈 상황
+
         if (controller != null)
         {
             // UI가 켜질 때(!isActive) 카메라와 이동을 멈춤
@@ -68,14 +84,14 @@ public class pause : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(null); //resume 버튼 하이라이트 재사용을 위한 선택 초기화
             }
             Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1f; // 게임 재개
+            Cursor.lockState = CursorLockMode.Locked;
         }
         else
         {
             Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0f; // 게임 일시정지 (물리 멈춤)
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 }

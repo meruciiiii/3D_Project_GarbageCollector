@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
 
     public bool LoadComplete { get; private set; } = false;
 
+    public bool isPaused = false;//퍼즈시에 쓰레기 못줍게
+
     public static GameManager instance = null;
     private void Awake()
     {
