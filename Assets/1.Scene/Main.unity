@@ -470,6 +470,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!4 &266517613 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5620456060491231251, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+  m_PrefabInstance: {fileID: 33962781}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &383041385 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4939056245614376529, guid: 2f58eb50abdfcdf4db0209a5c2908c5e, type: 3}
@@ -1694,6 +1699,10 @@ PrefabInstance:
       propertyPath: 'prefabsToSpawn.Array.data[4]'
       value: 
       objectReference: {fileID: 4439619555680173823, guid: 00e68dec2d0bba94b86d808bc20b1eb7, type: 3}
+    - target: {fileID: 692781346716801952, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
     - target: {fileID: 729481715903864232, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
       propertyPath: parentTransform
       value: 
@@ -1710,14 +1719,30 @@ PrefabInstance:
       propertyPath: parentTransform
       value: 
       objectReference: {fileID: 1271638792}
+    - target: {fileID: 1316451656565379273, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
     - target: {fileID: 1329076265454257349, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
       propertyPath: parentTransform
       value: 
       objectReference: {fileID: 1392592151}
+    - target: {fileID: 1529917221664863601, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
+    - target: {fileID: 1650519854076628761, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
     - target: {fileID: 1778328697781380810, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
       propertyPath: parentTransform
       value: 
       objectReference: {fileID: 1392592151}
+    - target: {fileID: 1786317749669885684, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
     - target: {fileID: 1810134374174180494, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
       propertyPath: parentTransform
       value: 
@@ -1726,6 +1751,14 @@ PrefabInstance:
       propertyPath: 'prefabsToSpawn.Array.data[4]'
       value: 
       objectReference: {fileID: 4439619555680173823, guid: 00e68dec2d0bba94b86d808bc20b1eb7, type: 3}
+    - target: {fileID: 1873600264751221829, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
+    - target: {fileID: 2066682012261251529, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
     - target: {fileID: 2665926960859878184, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
       propertyPath: parentTransform
       value: 
@@ -1734,6 +1767,18 @@ PrefabInstance:
       propertyPath: 'prefabsToSpawn.Array.data[4]'
       value: 
       objectReference: {fileID: 4439619555680173823, guid: 00e68dec2d0bba94b86d808bc20b1eb7, type: 3}
+    - target: {fileID: 2682552669691650029, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
+    - target: {fileID: 2889636813893225595, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
+    - target: {fileID: 3083482935705376592, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
     - target: {fileID: 3126981105369915762, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
       propertyPath: parentTransform
       value: 
@@ -1838,6 +1883,10 @@ PrefabInstance:
       propertyPath: parentTransform
       value: 
       objectReference: {fileID: 1392592151}
+    - target: {fileID: 4769116642974995092, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
     - target: {fileID: 5090733318867421172, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
       propertyPath: parentTransform
       value: 
@@ -1866,6 +1915,10 @@ PrefabInstance:
       propertyPath: 'prefabsToSpawn.Array.data[4]'
       value: 
       objectReference: {fileID: 4439619555680173823, guid: 00e68dec2d0bba94b86d808bc20b1eb7, type: 3}
+    - target: {fileID: 5615244104854817313, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
     - target: {fileID: 5619461697264706181, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
       propertyPath: parentTransform
       value: 
@@ -1874,6 +1927,10 @@ PrefabInstance:
       propertyPath: 'prefabsToSpawn.Array.data[4]'
       value: 
       objectReference: {fileID: 4439619555680173823, guid: 00e68dec2d0bba94b86d808bc20b1eb7, type: 3}
+    - target: {fileID: 5884972112434697529, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
     - target: {fileID: 5968138901391358450, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
       propertyPath: parentTransform
       value: 
@@ -1894,6 +1951,10 @@ PrefabInstance:
       propertyPath: 'prefabsToSpawn.Array.data[4]'
       value: 
       objectReference: {fileID: 4439619555680173823, guid: 00e68dec2d0bba94b86d808bc20b1eb7, type: 3}
+    - target: {fileID: 6556959426660603030, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
     - target: {fileID: 6673309822189198578, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
       propertyPath: parentTransform
       value: 
@@ -1902,6 +1963,14 @@ PrefabInstance:
       propertyPath: parentTransform
       value: 
       objectReference: {fileID: 1392592151}
+    - target: {fileID: 6827310764987513130, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
+    - target: {fileID: 6916710267566429581, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
     - target: {fileID: 6993851737747224293, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
       propertyPath: parentTransform
       value: 
@@ -1922,6 +1991,14 @@ PrefabInstance:
       propertyPath: 'prefabsToSpawn.Array.data[4]'
       value: 
       objectReference: {fileID: 4439619555680173823, guid: 00e68dec2d0bba94b86d808bc20b1eb7, type: 3}
+    - target: {fileID: 7773219239760058313, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
+    - target: {fileID: 7905764815739603437, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
     - target: {fileID: 7916572996444596868, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
       propertyPath: parentTransform
       value: 
@@ -1934,10 +2011,22 @@ PrefabInstance:
       propertyPath: 'prefabsToSpawn.Array.data[4]'
       value: 
       objectReference: {fileID: 4439619555680173823, guid: 00e68dec2d0bba94b86d808bc20b1eb7, type: 3}
+    - target: {fileID: 7962517994821071704, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
     - target: {fileID: 8043383575761733991, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
       propertyPath: parentTransform
       value: 
       objectReference: {fileID: 1271638792}
+    - target: {fileID: 8094447003155155805, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
+    - target: {fileID: 8303425254206501434, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
     - target: {fileID: 8406160422787069793, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
       propertyPath: parentTransform
       value: 
@@ -1950,6 +2039,14 @@ PrefabInstance:
       propertyPath: parentTransform
       value: 
       objectReference: {fileID: 1392592151}
+    - target: {fileID: 8458503552597986040, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814264848263505633, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
+      propertyPath: parentTransform
+      value: 
+      objectReference: {fileID: 266517613}
     - target: {fileID: 8843231115487094373, guid: 24a3dba254e7f3f45a5429c0330ece63, type: 3}
       propertyPath: m_Name
       value: GarbageSpawner
