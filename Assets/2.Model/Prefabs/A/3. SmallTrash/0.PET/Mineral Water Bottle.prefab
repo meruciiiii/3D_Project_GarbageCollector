@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3038983317026691802}
   - component: {fileID: -472964355489401504}
   - component: {fileID: 8360478349995642432}
+  - component: {fileID: -2883706569381442048}
   m_Layer: 6
   m_Name: Mineral Water Bottle
   m_TagString: Untagged
@@ -156,3 +157,21 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5539357819512116934, guid: 478519682e251d345b2c637aab894400, type: 3}
+--- !u!114 &-2883706569381442048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743392534779629890}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 1
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8300041095452220450}
   - component: {fileID: 2223421331353437213}
   - component: {fileID: 6233380624576477375}
+  - component: {fileID: 5367069788795519083}
   m_Layer: 6
   m_Name: Pizza Box 1
   m_TagString: Untagged
@@ -185,6 +186,24 @@ MonoBehaviour:
   rotatables:
   - key: 
     value: {fileID: 2464250462938479741}
+--- !u!114 &5367069788795519083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4439619555680173823}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 1
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &8846231533499363575
 GameObject:
   m_ObjectHideFlags: 0

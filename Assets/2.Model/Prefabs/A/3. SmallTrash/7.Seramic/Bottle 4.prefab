@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1543560545597956140}
   - component: {fileID: -531546911936745638}
   - component: {fileID: 6245493223965051240}
+  - component: {fileID: -7436666707456561001}
   m_Layer: 6
   m_Name: Bottle 4
   m_TagString: Untagged
@@ -156,3 +157,21 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5539357819512116934, guid: 3fd90c34bb0cb66429285eff600ea3d3, type: 3}
+--- !u!114 &-7436666707456561001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6031016554100481738}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 1
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

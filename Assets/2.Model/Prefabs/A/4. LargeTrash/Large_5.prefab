@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4605041491106030242}
   - component: {fileID: 8084115790507373439}
   - component: {fileID: 5103980209954861558}
+  - component: {fileID: 7813721860703354925}
   m_Layer: 7
   m_Name: Large_5
   m_TagString: Untagged
@@ -156,6 +157,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Trash
   smallTrashNum: 5
   outline_material: {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
+--- !u!114 &7813721860703354925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675429069109259068}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 1
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2564173252269815588
 GameObject:
   m_ObjectHideFlags: 0

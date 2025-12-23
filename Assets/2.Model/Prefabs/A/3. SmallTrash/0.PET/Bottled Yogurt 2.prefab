@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1439673145704577933}
   - component: {fileID: 3447841397772277478}
   - component: {fileID: 6714134477781424087}
+  - component: {fileID: -1300008903946382971}
   m_Layer: 6
   m_Name: Bottled Yogurt 2
   m_TagString: Untagged
@@ -156,3 +157,21 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5539357819512116934, guid: 51a65829bd93af540bb1d20f35cd2109, type: 3}
+--- !u!114 &-1300008903946382971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143814708430083730}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 1
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
