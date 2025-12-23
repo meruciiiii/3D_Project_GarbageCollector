@@ -585,6 +585,37 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1531455001534242995
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5227605796094591016}
+  m_Layer: 0
+  m_Name: Startpos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5227605796094591016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531455001534242995}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.014876435, y: -0.6945098, z: -0.014366005, w: 0.719186}
+  m_LocalPosition: {x: -13.51, y: -1, z: 8.7}
+  m_LocalScale: {x: 0.8000002, y: 0.8, z: 0.8000002}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3450530752747648747}
+  m_LocalEulerAnglesHint: {x: -2.37, y: -88, z: 0}
 --- !u!1 &2022975782805305820
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,7 +833,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6056482555033752837}
-  - component: {fileID: 7390402862114413402}
+  - component: {fileID: 8118698538072704417}
   m_Layer: 0
   m_Name: UI_Changer1_option
   m_TagString: Untagged
@@ -822,10 +853,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8818228159682396842}
   m_Father: {fileID: 3450530752747648747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7390402862114413402
+--- !u!114 &8118698538072704417
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -834,11 +866,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2403462319616088389}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03fb5ff163b5b4b499f017fe9fc51b3f, type: 3}
+  m_Script: {fileID: 11500000, guid: 100a695154fe20d4fa7b98f7c2d53af5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SwitchUI
-  currentUI_GameObject: {fileID: 9036765045123450982}
-  nextUI_GameObject: {fileID: 933701771861662582}
+  m_EditorClassIdentifier: Assembly-CSharp::UI_CamarMove
+  camera_ob: {fileID: 0}
+  cameraStartTransform: {fileID: 5227605796094591016}
+  camaraTargetTransform: {fileID: 8818228159682396842}
+  moveSpeed: 2
+  rotationSpeed: 2
+  currentUIGroup: {fileID: 9036765045123450982}
+  nextUIGroup: {fileID: 933701771861662582}
 --- !u!1 &2646836354328466444
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,9 +1049,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3759177996205210627}
-  - component: {fileID: 311053901264581748}
+  - component: {fileID: 1802437911332739550}
   m_Layer: 0
-  m_Name: UI_Changer2_credit
+  m_Name: UI_Changer2_howtoPlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1032,10 +1069,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2376350969671426805}
   m_Father: {fileID: 3450530752747648747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &311053901264581748
+--- !u!114 &1802437911332739550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1044,11 +1082,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 2844731011035273599}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03fb5ff163b5b4b499f017fe9fc51b3f, type: 3}
+  m_Script: {fileID: 11500000, guid: 100a695154fe20d4fa7b98f7c2d53af5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SwitchUI
-  currentUI_GameObject: {fileID: 9036765045123450982}
-  nextUI_GameObject: {fileID: 7266863521902435299}
+  m_EditorClassIdentifier: Assembly-CSharp::UI_CamarMove
+  camera_ob: {fileID: 0}
+  cameraStartTransform: {fileID: 5227605796094591016}
+  camaraTargetTransform: {fileID: 2376350969671426805}
+  moveSpeed: 2
+  rotationSpeed: 2
+  currentUIGroup: {fileID: 9036765045123450982}
+  nextUIGroup: {fileID: 7266863521902435299}
+--- !u!1 &2849736609977432017
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2376350969671426805}
+  m_Layer: 0
+  m_Name: targetpos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2376350969671426805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2849736609977432017}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.02067989, y: 0.008724691, z: 0.0001804711, w: 0.99974805}
+  m_LocalPosition: {x: -18.466, y: -0.935, z: 10.955}
+  m_LocalScale: {x: 0.8000002, y: 0.8, z: 0.8000002}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3759177996205210627}
+  m_LocalEulerAnglesHint: {x: -2.37, y: 1, z: 0}
 --- !u!1 &3005550336303992477
 GameObject:
   m_ObjectHideFlags: 0
@@ -1170,9 +1244,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 311053901264581748}
-        m_TargetAssemblyTypeName: SwitchUI, Assembly-CSharp
-        m_MethodName: SwitchUIObject
+      - m_Target: {fileID: 1802437911332739550}
+        m_TargetAssemblyTypeName: UI_CamarMove, Assembly-CSharp
+        m_MethodName: SwitchUIWithCamera
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1852,9 +1926,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7390402862114413402}
-        m_TargetAssemblyTypeName: SwitchUI, Assembly-CSharp
-        m_MethodName: SwitchUIObject
+      - m_Target: {fileID: 8118698538072704417}
+        m_TargetAssemblyTypeName: UI_CamarMove, Assembly-CSharp
+        m_MethodName: SwitchUIWithCamera
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2446,6 +2520,37 @@ MonoBehaviour:
   buttonDelay: 0.68
   fadeDuration: 1
   fadeImage: {fileID: 0}
+--- !u!1 &5568703820380914104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8818228159682396842}
+  m_Layer: 0
+  m_Name: targetpos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8818228159682396842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5568703820380914104}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.014876435, y: -0.6945098, z: -0.014366005, w: 0.719186}
+  m_LocalPosition: {x: -14.454, y: -0.966, z: 5.955}
+  m_LocalScale: {x: 0.8000002, y: 0.8, z: 0.8000002}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6056482555033752837}
+  m_LocalEulerAnglesHint: {x: -2.37, y: -88, z: 0}
 --- !u!1 &6365218375432689023
 GameObject:
   m_ObjectHideFlags: 0
@@ -2693,6 +2798,7 @@ Transform:
   - {fileID: 2017861070132719586}
   - {fileID: 3759177996205210627}
   - {fileID: 3048924652845320632}
+  - {fileID: 5227605796094591016}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7167631106696113657
@@ -3441,9 +3547,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7390402862114413402}
-        m_TargetAssemblyTypeName: SwitchUI, Assembly-CSharp
-        m_MethodName: SwitchUIObject
+      - m_Target: {fileID: 8118698538072704417}
+        m_TargetAssemblyTypeName: UI_CamarMove, Assembly-CSharp
+        m_MethodName: SwitchUIWithCamera
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4057,9 +4163,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 311053901264581748}
-        m_TargetAssemblyTypeName: SwitchUI, Assembly-CSharp
-        m_MethodName: SwitchUIObject
+      - m_Target: {fileID: 1802437911332739550}
+        m_TargetAssemblyTypeName: UI_CamarMove, Assembly-CSharp
+        m_MethodName: SwitchUIWithCamera
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
