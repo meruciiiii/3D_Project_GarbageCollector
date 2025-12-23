@@ -779,7 +779,8 @@ MonoBehaviour:
   input: {fileID: 4076259103573898125}
   moveSpeed: 0
   walkSpeed: 5
-  runSpeed: 6.5
+  runSpeed: 10
+  accelSpeed: 25
   sensitive: 0.1
   cameraObject: {fileID: 4923363421550768917}
   cur_weight: 0
@@ -929,6 +930,7 @@ MonoBehaviour:
   Sceneload_fade: {fileID: 0}
   vignetteController: {fileID: 5475801769564018433}
   playerInput: {fileID: 4076259103573898125}
+  camera: {fileID: 0}
 --- !u!114 &6112121132361723296
 MonoBehaviour:
   m_ObjectHideFlags: 0
