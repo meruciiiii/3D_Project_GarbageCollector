@@ -33,13 +33,14 @@ public class AudioManager : MonoBehaviour
 
     [Space(10f)]
     [Header("AudioClip")]
-    [SerializeField] private Sound[] BGMclip;
-    [SerializeField] private Sound[] SFXclip;
+    [SerializeField] private Sound[] BGM_clip;
+    [Space(10f)]
+    [SerializeField] private Sound[] SFX_clip;
 
     [Space(50f)]
     [Header("Audio Source")]
-    [SerializeField] private AudioSource BGMPlayer;
-    [SerializeField] private AudioSource[] SFXPlayer;
+    [SerializeField] private AudioSource BGM_Player;
+    [SerializeField] private AudioSource[] SFX_Player;
 
     [Space(50f)]
     [SerializeField] private float fadeDuration = 1.0f; // 페이드 속도 조절 변수
@@ -47,17 +48,17 @@ public class AudioManager : MonoBehaviour
 
     private void AutoSetting()
     {
-        BGMPlayer = transform.GetChild(0).GetComponent<AudioSource>();
-        SFXPlayer = transform.GetChild(1).GetComponents<AudioSource>();
+        BGM_Player = transform.GetChild(0).GetComponent<AudioSource>();
+        SFX_Player = transform.GetChild(1).GetComponentsInChildren<AudioSource>();
     }
 
     public void PlayBGM(string name)
     {
-        foreach(Sound s in BGMclip)
+        foreach(Sound s in BGM_clip)
         {
             if (s.name.Equals(name))
             {
-                if (BGMPlayer.clip == s.clip) return;
+                if (BGM_Player.clip == s.clip) return;
                 if (bgmFadeCoroutine != null) StopCoroutine(bgmFadeCoroutine);
                 bgmFadeCoroutine = StartCoroutine(FadeBGM(s.clip));
                 //BGMPlayer.clip = s.clip;
@@ -72,53 +73,78 @@ public class AudioManager : MonoBehaviour
     private IEnumerator FadeBGM(AudioClip newClip)
     {
         // 1. Fade Out
-        if (BGMPlayer.isPlaying)
+        if (BGM_Player.isPlaying)
         {
-            while (BGMPlayer.volume > 0)
+            while (BGM_Player.volume > 0)
             {
-                BGMPlayer.volume -= Time.deltaTime / fadeDuration;
+                BGM_Player.volume -= Time.deltaTime / fadeDuration;
                 yield return null;
             }
         }
 
         // 2. 클립 교체
-        BGMPlayer.clip = newClip;
-        BGMPlayer.outputAudioMixerGroup = BGM;
-        BGMPlayer.loop = true;
-        BGMPlayer.Play();
+        BGM_Player.clip = newClip;
+        BGM_Player.outputAudioMixerGroup = BGM;
+        BGM_Player.loop = true;
+        BGM_Player.Play();
 
         // 3. Fade In
-        while (BGMPlayer.volume < 1.0f)
+        while (BGM_Player.volume < 1.0f)
         {
-            BGMPlayer.volume += Time.deltaTime / fadeDuration;
+            BGM_Player.volume += Time.deltaTime / fadeDuration;
             yield return null;
         }
-        BGMPlayer.volume = 1.0f;
+        BGM_Player.volume = 1.0f;
     }
 
     public void StopBGM()
     {
-        BGMPlayer.Stop();
-        BGMPlayer.clip = null;
+        BGM_Player.Stop();
+        BGM_Player.clip = null;
     }
 
+    /*
     public void PlaySFX(string name)
     {
-        foreach(Sound s in SFXclip)
+        foreach(Sound s in SFX_clip)
         {
             if (s.name.Equals(name))
             {
-                for (int i = 0; i < SFXPlayer.Length; i++)
+                for (int i = 0; i < SFX_Player.Length; i++)
                 {
-                    if (!SFXPlayer[i].isPlaying)
+                    if (!SFX_Player[i].isPlaying)
                     {
-                        SFXPlayer[i].clip = s.clip;
-                        SFXPlayer[i].outputAudioMixerGroup = SFX;
-                        SFXPlayer[i].Play();
+                        SFX_Player[i].clip = s.clip;
+                        SFX_Player[i].outputAudioMixerGroup = SFX;
+                        SFX_Player[i].Play();
                         return;
                     }
                 }
                 Debug.Log("모든 Audio Source SFXPlayer가 Play중");
+                return;
+            }
+        }
+    }
+    */
+
+    public void PlaySFX(string name, Vector3 position) //AudioManager.instance.PlaySFX("사운드이름",transform.position)
+    {
+        foreach(Sound s in SFX_clip)
+        {
+            if (s.name.Equals(name))
+            {
+                for (int i = 0; i < SFX_Player.Length; i++)
+                {
+                    if (!SFX_Player[i].isPlaying)
+                    {
+                        SFX_Player[i].transform.position = position;
+                        SFX_Player[i].clip = s.clip;
+                        SFX_Player[i].outputAudioMixerGroup = SFX;
+                        SFX_Player[i].Play();
+                        return;
+                    }
+                }
+                Debug.Log("모든 슬롯이 사용 중입니다.");
                 return;
             }
         }
