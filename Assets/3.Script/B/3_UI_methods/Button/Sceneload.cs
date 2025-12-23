@@ -25,7 +25,7 @@ public class Sceneload : MonoBehaviour
 
         if (GameManager.instance != null && GameManager.instance.P_intro)
         {
-            finalSceneName = "B_Intro";
+            finalSceneName = "Main_intro";
         }
 
         AsyncOperation op = SceneManager.LoadSceneAsync(finalSceneName);
