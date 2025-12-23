@@ -50,6 +50,10 @@ public class HitsSort : MonoBehaviour
         lastHistCheck(finalCountLayerHits);
         return finalCountLayerHits;
     }
+    public void HumanCheck(RaycastHit[] hits)
+    {
+        lastHistCheck(hits);
+    }
     public void lastHistCheck(RaycastHit[] finalCountLayerHits)
     {
         currentHits = finalCountLayerHits;

@@ -67,6 +67,18 @@ public class PlayerWork : MonoBehaviour
         if(Physics.Raycast(origin, direction, out hit, Distance, interactionMask))
         {
             HitPosition = hit.point;
+            //Debug.Log(hit.collider.gameObject.layer.ToString());
+            if (hit.collider.gameObject.layer.Equals(9))
+            {
+                hits = new RaycastHit[1];
+                hits[0] = hit;
+                //아웃라인 및 머테리얼 부분 추후 수정
+                //sorting.HumanCheck(hits);
+                target = new GameObject[1];
+                target[0] = hits[0].collider.gameObject;
+                //Debug.Log("target ? " + target[0].layer);
+                return;
+            }
         }
         else
         {
@@ -88,5 +100,6 @@ public class PlayerWork : MonoBehaviour
     public GameObject[] GetGameObject()
     {
         return target;
+        //Debug.Log("target ? " + target[0].layer);
     }
 }

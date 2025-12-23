@@ -19,8 +19,8 @@ public class pause : MonoBehaviour
     {
         input = FindAnyObjectByType<PlayerInput>();
         controller = FindAnyObjectByType<PlayerController>();
-        if (input == null) Debug.Log("input null¿”");
-        else Debug.Log("input πﬁæ∆ø»");
+        //if (input == null) Debug.Log("input null¿”");
+        //else Debug.Log("input πﬁæ∆ø»");
     }
 
     private void Start()

@@ -102,26 +102,4 @@ public class PlayerIsDirty : MonoBehaviour
         delay = Mathf.Lerp(maxBeat, minBeat, Mathf.Clamp01(Mathf.Abs(cleanliness - 30f) / 30f));
         StartDirtyEffect();
     }
-    //public void JudgeChanging(float cleanliness)
-    //{
-    //    if (!lastCleanliness.Equals(0))//처음이 아니라면 코루틴이 종료 되기까지 기달리기
-    //    {
-    //        //우선 바뀌었다고 말해주기 -> 코루틴 종료 신호
-    //        changeCleanliness = true;
-    //        while (zoomDelayCoroutine != null)
-    //        {
-
-    //        }
-    //    }
-    //    else//처음 청결도가 들어올 때는 바로 코루틴 실행
-    //    {
-            
-    //    }
-    //    lastCleanliness = cleanliness;
-    //    changeCleanliness = false;
-    //    CalDelay(lastCleanliness);
-    //}
 }
-///씻었을때
-///lastCleanliness = 0
-///changeCleanliness = true

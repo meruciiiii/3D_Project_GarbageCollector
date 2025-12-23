@@ -42,10 +42,8 @@ public class PlayerIsFaint : MonoBehaviour
             yield return null;
         }
 
-        // 연출이 끝난 후 처리 (암전 혹은 리스폰)
 
         Debug.Log("연출 끝: 리스폰 로직 실행");
-        //showerSystem.TryShower();
         Sceneload_fade.SetActive(true);
         yield return new WaitForSeconds(1f);
         HandleResetPlayer();

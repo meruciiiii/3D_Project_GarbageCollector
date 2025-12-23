@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     {
         if(instance == null)
         {
-            Debug.Log("instance持失");
+            //Debug.Log("instance持失");
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
