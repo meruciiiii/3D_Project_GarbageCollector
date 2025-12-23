@@ -12,6 +12,8 @@ public class Intro_Typing_Read : MonoBehaviour
     [SerializeField] private float lineWaitTime = 0.6f; // 줄바꿈 시 대기 시간
     [SerializeField] private float waitforstart = 0f; // 줄바꿈 시 대기 시간
     [SerializeField] private string nextSceneName = "B_Scene"; // 인트로 종료 후 갈 씬
+    [SerializeField] private bool isclear = false;
+    
 
     private string Key2 = "value";
     private Coroutine loadCoroutine;
@@ -28,7 +30,6 @@ public class Intro_Typing_Read : MonoBehaviour
         // 1. 데이터 로딩 대기
         while (GameManager.instance == null || !GameManager.instance.LoadComplete) yield return null;
         while (CSV_Database.instance == null || !CSV_Database.instance.IsLoaded) yield return null;
-        Debug.Log("intro");
 
         if (string.IsNullOrEmpty(Key1) || CSV_Database.instance.DataMap == null) yield break;
 
@@ -44,6 +45,7 @@ public class Intro_Typing_Read : MonoBehaviour
                 // 3. 타이핑이 끝나면 잠시 대기 후 다음 씬으로 이동
                 GameManager.instance.P_intro = false;
                 yield return new WaitForSeconds(2.0f);
+                if (isclear) yield return new WaitForSeconds(5.0f);
                 SceneManager.LoadScene(nextSceneName);
             }
         }
