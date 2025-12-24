@@ -14,7 +14,7 @@ public class PlayerData
     public int bag = 10000;
 
     public int grab = 1;
-    public float grabspd = 1.55f;
+    public float grabspd = 1.5f;
     public float grab_range = 1f;
 
     public bool isEnglish = false;
