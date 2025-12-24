@@ -11,7 +11,7 @@ public enum garbagedata
     region, // 3 스폰지역
     weight, // 4 무게
     requireSrt, // 5 요구 힘
-    Hpdecrease // 청결도 감소수치
+    Hpdecrease // 6 청결도 감소수치
 }
 
 public class CSV_Database : MonoBehaviour
@@ -26,7 +26,7 @@ public class CSV_Database : MonoBehaviour
         }
         else
         {
-            Debug.Log("이미 CSVtest가 존재합니다.");
+            Debug.Log("이미 CSV_Database가 존재합니다.");
             Destroy(gameObject);
         }
     }
@@ -57,7 +57,7 @@ public class CSV_Database : MonoBehaviour
         // 2. 새로운 Dictionary를 만듭니다. 위에선 변수 즉 공간만 선언했었습니다.
         DataMap = new Dictionary<string, Dictionary<string, object>>();
 
-        // 3. List를 순회하며 Key(CSV파일 분류방식으로 Key라고 명명했습니다. 바꿔도 됩니다. 바꾼다면 아래쪽도 같이.)로 Dictionary에 저장합니다.
+        // 3. List를 순회하며 Key(CSV파일 분류방식으로 num라고 명명했습니다.)로 Dictionary에 저장합니다.
         foreach (var entry in Language_data)
         {
             // 'num'가 string 타입이라고 가정하고 키로 사용합니다.
@@ -90,59 +90,20 @@ public class CSV_Database : MonoBehaviour
 
             GarbageMap.Add(itemName, entry);
         }
-        
         IsLoaded = true;
     }
-
-    //피드백 요구 메서드 key값만 주면 바로 값 내뱉을 수 있게
-    //Garbage 데이터입니다.
     public string getname(string key)
     {
         string value = "";
         if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = data["name"].ToString();
-        else Debug.Log("key가 없습니다.");
-        return value;
-    }
-    public string getexplaination(string key)
-    {
-        string value = "";
-        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = data["explaination"].ToString();
-        else Debug.Log("key가 없습니다.");
-        return value;
-    }
-    public string getsize(string key)
-    {
-        string value = "";
-        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = data["size"].ToString();
-        else Debug.Log("key가 없습니다.");
-        return value;
-    }
-    public string getregion(string key)
-    {
-        string value = "";
-        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = data["region"].ToString();
-        else Debug.Log("key가 없습니다.");
+        else Debug.Log("key가 없음");
         return value;
     }
     public int getweight(string key)
     {
         int value = 0;
         if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = (int)data["weight"];
-        else Debug.Log("key가 없습니다.");
-        return value;
-    }
-    public int getrequireSrt(string key)
-    {
-        int value = 0;
-        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = (int)data["requireSrt"];
-        else Debug.Log("key가 없습니다.");
-        return value;
-    }
-    public int getHpdecrease(string key)
-    {
-        int value = 0;
-        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = (int)data["Hpdecrease"];
-        else Debug.Log("key가 없습니다.");
+        else Debug.Log("key가 없음");
         return value;
     }
 }

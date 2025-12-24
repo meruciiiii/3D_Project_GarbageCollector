@@ -14,7 +14,6 @@ public class pause : MonoBehaviour
     [Header("플레이어 연결")] private PlayerController controller;
 
     private PlayerInput input;
-    private bool ispause = false;
 
     private void Awake()
     {
@@ -36,13 +35,13 @@ public class pause : MonoBehaviour
         UpgradeUI shopUI = FindAnyObjectByType<UpgradeUI>();
         if (shopUI != null && shopUI.gameObject.activeInHierarchy)
         {
-            Debug.Log("업그레이드가 열려있어 일시정지를 할 수 없습니다.");
+            Debug.Log("업그레이드 패널이 열려있어 일시정지를 할 수 없습니다.");
             return;
         }
 
         if (sellUI != null && sellUI.gameObject.activeInHierarchy)
         {
-            Debug.Log("상점이 열려있어 일시정지를 할 수 없습니다.");
+            Debug.Log("정산 패널이 열려있어 일시정지를 할 수 없습니다.");
             return;
         }
 

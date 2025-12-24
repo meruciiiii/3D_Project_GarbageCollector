@@ -25,7 +25,8 @@ public class CSV_GarbageData_Example : MonoBehaviour
             }
 
             //여기가 데이터를 빼와서 사용하는 방식입니다.
-            if (CSV_Database.instance.GarbageMap.TryGetValue("small_1", out Dictionary<string, object> data))//첫번째 key로 이중 dictionary중 첫번째 dictionary를 꺼내옵니다. 
+            if (CSV_Database.instance.GarbageMap.TryGetValue("small_1", out Dictionary<string, object> data))
+                //첫번째 key로 이중 dictionary중 첫번째 dictionary를 꺼내옵니다. 
             {
                 string s = garbagedata.name.ToString(); //두번째 키를 넣어주세요. enum인 garbagedata로 빼놨습니다.
                 object sample;//받아올 value object
@@ -43,5 +44,4 @@ public class CSV_GarbageData_Example : MonoBehaviour
             }
         }
     }
-
 }

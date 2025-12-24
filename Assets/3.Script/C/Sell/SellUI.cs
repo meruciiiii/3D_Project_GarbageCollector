@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class SellUI : MonoBehaviour
 {
@@ -7,7 +9,6 @@ public class SellUI : MonoBehaviour
     [SerializeField] private SellManager sellManager; // 계산을 담당하는 매니저
 
     [Header("플레이어 연결")]
-    // 만약 스크립트 이름이 FirstPersonMovement라면 그 이름으로 바꾸세요.
     [SerializeField] private PlayerController playerController;
 
     [Header("UI 패널 연결")]
@@ -79,20 +80,20 @@ public class SellUI : MonoBehaviour
         string receipt = "";
 
         // 소형 쓰레기 줄
-        receipt += $"가방 쓰레기 ({smallWeight}kg) :  <color=white>{smallEarn} G</color>\n";
+        receipt += $"Small Trash ({smallWeight}kg) :  <color=white>{smallEarn} G</color>\n";
 
         // 대형 쓰레기 줄 (들고 있을 때만 초록색 강조)
         if (GameManager.instance.isGrabBigGarbage)
         {
-            receipt += $"대형 쓰레기 ({bigWeight}kg) :  <color=#00FF00>+ {bigEarn} G</color>\n";
+            receipt += $"Big Trash ({bigWeight}kg) :  <color=#00FF00>+ {bigEarn} G</color>\n";
         }
         else
         {
-            receipt += $"대형 쓰레기 (없음) :  <color=#808080>0 G</color>\n";
+            receipt += $" No Big Trash :  <color=#808080>0 G</color>\n";
         }
 
         receipt += "--------------------------------\n";
-        receipt += $"총 합계 : <color=yellow>{totalEarn} G</color>";
+        receipt += $"Result : <color=yellow>{totalEarn} G</color>";
 
         // [4] 화면에 적용
         infoText.text = receipt;
@@ -121,13 +122,30 @@ public class SellUI : MonoBehaviour
     }
 
     // 결과창 띄우기
-    private void ShowResult(int money)
+    public void ShowResult(int earnings)
     {
-        tradePanel.SetActive(false);
-        resultPanel.SetActive(true);
+        // [수정] 1. 뒤에 있는 정산 견적서 창(TradePanel)을 꺼줘야 함!
+        if (tradePanel != null) tradePanel.SetActive(false);
 
+        // 2. 결과창 켜기
+        if (resultPanel != null) resultPanel.SetActive(true);
+
+        string resultMessage = "Settlement complete";
+
+        // CSV 데이터 로드 (아까 추가한 로직)
+        if (CSV_Database.instance != null && CSV_Database.instance.DataMap != null)
+        {
+            if (CSV_Database.instance.DataMap.TryGetValue("ui_result", out Dictionary<string, object> data))
+            {
+                resultMessage = data["value"].ToString();
+            }
+        }
+
+        // 텍스트 갱신
         if (resultText != null)
-            resultText.text = $"정산이 완료되었습니다!\n\n<color=yellow>+{money} G</color>";
+        {
+            resultText.text = $"{resultMessage}\n<color=yellow>+ {earnings} G</color>";
+        }
     }
 
     // ---------------------------------------------------------
