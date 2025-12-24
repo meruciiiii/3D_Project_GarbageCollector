@@ -389,8 +389,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1555361105}
-  - {fileID: 383041385}
   - {fileID: 1487920700}
+  - {fileID: 383041385}
   - {fileID: 1780178714}
   - {fileID: 1815797870}
   - {fileID: 1888669849}
@@ -514,6 +514,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 188346424}
     m_Modifications:
+    - target: {fileID: 1733509263082531975, guid: 2f58eb50abdfcdf4db0209a5c2908c5e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1872680446, guid: 249709b0b8531e043aaded92c48a8acd, type: 3}
+    - target: {fileID: 2617146433897544201, guid: 2f58eb50abdfcdf4db0209a5c2908c5e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2617146433897544201, guid: 2f58eb50abdfcdf4db0209a5c2908c5e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 55
+      objectReference: {fileID: 0}
     - target: {fileID: 3892651888286373476, guid: 2f58eb50abdfcdf4db0209a5c2908c5e, type: 3}
       propertyPath: m_Name
       value: CrossCanvas
@@ -751,10 +763,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 413000378}
     m_Modifications:
-    - target: {fileID: 404597211939382020, guid: 2e7b648506ae2ea49827efb4b06e68f3, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1387900809699335769, guid: 2e7b648506ae2ea49827efb4b06e68f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.799988
@@ -818,7 +826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6875371760015618421, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 40.8
+      value: 36.28
       objectReference: {fileID: 0}
     - target: {fileID: 6875371760015618421, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
       propertyPath: m_LocalPosition.y
@@ -913,6 +921,14 @@ PrefabInstance:
     - target: {fileID: 2473348437428700204, guid: 031e109967bddfa4fbadde7d80b26bcc, type: 3}
       propertyPath: m_Name
       value: Aim
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074184864372463565, guid: 031e109967bddfa4fbadde7d80b26bcc, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3074184864372463565, guid: 031e109967bddfa4fbadde7d80b26bcc, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3995243231410655480, guid: 031e109967bddfa4fbadde7d80b26bcc, type: 3}
       propertyPath: m_AnchorMax.x
