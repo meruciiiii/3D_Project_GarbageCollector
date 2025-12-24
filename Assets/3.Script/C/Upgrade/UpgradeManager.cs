@@ -11,33 +11,31 @@ public enum UpgradeType
 }
 public class UpgradeManager : MonoBehaviour
 {
-    [Header("업그레이드 가격 설정 (Base Cost)")]
-    [SerializeField] private int baseStrengthCost = 50000; // 힘: 매우 비쌈 (새 지역 해금급)
-    [SerializeField] private int baseBagCost = 5000;       // 가방: 1/3 ~ 1회 수익
-    [SerializeField] private int baseMaxHPCost = 10000;    // 체력: 적당함
-    [SerializeField] private int baseSpeedCost = 15000;    // 속도: 체감 큼
-    [SerializeField] private int baseMultiGrabCost = 100000;// 멀티: 후반용
-    [SerializeField] private int pickNpcCost = 1000000;    // 히든: 100만 골드 (엔딩)
+    [Header("업그레이드 가격 설정 (고물가 반영)")]
+    // 1회 왕복 수익이 약 50,000원 이라고 가정했을 때의 가격 책정
+    [SerializeField] private int baseStrengthCost = 150000; // 힘: 3번 왕복해야 1업
+    [SerializeField] private int baseBagCost = 30000;       // 가방: 1번 왕복하면 구매 가능 (3만 -> 4만 -> 5만...)
+    [SerializeField] private int baseMaxHPCost = 20000;
+    [SerializeField] private int baseSpeedCost = 50000;
+    [SerializeField] private int baseMultiGrabCost = 300000; // 아주 비쌈
+    [SerializeField] private int pickNpcCost = 2000000;      // 엔딩급 가격
 
-    // [데이터 기반 졸업 기준 재설정]
-    private const int MAX_STR_NORMAL = 6;
-    private const int STR_ULTIMATE = 7;
+    // [최대치 상수 정의] - 이 숫자를 기억하세요!
+    public const int MAX_BAG_WEIGHT = 100000; // 10만까지 업그레이드 가능
+    public const int MAX_STR_NORMAL = 6;
+    public const int STR_ULTIMATE = 7;
+    public const int MAX_HP_LIMIT = 200;
+    public const float MIN_PICK_SPEED = 0.25f;
+    public const int MAX_GRAB_LIMIT = 5;
 
-    // [중요] small_9(12000) 2개는 담아야 함 -> 30,000까지 확장
-    private const int MAX_BAG_WEIGHT = 30000;
-    private const int MAX_HP_LIMIT = 200;
-    private const float MIN_PICK_SPEED = 0.25f;
-    private const int MAX_GRAB_LIMIT = 5;
-
+    // 만렙 체크 함수
     public bool IsAllStatMaxed()
     {
         if (GameManager.instance == null) return false;
 
-        // 모든 조건이 참(True)이어야 최종 True 반환
         bool isStrMax = GameManager.instance.P_Str >= MAX_STR_NORMAL;
-        bool isBagMax = GameManager.instance.P_Maxbag >= MAX_BAG_WEIGHT;
+        bool isBagMax = GameManager.instance.P_Maxbag >= MAX_BAG_WEIGHT; // 10만 기준
         bool isHpMax = GameManager.instance.P_MaxHP >= MAX_HP_LIMIT;
-        // 속도는 낮을수록 빠름 (0.25 이하면 MAX)
         bool isSpeedMax = GameManager.instance.grab_speed <= MIN_PICK_SPEED;
         bool isGrabMax = GameManager.instance.grab_limit >= MAX_GRAB_LIMIT;
 
@@ -51,37 +49,35 @@ public class UpgradeManager : MonoBehaviour
 
         switch (type)
         {
-            case UpgradeType.Strength: // 힘 (1->2가 가장 중요)
+            case UpgradeType.Strength:
                 if (GameManager.instance.P_Str >= MAX_STR_NORMAL) return 0;
-                // 1->2: 5만, 2->3: 20만, 3->4: 45만...
+                // 힘 제곱 비례: 15만, 60만, 135만...
                 return baseStrengthCost * (GameManager.instance.P_Str * GameManager.instance.P_Str);
 
-            case UpgradeType.BagWeight: // 가방 (5000 ~ 30000)
+            case UpgradeType.BagWeight:
                 if (GameManager.instance.P_Maxbag >= MAX_BAG_WEIGHT) return 0;
-                // (현재 - 5000) / 2500 -> 단계 계산
-                level = (GameManager.instance.P_Maxbag - 5000) / 2500;
-                // 5000 + (단계 * 3000) -> 점진적 증가
-                return baseBagCost + (level * 3000);
+
+                // [수정된 공식]
+                // 현재 가방 10000 시작. 5000 단위로 업그레이드.
+                // 레벨 = (현재 - 10000) / 5000  => 0, 1, 2, 3...
+                level = (GameManager.instance.P_Maxbag - 10000) / 5000;
+
+                // 가격: 기본 3만 + (레벨 * 1만) => 3만, 4만, 5만... 점진적 증가
+                return baseBagCost + (level * 10000);
 
             case UpgradeType.MaxHP:
                 if (GameManager.instance.P_MaxHP >= MAX_HP_LIMIT) return 0;
                 level = (GameManager.instance.P_MaxHP - 100) / 10;
-                return baseMaxHPCost + (level * 5000);
+                return baseMaxHPCost + (level * 10000);
 
-            case UpgradeType.PickSpeed: // 속도 (1.5 -> 0.25)
+            case UpgradeType.PickSpeed:
                 if (GameManager.instance.grab_speed <= MIN_PICK_SPEED) return 0;
-                // 안전장치 추가: 혹시 1.5보다 크면 0레벨로 취급
-                float startSpeed = 1.5f;
-                if (GameManager.instance.grab_speed > 1.5f) startSpeed = GameManager.instance.grab_speed;
-
-                // (1.5 - 현재) / 0.1 -> 약 12단계
-                level = Mathf.RoundToInt((startSpeed - GameManager.instance.grab_speed) / 0.1f);
-                if (level < 0) level = 0;
-                return baseSpeedCost + (level * 5000);
+                float speedDiff = 1.5f - GameManager.instance.grab_speed;
+                level = Mathf.RoundToInt(speedDiff * 10);
+                return baseSpeedCost + (level * 20000);
 
             case UpgradeType.MultiGrab:
                 if (GameManager.instance.grab_limit >= MAX_GRAB_LIMIT) return 0;
-                // 10만, 20만, 30만...
                 return baseMultiGrabCost * GameManager.instance.grab_limit;
 
             case UpgradeType.PickNPC:
@@ -95,12 +91,14 @@ public class UpgradeManager : MonoBehaviour
 
     public bool TryPurchaseUpgrade(UpgradeType type)
     {
-        // ... (조건 체크 및 결제 로직 기존 동일) ...
+        // 비용 체크
         int cost = GetUpgradeCost(type);
         if (cost == 0 || GameManager.instance.P_Money < cost) return false;
 
+        // 결제
         GameManager.instance.P_Money -= cost;
 
+        // 적용
         switch (type)
         {
             case UpgradeType.Strength:
@@ -108,9 +106,8 @@ public class UpgradeManager : MonoBehaviour
                 break;
 
             case UpgradeType.BagWeight:
-                // [변경] +50은 너무 적음. +2500씩 시원하게 확장 (약 10번 업글)
-                GameManager.instance.P_Maxbag += 2500;
-                Debug.Log($"가방 확장: {GameManager.instance.P_Maxbag}");
+                // [중요] 한 번에 5000씩 증가 (단위가 크므로)
+                GameManager.instance.P_Maxbag += 5000;
                 break;
 
             case UpgradeType.MaxHP:
@@ -119,7 +116,6 @@ public class UpgradeManager : MonoBehaviour
                 break;
 
             case UpgradeType.PickSpeed:
-                // [변경] 0.1씩 감소
                 GameManager.instance.grab_speed -= 0.1f;
                 if (GameManager.instance.grab_speed < MIN_PICK_SPEED)
                     GameManager.instance.grab_speed = MIN_PICK_SPEED;

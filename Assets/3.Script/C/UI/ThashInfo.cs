@@ -75,7 +75,7 @@ public class ThashInfo : MonoBehaviour
             // 3. UI °»½Å
             if (tooltipText != null)
             {
-                tooltipText.text = $"{tName}\n<color=yellow>{tWeight} kg</color>";
+                tooltipText.text = $"{tName}\n<color=yellow>{tWeight} G</color>";
             }
 
             if (tooltipPanel != null) tooltipPanel.SetActive(true);
