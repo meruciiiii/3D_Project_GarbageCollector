@@ -48,11 +48,14 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private float fadeDuration = 1.0f; // 페이드 속도 조절 변수
     private Coroutine bgmFadeCoroutine; // 현재 실행 중인 페이드 관리
 
+    private Transform sfx3DContainer; //3D 플레이어 위치. 게임 오브젝트 파괴시 사라지는거 방지
+
     private void AutoSetting()
     {
         BGM_Player = transform.GetChild(0).GetComponent<AudioSource>();
         SFX_Player = transform.GetChild(1).GetComponents<AudioSource>();
         SFX_3D_Player = transform.GetChild(2).GetComponentsInChildren<AudioSource>();
+        sfx3DContainer = transform.GetChild(2);
     }
 
     public void PlayBGM(string name)
@@ -133,7 +136,7 @@ public class AudioManager : MonoBehaviour
     }
     
 
-    public void Play3DSFX(string name, Vector3 position) //AudioManager.instance.PlaySFX("사운드이름",transform.position)
+    public void Play3DSFX(string name, Transform gameobject) //AudioManager.instance.Play3DSFX("3D_SFX", this.transform);
     {
         foreach(Sound s in SFX_3D_clip)
         {
@@ -143,10 +146,13 @@ public class AudioManager : MonoBehaviour
                 {
                     if (!SFX_3D_Player[i].isPlaying)
                     {
-                        SFX_3D_Player[i].transform.position = position;
+                        SFX_3D_Player[i].transform.SetParent(gameobject); //자식으로 들어갑니다
+
+                        SFX_3D_Player[i].transform.localPosition = Vector3.zero;
                         SFX_3D_Player[i].clip = s.clip;
                         SFX_3D_Player[i].outputAudioMixerGroup = SFX;
                         SFX_3D_Player[i].Play();
+                        StartCoroutine(ResetAudioSourceParent(SFX_3D_Player[i], s.clip.length));
                         return;
                     }
                 }
@@ -155,5 +161,30 @@ public class AudioManager : MonoBehaviour
             }
         }
         Debug.Log($"해당 name:[{name}] key를 가진 3DSFX가 없습니다.");
+    }
+
+    private IEnumerator ResetAudioSourceParent(AudioSource source, float delay)
+    {
+        float timer = 0f;
+        while (timer < delay || source.isPlaying)
+        {
+            timer += Time.deltaTime;
+
+            // 재생 도중 부모(몬스터 등)가 사라졌는지 체크
+            if (source.transform.parent == null || source.transform.parent.gameObject.activeInHierarchy == false)
+            {
+                // 부모가 사라졌다면 즉시 원래 컨테이너로 복귀시켜서 미아(분실) 방지
+                source.transform.SetParent(sfx3DContainer);
+                yield break;
+            }
+            yield return null;
+        }
+
+        // 재생 완료 후 복귀
+        if (source != null)
+        {
+            source.transform.SetParent(sfx3DContainer);
+            source.transform.localPosition = Vector3.zero; // 위치 초기화
+        }
     }
 }
