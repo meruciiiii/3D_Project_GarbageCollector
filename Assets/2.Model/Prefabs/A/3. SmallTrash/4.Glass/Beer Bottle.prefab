@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 5717933860008750618}
   - component: {fileID: 8620664746523883182}
   - component: {fileID: -8415491397955909453}
-  - component: {fileID: 7017031416159444495}
+  - component: {fileID: 6728606536319634821}
+  - component: {fileID: 2462218859826787594}
   m_Layer: 6
   m_Name: Beer Bottle
   m_TagString: Untagged
@@ -140,8 +141,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallTrash
-  smallTrashNum: 4
-  outline_material: {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
+  size: 0
+  trashNum: 4
+  trashData: {fileID: 6728606536319634821}
+  trash_r: {fileID: -8415491397955909453}
+  trash_c: {fileID: 6681844077309326527}
+  trash_render: {fileID: 1311018794969058608}
 --- !u!54 &-8415491397955909453
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -169,21 +174,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7017031416159444495
+--- !u!114 &6728606536319634821
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3004314219663543137}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 1
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 5
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
+  m_EditorClassIdentifier: Assembly-CSharp::TrashData
+--- !u!114 &2462218859826787594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3004314219663543137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447de1ffe67d0a74d9210b779a8d0c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmallTrashCollectable

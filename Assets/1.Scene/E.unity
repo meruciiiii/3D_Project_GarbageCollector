@@ -1636,11 +1636,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2170708040281475043, guid: 5eed33d985b965e46b56a89501ad7cf3, type: 3}
   m_PrefabInstance: {fileID: 11675046}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &814805184 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5653073563824068037, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
-  m_PrefabInstance: {fileID: 1075056160}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &921746898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1797,13 +1792,9 @@ PrefabInstance:
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 1815797868}
-    - target: {fileID: 3317103082146166114, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
-      propertyPath: runSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3317103082146166114, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
-      propertyPath: accelSpeed
-      value: 25
+    - target: {fileID: 4205599169637202191, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+      propertyPath: m_Name
+      value: TrashData
       objectReference: {fileID: 0}
     - target: {fileID: 5475801769564018433, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
       propertyPath: volume
@@ -1853,28 +1844,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8968073341749195394, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
-      propertyPath: humanTrashAction
-      value: 
-      objectReference: {fileID: 1556021435}
-    m_RemovedComponents:
-    - {fileID: 7912883820906852528, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 6875371760015618421, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
-      insertIndex: 7
-      addedObject: {fileID: 1509785724}
+    m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5653073563824068037, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 4205599169637202191, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1556021435}
+      addedObject: {fileID: 1509785725}
   m_SourcePrefab: {fileID: 100100000, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
 --- !u!114 &1075056161 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3317103082146166114, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
   m_PrefabInstance: {fileID: 1075056160}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814805184}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dadd016a403d9b94c828fbfd2edee62e, type: 3}
@@ -1885,7 +1868,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4076259103573898125, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
   m_PrefabInstance: {fileID: 1075056160}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814805184}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c8f929a49e74ad4488c238560b2e7af, type: 3}
@@ -2036,37 +2019,38 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5931061889916121575, guid: 031e109967bddfa4fbadde7d80b26bcc, type: 3}
   m_PrefabInstance: {fileID: 1487920699}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1509785723
+--- !u!1 &1509785723 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4205599169637202191, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+  m_PrefabInstance: {fileID: 1075056160}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1509785724}
-  m_Layer: 3
-  m_Name: HumanData
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1509785724
-Transform:
+--- !u!54 &1509785725
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509785723}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.63452566, y: -0.51162755, z: 0.3252157, w: 0.479426}
-  m_LocalPosition: {x: 0.6200006, y: 0.86, z: 0.9700004}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 712142496}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &1550032145 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5475801769564018433, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
@@ -2088,34 +2072,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6112121132361723296, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
   m_PrefabInstance: {fileID: 1075056160}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814805184}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d544d77c9635ac144980723f331c0bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerIsDirty
---- !u!114 &1556021435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814805184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 553b7d92e193eff4eab498ed1eb2a0c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HumanTrashAction
-  liftCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  liftDuration: 0.5
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1001 &1573542640
 PrefabInstance:
   m_ObjectHideFlags: 0

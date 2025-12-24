@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 2393864159366469816}
   - component: {fileID: 3990380109110494324}
   - component: {fileID: 3165884365927008431}
-  - component: {fileID: -7907099651908082699}
+  - component: {fileID: 7485618623828578083}
+  - component: {fileID: -8905758892146276747}
   m_Layer: 6
   m_Name: Shirt 2
   m_TagString: Untagged
@@ -141,8 +142,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallTrash
-  smallTrashNum: 6
-  outline_material: {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
+  size: 0
+  trashNum: 6
+  trashData: {fileID: 7485618623828578083}
+  trash_r: {fileID: 3165884365927008431}
+  trash_c: {fileID: 2393864159366469816}
+  trash_render: {fileID: 2669127382288855841}
 --- !u!54 &3165884365927008431
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -170,21 +175,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-7907099651908082699
+--- !u!114 &7485618623828578083
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273593062365614524}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 1
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 5
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
+  m_EditorClassIdentifier: Assembly-CSharp::TrashData
+--- !u!114 &-8905758892146276747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273593062365614524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447de1ffe67d0a74d9210b779a8d0c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmallTrashCollectable
