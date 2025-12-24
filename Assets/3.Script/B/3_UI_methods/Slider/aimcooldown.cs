@@ -68,7 +68,7 @@ public class aimcooldown : MonoBehaviour
 
     private void OnComplete()
     {
-        Debug.Log("충전 완료!");
+        Debug.Log("줍기 준비 완료!");
         cooldownSlider.value = 0;
         chargeCoroutine = null;
     }

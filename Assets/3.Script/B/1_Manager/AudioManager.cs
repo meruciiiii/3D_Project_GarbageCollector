@@ -67,10 +67,15 @@ public class AudioManager : MonoBehaviour
                 if (BGM_Player.clip == s.clip) return;
                 if (bgmFadeCoroutine != null) StopCoroutine(bgmFadeCoroutine);
                 bgmFadeCoroutine = StartCoroutine(FadeBGM(s.clip));
-                //BGMPlayer.clip = s.clip;
-                //BGMPlayer.outputAudioMixerGroup = BGM; //오디오 믹서 그룹화
-                //BGMPlayer.loop = true;//루프시킴
-                //BGMPlayer.Play();
+
+                /*
+                 //기존 로직
+                BGM_Player.clip = s.clip;
+                BGM_Player.outputAudioMixerGroup = BGM; //오디오 믹서 그룹화
+                BGM_Player.loop = true;//루프시킴
+                BGM_Player.Play();
+                */
+
                 break;
             }
         }
@@ -111,7 +116,6 @@ public class AudioManager : MonoBehaviour
         BGM_Player.clip = null;
         BGM_Player.volume = 1.0f;
     }
-
     
     public void PlaySFX(string name)
     {
@@ -135,7 +139,6 @@ public class AudioManager : MonoBehaviour
         }
     }
     
-
     public void Play3DSFX(string name, Transform gameobject) //AudioManager.instance.Play3DSFX("3D_SFX", this.transform);
     {
         foreach(Sound s in SFX_3D_clip)
