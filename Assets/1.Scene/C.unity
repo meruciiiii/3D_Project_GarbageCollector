@@ -739,9 +739,17 @@ PrefabInstance:
       value: ShowerSystem
       objectReference: {fileID: 0}
     - target: {fileID: 741007803805863405, guid: 0bad6290ad155b64b95640969a3fc4a6, type: 3}
+      propertyPath: playerIsDirty
+      value: 
+      objectReference: {fileID: 1075056163}
+    - target: {fileID: 741007803805863405, guid: 0bad6290ad155b64b95640969a3fc4a6, type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1075056161}
+    - target: {fileID: 741007803805863405, guid: 0bad6290ad155b64b95640969a3fc4a6, type: 3}
+      propertyPath: vignetteController
+      value: 
+      objectReference: {fileID: 1030497692}
     - target: {fileID: 7527150274744898826, guid: 0bad6290ad155b64b95640969a3fc4a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.068
@@ -935,22 +943,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 188346424}
     m_Modifications:
-    - target: {fileID: 1139746340152223956, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1139746340152223956, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 4025647020663273940, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4025647020663273940, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 40
-      objectReference: {fileID: 0}
     - target: {fileID: 5600406460294992452, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
       propertyPath: m_Name
       value: Upgrade&Sell
@@ -959,42 +951,10 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1075056161}
-    - target: {fileID: 6713401322762369444, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6713401322762369444, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 40
-      objectReference: {fileID: 0}
     - target: {fileID: 7099647208225657412, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1075056161}
-    - target: {fileID: 7330244663974928763, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7330244663974928763, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 7417885733574616301, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7417885733574616301, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 8305753237891875599, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8305753237891875599, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 40
-      objectReference: {fileID: 0}
     - target: {fileID: 8433824124394539638, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
       propertyPath: m_LocalPosition.x
       value: -961
@@ -1035,10 +995,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8939749540885837299, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 40
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1054,6 +1010,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8609995893780747151, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
   m_PrefabInstance: {fileID: 683183849}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1030497692 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5475801769564018433, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+  m_PrefabInstance: {fileID: 1075056160}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d2092c57215ad744aff99d651a267ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VignetteController
 --- !u!1001 &1064709272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1206,6 +1173,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c8f929a49e74ad4488c238560b2e7af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
+--- !u!114 &1075056163 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6112121132361723296, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+  m_PrefabInstance: {fileID: 1075056160}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d544d77c9635ac144980723f331c0bf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerIsDirty
 --- !u!114 &1225353837 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2655080695926488957, guid: 2af119bc682878a47810b9d317957377, type: 3}

@@ -13,7 +13,7 @@ public class CSVReader
     static char COMMENT_CHAR = '#'; //주석행 추가
 
     public static List<Dictionary<string, object>> Read(string file) 
-        //전역 메서드 반환값 List<Dictionary<string, object>>, a매개변수 string (plane text file)
+        //전역 메서드 반환값 List<Dictionary<string, object>>, file 매개변수 string (plane text file이니 string 문자열입니다.)
     {
         var list = new List<Dictionary<string, object>>();
 
@@ -36,10 +36,10 @@ public class CSVReader
         {
             string line = lines[i]; // 현재 줄을 변수에 저장
 
-            // 추가된 로직: 현재 줄이 주석 문자로 시작하는지 확인
+            // 추가: 현재 줄이 줄바꿈 문자로 시작하는지 확인 |
             if (line.Length > 0 && line.TrimStart().StartsWith(COMMENT_CHAR.ToString()))
             {
-                continue; // 주석이면 다음 반복으로 넘어갑니다.
+                continue; // 줄바꿈문자를 만나면 다음 반복으로 넘어갑니다.
             }
 
             var values = Regex.Split(line, SPLIT_RE);//lines[i]=> line

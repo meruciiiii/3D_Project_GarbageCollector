@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     public event Action UIValueChange;
     [SerializeField] private PlayerInput input;
 
-    public static UIManager instance = null;
+    public static UIManager instance = null; //ΩÃ±€≈Ê¿∫ æ∆¥‘
 
     private void Awake()
     {

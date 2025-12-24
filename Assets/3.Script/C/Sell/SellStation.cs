@@ -13,6 +13,18 @@ public class SellStation : MonoBehaviour
     {
         if (guideText != null) guideText.SetActive(false);
     }
+    private void Update()
+    {
+        // UI(상점/정산창)가 켜져 있으면 안내 문구를 강제로 끕니다.
+        if (sellUI != null && sellUI.gameObject.activeSelf)
+        {
+            if (guideText != null) guideText.SetActive(false);
+        }
+        else if (isPlayerNearby) // UI가 꺼져있고 플레이어가 근처에 있으면 켭니다.
+        {
+            if (guideText != null) guideText.SetActive(true);
+        }
+    }
 
     private void TryOpenShop()
     {

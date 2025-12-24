@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public int P_Spd = 5; //속도
 
     public int P_Money = 0; //소지 돈
-    public int P_Maxbag = 5000; //가방최대무게
+    public int P_Maxbag = 10000; //가방최대무게
 
     public int P_Weight = 0; //현재 무게
 
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     public int grab_limit = 1;//집을 수 있는 최댓수
     public float grab_range = 1f;//집을 수 있는 범위 임의값 float 1f
-    public float grab_speed = 1.55f;//집는 속도
+    public float grab_speed = 1.5f;//집는 속도
 
     //큰 쓰레기 전용 값 3종류
     public bool isGrabBigGarbage = false;
@@ -42,11 +42,10 @@ public class GameManager : MonoBehaviour
     {
         P_CurrentHP = Mathf.Clamp(P_CurrentHP + HPindecrease, 0, P_MaxHP);//최대 최소 체력 제한
     }
-    //P_Str,P_Spd,P_Money,P_Maxbag은 참조해서 사용
 
     public bool LoadComplete { get; private set; } = false;
 
-    public bool isPaused = false;//퍼즈시에 쓰레기 못줍게
+    public bool isPaused = false;//퍼즈시에 쓰레기 못줍게, 정산, 업그레이드창 안뜨게
 
     public static GameManager instance = null;
     private void Awake()
@@ -70,7 +69,6 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WaitForDataManagerAndLoad()
     {
-        //우진님 피드백으로 일단 싱글톤 제거할 수 있었던 jsondatamanager제거
         LoadGamedata();
 
         while (CSV_Database.instance == null)
@@ -127,7 +125,7 @@ public class GameManager : MonoBehaviour
         P_Str = 1;
         P_Spd = 5;
         P_Money = 0;
-        P_Maxbag = 5000;
+        P_Maxbag = 10000;
         P_Weight = 0;
 
         grab_limit = 1;

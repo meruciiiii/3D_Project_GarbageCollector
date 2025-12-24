@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Stage1_Spawner : NPC_Spawner {
-	//VictimÀÇ ¹Ý´ñ¸»Àº 
-	//culprit(Áß¹üÁË±îÁø ¾Æ´Ï°í, '°æ¹üÁË¸¦ ÀÏÀ¸Å²' ÀÌ¶ó´Â ¶æÀÌ¶ó°í ÇÕ´Ï´Ù. ¾²·¹±â´Â ±×·¡µµ... ¹üÁËÀÚ±îÁø ¾Æ´Ï´Ñ±î...)
-	[Header("¹üÁË À§Ä¡ ÁÂÇ¥")]
+	//Victimï¿½ï¿½ ï¿½Ý´ï¿½ï¿½ï¿½ 
+	//culprit(ï¿½ß¹ï¿½ï¿½Ë±ï¿½ï¿½ï¿½ ï¿½Æ´Ï°ï¿½, 'ï¿½ï¿½ï¿½ï¿½Ë¸ï¿½ ï¿½ï¿½ï¿½ï¿½Å²' ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½Õ´Ï´ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½... ï¿½ï¿½ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ ï¿½Æ´Ï´Ñ±ï¿½...)
+	[Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½Ç¥")]
 	[SerializeField] private GameObject cultive_pos;
 	[SerializeField] private GameObject cultive_dir;
 
@@ -16,18 +16,31 @@ public class Stage1_Spawner : NPC_Spawner {
 	private IEnumerator NPC_Spawn_co() {
 		while(true) {
 			seconds = new WaitForSeconds(Random.Range(min_sec, max_sec));
-			//if(npc_pooling[pool_current].activeSelf) {
-			//	NPC_Pooling_ReSize();
-			//	pool_current = pool_count - 1;
-			//}
+			
+			int inactiveNpcIndex = -1;
+			for (int i = 0; i < pool_count; i++)
+			{
+				if (!npc_pooling[i].activeSelf)
+				{
+					inactiveNpcIndex = i;
+					break;
+				}
+			}
+
+			if (inactiveNpcIndex == -1)
+			{
+				NPC_Pooling_ReSize();
+				inactiveNpcIndex = pool_count - 1;
+			}
+
+			pool_current = inactiveNpcIndex;
+
 			GameObject victim = npc_pooling[pool_current];
 			victim.TryGetComponent(out Stage1_Victim victim_pattern);
 			Rnd_Set_Pos();
-			victim.SetActive(true);
 			victim_pattern.set_pos(start_pos.position, end_pos.position, cultive_pos.transform.position, cultive_dir.transform.position);
+			victim.SetActive(true);
 			victim_pattern.start();
-			pool_current++;
-			if(pool_current.Equals(pool_count)) { pool_current = 0; }
 			yield return seconds;
 		}
 	}

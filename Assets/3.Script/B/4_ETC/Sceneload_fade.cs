@@ -79,7 +79,7 @@ public class BSceneManager : MonoBehaviour
 
         if (fadeImage != null&& isFirstLoad)
         {
-            Debug.Log("화면 어두워지는 중 (Fade Out)");
+            //Debug.Log("화면 어두워지는 중 (Fade Out)");
             float timer = 0f;
             while (timer < 1f)
             {
@@ -93,7 +93,7 @@ public class BSceneManager : MonoBehaviour
         if(!isFirstLoad) isFirstLoad = true;
 
         // 1. 이 상태에서 이미 B씬의 물리(쓰레기 낙하)는 작동 중
-        Debug.Log("쓰레기 낙하 시작 (화면 가려짐)");
+        //Debug.Log("쓰레기 낙하 시작 (화면 가려짐)");
 
         // 2. 쓰레기가 충분히 떨어질 때까지 기다림
         yield return new WaitForSeconds(waitTime);//IEnumerator 처럼  yield return new WaitForSeconds 사용가능
@@ -112,7 +112,7 @@ public class BSceneManager : MonoBehaviour
             }
             fadeImage.gameObject.SetActive(false);
         }
-        Debug.Log("연출 완료, 화면 공개");
+        //Debug.Log("연출 완료, 화면 공개");
         
         SetPlayerFreeze(false);
         this.gameObject.SetActive(false);

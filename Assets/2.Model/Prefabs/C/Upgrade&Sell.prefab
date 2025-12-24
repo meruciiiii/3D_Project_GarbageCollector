@@ -199,7 +199,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -357,7 +357,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -436,7 +436,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
@@ -515,7 +515,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -527,7 +527,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PickUp_Upgrade
+  m_Text: 'PickUp
+
+    Upgrade'
 --- !u!1 &2127020405527908129
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,7 +596,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -732,7 +734,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -744,7 +746,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PickUp_Human
+  m_Text: 'PickUp
+
+    Human'
 --- !u!1 &2484121275990189509
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,7 +815,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -823,7 +827,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Strenth_Upgrade
+  m_Text: 'Strenth
+
+    Upgrade'
 --- !u!1 &2484706087411940912
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,7 +897,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43f0ffdbd8d79a74cba85c799554644a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SellManager
-  pricePerWeight: 15
+  pricePerWeight: 3
+  bigTrashMultiplier: 1.2
   playerController: {fileID: 0}
 --- !u!114 &8892845127071251726
 MonoBehaviour:
@@ -1102,17 +1109,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Cancle
 --- !u!1 &3713275598462709568
@@ -1664,7 +1671,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
@@ -1743,7 +1750,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -1755,7 +1762,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Bag_Upgrade
+  m_Text: 'Bag
+
+    Upgrade'
 --- !u!1 &4933337237330530785
 GameObject:
   m_ObjectHideFlags: 0
@@ -2380,12 +2389,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8bae762e83fa94e8fffc008eabb204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeManager
-  baseStrengthCost: 10
-  baseBagCost: 10
-  baseMaxHPCost: 10
-  baseSpeedCost: 2000
-  baseMultiGrabCost: 3000
-  pickNpcCost: 50000
+  baseStrengthCost: 5000
+  baseBagCost: 5000
+  baseMaxHPCost: 5000
+  baseSpeedCost: 5000
+  baseMultiGrabCost: 10000
+  pickNpcCost: 150000
 --- !u!114 &75284994897638241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2587,7 +2596,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -2612,6 +2621,7 @@ GameObject:
   - component: {fileID: 4068467287371958888}
   - component: {fileID: 9178300525527202167}
   - component: {fileID: 8450059910068940461}
+  - component: {fileID: 5501032868213006019}
   m_Layer: 5
   m_Name: UpgradeGuide
   m_TagString: Untagged
@@ -2667,7 +2677,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -2693,8 +2703,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 5, y: -5}
+  m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!114 &5501032868213006019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6337959457833692195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69d85f13ca93a04bb17a4b0c7b5df1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Text_CSV_Read
+  text_component: {fileID: 9178300525527202167}
+  Key1: g3
 --- !u!1 &6599154891510856638
 GameObject:
   m_ObjectHideFlags: 0
@@ -2761,7 +2785,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -2889,6 +2913,7 @@ GameObject:
   - component: {fileID: 4382177692056342669}
   - component: {fileID: 7464021081122080510}
   - component: {fileID: 2908340387109339410}
+  - component: {fileID: 2910011972191797849}
   m_Layer: 0
   m_Name: SellGuide
   m_TagString: Untagged
@@ -2944,7 +2969,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -2970,8 +2995,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 5, y: -5}
+  m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 0
+--- !u!114 &2910011972191797849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817179802234743114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69d85f13ca93a04bb17a4b0c7b5df1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Text_CSV_Read
+  text_component: {fileID: 7464021081122080510}
+  Key1: g2
 --- !u!1 &7013685850439347840
 GameObject:
   m_ObjectHideFlags: 0
@@ -3038,7 +3077,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
@@ -3321,7 +3360,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -3333,7 +3372,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: HP_Upgrade
+  m_Text: 'HP
+
+    Upgrade'
 --- !u!1 &8627904060984892087
 GameObject:
   m_ObjectHideFlags: 0
@@ -3530,7 +3571,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -3542,7 +3583,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Grab_Upgrade
+  m_Text: 'Grab
+
+    Upgrade'
 --- !u!1 &8889411108454344156
 GameObject:
   m_ObjectHideFlags: 0
@@ -3609,7 +3652,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -3688,16 +3731,16 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Sell

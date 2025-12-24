@@ -18,13 +18,13 @@ public class UIValue : MonoBehaviour
     private Coroutine hpCoroutine;
 
     [Header("HP Slider Setting")]
-    [SerializeField] private Image hpfill;//fill 할당
+    [SerializeField] private Image hpfill; //슬라이더 fill 할당
     private Color Hp_origin;
     [SerializeField] private Color hp_warning1 = new Color(0f,0f,0f);
     [SerializeField] private Color hp_warning2 = new Color(0f,0f,0f);
 
     [Header("Weight Slider Setting")]
-    [SerializeField] private Image weightfill;//fill 할당
+    [SerializeField] private Image weightfill;
     private Color weight_origin;
     [SerializeField] private Color weight_warning1 = new Color(0f, 0f, 0f);
     [SerializeField] private Color weight_warning2 = new Color(0f, 0f, 0f);
@@ -62,13 +62,14 @@ public class UIValue : MonoBehaviour
     
     public void moneyandweight()
     {
+        if (GameManager.instance == null || !GameManager.instance.LoadComplete) return;
         if (!gameObject.activeInHierarchy) return;
         float targetMoney = GameManager.instance.P_Money / 100.0f;
 
         if (moneycoroutine != null) StopCoroutine(moneycoroutine);
         moneycoroutine = StartCoroutine(AnimateMoney(targetMoney));
 
-        // 무게도 동일하게 100.0f로 나누어 소수점 두 자리를 표현합니다.
+        // 무게도 동일하게 100.0f로 나누어 소수점 두 자리를 표현
         float targetWeight = GameManager.instance.P_Weight / 100.0f;
         float maxWeight = GameManager.instance.P_Maxbag / 100.0f;
 
@@ -79,6 +80,7 @@ public class UIValue : MonoBehaviour
     }
     public void HP()
     {
+        if (GameManager.instance == null || !GameManager.instance.LoadComplete) return;
         if (!gameObject.activeInHierarchy) return;
         int targetHP = GameManager.instance.P_CurrentHP;
         int maxHP = GameManager.instance.P_MaxHP;
@@ -117,21 +119,20 @@ public class UIValue : MonoBehaviour
             elapsed += Time.deltaTime;
             // Lerp를 사용하여 부드럽게 값 증가
             currentDisplayMoney = Mathf.Lerp(startValue, target, elapsed / duration);
-            moneytext.text = $"{currentDisplayMoney:F2}$";
+            moneytext.text = $"{currentDisplayMoney:N2}";
             yield return null;
         }
 
         // 마지막 오차 보정
         currentDisplayMoney = target;
-        moneytext.text = $"{currentDisplayMoney:F2}$";
+        moneytext.text = $"{currentDisplayMoney:N2}";
     }
 
     private IEnumerator AnimateWeight(float target, float max)
     {
         float duration = 0.5f;
         float elapsed = 0f;
-        // 현재 슬라이더 값에서 시작 (텍스트도 이에 맞춤)
-        float startValue = weightSlider.value;
+        float startValue = weightSlider.value;// 현재 슬라이더 값에서 시작
 
         while (elapsed < duration)
         {

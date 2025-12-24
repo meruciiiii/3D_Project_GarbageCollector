@@ -109,7 +109,7 @@
 //        private bool _initialised = false;
 //        private bool _autoGenerating = false;
 
-//         Set of forbidden characters
+//        // Set of forbidden characters
 //        private static readonly HashSet<char> forbiddenChars = new HashSet<char>
 //        {
 //            '/', '"', '*', ':', '\\', '|', '?', '.', '<', '>'
@@ -592,7 +592,7 @@
 //            _selectionClearStyle.fontStyle = FontStyle.Bold;
 
 //            _switchRect.x = _selectionPanelRect.center.x + 40;
-//            Right
+//            //Right
 //            GUI.backgroundColor = buttonColorDark;
 //            if (GUI.Button(_switchRect, "") && !_autoGenerating)
 //            {
@@ -603,7 +603,7 @@
 //            GUI.Label(_switchRect, ">", _selectionClearStyle);
 
 
-//            Left
+//            //Left
 //            _switchRect.x -= 160;
 
 //            GUI.backgroundColor = buttonColorDark;
@@ -615,7 +615,7 @@
 
 //            GUI.Label(_switchRect, "<", _selectionClearStyle);
 
-//            Counter
+//            //Counter
 //            _selectionClearStyle.fontStyle = FontStyle.Normal;
 //            _selectionClearStyle.fontSize = 20;
 
