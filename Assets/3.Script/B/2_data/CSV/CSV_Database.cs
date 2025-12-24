@@ -92,4 +92,18 @@ public class CSV_Database : MonoBehaviour
         }
         IsLoaded = true;
     }
+    public string getname(string key)
+    {
+        string value = "";
+        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = data["name"].ToString();
+        else Debug.Log("key가 없음");
+        return value;
+    }
+    public int getweight(string key)
+    {
+        int value = 0;
+        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = (int)data["weight"];
+        else Debug.Log("key가 없음");
+        return value;
+    }
 }
