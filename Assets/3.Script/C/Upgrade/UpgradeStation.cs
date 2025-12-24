@@ -19,10 +19,14 @@ public class UpgradeStation : MonoBehaviour
     // 이벤트에 연결될 함수 (UI 켜고 끄기)
     private void ToggleUI()
     {
+        if (GameManager.instance != null && GameManager.instance.isPaused)
+        {
+            return;
+        }
+
         if (upgradeUI == null) return;
 
         bool isActive = upgradeUI.gameObject.activeSelf;
-        // 현재 상태의 반대로 설정 (켜져있으면 끄고, 꺼져있으면 켭니다)
         upgradeUI.gameObject.SetActive(!isActive);
     }
 

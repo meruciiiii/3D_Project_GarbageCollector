@@ -44,6 +44,12 @@ public class UIValue : MonoBehaviour
         StartCoroutine(waitforvalue());
     }
 
+    private void OnEnable()
+    {
+        moneyandweight();
+        HP();
+    }
+
     private IEnumerator waitforvalue()
     {
         while(!GameManager.instance.LoadComplete) yield return null;
@@ -56,6 +62,8 @@ public class UIValue : MonoBehaviour
     
     public void moneyandweight()
     {
+        if (GameManager.instance == null || !GameManager.instance.LoadComplete) return;
+        if (!gameObject.activeInHierarchy) return;
         float targetMoney = GameManager.instance.P_Money / 100.0f;
 
         if (moneycoroutine != null) StopCoroutine(moneycoroutine);
@@ -72,6 +80,8 @@ public class UIValue : MonoBehaviour
     }
     public void HP()
     {
+        if (GameManager.instance == null || !GameManager.instance.LoadComplete) return;
+        if (!gameObject.activeInHierarchy) return;
         int targetHP = GameManager.instance.P_CurrentHP;
         int maxHP = GameManager.instance.P_MaxHP;
 

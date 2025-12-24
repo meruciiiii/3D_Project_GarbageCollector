@@ -3,25 +3,29 @@ using UnityEngine;
 public class SellManager : MonoBehaviour
 {
     [Header("정산 설정")]
-    [Tooltip("1kg당 판매 가격")]
-    [SerializeField] private int pricePerWeight = 15;
+    [Tooltip("1kg당 판매 가격 (무게 단위가 크므로 1원으로 설정)")]
+    [SerializeField] private int pricePerWeight = 1;
 
-    // 1. 소형 쓰레기(가방) 예상 금액만 계산하는 함수
+    [Tooltip("대형 쓰레기 보너스 (힘들게 들고 왔으니 1.2배)")]
+    [SerializeField] private float bigTrashMultiplier = 1.2f;
+
+    [SerializeField] private PlayerController playerController;
+
     public int GetSmallTrashEarnings()
     {
         if (GameManager.instance == null) return 0;
         return GameManager.instance.P_Weight * pricePerWeight;
     }
 
-    // 2. 대형 쓰레기(손) 예상 금액만 계산하는 함수
     public int GetBigTrashEarnings()
     {
         if (GameManager.instance == null) return 0;
 
-        // 들고 있을 때만 계산
         if (GameManager.instance.isGrabBigGarbage)
         {
-            return GameManager.instance.BigGarbageWeight * pricePerWeight;
+            // 대형 쓰레기는 보너스 적용
+            float earnings = GameManager.instance.BigGarbageWeight * pricePerWeight * bigTrashMultiplier;
+            return Mathf.RoundToInt(earnings);
         }
         return 0;
     }
@@ -60,8 +64,13 @@ public class SellManager : MonoBehaviour
             GameManager.instance.BigGarbageWeight = 0;
         }
 
-        // --- 돈 지급 및 저장 ---
-        if (totalEarnings > 0)
+        if (totalEarnings > 0 && playerController != null)
+        {
+            playerController.SendMessage("Walk", SendMessageOptions.DontRequireReceiver);
+        }
+
+            // --- 돈 지급 및 저장 ---
+            if (totalEarnings > 0)
         {
             GameManager.instance.P_Money += totalEarnings;
             GameManager.instance.SaveAllGamedata();

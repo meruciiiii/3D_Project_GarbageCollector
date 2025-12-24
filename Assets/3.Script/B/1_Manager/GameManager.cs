@@ -20,11 +20,12 @@ public class GameManager : MonoBehaviour
 
     public int grab_limit = 1;//집을 수 있는 최댓수
     public float grab_range = 1f;//집을 수 있는 범위 임의값 float 1f
-    public float grab_speed = 1.5f;//집는 속도
+    public float grab_speed = 1.55f;//집는 속도
 
-    //큰 쓰레기 전용 값 2종류
+    //큰 쓰레기 전용 값 3종류
     public bool isGrabBigGarbage = false;
     public int BigGarbageWeight = 0;
+    public int BigneedStr = 0;
 
     public float P_RemainWeight //남은 가방무게 일단 넣어두기
     {

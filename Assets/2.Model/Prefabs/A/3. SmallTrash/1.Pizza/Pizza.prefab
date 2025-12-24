@@ -15,8 +15,6 @@ GameObject:
   - component: {fileID: 7393743861784394015}
   - component: {fileID: 6634981542582479243}
   - component: {fileID: -2596561750432035169}
-  - component: {fileID: -7049096635203016980}
-  - component: {fileID: 8748150767726470260}
   m_Layer: 6
   m_Name: Pizza
   m_TagString: Untagged
@@ -73,8 +71,11 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 4474578618846804387, guid: e4baef6ddbaa24d49862e629f783082c, type: 3}
+  - {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
   - {fileID: -3399280609992867589, guid: e4baef6ddbaa24d49862e629f783082c, type: 3}
+  - {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
   - {fileID: -6050651322315956233, guid: e4baef6ddbaa24d49862e629f783082c, type: 3}
+  - {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -143,10 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallTrash
-  size: 0
-  trashNum: 0
-  trashData: {fileID: 0}
-  trash_r: {fileID: 0}
+  smallTrashNum: 1
+  outline_material: {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
 --- !u!54 &-2596561750432035169
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -174,31 +173,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-7049096635203016980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5106113012176776368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Trash
-  size: 0
-  trashNum: 0
-  trashData: {fileID: 0}
-  trash_r: {fileID: 0}
---- !u!114 &8748150767726470260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5106113012176776368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TrashData

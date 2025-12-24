@@ -15,8 +15,6 @@ GameObject:
   - component: {fileID: 4153166700010958918}
   - component: {fileID: 1940793544165950867}
   - component: {fileID: -6101775442871340920}
-  - component: {fileID: -5239702068546973894}
-  - component: {fileID: 6450754416367465995}
   m_Layer: 6
   m_Name: Bottle 15
   m_TagString: Untagged
@@ -144,10 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallTrash
-  size: 0
-  trashNum: 0
-  trashData: {fileID: 0}
-  trash_r: {fileID: 0}
+  smallTrashNum: 4
+  outline_material: {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
 --- !u!54 &-6101775442871340920
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -175,31 +171,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-5239702068546973894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3154815784378550562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Trash
-  size: 0
-  trashNum: 0
-  trashData: {fileID: 0}
-  trash_r: {fileID: 0}
---- !u!114 &6450754416367465995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3154815784378550562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TrashData
