@@ -1110,16 +1110,16 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Cancle
 --- !u!1 &3713275598462709568
@@ -2389,12 +2389,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8bae762e83fa94e8fffc008eabb204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeManager
-  baseStrengthCost: 1500
-  baseBagCost: 200
-  baseMaxHPCost: 1000
-  baseSpeedCost: 500
-  baseMultiGrabCost: 5000
-  pickNpcCost: 100000
+  baseStrengthCost: 5000
+  baseBagCost: 5000
+  baseMaxHPCost: 5000
+  baseSpeedCost: 5000
+  baseMultiGrabCost: 10000
+  pickNpcCost: 150000
 --- !u!114 &75284994897638241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3731,16 +3731,16 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 29b8967d341c85945a07ca3b958d0680, type: 3}
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Sell
