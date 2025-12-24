@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 3038983317026691802}
   - component: {fileID: -472964355489401504}
   - component: {fileID: 8360478349995642432}
+  - component: {fileID: 4723816839134040371}
+  - component: {fileID: 8111299553633716095}
   m_Layer: 6
   m_Name: Mineral Water Bottle
   m_TagString: Untagged
@@ -105,8 +107,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallTrash
-  smallTrashNum: 0
-  outline_material: {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
+  size: 0
+  trashNum: 0
+  trashData: {fileID: 0}
+  trash_r: {fileID: 0}
 --- !u!54 &-472964355489401504
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -156,3 +160,31 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5539357819512116934, guid: 478519682e251d345b2c637aab894400, type: 3}
+--- !u!114 &4723816839134040371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743392534779629890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Trash
+  size: 0
+  trashNum: 0
+  trashData: {fileID: 0}
+  trash_r: {fileID: 0}
+--- !u!114 &8111299553633716095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743392534779629890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrashData

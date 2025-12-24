@@ -53,8 +53,8 @@ public class SellManager : MonoBehaviour
         if (bigEarn > 0)
         {
             // 오브젝트 삭제
-            CatchBigGarbage catcher = FindAnyObjectByType<CatchBigGarbage>();
-            if (catcher != null) catcher.DestroyTrash();
+            BigTrashAction catcher = FindAnyObjectByType<BigTrashAction>();
+            if (catcher != null) catcher.SellHeldTrash();
 
             GameManager.instance.isGrabBigGarbage = false;
             GameManager.instance.BigGarbageWeight = 0;

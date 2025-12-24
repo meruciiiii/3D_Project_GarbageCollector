@@ -11,27 +11,13 @@ public class CleanPlayer : MonoBehaviour
     
     private int currentHP;
     private float cleanliness;
-
-    private int[] Hpdecrease = new int[9];
-    private int trashNum;
-
     private bool isTooDirty;
     private bool isDirty;
 
-    private void Awake()
-    {
-        for (int i = 0; i < Hpdecrease.Length; i++)
-        {
-            string trashName = "small_" + (i);
-            StartCoroutine(FindCsvData_co(trashName, i));
-        }
-    }
-    public void Clean(int trashNum)
+    public void Clean(int Hpdecrease)
     {
         currentHP = GameManager.instance.P_CurrentHP;
-        this.trashNum = trashNum;
-        currentHP -= Hpdecrease[trashNum];
-            Debug.Log(currentHP+"청결도가 떨어졌어요");
+        currentHP -= Hpdecrease;
         cleanliness = (float)(currentHP * 100) / (float)GameManager.instance.P_MaxHP;
         isDirty = cleanliness <= 30;
         if (isDirty)
@@ -41,21 +27,5 @@ public class CleanPlayer : MonoBehaviour
         }
         GameManager.instance.P_CurrentHP = currentHP;
     }
-    private IEnumerator FindCsvData_co(string trashName, int i)
-    {
-        while (CSV_Database.instance == null || CSV_Database.instance.GarbageMap == null)
-        {
-            yield return null;
-        }
-        if (CSV_Database.instance.GarbageMap.TryGetValue(trashName, out Dictionary<string, object> data))
-        {
-            object sample = data["Hpdecrease"]; ;
-            Hpdecrease[i] = (int)sample;
-            //Debug.Log(trashName + " : " + Hpdecrease[i]);
-        }
-        else
-        {
-            //Debug.LogError("GarbageMap에서 키 'small_"+i+"'을 찾을 수 없습니다.");
-        }
-    }
+    
 }

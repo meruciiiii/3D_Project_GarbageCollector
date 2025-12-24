@@ -12,8 +12,8 @@ public class HitPointState : MonoBehaviour
     //현 상태에 따라 실행하는 부분이 다르다
 
 
-    [SerializeField] private CatchSmallGarbage catchSmall;
-    [SerializeField] private CatchBigGarbage catchLarge;
+    [SerializeField] private SmallTrashAction catchSmall;
+    [SerializeField] private BigTrashAction catchLarge;
     [SerializeField] private CatchHuman catchHuman;
     [SerializeField] private PlayerWork playerWork;
     [SerializeField] private PlayerInput input;
@@ -22,7 +22,6 @@ public class HitPointState : MonoBehaviour
     //이벤트 등록 
     private void Start()
     {
-        input.onPickUp += Grab;
         //Debug.Log("이벤트 추가 됐어?");
         //Debug.Log(GameManager.instance);
         TimebetGrab = GameManager.instance.grab_speed;
@@ -40,16 +39,12 @@ public class HitPointState : MonoBehaviour
     public void isTrash()
     {
         GameObject[] target = playerWork.GetGameObject();
-        Debug.Log("target ? " + playerWork.GetGameObject());
-        if (GameManager.instance.isGrabBigGarbage)
+        if (GameManager.instance.isPaused)
         {
-            Debug.Log("큰 쓰레기 들고있는걸?!");
-            if (!Cursor.visible)
-            {
-                catchLarge.DrobGarbage();
-            }
+            Debug.Log("푸쉬!");
             return;
         }
+        
         if (target == null)
         {
             Debug.Log("null이라서 나갈게");
@@ -67,7 +62,6 @@ public class HitPointState : MonoBehaviour
             {
                 // Bigtrash 처리
                 //Debug.Log("큰 쓰레기 발견");
-                catchLarge.CatchTrash(target[i]);
                 return;
             }
         }
@@ -75,7 +69,6 @@ public class HitPointState : MonoBehaviour
         {
             if (target[i] != null && target[i].layer == LayerMask.NameToLayer("SmallTrash"))
             {
-                catchSmall.CatchTrash(target[i]);
                 LastGrabTime = Time.time;
             }
         }

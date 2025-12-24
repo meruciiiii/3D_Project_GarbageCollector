@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4050263556440167976}
   - component: {fileID: -5761919563454623973}
   - component: {fileID: -5302885375094464186}
+  - component: {fileID: -4073426693308580211}
+  - component: {fileID: 2379373545107685793}
   m_Layer: 7
   m_Name: Large_1
   m_TagString: Untagged
@@ -153,5 +155,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Trash
-  smallTrashNum: 1
-  outline_material: {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
+  size: 0
+  trashNum: 0
+  trashData: {fileID: 0}
+  trash_r: {fileID: 0}
+--- !u!114 &-4073426693308580211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3156164406800135307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Trash
+  size: 0
+  trashNum: 0
+  trashData: {fileID: 0}
+  trash_r: {fileID: 0}
+--- !u!114 &2379373545107685793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3156164406800135307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrashData

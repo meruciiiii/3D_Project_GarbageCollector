@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
         P_intro = loadData.intro;
 
         LoadComplete = true;
-        Debug.Log("LoadGamedata");
+        //Debug.Log("LoadGamedata");
     }
 
     public void SaveAllGamedata()

@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 6347013669697719936}
   - component: {fileID: 624899288951058980}
   - component: {fileID: -8509052915115945576}
+  - component: {fileID: -9184262414931835661}
+  - component: {fileID: -1420894147509692965}
   m_Layer: 6
   m_Name: Shopping Bag 3
   m_TagString: Untagged
@@ -126,8 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallTrash
-  smallTrashNum: 0
-  outline_material: {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
+  size: 0
+  trashNum: 0
+  trashData: {fileID: 0}
+  trash_r: {fileID: 0}
 --- !u!54 &-8509052915115945576
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -155,3 +159,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-9184262414931835661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944599015155736451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Trash
+  size: 0
+  trashNum: 0
+  trashData: {fileID: 0}
+  trash_r: {fileID: 0}
+--- !u!114 &-1420894147509692965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944599015155736451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrashData

@@ -31,22 +31,22 @@ public class HitsSort : MonoBehaviour
         });
 
         // 가장 가까운 요소의 레이어 파악
-        Debug.Log($"가장 가까운 레이어: {LayerMask.LayerToName(layerNum)}");
+        //Debug.Log($"가장 가까운 레이어: {LayerMask.LayerToName(layerNum)}");
 
         // 해당 레이어와 일치하는 요소만 선택
         RaycastHit[] sameLayerHits = Array.FindAll(hits, h => h.collider.gameObject.layer == layerNum);
 
         int finalCount = Mathf.Min(sameLayerHits.Length, grabLimit);
 
-        Debug.Log("sameLayerHits 개수 : " + sameLayerHits.Length);
-        Debug.Log($"--- 결과 출력 (총 {finalCount}개) ---");
+        //Debug.Log("sameLayerHits 개수 : " + sameLayerHits.Length);
+        //Debug.Log($"--- 결과 출력 (총 {finalCount}개) ---");
         RaycastHit[] finalCountLayerHits = new RaycastHit[finalCount];
         for (int i = 0; i < finalCount; i++)
         {
             //Debug.Log($"{i + 1}위: {sameLayerHits[i].collider.gameObject.name}, 거리: {sameLayerHits[i].distance:F2}");
             finalCountLayerHits[i] = sameLayerHits[i];
         }
-        Debug.Log("finalCountLayerHits 개수 : " + finalCountLayerHits.Length);
+        //Debug.Log("finalCountLayerHits 개수 : " + finalCountLayerHits.Length);
         lastHistCheck(finalCountLayerHits);
         return finalCountLayerHits;
     }
@@ -66,7 +66,6 @@ public class HitsSort : MonoBehaviour
         {
             if (lastHits == currentHits)
             {
-
             }
             else
             {
@@ -78,26 +77,10 @@ public class HitsSort : MonoBehaviour
     }
     public void currentHitsOnOutline()
     {
-        for (int i = 0; i < currentHits.Length; i++)
-        {
-            currentHits[i].collider.gameObject.TryGetComponent<Trash>(out trash);
-            trash.onOutline();
-        }
+        
     }
     public void lastHitsOffOutline()
     {
-        if(lastHits == null)
-        {
-            return;
-        }
-        for (int i = 0; i < lastHits.Length; i++)
-        {
-            if(lastHits[i].collider == null || !lastHits[i].collider.gameObject.TryGetComponent<Trash>(out trash))
-            {
-                return;
-            }
-            trash.offOutline();
-        }
-        lastHits = null;
+        
     }
 }

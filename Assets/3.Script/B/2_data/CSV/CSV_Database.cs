@@ -46,12 +46,12 @@ public class CSV_Database : MonoBehaviour
         if (!GameManager.instance.P_isEnglish) 
         { 
             Language_data = CSVReader.Read("CSV_DataKR");
-            Debug.Log("CSV_DataKR 읽기 완료");
+            //Debug.Log("CSV_DataKR 읽기 완료");
         } //Resources 안에 있는 CSV_DataKR 읽기
         else 
         {
             Language_data = CSVReader.Read("CSV_DataEN");
-            Debug.Log("CSV_DataEN 읽기 완료");
+            //Debug.Log("CSV_DataEN 읽기 완료");
         } //영문 CSV 파일 읽기
 
         // 2. 새로운 Dictionary를 만듭니다. 위에선 변수 즉 공간만 선언했었습니다.
@@ -74,12 +74,12 @@ public class CSV_Database : MonoBehaviour
         if (!GameManager.instance.P_isEnglish)
         {
             Language_garbage_data = CSVReader.Read("CSV_GarbageDataKR");
-            Debug.Log("CSV_GarbageDataKR 읽기 완료");
+            //Debug.Log("CSV_GarbageDataKR 읽기 완료");
         }
         else
         {
             Language_garbage_data = CSVReader.Read("CSV_GarbageDataEN");
-            Debug.Log("CSV_GarbageDataEN 읽기 완료");
+            //Debug.Log("CSV_GarbageDataEN 읽기 완료");
         }
 
         GarbageMap = new Dictionary<string, Dictionary<string, object>>();

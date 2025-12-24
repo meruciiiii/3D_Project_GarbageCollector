@@ -2,33 +2,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Trash : MonoBehaviour
 {
-    [SerializeField] private int smallTrashNum;
-    public int getTrashNum()
+    public enum TrashSize
     {
-        return smallTrashNum;
+        Small,
+        Large
     }
+    [SerializeField] private TrashSize size;
+    [SerializeField] private int trashNum;
+    [SerializeField] private TrashData trashData;
+    [SerializeField] private Rigidbody trash_r;
 
-    [SerializeField] private Material outline_material;
-    private Renderer render;
-
-    private void Start() {
-        TryGetComponent(out render);
-    }
-
-    public void onOutline() {
-        List<Material> materials = render.sharedMaterials.ToList();
-        materials.Add(outline_material);
-        render.materials = materials.ToArray();
-    }
-
-    public void offOutline() {
-        List<Material> materials = render.sharedMaterials.ToList();
-        materials.Remove(outline_material);
-        render.materials = materials.ToArray();
-    }
+    public TrashSize Size => size;
+    public int TrashNum => trashNum;
+    public TrashData Data => trashData;
+    public Rigidbody Trash_r => trash_r;
 }
