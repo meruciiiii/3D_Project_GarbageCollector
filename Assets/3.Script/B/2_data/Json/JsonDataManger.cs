@@ -11,7 +11,7 @@ public class PlayerData
     public int Str = 1;
     public int Spd = 5;
     public int Money = 0;
-    public int bag = 10000;
+    public int bag = 5000;
 
     public int grab = 1;
     public float grabspd = 1.5f;
