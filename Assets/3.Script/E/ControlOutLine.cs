@@ -12,7 +12,7 @@ public class ControlOutLine : MonoBehaviour
 
     private void Start()
     {
-        TryGetComponent(out render);
+        if (!TryGetComponent(out render)) return;
     }
 
     public void onOutline()

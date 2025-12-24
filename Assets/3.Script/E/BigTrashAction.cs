@@ -7,34 +7,43 @@ using UnityEngine;
 public class BigTrashAction : MonoBehaviour
 {
     private Trash currentTrash;
-    public void TryInteractWithBigTrash(Trash trash)
-    {
-        if (!GameManager.instance.isGrabBigGarbage)
-        {
-            DrobGarbage(trash);
-        }
-        else
-        {
-            Hold(trash);
-        }
-    }
+    private bool isHolding => currentTrash != null;
+    public bool IsHolding => isHolding;
+    //public void TryInteractWithBigTrash(Trash trash)
+    //{
+    //    if (IsHolding)
+    //    {
+    //        DrobGarbage(trash);
+    //    }
+    //    else
+    //    {
+    //        Hold(trash);
+    //    }
+    //}
     public void Hold(Trash trash)
     {
         if (CanHold(trash.Data.getrequiredStrength(trash.TrashNum)))
             return;
         currentTrash = trash;
+        Debug.Log(transform.GetChild(trash.TrashNum + 1).gameObject.name+" 활성화?" +transform.GetChild(trash.TrashNum + 1).gameObject.activeSelf);
         transform.GetChild(trash.TrashNum + 1).gameObject.SetActive(true);
-        GameManager.instance.P_Weight += GameManager.instance.P_Weight + trash.Data.getSmallTrashWeight(trash.TrashNum);
+        Debug.Log(transform.GetChild(trash.TrashNum + 1).gameObject.name+" 활성화?" +transform.GetChild(trash.TrashNum + 1).gameObject.activeSelf);
+        GameManager.instance.BigGarbageWeight = trash.Data.getBigTrashWeight(trash.TrashNum);
+        currentTrash.Trash_c.enabled = false;
+        currentTrash.Trash_render.enabled = false;
+        GameManager.instance.isGrabBigGarbage = true;
     }
     public bool CanHold(int strength)
     {
-        if (GameManager.instance.P_Str >= strength)
+        if (GameManager.instance.P_Str < strength)
             return true; //들 수 있다.
         else
             return false; //들 수 없다.
     }
-    public void DrobGarbage(Trash trash)                                                                //수정해야 할 것
+    public void DrobGarbage()                                                                //수정해야 할 것
     {
+        Trash trash = currentTrash;
+        Debug.Log("is it Droping");
         Transform trashRotation = trash.transform;                                                                //trash
         trashRotation.rotation = transform.GetChild(trash.TrashNum + 1).gameObject.transform.rotation;
         transform.GetChild(trash.TrashNum + 1).gameObject.SetActive(false);
@@ -48,6 +57,9 @@ public class BigTrashAction : MonoBehaviour
         trash.Trash_r.AddTorque(Vector3.Cross(Vector3.up, direction) * 1f);
         //Debug.Log(transform.position);
         GameManager.instance.isGrabBigGarbage = false;
+        currentTrash.Trash_c.enabled = true;
+        currentTrash.Trash_render.enabled = true;
+        currentTrash = null;
     }
     public void SellHeldTrash()
     {
@@ -56,7 +68,5 @@ public class BigTrashAction : MonoBehaviour
         transform.GetChild(currentTrash.TrashNum + 1).gameObject.SetActive(false);
         Destroy(currentTrash.gameObject);
         currentTrash = null;
-        // 손에 들고 있던 비주얼 끄기
-        // 돈 지급
     }
 }

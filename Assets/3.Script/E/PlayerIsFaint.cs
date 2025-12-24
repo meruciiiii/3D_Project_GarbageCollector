@@ -63,9 +63,10 @@ public class PlayerIsFaint : MonoBehaviour
     private void DoNotControl(bool isFaint)
     {
         PlayerController playerController;
-        TryGetComponent<PlayerController>(out playerController);
+        if (!TryGetComponent<PlayerController>(out playerController))
+            return;
         Rigidbody Player_r;
-        TryGetComponent<Rigidbody>(out Player_r);
+        if(!TryGetComponent<Rigidbody>(out Player_r))return;
         if (Player_r != null)
         {
             Player_r.linearVelocity = Vector3.zero;

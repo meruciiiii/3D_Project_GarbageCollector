@@ -6,10 +6,11 @@ using UnityEngine;
 
 public class TrashData : MonoBehaviour
 {
-    private int[] SmallTrashWeight = new int[6];//10
-    private int[] SmallTrashHpdecrease = new int[6];//10
-    private int[] BigTrashrequiredStrength = new int[6];//8
-    private int[] BigTrashHpdecrease = new int[6];//8
+    private int[] SmallTrashWeight = new int[10];
+    private int[] SmallTrashHpdecrease = new int[10];
+    private int[] BigTrashrequiredStrength = new int[8];
+    private int[] BigTrashHpdecrease = new int[8];
+    private int[] BigTrashWeight = new int[8];
     private void Awake()
     {
         for (int i = 0; i < SmallTrashWeight.Length; i++)
@@ -35,6 +36,7 @@ public class TrashData : MonoBehaviour
         {
             object sample = data["weight"]; ;
             SmallTrashWeight[i] = (int)sample;
+            sample = data["Hpdecrease"]; ;
             SmallTrashHpdecrease[i] = (int)sample;
         }
         else
@@ -53,7 +55,10 @@ public class TrashData : MonoBehaviour
             object sample = data["requireSrt"]; ;
             //Debug.Log(trashName + " : " + (int)sample);
             BigTrashrequiredStrength[i] = (int)sample;
+            sample = data["Hpdecrease"]; ;
             BigTrashHpdecrease[i] = (int)sample;
+            sample = data["weight"]; ;
+            BigTrashWeight[i] = (int)sample;
         }
         else
         {
@@ -90,5 +95,9 @@ public class TrashData : MonoBehaviour
     public int getBigTrashHpdecrease(int i)
     {
         return BigTrashHpdecrease[i];
+    }
+    public int getBigTrashWeight(int i)
+    {
+        return BigTrashWeight[i];
     }
 }

@@ -41,6 +41,7 @@ public class PlayerWork : MonoBehaviour
     [SerializeField] private PlayerInput input;
     [SerializeField] public SmallTrashAction smallTrashAction;
     [SerializeField] public BigTrashAction bigTrashAction;
+    [SerializeField] public HumanTrashAction humanTrashAction;
 
 
     public void Awake()
@@ -123,6 +124,17 @@ public class PlayerWork : MonoBehaviour
     }
     private void Interact(PlayerWork player)
     {
+        if (humanTrashAction.IsHolding)
+        {
+            humanTrashAction.DrobGarbage();
+            Debug.Log("실행했나요?");
+            return;
+        }
+        if (bigTrashAction.IsHolding)
+        {
+            bigTrashAction.DrobGarbage();
+            return;
+        }
         if (target == null || target.Length == 0) return;
         ///if(target[0].TryGetComponent<IInteractable>(out IInteractable interactable))
         ///{
