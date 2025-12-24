@@ -39,11 +39,10 @@ public class GameManager : MonoBehaviour
     {
         P_CurrentHP = Mathf.Clamp(P_CurrentHP + HPindecrease, 0, P_MaxHP);//최대 최소 체력 제한
     }
-    //P_Str,P_Spd,P_Money,P_Maxbag은 참조해서 사용
 
     public bool LoadComplete { get; private set; } = false;
 
-    public bool isPaused = false;//퍼즈시에 쓰레기 못줍게
+    public bool isPaused = false;//퍼즈시에 쓰레기 못줍게, 정산, 업그레이드창 안뜨게
 
     public static GameManager instance = null;
     private void Awake()
@@ -67,7 +66,6 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WaitForDataManagerAndLoad()
     {
-        //우진님 피드백으로 일단 싱글톤 제거할 수 있었던 jsondatamanager제거
         LoadGamedata();
 
         while (CSV_Database.instance == null)

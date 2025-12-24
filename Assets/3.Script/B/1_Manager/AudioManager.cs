@@ -83,8 +83,7 @@ public class AudioManager : MonoBehaviour
 
     private IEnumerator FadeBGM(AudioClip newClip)
     {
-        // 1. Fade Out
-        if (BGM_Player.isPlaying)
+        if (BGM_Player.isPlaying) // 1. Fade Out
         {
             while (BGM_Player.volume > 0)
             {
@@ -92,17 +91,14 @@ public class AudioManager : MonoBehaviour
                 yield return null;
             }
         }
-
-        // 2. 클립 교체
-        BGM_Player.clip = newClip;
+        
+        BGM_Player.clip = newClip; // 2. 클립 교체
         BGM_Player.outputAudioMixerGroup = BGM;
         BGM_Player.loop = true;
         BGM_Player.Play();
-
-        // 3. Fade In
-        while (BGM_Player.volume < 1.0f)
+        
+        while (BGM_Player.volume < 1.0f) // 3. Fade In
         {
-           
             BGM_Player.volume += Time.deltaTime / fadeDuration;
             yield return null;
         }
@@ -139,7 +135,8 @@ public class AudioManager : MonoBehaviour
         }
     }
     
-    public void Play3DSFX(string name, Transform gameobject) //AudioManager.instance.Play3DSFX("3D_SFX", this.transform);
+    public void Play3DSFX(string name, Transform gameobject) 
+        //사용방식 AudioManager.instance.Play3DSFX("3D_SFX", this.transform);
     {
         foreach(Sound s in SFX_3D_clip)
         {
