@@ -14,6 +14,7 @@ public class SoundController : MonoBehaviour
     {
         LoadAndApplyVolume("BGM", 0);
         LoadAndApplyVolume("SFX", 1);
+        LoadAndApplyVolume("Master", 2);
     }
 
     private void LoadAndApplyVolume(string parameter, int SliderIndex)
@@ -21,7 +22,10 @@ public class SoundController : MonoBehaviour
         string key = "volume_" + parameter;
         float savedValue = PlayerPrefs.GetFloat(key, 75f); //기본값 75
 
-        sliders[SliderIndex].value = savedValue;
+        if (SliderIndex < sliders.Length && sliders[SliderIndex] != null)
+        {
+            sliders[SliderIndex].value = savedValue;
+        }
 
         ApplyToMixer(parameter, savedValue);
     }
@@ -39,10 +43,16 @@ public class SoundController : MonoBehaviour
 
     public void ControllVolume(string audioGroup)
     {
-        int index = 0;
-        if (audioGroup == "BGM") index = 0;
-        else if (audioGroup == "SFX") index = 1;
-        else { Debug.Log("audioGroup 이름이 없습니다."); return; }
+        int index = -1;//선택이 없으면 -1로 들어가서 default
+        switch (audioGroup)
+        {
+            case "BGM": index = 0; break;
+            case "SFX": index = 1; break;
+            case "Master": index = 2; break;
+            default:
+                Debug.LogWarning($"{audioGroup}은(는) 잘못된 이름입니다.");
+                return;
+        }
 
         float snappedValue = Mathf.Round(sliders[index].value / snapValue) * snapValue; //5단위 반올림
         sliders[index].value = snappedValue;

@@ -1,14 +1,16 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using System.Collections;
 
 public class StartSoundApplier : MonoBehaviour
 {
     [SerializeField] private AudioMixer audiomixer;
-    void Start()
+    IEnumerator Start()
     {
-        // 게임 시작하자마자 저장된 볼륨을 불러와서 믹서에 적용
+        yield return new WaitForSecondsRealtime(0.05f);
         Apply("BGM");
         Apply("SFX");
+        Apply("Master");
     }
 
     private void Apply(string parameter)
