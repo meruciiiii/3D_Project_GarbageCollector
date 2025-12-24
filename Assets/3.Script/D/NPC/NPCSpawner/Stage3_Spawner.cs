@@ -7,6 +7,10 @@ public class Stage3_Spawner : NPC_Spawner {
 		StartCoroutine(NPC_Spawn_co());
 	}
 
+	private void OnDisable() {
+		StopAllCoroutines();
+	}
+
 	private IEnumerator NPC_Spawn_co() {
 		while (true) {
 			seconds = new WaitForSeconds(Random.Range(min_sec, max_sec));

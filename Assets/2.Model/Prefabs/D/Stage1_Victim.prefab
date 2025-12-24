@@ -657,7 +657,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2970450682493004797}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52d7ed0c7f4a5754ba83cc27b1342ae4, type: 3}
   m_Name: 
@@ -672,7 +672,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2970450682493004797}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73b60e0c1e4ef174fbf29bbc8af8631d, type: 3}
   m_Name: 
@@ -1822,7 +1822,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4311250962360718813}
   - component: {fileID: 5355724423350923839}
-  - component: {fileID: 7971638228639824532}
   m_Layer: 9
   m_Name: Character
   m_TagString: Untagged
@@ -1881,33 +1880,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7971638228639824532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6557946471976376174}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db712d8426a1b042b9185c47a503793, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PrivateLT.CharacterCustomization.NPC_Random_Mesh
-  customizationData: {fileID: 11400000, guid: d8a971c0f08537a46a05b8a4a00872a5, type: 2}
-  _customizationParts:
-  - SkinnedMeshRenderer: {fileID: 6051819812071938909}
-  - SkinnedMeshRenderer: {fileID: 2487916811182978678}
-  - SkinnedMeshRenderer: {fileID: 3498606553307879234}
-  - SkinnedMeshRenderer: {fileID: 5202384943912258219}
-  - SkinnedMeshRenderer: {fileID: 2356552242082146630}
-  - SkinnedMeshRenderer: {fileID: 4422307102786159300}
-  - SkinnedMeshRenderer: {fileID: 8473867699474649692}
-  - SkinnedMeshRenderer: {fileID: 1321847995665462228}
-  - SkinnedMeshRenderer: {fileID: 4941811802633685556}
-  - SkinnedMeshRenderer: {fileID: 5313214201405004413}
-  - SkinnedMeshRenderer: {fileID: 7581956939021157898}
-  - SkinnedMeshRenderer: {fileID: 6555523875617313537}
-  - SkinnedMeshRenderer: {fileID: 9070409089511558911}
 --- !u!1 &6613522825501612766
 GameObject:
   m_ObjectHideFlags: 0

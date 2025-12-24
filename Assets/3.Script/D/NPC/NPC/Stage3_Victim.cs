@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Stage3_Victim : NPC_Controller {
-	[Header("¾²·¹±â ¹ö¸² °¹¼ö")]
+	[Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
 	[SerializeField] private int cultive_count;
 	[SerializeField] private int max_cultive_count;
 
-	[Header("¾²·¹±â µå¶ø ÁÖ±â")]
+	[Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½")]
 	[SerializeField] private float min_sec;
 	[SerializeField] private float max_sec;
 	private WaitForSeconds seconds;
 
 	private void OnEnable() {
 		cultive_count = 0;
+	}
+
+	private void OnDisable() {
+		StopAllCoroutines();
 	}
 
 	public override void start() {

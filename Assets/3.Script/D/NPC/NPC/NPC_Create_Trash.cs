@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NPC_Create_Trash : MonoBehaviour {
-	[Header("¾²·¹±â ÇÁ¸®ÆÕ")]
+	[Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
 	[SerializeField] private GameObject[] trash_prefabs;
 
-	[Header("´øÁö´Â ¹æÇâ, Èû")]
+	[Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½")]
 	public Vector3 throw_vector;
 	[SerializeField] private float throw_power;
 
@@ -25,5 +25,6 @@ public class NPC_Create_Trash : MonoBehaviour {
 		trash.transform.rotation = randomRotation;
 		trash.TryGetComponent(out Rigidbody trashRB);
 		trashRB.AddForce(throw_vector * throw_power, ForceMode.Impulse);
+		Destroy(trash, 10.0f);
 	}
 }
