@@ -104,7 +104,7 @@ public class UpgradeUI : MonoBehaviour
     {
         if (GameManager.instance == null || upgradeManager == null) return;
 
-        moneyText.text = $"보유 자원: {GameManager.instance.P_Money}";
+        moneyText.text = $"Current Money: {GameManager.instance.P_Money}";
 
         // 1. 힘 (상수 참조)
         if (strPriceText != null)
@@ -114,11 +114,11 @@ public class UpgradeUI : MonoBehaviour
                 if (GameManager.instance.P_Str >= UpgradeManager.STR_ULTIMATE)
                     strPriceText.text = "ULTIMATE MAX";
                 else
-                    strPriceText.text = "MAX (한계 도달)";
+                    strPriceText.text = "MAX";
             }
             else
             {
-                strPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.Strength)}";
+                strPriceText.text = $"Price: {upgradeManager.GetUpgradeCost(UpgradeType.Strength)}";
             }
         }
 
@@ -132,7 +132,7 @@ public class UpgradeUI : MonoBehaviour
             }
             else
             {
-                bagPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.BagWeight)}";
+                bagPriceText.text = $"Price: {upgradeManager.GetUpgradeCost(UpgradeType.BagWeight)}";
             }
         }
 
@@ -142,7 +142,7 @@ public class UpgradeUI : MonoBehaviour
             if (GameManager.instance.P_MaxHP >= UpgradeManager.MAX_HP_LIMIT)
                 maxHPPriceText.text = "MAX LEVEL";
             else
-                maxHPPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.MaxHP)}";
+                maxHPPriceText.text = $"Price: {upgradeManager.GetUpgradeCost(UpgradeType.MaxHP)}";
         }
 
         // 4. 속도
@@ -151,7 +151,7 @@ public class UpgradeUI : MonoBehaviour
             if (GameManager.instance.grab_speed <= UpgradeManager.MIN_PICK_SPEED)
                 speedPriceText.text = "MAX LEVEL";
             else
-                speedPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.PickSpeed)}";
+                speedPriceText.text = $"Price: {upgradeManager.GetUpgradeCost(UpgradeType.PickSpeed)}";
         }
 
         // 5. 다중 줍기
@@ -160,7 +160,7 @@ public class UpgradeUI : MonoBehaviour
             if (GameManager.instance.grab_limit >= UpgradeManager.MAX_GRAB_LIMIT)
                 multiGrabPriceText.text = "MAX LEVEL";
             else
-                multiGrabPriceText.text = $"비용: {upgradeManager.GetUpgradeCost(UpgradeType.MultiGrab)}";
+                multiGrabPriceText.text = $"Price: {upgradeManager.GetUpgradeCost(UpgradeType.MultiGrab)}";
         }
 
         // ... (히든 업그레이드 UI 로직 유지) ...
@@ -170,19 +170,19 @@ public class UpgradeUI : MonoBehaviour
             {
                 if (GameManager.instance.P_Str >= UpgradeManager.STR_ULTIMATE)
                 {
-                    txtPickNPCInfo.text = "구매 완료 (힘 7)";
+                    txtPickNPCInfo.text = "Purchase completed (힘 7)";
                     btnPickNPC.interactable = false;
                 }
                 else
                 {
                     int cost = upgradeManager.GetUpgradeCost(UpgradeType.PickNPC);
-                    txtPickNPCInfo.text = $"인간 들기 (한계돌파)\n비용: {cost}";
+                    txtPickNPCInfo.text = $"PickUP Human (한계돌파)\nPrice: {cost}";
                     btnPickNPC.interactable = true;
                 }
             }
             else
             {
-                txtPickNPCInfo.text = "???\n(모든 능력 MAX 필요)";
+                txtPickNPCInfo.text = "???";
                 btnPickNPC.interactable = false;
             }
         }
