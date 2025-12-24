@@ -257,6 +257,34 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2514350633498398240, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+      propertyPath: trashNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811247253462946627, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+      propertyPath: size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811247253462946627, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+      propertyPath: trash_c
+      value: 
+      objectReference: {fileID: 2038218357}
+    - target: {fileID: 2811247253462946627, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+      propertyPath: trash_r
+      value: 
+      objectReference: {fileID: 2038218356}
+    - target: {fileID: 2811247253462946627, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+      propertyPath: trashNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2811247253462946627, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+      propertyPath: trashData
+      value: 
+      objectReference: {fileID: 2038218360}
+    - target: {fileID: 2811247253462946627, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+      propertyPath: trash_render
+      value: 
+      objectReference: {fileID: 2038218358}
     - target: {fileID: 3182276385910502966, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -350,16 +378,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 8592115436197745213, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
-    - {fileID: 5282469862505395713, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
-    - {fileID: 3921648976225186941, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
-    - {fileID: 6953955677999246583, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
-    - {fileID: 4261858771191932861, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
-    - {fileID: 9176754442209872324, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
-    - {fileID: 8337523644399831994, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5455887422099380549, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2038218362}
     - targetCorrespondingSourceObject: {fileID: 7850224437989786814, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2055090983}
@@ -1353,10 +1384,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ThashInfo
   tooltipText: {fileID: 1888669851}
   tooltipPanel: {fileID: 0}
-  checkDistance: 3
+  checkDistance: 3.5
   trashLayerMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 4294967295
 --- !u!1 &1213907183 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6859401122917240995, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
@@ -1904,6 +1935,49 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c587aceb4c9e57b429fbd4bc2caae7bd, type: 3}
+--- !u!1 &2038218353 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5455887422099380549, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+  m_PrefabInstance: {fileID: 33962781}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &2038218356 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 5796777950060028629, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+  m_PrefabInstance: {fileID: 33962781}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &2038218357 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 6363211635030457318, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+  m_PrefabInstance: {fileID: 33962781}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2038218358 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2464197719768507101, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+  m_PrefabInstance: {fileID: 33962781}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2038218360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4719488565310385263, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+  m_PrefabInstance: {fileID: 33962781}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038218353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrashData
+--- !u!114 &2038218362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038218353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fc4037463a9f24cab292f9658d0225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BigTrashHoldable
 --- !u!1 &2055090980 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7850224437989786814, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
