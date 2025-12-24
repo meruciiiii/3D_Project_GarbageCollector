@@ -332,6 +332,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 9.89
       objectReference: {fileID: 0}
+    - target: {fileID: 4299246659859771061, guid: 755a5db459a7d7c47839d714188c3cae, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8f21afcae59005145a9b62e74da13542, type: 2}
     - target: {fileID: 7908012585378873098, guid: 755a5db459a7d7c47839d714188c3cae, type: 3}
       propertyPath: NPC_prefabs
       value: 
@@ -358,6 +362,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 103953357967709982, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5254380294658193567, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
       propertyPath: m_Name
       value: Garbage
@@ -425,7 +433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5653073563824068037, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6875371760015618421, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
       propertyPath: m_LocalScale.x
@@ -539,6 +547,10 @@ PrefabInstance:
     - target: {fileID: 8219868553128016426, guid: 2af119bc682878a47810b9d317957377, type: 3}
       propertyPath: m_Name
       value: City
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219868553128016426, guid: 2af119bc682878a47810b9d317957377, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
