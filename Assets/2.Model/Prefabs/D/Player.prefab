@@ -462,6 +462,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4205599169637202191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 36875978162177064}
+  m_Layer: 3
+  m_Name: HumanData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &36875978162177064
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4205599169637202191}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.63452566, y: -0.51162755, z: 0.3252157, w: 0.479426}
+  m_LocalPosition: {x: 0.6200006, y: 0.86, z: 0.9700004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6875371760015618421}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5653073563824068037
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +518,7 @@ GameObject:
   - component: {fileID: 339537357279044413}
   - component: {fileID: 151181822787313401}
   - component: {fileID: 5800795349668135749}
+  - component: {fileID: 1095018349714398221}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -514,6 +546,7 @@ Transform:
   - {fileID: 1413791414137392988}
   - {fileID: 1854098231485128786}
   - {fileID: 3447716619705391381}
+  - {fileID: 36875978162177064}
   - {fileID: 6941614321219483863}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -822,7 +855,7 @@ MonoBehaviour:
   input: {fileID: 4076259103573898125}
   smallTrashAction: {fileID: 151181822787313401}
   bigTrashAction: {fileID: 339537357279044413}
-  humanTrashAction: {fileID: 5800795349668135749}
+  humanTrashAction: {fileID: 1095018349714398221}
 --- !u!114 &1467396829818393056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -973,6 +1006,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallTrashAction
 --- !u!114 &5800795349668135749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5653073563824068037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 553b7d92e193eff4eab498ed1eb2a0c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HumanTrashAction
+  liftCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  liftDuration: 0.5
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &1095018349714398221
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

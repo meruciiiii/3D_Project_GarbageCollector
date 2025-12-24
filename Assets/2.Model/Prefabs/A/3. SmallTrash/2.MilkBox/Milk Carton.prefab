@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 3390222364245057208}
   - component: {fileID: 6095367464445612122}
   - component: {fileID: 4750086910239549691}
-  - component: {fileID: 6176585700867123924}
   - component: {fileID: -3025634595655488689}
-  - component: {fileID: -3872843048761774240}
+  - component: {fileID: 6176585700867123924}
+  - component: {fileID: -4627476906172089505}
+  - component: {fileID: 7347961507377803315}
   m_Layer: 6
   m_Name: Milk Carton
   m_TagString: Untagged
@@ -129,20 +130,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hided: 1
---- !u!114 &6176585700867123924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7946040378292410523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SmallTrash
-  smallTrashNum: 2
-  outline_material: {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
 --- !u!54 &-3025634595655488689
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -170,21 +157,45 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-3872843048761774240
+--- !u!114 &6176585700867123924
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7946040378292410523}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 1
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 5
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
+  m_EditorClassIdentifier: Assembly-CSharp::SmallTrash
+  size: 0
+  trashNum: 2
+  trashData: {fileID: -4627476906172089505}
+  trash_r: {fileID: -3025634595655488689}
+  trash_c: {fileID: 6095367464445612122}
+  trash_render: {fileID: 3390222364245057208}
+--- !u!114 &-4627476906172089505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946040378292410523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrashData
+--- !u!114 &7347961507377803315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946040378292410523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447de1ffe67d0a74d9210b779a8d0c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmallTrashCollectable

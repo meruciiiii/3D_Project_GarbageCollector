@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 2787229380007934188}
   - component: {fileID: 3771271600374762322}
   - component: {fileID: 5172679308205448972}
+  - component: {fileID: 6279626957704070665}
+  - component: {fileID: -1724506300899062841}
   m_Layer: 6
   m_Name: Keyboard 2
   m_TagString: Untagged
@@ -144,8 +146,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Trash
-  smallTrashNum: 9
-  outline_material: {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
+  size: 0
+  trashNum: 9
+  trashData: {fileID: 6279626957704070665}
+  trash_r: {fileID: 3771271600374762322}
+  trash_c: {fileID: 4354881922248558151}
+  trash_render: {fileID: 4858226121339262845}
 --- !u!54 &3771271600374762322
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -191,3 +197,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &6279626957704070665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4602959285681396069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrashData
+--- !u!114 &-1724506300899062841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4602959285681396069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447de1ffe67d0a74d9210b779a8d0c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmallTrashCollectable

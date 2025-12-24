@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 1097326516262234654}
   - component: {fileID: 5142340987969117853}
   - component: {fileID: 4708239375364106602}
-  - component: {fileID: 1439673145704577933}
   - component: {fileID: 3447841397772277478}
   - component: {fileID: 6714134477781424087}
   - component: {fileID: -1401607336133336427}
-  - component: {fileID: 8592019204563337921}
+  - component: {fileID: -1661469332544544298}
+  - component: {fileID: -1880433417678786830}
   m_Layer: 6
   m_Name: Bottled Yogurt 2
   m_TagString: Untagged
@@ -95,22 +95,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1439673145704577933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5143814708430083730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SmallTrash
-  size: 0
-  trashNum: 0
-  trashData: {fileID: 0}
-  trash_r: {fileID: 0}
 --- !u!54 &3447841397772277478
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -174,9 +158,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Trash
   size: 0
   trashNum: 0
-  trashData: {fileID: 0}
-  trash_r: {fileID: 0}
---- !u!114 &8592019204563337921
+  trashData: {fileID: -1661469332544544298}
+  trash_r: {fileID: 3447841397772277478}
+  trash_c: {fileID: 6714134477781424087}
+  trash_render: {fileID: 4708239375364106602}
+--- !u!114 &-1661469332544544298
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,3 +174,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrashData
+--- !u!114 &-1880433417678786830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143814708430083730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447de1ffe67d0a74d9210b779a8d0c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmallTrashCollectable
