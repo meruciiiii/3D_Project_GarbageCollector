@@ -28,6 +28,7 @@ public class NPC_Controller : MonoBehaviour {
 	public void set_pos(Vector3 start_pos, Vector3 end_pos) {
 		this.start_pos = start_pos;
 		this.end_pos = end_pos;
+		Debug.Log(start_pos);
 		npc_agent.Warp(start_pos);
 	}
 

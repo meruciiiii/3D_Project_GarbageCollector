@@ -16,15 +16,15 @@ public class Stage1_Spawner : NPC_Spawner {
 	private IEnumerator NPC_Spawn_co() {
 		while(true) {
 			seconds = new WaitForSeconds(Random.Range(min_sec, max_sec));
-			if(npc_pooling[pool_current].activeSelf) {
-				NPC_Pooling_ReSize();
-				pool_current = pool_count - 1;
-			}
+			//if(npc_pooling[pool_current].activeSelf) {
+			//	NPC_Pooling_ReSize();
+			//	pool_current = pool_count - 1;
+			//}
 			GameObject victim = npc_pooling[pool_current];
 			victim.TryGetComponent(out Stage1_Victim victim_pattern);
 			Rnd_Set_Pos();
-			victim_pattern.set_pos(start_pos.position, end_pos.position, cultive_pos.transform.position, cultive_dir.transform.position);
 			victim.SetActive(true);
+			victim_pattern.set_pos(start_pos.position, end_pos.position, cultive_pos.transform.position, cultive_dir.transform.position);
 			victim_pattern.start();
 			pool_current++;
 			if(pool_current.Equals(pool_count)) { pool_current = 0; }
