@@ -41,10 +41,10 @@ public class NPC_Spawner : MonoBehaviour {
 		end_pos = locations_list[rad_val];
 	}
 
-	//protected void NPC_Pooling_ReSize() {
-	//	Debug.Log("眠啊积己");
-	//	pool_count += 1;
-	//	Array.Resize(ref npc_pooling, pool_count);
-	//	npc_pooling[pool_count - 1] = Instantiate(NPC_prefabs);
-	//}
+	protected void NPC_Pooling_ReSize() {
+		Debug.Log("眠啊积己");
+		pool_count += 1;
+		Array.Resize(ref npc_pooling, pool_count);
+		npc_pooling[pool_count - 1] = Instantiate(NPC_prefabs);
+	}
 }
