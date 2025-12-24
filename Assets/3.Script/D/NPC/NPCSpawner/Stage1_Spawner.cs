@@ -9,11 +9,12 @@ public class Stage1_Spawner : NPC_Spawner {
 	[SerializeField] private GameObject cultive_pos;
 	[SerializeField] private GameObject cultive_dir;
 
-	private void OnEnable() {
-		StartCoroutine(NPC_Spawn_co());
-	}
 
-	private IEnumerator NPC_Spawn_co() {
+	
+    private void OnEnable() {
+		StartCoroutine(NPC_Spawn_co());
+    }
+    private IEnumerator NPC_Spawn_co() {
 		while(true) {
 			seconds = new WaitForSeconds(Random.Range(min_sec, max_sec));
 			//if(npc_pooling[pool_current].activeSelf) {
@@ -25,7 +26,7 @@ public class Stage1_Spawner : NPC_Spawner {
 			Rnd_Set_Pos();
 			victim.SetActive(true);
 			victim_pattern.set_pos(start_pos.position, end_pos.position, cultive_pos.transform.position, cultive_dir.transform.position);
-			victim_pattern.start();
+			victim_pattern.start();// ?
 			pool_current++;
 			if(pool_current.Equals(pool_count)) { pool_current = 0; }
 			yield return seconds;

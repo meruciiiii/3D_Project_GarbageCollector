@@ -40,10 +40,20 @@ public class NPC_Controller : MonoBehaviour {
 	}
 	protected IEnumerator Move_co(Vector3 target_point) {
 		transform.LookAt(target_point);
-		while (Vector3.SqrMagnitude(transform.position - target_point) >= 0.01f) {
-			npc_agent.SetDestination(target_point);
-			yield return null;
-		}
-		transform.position = target_point;
+		//todo1224
+		//while (Vector3.SqrMagnitude(transform.position - target_point) >= 0.01f) {
+		//	npc_agent.SetDestination(target_point);
+		//	yield return null;
+		//}
+		npc_agent.SetDestination(target_point);
+		yield return new WaitForSeconds(10f);
+        //transform.position = target_point;
+	}
+
+	public void destination(Vector3 targetPos)
+    {
+		transform.LookAt(targetPos);
+		npc_agent.SetDestination(targetPos);
+
 	}
 }
