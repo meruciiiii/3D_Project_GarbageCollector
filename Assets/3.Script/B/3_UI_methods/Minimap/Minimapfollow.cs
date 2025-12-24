@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Minimapfollow : MonoBehaviour
+public class Minimapfollow : MonoBehaviour//미니맵 서브 카메라에 같이 붙을 컴포넌트입니다. 카메라가 움직임!
 {
     [SerializeField] private Transform player;
     private float height = 250f;

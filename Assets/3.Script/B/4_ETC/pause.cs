@@ -14,7 +14,6 @@ public class pause : MonoBehaviour
     [Header("플레이어 연결")] private PlayerController controller;
 
     private PlayerInput input;
-    private bool ispause = false;
 
     private void Awake()
     {
