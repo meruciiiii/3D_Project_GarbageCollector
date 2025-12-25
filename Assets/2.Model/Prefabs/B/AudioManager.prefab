@@ -606,7 +606,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   BGM: {fileID: 8320345512917189993, guid: e493601864293f44f97480476bdad2ee, type: 2}
   SFX: {fileID: -7318383979575066187, guid: e493601864293f44f97480476bdad2ee, type: 2}
-  BGM_clip: []
+  BGM_clip:
+  - name: BGM1
+    clip: {fileID: 8300000, guid: 14450614e6e9edb45a7f4d6d7a6ad34c, type: 3}
   SFX_clip: []
   SFX_3D_clip: []
   BGM_Player: {fileID: 0}
