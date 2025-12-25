@@ -13,18 +13,40 @@ public class Sound
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance = null;
+    [SerializeField] private AudioMixer audioMixer;
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            AutoSetting();
         }
         else
         {
             Destroy(gameObject);
+            return;
         }
-        AutoSetting();
+    }
+
+    private void Start()
+    {
+        LoadAllVolumes();
+    }
+    private void AutoSetting()
+    {
+        BGM_Player = transform.GetChild(0).GetComponent<AudioSource>();
+        SFX_Player = transform.GetChild(1).GetComponents<AudioSource>();
+        sfx3DContainer = transform.GetChild(2);
+        SFX_3D_Player = transform.GetChild(2).GetComponentsInChildren<AudioSource>();
+    }
+
+    private void LoadAllVolumes()
+    {
+        SetVolume("Master", PlayerPrefs.GetFloat("volume_Master", defaultVolume));
+        SetVolume("BGM", PlayerPrefs.GetFloat("volume_BGM", defaultVolume));
+        SetVolume("SFX", PlayerPrefs.GetFloat("volume_SFX", defaultVolume));
     }
 
     [Header("AudioGroup")]
@@ -49,15 +71,24 @@ public class AudioManager : MonoBehaviour
     private Coroutine bgmFadeCoroutine; // 현재 실행 중인 페이드 관리
 
     private Transform sfx3DContainer; //3D 플레이어 위치. 게임 오브젝트 파괴시 사라지는거 방지
+    private const float defaultVolume = 75f;
 
-    private void AutoSetting()
+    public void SetVolume(string parameter, float sliderValue)
     {
-        BGM_Player = transform.GetChild(0).GetComponent<AudioSource>();
-        SFX_Player = transform.GetChild(1).GetComponents<AudioSource>();
-        SFX_3D_Player = transform.GetChild(2).GetComponentsInChildren<AudioSource>();
-        sfx3DContainer = transform.GetChild(2);
+        // 1. 오디오 믹서 적용
+        float normalizeValue = Mathf.Clamp(sliderValue / 100f, 0.0001f, 1f);
+        float dB = Mathf.Log10(normalizeValue) * 20;
+        audioMixer.SetFloat(parameter, dB);
+
+        // 2. 데이터 저장
+        PlayerPrefs.SetFloat("volume_" + parameter, sliderValue);
     }
 
+    // 현재 저장된 볼륨 값을 가져오는 함수 (슬라이더 초기화용)
+    public float GetSavedVolume(string parameter)
+    {
+        return PlayerPrefs.GetFloat("volume_" + parameter, 75f);
+    }
     public void PlayBGM(string name)
     {
         foreach(Sound s in BGM_clip)
@@ -85,13 +116,18 @@ public class AudioManager : MonoBehaviour
     {
         if (BGM_Player.isPlaying) // 1. Fade Out
         {
+            float startVol = BGM_Player.volume; // 현재 볼륨 기억
             while (BGM_Player.volume > 0)
             {
-                BGM_Player.volume -= Time.deltaTime / fadeDuration;
+                // 그냥 1/fadeDuration을 빼면, 현재 볼륨이 0.5일 때 예상보다 빨리 꺼질 수 있음
+                // startVol을 곱해주는 것이 더 자연스러운 곡선을 만듭니다.
+                BGM_Player.volume -= startVol * Time.deltaTime / fadeDuration;
                 yield return null;
             }
         }
-        
+
+        BGM_Player.volume = 0;
+        BGM_Player.Stop();
         BGM_Player.clip = newClip; // 2. 클립 교체
         BGM_Player.outputAudioMixerGroup = BGM;
         BGM_Player.loop = true;
@@ -107,12 +143,35 @@ public class AudioManager : MonoBehaviour
 
     public void StopBGM()
     {
-        if (bgmFadeCoroutine != null) StopCoroutine(bgmFadeCoroutine); // 돌아가던 페이드도 멈춰줘야 함
+        // 1. 이미 페이드 로직이 돌아가고 있다면 중지
+        if (bgmFadeCoroutine != null)
+            StopCoroutine(bgmFadeCoroutine);
+
+        // 2. 부드럽게 꺼지는 페이드 아웃 코루틴 시작
+        bgmFadeCoroutine = StartCoroutine(FadeOutAndStopBGM());
+    }
+
+    private IEnumerator FadeOutAndStopBGM()
+    {
+        if (BGM_Player.isPlaying)
+        {
+            float startVolume = BGM_Player.volume;
+
+            // 현재 볼륨에서 0까지 fadeDuration에 걸쳐 감소
+            while (BGM_Player.volume > 0)
+            {
+                BGM_Player.volume -= startVolume * Time.deltaTime / fadeDuration;
+                yield return null;
+            }
+        }
+
+        // 완전히 멈춤 및 초기화
         BGM_Player.Stop();
         BGM_Player.clip = null;
-        BGM_Player.volume = 1.0f;
+        BGM_Player.volume = 1.0f; // 다음 재생을 위해 볼륨만 기본값으로 복구
+        bgmFadeCoroutine = null;
     }
-    
+
     public void PlaySFX(string name)
     {
         foreach(Sound s in SFX_clip)
