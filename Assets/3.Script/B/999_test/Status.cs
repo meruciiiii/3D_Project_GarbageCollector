@@ -11,6 +11,10 @@ public class Status : MonoBehaviour
     [SerializeField] private Slider spdSlider;
     [SerializeField] private Slider amountSlider;
 
+    [Header("텍스트 정보 할당 (HP / bag)")]
+    [SerializeField] private Text hpText;       // 체력 표시용
+    [SerializeField] private Text bagText; // 가방 표시용
+
     private UIManager uimanager;
 
     private void Awake()
@@ -73,6 +77,19 @@ public class Status : MonoBehaviour
             amountSlider.minValue = 0;
             amountSlider.maxValue = 4;
             amountSlider.value = GameManager.instance.grab_limit - baseAmount;
+        }
+
+        if (hpText != null)
+        {
+            // GameManager에 해당 변수명이 있는지 확인 필요 (예: currentHP, maxHP)
+            hpText.text = $"CP : {GameManager.instance.P_MaxHP}";
+        }
+
+        // 5. 인벤토리량 업데이트
+        if (bagText != null)
+        {
+            // GameManager에 해당 변수명이 있는지 확인 필요 (예: currentInv, maxInv)
+            bagText.text = $"Storage : {GameManager.instance.P_Maxbag}";
         }
     }
 }
