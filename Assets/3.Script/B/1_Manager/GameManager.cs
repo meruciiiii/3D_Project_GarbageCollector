@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public int Current_Area = 1;
+
     public void ChangeHP(int HPindecrease)
     {
         P_CurrentHP = Mathf.Clamp(P_CurrentHP + HPindecrease, 0, P_MaxHP);//최대 최소 체력 제한
