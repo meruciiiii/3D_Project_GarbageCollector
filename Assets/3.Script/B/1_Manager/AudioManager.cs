@@ -166,25 +166,44 @@ public class AudioManager : MonoBehaviour
     private IEnumerator ResetAudioSourceParent(AudioSource source, float delay)
     {
         float timer = 0f;
+        // 1. 소리가 시작될 때의 부모를 기억합니다.
+        Transform currentTarget = source.transform.parent;
+
         while (timer < delay || source.isPlaying)
         {
             timer += Time.deltaTime;
 
-            // 재생 도중 부모(몬스터 등)가 사라졌는지 체크
-            if (source.transform.parent == null || source.transform.parent.gameObject.activeInHierarchy == false)
+            // 2. 부모가 살아있고 활성화된 상태인지 실시간 체크
+            if (currentTarget != null && currentTarget.gameObject.activeInHierarchy)
             {
-                // 부모가 사라졌다면 즉시 원래 컨테이너로 복귀시켜서 미아(분실) 방지
-                source.transform.SetParent(sfx3DContainer);
-                yield break;
+                // 부모가 이동 중일 수 있으므로 위치를 계속 동기화합니다.
+                // (자식으로 되어있다면 자동으로 따라가지만, 안전을 위해 체크만 합니다.)
             }
+            else
+            {
+                // 3. 부모가 사라진(Destroy/Disable) 순간!
+                // 독립시키기 직전의 위치를 마지막으로 고정합니다.
+                if (source.transform.parent != sfx3DContainer)
+                {
+                    Vector3 lastPos = source.transform.position; // 마지막 위치 기억
+                    source.transform.SetParent(null);// 월드 좌표로 분리 (이제 안 따라감)
+                    source.transform.position = lastPos; // 위치 고정
+                }
+
+                // 4. 이제 부모가 없으므로 루프를 빠져나가 소리만 끝날 때까지 대기합니다.
+                yield return new WaitWhile(() => source != null && source.isPlaying);
+                break;
+            }
+
             yield return null;
         }
 
-        // 재생 완료 후 복귀
+        // 5. 모든 상황 종료 후 회수
         if (source != null)
         {
+            source.Stop();
             source.transform.SetParent(sfx3DContainer);
-            source.transform.localPosition = Vector3.zero; // 위치 초기화
+            source.transform.localPosition = Vector3.zero;
         }
     }
 }
