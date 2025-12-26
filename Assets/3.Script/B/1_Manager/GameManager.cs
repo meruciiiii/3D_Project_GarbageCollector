@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     public bool P_isEnglish; //한 영문전환
     public bool P_intro = true; //게임 첫 시작시 intro
+    public bool GameClear = false;
 
     public int grab_limit = 1;//집을 수 있는 최댓수
     public float grab_range = 1f;//집을 수 있는 범위 임의값 float 1f

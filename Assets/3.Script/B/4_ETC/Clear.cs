@@ -14,6 +14,7 @@ public class Clear : MonoBehaviour
 
     private void OnEnable()
     {
+        GameManager.instance.GameClear = true;
         scene.SceneLoader(clearSceneString);
     }
 }
