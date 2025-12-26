@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 1494580689318571130}
   - component: {fileID: 326943640168566938}
   - component: {fileID: 1021830702764140088}
+  - component: {fileID: 8430323586080154734}
   m_Layer: 9
   m_Name: Stage3_NPC
   m_TagString: NPC
@@ -244,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b60e0c1e4ef174fbf29bbc8af8631d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC_Create_Trash
+  area: {fileID: 0}
   trash_prefabs:
   - {fileID: 1273593062365614524, guid: 6344bd3b5568a3a4db4d362268e34f93, type: 3}
   - {fileID: 8775165784479022817, guid: 689b473dab5859b43acc773185a76add, type: 3}
@@ -286,6 +288,28 @@ MonoBehaviour:
   - SkinnedMeshRenderer: {fileID: 3802358158223874190}
   - SkinnedMeshRenderer: {fileID: 3642046576432829699}
   - SkinnedMeshRenderer: {fileID: 1728307039069746373}
+--- !u!95 &8430323586080154734
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580953416064677370}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: ed4213104c2cb174d9bda386431ff013, type: 3}
+  m_Controller: {fileID: 9100000, guid: c99416278f943c24e976f2b1d033bd5c, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &656391653932720175
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,7 +759,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297801476838077323}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: ed4213104c2cb174d9bda386431ff013, type: 3}
   m_Controller: {fileID: 9100000, guid: c99416278f943c24e976f2b1d033bd5c, type: 2}
   m_CullingMode: 1

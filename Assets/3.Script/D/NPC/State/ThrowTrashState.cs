@@ -19,7 +19,7 @@ public class ThrowTrashState : IState {
 	public void Update() {
 		//쓰레기 투척 방향 바라보기
 		timer += Time.deltaTime;
-		if(timer >= 2.0f) {
+		if(timer >= 1.0f) {
 			npc.npc_create_trash.trash_Spawn();
 			npc.ChangeState(npc.moveState);
 		}
