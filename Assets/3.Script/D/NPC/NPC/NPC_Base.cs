@@ -4,32 +4,46 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class NPC_Base : MonoBehaviour {
-	[Header("이동 속도")]
-	public float NPC_speed = 1.5f;
+[Header("범죄 확률")]
+	[Range(0,100)] public float percent;
 
-	[HideInInspector]
-	//[Header("이동 좌표")]
+	[Header("이동 속도")]
+	public float NPC_speed = 3.5f;
+
+	[Header("이동 좌표")]
 	public List<Vector3> pos_list;
 	public Vector3 start_pos;
 	public Vector3 end_pos;
 
-	//NavMesh Agent
-	public NavMeshAgent agent;
+	//[Header("컴포넌트 등록")]
+	[HideInInspector] public NPC_Random_Mesh npc_random_mesh;
+	[HideInInspector] public NPC_Create_Trash npc_create_trash;
+	[HideInInspector] public NavMeshAgent agent;
 
 	//State Pattern
 	public IState currentState;
-
 	public IState spawnState;
 	public IState moveState;
 	public IState setPosState;
 
+	//구역 이벤트 수신용
+	[SerializeField] protected bool isActive;
+
+	//애니메이터 추가
+	public Animator animator;
+	//-------------------------------------------------------------
+
 	protected virtual void Awake() {
 		TryGetComponent(out agent);
+		TryGetComponent(out npc_create_trash);
+		TryGetComponent(out npc_random_mesh);
 		agent.speed = NPC_speed;
 
 		spawnState = new SpawnState(this);
 		moveState = new MoveState(this);
 		setPosState = new SetPosState(this);
+
+		AreaManager.instance.onAreaChanged += Event_ChangeArea;
 	}
 
 	private void Update() {
@@ -50,5 +64,12 @@ public class NPC_Base : MonoBehaviour {
 
 		currentState = newState;
 		currentState.Enter();
+	}
+
+	protected virtual void Event_ChangeArea(int area) { }
+
+	public void Die() {
+		//래그돌로바꿔주세요
+		
 	}
 }

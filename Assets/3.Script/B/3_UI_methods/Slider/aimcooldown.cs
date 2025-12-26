@@ -8,88 +8,79 @@ public class aimcooldown : MonoBehaviour
 {
     [SerializeField] private Slider cooldownSlider;
     [SerializeField] private PlayerInput input;
-    private Coroutine chargeCoroutine;
 
+    private Coroutine chargeCoroutine;
     private int lastWeight = 0;
+    private bool isPicking = false;
 
     private void Awake()
     {
-        input.onPickUp += StartCharging;
+        // 입력 이벤트 연결 (누르고 있는지 여부만 판단)
+        input.onPickUp += () => isPicking = true;
+        input.offPickUp += () => { isPicking = false; ResetSlider(); };
     }
+
     private void Start()
     {
-        lastWeight = GameManager.instance.P_Weight;
+        // 시작 시 현재 무게 저장
+        if (GameManager.instance != null)
+            lastWeight = GameManager.instance.P_Weight;
     }
 
-    public void StartCharging()
+    private void Update()
     {
-        if (!gameObject.activeInHierarchy) return;
-        if (chargeCoroutine != null) return;
-
-        StartCoroutine(WaitAndCheckWeight());
-    }
-
-    private IEnumerator WaitAndCheckWeight()
-    {
-        // 모든 물리/데이터 업데이트가 끝날 때까지 1프레임 쉬는데
-        // 만약 안돼는 경우가 있다면 yield return new WaitForSeconds(0.05f); 정도로 수정 가능
-        yield return null;
+        if (GameManager.instance == null) return;
 
         int currentWeight = GameManager.instance.P_Weight;
 
-        // 2. 업데이트된 무게와 비교
+        // 1. 무게가 늘어났는지 감시 (쓰레기 줍기 성공 감지)
         if (currentWeight > lastWeight)
         {
-            // 무게가 늘어남 즉 쓰레기를 줍기 성공 시에만 에임 슬라이더 코루틴 시작
-            chargeCoroutine = StartCoroutine(isGoing_co());
-        }
+            // 줍기 성공 시 슬라이더 코루틴 시작
+            if (chargeCoroutine != null) StopCoroutine(chargeCoroutine);
+            chargeCoroutine = StartCoroutine(CooldownRoutine());
 
-        // 3. 무게 늘어났든 줄어들었든 현재 무게를 무조건 동기화 (정산 대응)
-        lastWeight = currentWeight;
+            // 무게 값 동기화
+            lastWeight = currentWeight;
+        }
+        // 2. 무게가 줄어들었을 때 (정산 등) 값 최신화
+        else if (currentWeight < lastWeight)
+        {
+            lastWeight = currentWeight;
+        }
     }
 
-    private IEnumerator isGoing_co()
+    private IEnumerator CooldownRoutine()
     {
-        cooldownSlider.value = 0; // 시작 시 초기화
-
+        // 0에서 100(1.0f)까지 채우기
         float duration = GameManager.instance.grab_speed;
         float timer = 0f;
 
         while (timer < duration)
         {
             timer += Time.deltaTime;
-            cooldownSlider.value = timer / duration; // 0에서 1까지 시간 비율로 채움
+            cooldownSlider.value = Mathf.Clamp01(timer / duration);
             yield return null;
         }
 
-        cooldownSlider.value = cooldownSlider.maxValue;
-        OnComplete();
-    }
+        // 100% 도달 완료
+        cooldownSlider.value = 1f;
 
-    private void OnComplete()
-    {
-        Debug.Log("줍기 준비 완료!");
+        // 3. 완료 직후 0으로 초기화 (원하시는 로직)
+        yield return new WaitForEndOfFrame();
         cooldownSlider.value = 0;
         chargeCoroutine = null;
+    }
+
+    private void ResetSlider()
+    {
+        if (chargeCoroutine != null) return; // 코루틴 도중에는 0으로 밀지 않음
+        cooldownSlider.value = 0;
     }
 
     private void OnEnable()
     {
-        // 1. 다시 켜질 때 슬라이더 초기화
+        if (GameManager.instance != null) lastWeight = GameManager.instance.P_Weight;
         cooldownSlider.value = 0;
-        chargeCoroutine = null;
-
-        // 2. 꺼져 있는 동안 변했을 무게 데이터를 최신화
-        if (GameManager.instance != null)
-        {
-            lastWeight = GameManager.instance.P_Weight;
-        }
-    }
-
-    private void OnDisable()
-    {
-        // 3. 오브젝트가 꺼지면 코루틴 변수 비우기 
-        // (오브젝트가 꺼지는 순간 실행 중이던 코루틴은 유니티가 알아서 멈춥니다)
-        chargeCoroutine = null;
     }
 }

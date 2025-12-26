@@ -14,6 +14,7 @@ public class Sceneload : MonoBehaviour
     public void SceneLoader(string scenename)
     {
         if (Time.timeScale.Equals(0)) Time.timeScale = 1f;
+        AudioManager.instance.PlaySFX("SFX1");
         StartCoroutine(LoadAsync(scenename));
     }
 

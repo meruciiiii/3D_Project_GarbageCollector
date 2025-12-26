@@ -15,6 +15,7 @@ public class ChangeLanguage : MonoBehaviour
         GameManager.instance.P_isEnglish = !GameManager.instance.P_isEnglish;
         CSV_Database.instance.LoadData();
         switchlanguage();
+        AudioManager.instance.PlaySFX("SFX1");
     }
     
     private void switchlanguage()

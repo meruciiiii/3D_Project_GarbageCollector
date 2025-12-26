@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
             AutoSetting();
+            InitializeDictionary();
         }
         else
         {
@@ -178,24 +179,50 @@ public class AudioManager : MonoBehaviour
         bgmFadeCoroutine = null;
     }
 
+
+    private Dictionary<string, AudioClip> sfxDictionary = new Dictionary<string, AudioClip>();
+
+    private void InitializeDictionary()
+    {
+        foreach (Sound s in SFX_clip)
+        {
+            if (!sfxDictionary.ContainsKey(s.name))
+                sfxDictionary.Add(s.name, s.clip);
+        }
+    }
     public void PlaySFX(string name)
     {
-        foreach(Sound s in SFX_clip)
+        //foreach(Sound s in SFX_clip)
+        //{
+        //    if (s.name.Equals(name))
+        //    {
+        //        for (int i = 0; i < SFX_Player.Length; i++)
+        //        {
+        //            if (!SFX_Player[i].isPlaying)
+        //            {
+        //                SFX_Player[i].clip = s.clip;
+        //                SFX_Player[i].outputAudioMixerGroup = SFX;
+        //                SFX_Player[i].Play();
+        //                return;
+        //            }
+        //        }
+        //        Debug.Log("모든 Audio Source SFXPlayer가 Play중");
+        //        return;
+        //    }
+        //}
+
+         //리스트를 도는 대신 딕셔너리에서 바로 찾음
+        if (sfxDictionary.TryGetValue(name, out AudioClip clip))
         {
-            if (s.name.Equals(name))
+            for (int i = 0; i < SFX_Player.Length; i++)
             {
-                for (int i = 0; i < SFX_Player.Length; i++)
+                if (!SFX_Player[i].isPlaying)
                 {
-                    if (!SFX_Player[i].isPlaying)
-                    {
-                        SFX_Player[i].clip = s.clip;
-                        SFX_Player[i].outputAudioMixerGroup = SFX;
-                        SFX_Player[i].Play();
-                        return;
-                    }
+                    SFX_Player[i].clip = clip;
+                    SFX_Player[i].outputAudioMixerGroup = SFX;
+                    SFX_Player[i].Play();
+                    return;
                 }
-                Debug.Log("모든 Audio Source SFXPlayer가 Play중");
-                return;
             }
         }
     }
