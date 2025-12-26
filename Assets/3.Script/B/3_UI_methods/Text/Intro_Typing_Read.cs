@@ -99,6 +99,7 @@ public class Intro_Typing_Read : MonoBehaviour
             }
 
             text_component.text += letter;
+            AudioManager.instance.PlaySFX("SFX2");
             yield return new WaitForSeconds(typingSpeed);
         }
     }

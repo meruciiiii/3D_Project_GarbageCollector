@@ -12,6 +12,11 @@ public class HitsSort : MonoBehaviour
     private Trash trash;
     public RaycastHit[] SortingHits(RaycastHit[] hits, Vector3 hitPoint, int layerNum)
     {
+        if(layerNum.Equals(7)|| layerNum.Equals(9))
+        {
+            grabLimit = 1;
+        }
+        else
         grabLimit = GameManager.instance.grab_limit;
         if (hits == null || hits.Length == 0)
         {

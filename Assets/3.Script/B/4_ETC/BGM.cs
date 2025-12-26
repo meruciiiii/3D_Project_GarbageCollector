@@ -8,6 +8,7 @@ public class BGM : MonoBehaviour
     [SerializeField] private string BGMname;
     void Start()
     {
+        if (BGMname == "BGM1" && GameManager.instance.GameClear) return;
         AudioManager.instance.PlayBGM(BGMname);
     }
 }

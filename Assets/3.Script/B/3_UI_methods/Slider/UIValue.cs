@@ -46,8 +46,33 @@ public class UIValue : MonoBehaviour
 
     private void OnEnable()
     {
-        moneyandweight();
-        HP();
+        if (GameManager.instance == null || !GameManager.instance.LoadComplete) return;
+
+        // 돈 즉시 갱신
+        currentDisplayMoney = GameManager.instance.P_Money;
+        if (moneytext != null) moneytext.text = $"{currentDisplayMoney:N0}";
+
+        // 무게 즉시 갱신
+        float targetWeight = GameManager.instance.P_Weight / 100.0f;
+        float maxWeight = GameManager.instance.P_Maxbag / 100.0f;
+        if (weightSlider != null)
+        {
+            weightSlider.maxValue = maxWeight;
+            weightSlider.value = targetWeight;
+        }
+        if (weighttext != null) weighttext.text = $"{targetWeight:F1} / {maxWeight:F1} kg";
+        UpdateColorWeight(targetWeight, maxWeight);
+
+        // HP 즉시 갱신
+        int targetHP = GameManager.instance.P_CurrentHP;
+        int maxHP = GameManager.instance.P_MaxHP;
+        if (HPSlider != null)
+        {
+            HPSlider.maxValue = maxHP;
+            HPSlider.value = targetHP;
+        }
+        if (HPtext != null) HPtext.text = $"{targetHP} / {maxHP}";
+        UpdateColorHP(targetHP, maxHP);
     }
 
     private IEnumerator waitforvalue()

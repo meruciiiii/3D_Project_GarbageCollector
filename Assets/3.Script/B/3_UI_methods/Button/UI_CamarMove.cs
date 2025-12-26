@@ -35,6 +35,7 @@ public class UI_CamarMove : MonoBehaviour
     // 화면 전환과 버튼에 넣을 메서드 public
     public void SwitchUIWithCamera()
     {
+        AudioManager.instance.PlaySFX("SFX1");
         // UI 이동 중에는 현재 UI 숨기기
         if (currentUIGroup != null)
             currentUIGroup.SetActive(false);

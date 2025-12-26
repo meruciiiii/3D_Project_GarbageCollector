@@ -73,7 +73,7 @@ public class PlayerWork : MonoBehaviour
     {
         pickInterval = (float)GameManager.instance.grab_speed;
         Debug.Log(GameManager.instance.grab_speed + " : Ω∫≈∏∆Æ µÙ∑π¿Ã");
-        pickInterval = 1.5f;
+        //pickInterval = 1.5f;
         Debug.Log(pickInterval + " : Ω∫≈∏∆Æ µÙ∑π¿Ã");
     }
     private void Update()
@@ -96,12 +96,6 @@ public class PlayerWork : MonoBehaviour
         if (!isPicking)
             return;
 
-        //pickTimer += Time.deltaTime;
-        //if (pickTimer < pickInterval)
-        //{
-        //    Debug.Log(pickTimer + " : µÙ∑π¿Ã");
-        //    return;
-        //}
         if (Time.time < nextPickTime)
             return;
 
