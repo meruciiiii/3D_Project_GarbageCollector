@@ -1789,6 +1789,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8968073341749195394, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+      propertyPath: uIManager
+      value: 
+      objectReference: {fileID: 1780178715}
+    - target: {fileID: 8968073341749195394, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 1075056161}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2451,6 +2459,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4588548507346268208, guid: 7e5e1a99be537c14f8bfa34fab9362fb, type: 3}
   m_PrefabInstance: {fileID: 1573542640}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1780178715 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7392373110579160876, guid: 7e5e1a99be537c14f8bfa34fab9362fb, type: 3}
+  m_PrefabInstance: {fileID: 1573542640}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a99b4df2b66ae746aca908b9d83480e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
 --- !u!4 &1793547242 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1684571036562991282, guid: b444e606494ead64188c8216bce9a3fd, type: 3}

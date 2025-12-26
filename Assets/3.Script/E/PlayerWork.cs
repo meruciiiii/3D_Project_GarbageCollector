@@ -35,7 +35,7 @@ public class PlayerWork : MonoBehaviour
 
 
     private bool isPicking;
-    [SerializeField] private float pickInterval = 0.15f;
+    [SerializeField] private float pickInterval;
     private float pickTimer;
 
 
@@ -44,6 +44,8 @@ public class PlayerWork : MonoBehaviour
     [SerializeField] public SmallTrashAction smallTrashAction;
     [SerializeField] public BigTrashAction bigTrashAction;
     [SerializeField] public HumanTrashAction humanTrashAction;
+    [SerializeField] private PlayerController controller;
+    [SerializeField] private UIManager uIManager;
 
 
     public void Awake()
@@ -61,10 +63,17 @@ public class PlayerWork : MonoBehaviour
         input.onPickUp += () => isPicking = true;
         input.offPickUp += () => isPicking = false;
         input.onPickUp += () => Interact(this);
+        if (!TryGetComponent<PlayerController>(out controller))
+        {
+            //Debug.Log("Failed to call controller");
+            return;
+        }
+        pickInterval = GameManager.instance.grab_speed;
     }
     private void Update()
     {
         Detect();
+        HandleContinuousPick();
     }
     private void Detect()
     {
@@ -75,6 +84,18 @@ public class PlayerWork : MonoBehaviour
         hits = Physics.SphereCastAll(origin, radius, direction, Distance, interactionMask);
         UpdateAnchorPoint();
         SelectTargets();
+    }
+    private void HandleContinuousPick()
+    {
+        if (!isPicking)
+            return;
+
+        pickTimer += Time.deltaTime;
+        if (pickTimer < pickInterval)
+            return;
+
+        //pickTimer = 0f;
+        Interact(this);
     }
     private void UpdateAnchorPoint()
     {
@@ -164,11 +185,22 @@ public class PlayerWork : MonoBehaviour
             {
                 Debug.Log("IInteractable 컴포넌트가 없습니다.");
             }
+            controller.Calc_Speed();
+            pickTimer = 0f;
+            uIManager.change_Value();
+        }
+        if (bigTrashAction.IsHolding|| humanTrashAction.IsHolding)
+        {
+            isPicking = false;
         }
     }
     public GameObject[] GetGameObject()
     {
         //Debug.Log("target ? " + target[0].name);
         return target;
+    }
+    public void SetPickInterval()
+    {
+        pickInterval = GameManager.instance.grab_speed;
     }
 }
