@@ -16,7 +16,7 @@ public class SmallTrashCollectable : MonoBehaviour, IInteractable
 
         player.smallTrashAction.Add(trash.Data.getSmallTrashWeight(trash.TrashNum));
         player.cleanPlayer.Clean(trash.Data.getSmallTrashHpdecrease(trash.TrashNum));
-        Debug.Log("trash.Data.getSmallTrashHpdecrease(trash.TrashNum) : " + trash.Data.getSmallTrashHpdecrease(trash.TrashNum));
+        //Debug.Log("trash.Data.getSmallTrashHpdecrease(trash.TrashNum) : " + trash.Data.getSmallTrashHpdecrease(trash.TrashNum));
         Destroy(gameObject);
     }
 }
