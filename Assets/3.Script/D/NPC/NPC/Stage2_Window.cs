@@ -14,8 +14,12 @@ public class Stage2_Window : MonoBehaviour {
 	[SerializeField] private float max_sec;
 	//private WaitForSeconds seconds;
 
+	private GameObject area_object;
+
 	private void Awake() {
 		TryGetComponent(out npc_create_trash);
+		area_object = GameObject.FindGameObjectWithTag("Area01");
+		npc_create_trash.area = area_object.transform;
 	}
 
 	private void Start() {

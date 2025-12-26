@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NPC_Create_Trash : MonoBehaviour {
+	[Header("구역 지정")]
+	public Transform area;
+
 	[Header("쓰레기 프리팹")]
 	[SerializeField] private GameObject[] trash_prefabs;
 	private GameObject trash_prefab;
@@ -16,7 +19,7 @@ public class NPC_Create_Trash : MonoBehaviour {
 
 	public void trash_Spawn() {
 		trash_prefab = trash_prefabs[Random.Range(0, trash_prefabs.Length)];
-		trash = Instantiate(trash_prefab);
+		trash = Instantiate(trash_prefab, area);
 
 		//위치 설정
 		set_pos = transform.position;

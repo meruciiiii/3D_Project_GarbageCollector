@@ -11,6 +11,13 @@ public class Stage3_NPC : NPC_Base {
 	[SerializeField] private float min_sec = 3;
 	[SerializeField] private float max_sec = 6;
 
+	private GameObject area_object;
+
+	protected override void Awake() {
+		area_object = GameObject.FindGameObjectWithTag("Area01");
+		npc_create_trash.area = area_object.transform;
+	}
+
 	public void run_coroutine() {StartCoroutine(drop_trash());}
 	public void stop_coroutine() {StopCoroutine(drop_trash());}
 
