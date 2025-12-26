@@ -48,7 +48,7 @@ public class PlayerInput : MonoBehaviour {
 			onPickUp();
 		}
 		else if (context.phase.Equals(InputActionPhase.Canceled)) {
-			//offPickUp();
+			offPickUp();
 		}
 	}
 	//플레이어 상호작용
