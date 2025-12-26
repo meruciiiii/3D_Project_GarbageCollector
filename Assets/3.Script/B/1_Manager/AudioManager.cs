@@ -40,6 +40,11 @@ public class AudioManager : MonoBehaviour
         SFX_Player = transform.GetChild(1).GetComponents<AudioSource>();
         sfx3DContainer = transform.GetChild(2);
         SFX_3D_Player = transform.GetChild(2).GetComponentsInChildren<AudioSource>();
+
+        walkingPlayer = gameObject.AddComponent<AudioSource>();
+        walkingPlayer.playOnAwake = false;
+        walkingPlayer.loop = true; // 기본적으로 루프 활성
+        walkingPlayer.outputAudioMixerGroup = SFX; // SFX 믹서 그룹 할당
     }
 
     private void LoadAllVolumes()
@@ -65,6 +70,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource BGM_Player;
     [SerializeField] private AudioSource[] SFX_Player;
     [SerializeField] private AudioSource[] SFX_3D_Player;
+    private AudioSource walkingPlayer; // 걷기 전용 플레이어
 
     [Space(50f)]
     [SerializeField] private float fadeDuration = 1.0f; // 페이드 속도 조절 변수
@@ -197,7 +203,9 @@ public class AudioManager : MonoBehaviour
     public void Play3DSFX(string name, Transform gameobject) 
         //사용방식 AudioManager.instance.Play3DSFX("3D_SFX", this.transform);
     {
-        foreach(Sound s in SFX_3D_clip)
+        if (gameobject == null) return; // 타겟이 없으면 실행 안 함
+
+        foreach (Sound s in SFX_3D_clip)
         {
             if (s.name.Equals(name))
             {
@@ -263,6 +271,35 @@ public class AudioManager : MonoBehaviour
             source.Stop();
             source.transform.SetParent(sfx3DContainer);
             source.transform.localPosition = Vector3.zero;
+        }
+    }
+
+    // 걷기 사운드 시작
+    public void PlayWalkingSound(string name)
+    {
+        // walkingPlayer.clip이 null일 경우를 대비해 순서대로 체크
+        if (walkingPlayer.isPlaying && walkingPlayer.clip != null)
+        {
+            if (walkingPlayer.clip.name == name) return;
+        }
+
+        foreach (Sound s in SFX_clip)
+        {
+            if (s.name.Equals(name))
+            {
+                walkingPlayer.clip = s.clip;
+                walkingPlayer.Play();
+                return;
+            }
+        }
+    }
+
+    // 걷기 사운드 중지
+    public void StopWalkingSound()
+    {
+        if (walkingPlayer.isPlaying)
+        {
+            walkingPlayer.Stop();
         }
     }
 }
