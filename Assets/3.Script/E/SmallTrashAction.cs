@@ -47,6 +47,6 @@ public class SmallTrashAction : MonoBehaviour
     }
     public void Add(int weight)
     {
-        GameManager.instance.P_Weight += GameManager.instance.P_Weight + weight;
+        GameManager.instance.P_Weight += weight;
     }
 }

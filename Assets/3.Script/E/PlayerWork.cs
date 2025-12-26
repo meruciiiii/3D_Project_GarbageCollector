@@ -34,10 +34,12 @@ public class PlayerWork : MonoBehaviour
     private RaycastHit hit;
 
 
-    public HitsSort sorting;
-    //[SerializeField] private PlayerInput input;
+    private bool isPicking;
+    [SerializeField] private float pickInterval = 0.15f;
+    private float pickTimer;
 
 
+    [SerializeField] private HitsSort sorting;
     [SerializeField] private PlayerInput input;
     [SerializeField] public SmallTrashAction smallTrashAction;
     [SerializeField] public BigTrashAction bigTrashAction;
@@ -56,6 +58,8 @@ public class PlayerWork : MonoBehaviour
             enabled = false;
             return;
         }
+        input.onPickUp += () => isPicking = true;
+        input.offPickUp += () => isPicking = false;
         input.onPickUp += () => Interact(this);
     }
     private void Update()
