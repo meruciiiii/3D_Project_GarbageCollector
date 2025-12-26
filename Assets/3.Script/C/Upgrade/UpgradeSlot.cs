@@ -143,7 +143,8 @@ public class UpgradeSlot : MonoBehaviour
         bool success = manager.TryPurchaseUpgrade(type);
         if (success)
         {
-            parentUI.RefreshAll(); // 전체 새로고침 (돈이 줄었으니까)
+            // [핵심] true를 넣어서 "돈 굴러가는 애니메이션 해줘!" 라고 요청
+            parentUI.RefreshAll(true);
         }
     }
 }
