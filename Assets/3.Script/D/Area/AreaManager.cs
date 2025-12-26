@@ -21,6 +21,6 @@ public class AreaManager : MonoBehaviour {
 		//이벤트 수신자들에게 area 값 전송
 
 		onAreaChanged.Invoke(area);
-		Debug.Log("보냈음요");
+		//Debug.Log("보냈음요");
 	}
 }

@@ -20,7 +20,7 @@ public class Stage1_NPC : NPC_Base {
 	}
 
 	protected override void Event_ChangeArea(int area) {
-		Debug.Log("NPC 수신!" + area);
+		//Debug.Log("NPC 수신!" + area);
 		if(area.Equals(1)) {isActive = true;}
 		else { isActive = false; }
 	}
