@@ -20,6 +20,8 @@ public class NPC_Controller : MonoBehaviour {
 	[Header("쓰레기 생성 확률")]
 	[SerializeField] [Range(0, 100)] protected int cultive_percent;
 
+	private Coroutine activeRoutine; // 현재 실행 중인 코루틴 저장
+
 	private void Awake() {
 		TryGetComponent(out npc_create_trash);
 		TryGetComponent(out npc_agent);
@@ -33,7 +35,8 @@ public class NPC_Controller : MonoBehaviour {
 	}
 
 	public virtual void start() {
-		StartCoroutine(routine_co());
+		if (activeRoutine != null) StopCoroutine(activeRoutine);
+		activeRoutine = StartCoroutine(routine_co());
 	}
 	protected virtual IEnumerator routine_co() {
 		yield return null;
@@ -55,5 +58,15 @@ public class NPC_Controller : MonoBehaviour {
 		transform.LookAt(targetPos);
 		npc_agent.SetDestination(targetPos);
 
+	}
+
+	// NPC가 비활성화될 때도 안전하게 멈춰줘야 함
+	private void OnDisable()
+	{
+		if (activeRoutine != null)
+		{
+			StopCoroutine(activeRoutine);
+			activeRoutine = null;
+		}
 	}
 }

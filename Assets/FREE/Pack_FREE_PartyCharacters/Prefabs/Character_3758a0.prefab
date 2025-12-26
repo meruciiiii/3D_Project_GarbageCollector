@@ -447,7 +447,6 @@ GameObject:
   - component: {fileID: 4302710204076414220}
   - component: {fileID: 5539657654852443681}
   - component: {fileID: 5624128958600563949}
-  - component: {fileID: 2773991653926424974}
   m_Layer: 0
   m_Name: Character_3758a0
   m_TagString: Untagged
@@ -531,21 +530,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
---- !u!114 &2773991653926424974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2909759000183810786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73b60e0c1e4ef174fbf29bbc8af8631d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPC_Create_Trash
-  trash_prefabs: []
-  throw_vector: {x: 0, y: 0, z: 0}
-  throw_power: 0
 --- !u!1 &2946975698134392578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,7 +1093,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6ce766ff1db7ffb4688c643b37ae5d34, type: 2}
+  - {fileID: 2100000, guid: 8f21afcae59005145a9b62e74da13542, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
