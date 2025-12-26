@@ -104,7 +104,7 @@ public class UpgradeUI : MonoBehaviour
     {
         if (GameManager.instance == null || upgradeManager == null) return;
 
-        moneyText.text = $"Current Money: {GameManager.instance.P_Money}";
+        moneyText.text = $"{GameManager.instance.P_Money}";
 
         // 1. 힘 (상수 참조)
         if (strPriceText != null)
