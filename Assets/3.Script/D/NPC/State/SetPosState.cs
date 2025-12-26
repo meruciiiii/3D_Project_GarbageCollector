@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class SetPosState : IState {
 	private NPC_Base npc;
-	private int index;
 
 	public SetPosState(NPC_Base npc) { this.npc = npc; }
 
@@ -17,7 +16,7 @@ public class SetPosState : IState {
 		foreach(Vector3 pos in npc.pos_list) {pos_list.Add(pos);}
 
 		//start_pos 적용
-		index = Random.Range(0, pos_list.Count);
+		int index = Random.Range(0, pos_list.Count);
 		npc.start_pos = pos_list[index];
 		pos_list.RemoveAt(index);
 		//end_pos 적용

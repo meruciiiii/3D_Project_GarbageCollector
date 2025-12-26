@@ -4,17 +4,25 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class NPC_Base : MonoBehaviour {
-	[Header("이동 속도")]
-	public float NPC_speed = 1.5f;
+	//쓰레기 생성 컴포넌트
+	[HideInInspector] public NPC_Create_Trash npc_create_trash;
 
-	[HideInInspector]
-	//[Header("이동 좌표")]
+
+	[Header("범죄 확률")]
+	[Range(0,100)] public float percent;
+
+	[Header("이동 속도")]
+	public float NPC_speed = 3.5f;
+
+	[Header("이동 좌표")]
 	public List<Vector3> pos_list;
 	public Vector3 start_pos;
 	public Vector3 end_pos;
 
+
+
 	//NavMesh Agent
-	public NavMeshAgent agent;
+	[HideInInspector] public NavMeshAgent agent;
 
 	//State Pattern
 	public IState currentState;
@@ -23,8 +31,12 @@ public class NPC_Base : MonoBehaviour {
 	public IState moveState;
 	public IState setPosState;
 
+
+	//-------------------------------------------------------------
+
 	protected virtual void Awake() {
 		TryGetComponent(out agent);
+		TryGetComponent(out npc_create_trash);
 		agent.speed = NPC_speed;
 
 		spawnState = new SpawnState(this);

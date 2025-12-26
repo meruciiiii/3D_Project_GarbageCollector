@@ -9,8 +9,6 @@ public class SpawnState : IState {
 
 	public void Enter() {
 		npc.agent.Warp(npc.start_pos);
-
-		npc.agent.isStopped = false;
 	}
 
 	public void Update() {

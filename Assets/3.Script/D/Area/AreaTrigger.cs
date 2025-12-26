@@ -8,22 +8,25 @@ public class AreaTrigger : MonoBehaviour {
 
 	[Header("현재 구역")]
 	[SerializeField] private int area;
-	
+
 	private void OnTriggerEnter(Collider other) {
-		if(other.CompareTag("Player")) {
-			if(area.Equals(GameManager.instance.Current_Area)) {
-				GameManager.instance.Current_Area = area;
-				areaManager.onChangeArea();
-				Debug.Log("Area 변경!!");
+		if (other.CompareTag("Player")) {
+			GameManager.instance.Current_Area = area;
+			//areaManager.onChangeArea();
+			Debug.Log("Area 변경!!");
+		} else if (other.CompareTag("NPC")) {
+			if (other.TryGetComponent(out Stage3_NPC npc_script)) {
+				npc_script.run_coroutine();
 			}
 		}
 	}
 
-	//private void OnTriggerExit(Collider other) {
-	//	if (other.CompareTag("Player")) {
-	//		if (!area.Equals(GameManager.instance.Current_Area)) {
-	//			areaManager.onChangeArea();
-	//		}
-	//	}
-	//}
+	private void OnTriggerExit(Collider other) {
+		 if (other.CompareTag("NPC")) {
+			if (other.TryGetComponent(out Stage3_NPC npc_script)) {
+				npc_script.stop_coroutine();
+				npc_script.drop_cnt = 0;
+			}
+		}
+	}
 }

@@ -11,11 +11,13 @@ public class ThrowTrashState : IState {
 	public void Enter() {
 		timer = 0f;
 		npc.agent.isStopped = true;
+		//쓰레기 투척 애니메이션 활성화!
 	}
 
 	public void Update() {
 		timer += Time.deltaTime;
 		if(timer >= 2.0f) {
+			npc.npc_create_trash.trash_Spawn();
 			npc.ChangeState(npc.moveState);
 		}
 	}
