@@ -4,6 +4,7 @@ public class ExitGame : MonoBehaviour
 {
     public void exitGame()//게임 종료용 버튼용 메서드입니다.
     {
+        AudioManager.instance.PlaySFX("SFX1");
         if (Time.timeScale.Equals(0)) Time.timeScale = 1f;
         Debug.Log("exitGame!!");
 #if UNITY_EDITOR

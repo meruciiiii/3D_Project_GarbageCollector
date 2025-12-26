@@ -44,7 +44,7 @@ public class pause : MonoBehaviour
             Debug.Log("정산 패널이 열려있어 일시정지를 할 수 없습니다.");
             return;
         }
-
+        AudioManager.instance.PlaySFX("SFX3");
         bool isCurrentlyActive = Pause_UI.activeSelf;
         bool targetState = !isCurrentlyActive;
 
