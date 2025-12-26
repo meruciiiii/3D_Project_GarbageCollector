@@ -1381,9 +1381,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1517340472371537904, guid: aaa5d43e2c80cba49ae23dff950debfb, type: 3}
+      propertyPath: BGM_Player
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1517340472371537904, guid: aaa5d43e2c80cba49ae23dff950debfb, type: 3}
       propertyPath: audioMixer
       value: 
       objectReference: {fileID: 24100000, guid: e493601864293f44f97480476bdad2ee, type: 2}
+    - target: {fileID: 1517340472371537904, guid: aaa5d43e2c80cba49ae23dff950debfb, type: 3}
+      propertyPath: SFX_Player.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1517340472371537904, guid: aaa5d43e2c80cba49ae23dff950debfb, type: 3}
+      propertyPath: 'SFX_Player.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1817496224}
     - target: {fileID: 2792145416185268040, guid: aaa5d43e2c80cba49ae23dff950debfb, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -1866,6 +1878,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 188346424}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1817496224 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4914549225149369438, guid: aaa5d43e2c80cba49ae23dff950debfb, type: 3}
+  m_PrefabInstance: {fileID: 1303976665}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1888669848
 PrefabInstance:
   m_ObjectHideFlags: 0

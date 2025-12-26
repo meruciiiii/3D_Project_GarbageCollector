@@ -28,6 +28,7 @@ public class UpgradeManager : MonoBehaviour
     public const int MAX_GRAB_LIMIT = 6;
 
     private PlayerWork playerWork;
+    private AudioManager audioManager;
 
     public bool IsAllStatMaxed()
     {

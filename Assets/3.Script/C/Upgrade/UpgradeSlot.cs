@@ -141,8 +141,13 @@ public class UpgradeSlot : MonoBehaviour
     private void TryBuy()
     {
         bool success = manager.TryPurchaseUpgrade(type);
+
         if (success)
         {
+            if(AudioManager.instance != null)
+            {
+                AudioManager.instance.PlaySFX("SFX13");
+            }
             // [핵심] true를 넣어서 "돈 굴러가는 애니메이션 해줘!" 라고 요청
             parentUI.RefreshAll(true);
         }
