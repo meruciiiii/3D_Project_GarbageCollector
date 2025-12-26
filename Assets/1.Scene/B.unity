@@ -670,7 +670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878090558710882884, guid: aeeb2a8d10dfd1e48af9b2244ccab6cc, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1438,6 +1438,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d544d77c9635ac144980723f331c0bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerIsDirty
+--- !u!114 &1075056187 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8968073341749195394, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+  m_PrefabInstance: {fileID: 1075056160}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52f8c1b3304a9e428500efefdeb9952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWork
 --- !u!1 &1213907183 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6859401122917240995, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
@@ -1778,6 +1789,10 @@ PrefabInstance:
       propertyPath: input
       value: 
       objectReference: {fileID: 1075056162}
+    - target: {fileID: 1730113960472006672, guid: 031e109967bddfa4fbadde7d80b26bcc, type: 3}
+      propertyPath: playerWork
+      value: 
+      objectReference: {fileID: 1075056187}
     - target: {fileID: 2473348437428700204, guid: 031e109967bddfa4fbadde7d80b26bcc, type: 3}
       propertyPath: m_Name
       value: Aim
