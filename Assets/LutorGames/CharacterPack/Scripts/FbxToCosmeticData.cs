@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 namespace PrivateLT.CharacterCustomization
 {
     using System.Collections.Generic;
@@ -132,5 +131,3 @@ namespace PrivateLT.CharacterCustomization
         }
     }
 }
-
-#endif

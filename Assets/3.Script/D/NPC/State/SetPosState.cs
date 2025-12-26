@@ -23,6 +23,7 @@ public class SetPosState : IState {
 		index = Random.Range(0, pos_list.Count);
 		npc.end_pos = pos_list[index];
 		#endregion
+		npc.npc_random_mesh.ApplyRandomLook();
 	}
 
 	public void Update() {
