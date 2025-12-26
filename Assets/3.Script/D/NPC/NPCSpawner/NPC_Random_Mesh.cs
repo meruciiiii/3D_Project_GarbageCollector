@@ -13,7 +13,7 @@ public class NPC_Random_Mesh : MonoBehaviour {
 		foreach (var part in _customizationParts) {
 			// [중요] 기존 코드의 이벤트를 강제로 정리하는 로직
 			// Initialise를 하기 전에 미리 빼줘야 MissingReference를 피할 수 있습니다.
-			var data = customizationData.CosmeticDatas.FirstOrDefault(x => x.Type == part.SkinnedMeshRenderer.name.Split('_')[0]);
+			var data = customizationData.CosmeticDatas.FirstOrDefault(x => x?.Type == part.SkinnedMeshRenderer.name.Split('_')[0]);
 			if (data != null) {
 				// 이전 NPC들이 등록해놨을지 모를 이벤트들을 모두 제거 (안전장치)
 				// 현재 구조상 '모든' 구독자가 빠지지만, NPC는 각자 Shuffle을 직접 호출하므로 문제없습니다.
