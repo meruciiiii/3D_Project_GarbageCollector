@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Stage3_NPC
   percent: 100
-  NPC_speed: 3.5
+  NPC_speed: 2.5
   pos_list: []
   start_pos: {x: 0, y: 0, z: 0}
   end_pos: {x: 0, y: 0, z: 0}
@@ -227,6 +227,7 @@ MonoBehaviour:
   npc_create_trash: {fileID: 0}
   agent: {fileID: 0}
   isActive: 0
+  animator: {fileID: 4041529145820544186}
   max_drop_cnt: 3
   drop_cnt: 0
   min_sec: 5
@@ -736,7 +737,7 @@ Animator:
   m_GameObject: {fileID: 1297801476838077323}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ed4213104c2cb174d9bda386431ff013, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c99416278f943c24e976f2b1d033bd5c, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
