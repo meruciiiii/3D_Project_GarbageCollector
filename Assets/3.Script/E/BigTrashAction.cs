@@ -43,7 +43,7 @@ public class BigTrashAction : MonoBehaviour
     public void DrobGarbage()                                                                //수정해야 할 것
     {
         Trash trash = currentTrash;
-        Debug.Log("is it Droping");
+        //Debug.Log("is it Droping");
         Transform trashRotation = trash.transform;                                                                //trash
         trashRotation.rotation = transform.GetChild(trash.TrashNum + 1).gameObject.transform.rotation;
         transform.GetChild(trash.TrashNum + 1).gameObject.SetActive(false);
