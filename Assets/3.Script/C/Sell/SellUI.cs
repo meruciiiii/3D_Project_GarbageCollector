@@ -102,7 +102,7 @@ public class SellUI : MonoBehaviour
             receipt += $" No Big Trash :  <color=#808080>0 G</color>\n";
         }
 
-        receipt += "--------------------------------\n";
+        //receipt += "--------------------------------\n";
         receipt += $"Result : <color=yellow>{totalEarn} G</color>";
 
         // [4] 화면에 적용
