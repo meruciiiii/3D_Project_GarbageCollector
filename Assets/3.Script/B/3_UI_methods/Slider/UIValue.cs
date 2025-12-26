@@ -12,7 +12,7 @@ public class UIValue : MonoBehaviour
     [SerializeField] private Slider weightSlider;
     [SerializeField] private Slider HPSlider;
 
-    private float currentDisplayMoney = 0f;//UI에 표시되고 있는 가짜돈
+    private int currentDisplayMoney = 0;//UI에 표시되고 있는 가짜돈
     private Coroutine moneycoroutine;
     private Coroutine weightCoroutine;
     private Coroutine hpCoroutine;
@@ -54,8 +54,8 @@ public class UIValue : MonoBehaviour
     {
         while(!GameManager.instance.LoadComplete) yield return null;
 
-        currentDisplayMoney = GameManager.instance.P_Money / 100.0f;
-        moneytext.text = $"{currentDisplayMoney:F2}$";
+        currentDisplayMoney = GameManager.instance.P_Money;
+        moneytext.text = $"{currentDisplayMoney:N0}$";
 
         UIManager.instance.change_Value();
     }
@@ -64,7 +64,7 @@ public class UIValue : MonoBehaviour
     {
         if (GameManager.instance == null || !GameManager.instance.LoadComplete) return;
         if (!gameObject.activeInHierarchy) return;
-        float targetMoney = GameManager.instance.P_Money / 100.0f;
+        int targetMoney = GameManager.instance.P_Money;
 
         if (moneycoroutine != null) StopCoroutine(moneycoroutine);
         moneycoroutine = StartCoroutine(AnimateMoney(targetMoney));
@@ -108,24 +108,24 @@ public class UIValue : MonoBehaviour
         else if (average < 0.7f) hpfill.color = hp_warning1;
         else hpfill.color = Hp_origin;
     }
-    private IEnumerator AnimateMoney(float target)
+    private IEnumerator AnimateMoney(int target)
     {
         float duration = 0.5f; // 0.5초 동안 올라감, 사운드 길이에 따라 바꿔주세요
         float elapsed = 0f;
-        float startValue = currentDisplayMoney; // 현재 화면에 찍힌 값에서 시작
+        int startValue = currentDisplayMoney; // 현재 화면에 찍힌 값에서 시작
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             // Lerp를 사용하여 부드럽게 값 증가
-            currentDisplayMoney = Mathf.Lerp(startValue, target, elapsed / duration);
-            moneytext.text = $"{currentDisplayMoney:N2}";
+            currentDisplayMoney = (int)Mathf.Lerp(startValue, target, elapsed / duration);
+            moneytext.text = $"{currentDisplayMoney:N0}";
             yield return null;
         }
 
         // 마지막 오차 보정
         currentDisplayMoney = target;
-        moneytext.text = $"{currentDisplayMoney:N2}";
+        moneytext.text = $"{currentDisplayMoney:N0}";
     }
 
     private IEnumerator AnimateWeight(float target, float max)
