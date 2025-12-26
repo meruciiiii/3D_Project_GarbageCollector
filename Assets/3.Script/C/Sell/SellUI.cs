@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ public class SellUI : MonoBehaviour
     [SerializeField] private GameObject resultPanel;  // 거래 후 결과 창
 
     [Header("UI 요소 연결")]
-    [SerializeField] private Text infoText;           // 상세 내역 텍스트
-    [SerializeField] private Text resultText;         // 결과 텍스트 ("+1500 G")
+    [SerializeField] private TextMeshProUGUI infoText;           // 상세 내역 텍스트
+    [SerializeField] private TextMeshProUGUI resultText;         // 결과 텍스트 ("+1500 G")
     [SerializeField] private Button sellButton;       // 판매 버튼
     [SerializeField] private Button cancelButton;     // 취소 버튼
     [SerializeField] private Button confirmButton;    // 확인 버튼 (결과창 닫기)
@@ -90,20 +91,20 @@ public class SellUI : MonoBehaviour
         string receipt = "";
 
         // 소형 쓰레기 줄
-        receipt += $"Small Trash ({smallWeight}kg) :  <color=white>{smallEarn} G</color>\n";
+        receipt += $"Small Trash ({smallWeight}kg) :  <color=#A81EB2>{smallEarn} G</color>\n";
 
         // 대형 쓰레기 줄 (들고 있을 때만 초록색 강조)
         if (GameManager.instance.isGrabBigGarbage)
         {
-            receipt += $"Big Trash ({bigWeight}kg) :  <color=#00FF00>+ {bigEarn} G</color>\n";
+            receipt += $"Big Trash ({bigWeight}kg) :  <color=#A81EB2>{bigEarn} G</color>\n";
         }
         else
         {
-            receipt += $" No Big Trash :  <color=#808080>0 G</color>\n";
+            receipt += $" No Big Trash :  <color=#9A9A9A>0 G</color>\n";
         }
 
-        //receipt += "--------------------------------\n";
-        receipt += $"Result : <color=yellow>{totalEarn} G</color>";
+        receipt += "\n";
+        receipt += $"Result : <color=#FF5300>{totalEarn} G</color>";
 
         // [4] 화면에 적용
         infoText.text = receipt;
