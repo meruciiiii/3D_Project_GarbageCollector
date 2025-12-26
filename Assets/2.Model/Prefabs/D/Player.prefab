@@ -518,6 +518,7 @@ GameObject:
   - component: {fileID: 339537357279044413}
   - component: {fileID: 151181822787313401}
   - component: {fileID: 4273967007487283107}
+  - component: {fileID: 323106060437921180}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1044,6 +1045,23 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 1
+--- !u!114 &323106060437921180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5653073563824068037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 439ffeca2a0bc4044b482fc0bbac84d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ThashInfo
+  tooltipText: {fileID: 0}
+  checkDistance: 3
+  trashLayerMask:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1 &6265970743048524887
 GameObject:
   m_ObjectHideFlags: 0
