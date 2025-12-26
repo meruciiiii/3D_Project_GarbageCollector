@@ -236,28 +236,28 @@ public class AudioManager : MonoBehaviour
         // 1. 소리가 시작될 때의 부모를 기억합니다.
         Transform currentTarget = source.transform.parent;
 
+        // 소리가 끝날 때까지 또는 설정된 clip 길이 동안 체크
         while (timer < delay || source.isPlaying)
         {
             timer += Time.deltaTime;
 
-            // 2. 부모가 살아있고 활성화된 상태인지 실시간 체크
-            if (currentTarget != null && currentTarget.gameObject.activeInHierarchy)
+            // 2. 원래 부모가 사라졌거나(Destroy) 비활성화(Disable) 되었는지 체크
+            if (currentTarget == null || !currentTarget.gameObject.activeInHierarchy)
             {
-                // 부모가 이동 중일 수 있으므로 위치를 계속 동기화합니다.
-                // (자식으로 되어있다면 자동으로 따라가지만, 안전을 위해 체크만 합니다.)
-            }
-            else
-            {
-                // 3. 부모가 사라진(Destroy/Disable) 순간!
-                // 독립시키기 직전의 위치를 마지막으로 고정합니다.
+                // 부모가 사라진 순간!
                 if (source.transform.parent != sfx3DContainer)
                 {
-                    Vector3 lastPos = source.transform.position; // 마지막 위치 기억
-                    source.transform.SetParent(null);// 월드 좌표로 분리 (이제 안 따라감)
-                    source.transform.position = lastPos; // 위치 고정
+                    // 현재 월드 좌표를 유지하기 위해 위치를 기록
+                    Vector3 currentWorldPos = source.transform.position;
+
+                    // 3. 즉시 매니저의 컨테이너로 부모 변경 (좌표 유지를 위해 worldPositionStays: true)
+                    source.transform.SetParent(sfx3DContainer, true);
+
+                    // 만약 worldPositionStays가 불안정할 경우를 대비해 수동 재설정
+                    source.transform.position = currentWorldPos;
                 }
 
-                // 4. 이제 부모가 없으므로 루프를 빠져나가 소리만 끝날 때까지 대기합니다.
+                // 4. 이제 독립되었으므로 소리가 끝날 때까지만 대기하고 루프 종료
                 yield return new WaitWhile(() => source != null && source.isPlaying);
                 break;
             }
@@ -265,12 +265,13 @@ public class AudioManager : MonoBehaviour
             yield return null;
         }
 
-        // 5. 모든 상황 종료 후 회수
+        // 5. 모든 상황 종료 후 (소리 끝) 리셋 및 회수
         if (source != null)
         {
             source.Stop();
+            source.clip = null; // 참조 해제
             source.transform.SetParent(sfx3DContainer);
-            source.transform.localPosition = Vector3.zero;
+            source.transform.localPosition = Vector3.zero; // 다음 사용을 위해 위치 초기화
         }
     }
 
