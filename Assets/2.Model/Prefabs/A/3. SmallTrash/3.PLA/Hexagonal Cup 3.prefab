@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5358441408854420191}
   - component: {fileID: -577835064574965450}
   - component: {fileID: -2572807318786018808}
+  - component: {fileID: -6183007429451529197}
   m_Layer: 6
   m_Name: Hexagonal Cup 3
   m_TagString: Untagged
@@ -185,3 +186,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447de1ffe67d0a74d9210b779a8d0c05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallTrashCollectable
+--- !u!114 &-6183007429451529197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6979740603393455196}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

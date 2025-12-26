@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3088142938369985074}
   - component: {fileID: -6167507113821268854}
   - component: {fileID: 2261796856842895199}
+  - component: {fileID: 3596664479045242297}
   m_Layer: 6
   m_Name: Knife
   m_TagString: Untagged
@@ -188,3 +189,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447de1ffe67d0a74d9210b779a8d0c05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallTrashCollectable
+--- !u!114 &3596664479045242297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6356834115478950209}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
