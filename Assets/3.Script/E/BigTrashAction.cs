@@ -20,10 +20,10 @@ public class BigTrashAction : MonoBehaviour
     //        Hold(trash);
     //    }
     //}
-    public void Hold(Trash trash)
+    public bool Hold(Trash trash)
     {
         if (CanHold(trash.Data.getrequiredStrength(trash.TrashNum)))
-            return;
+            return false;
         currentTrash = trash;
         //Debug.Log(transform.GetChild(trash.TrashNum + 1).gameObject.name+" È°¼ºÈ­?" +transform.GetChild(trash.TrashNum + 1).gameObject.activeSelf);
         transform.GetChild(trash.TrashNum + 1).gameObject.SetActive(true);
@@ -32,6 +32,7 @@ public class BigTrashAction : MonoBehaviour
         currentTrash.Trash_c.enabled = false;
         currentTrash.Trash_render.enabled = false;
         GameManager.instance.isGrabBigGarbage = true;
+        return true;
     }
     public bool CanHold(int strength)
     {

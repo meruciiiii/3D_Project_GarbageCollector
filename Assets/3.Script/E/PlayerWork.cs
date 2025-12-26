@@ -36,7 +36,7 @@ public class PlayerWork : MonoBehaviour
 
     private bool isPicking;
     [SerializeField] private float pickInterval;
-    private float pickTimer;
+    private float nextPickTime;
 
 
     [SerializeField] private HitsSort sorting;
@@ -62,13 +62,19 @@ public class PlayerWork : MonoBehaviour
         }
         input.onPickUp += () => isPicking = true;
         input.offPickUp += () => isPicking = false;
-        input.onPickUp += () => Interact(this);
+        //input.onPickUp += () => Interact(this);
         if (!TryGetComponent<PlayerController>(out controller))
         {
             //Debug.Log("Failed to call controller");
             return;
         }
-        pickInterval = GameManager.instance.grab_speed;
+    }
+    private void Start()
+    {
+        pickInterval = (float)GameManager.instance.grab_speed;
+        Debug.Log(GameManager.instance.grab_speed + " : 스타트 딜레이");
+        pickInterval = 1.5f;
+        Debug.Log(pickInterval + " : 스타트 딜레이");
     }
     private void Update()
     {
@@ -90,9 +96,17 @@ public class PlayerWork : MonoBehaviour
         if (!isPicking)
             return;
 
-        pickTimer += Time.deltaTime;
-        if (pickTimer < pickInterval)
+        //pickTimer += Time.deltaTime;
+        //if (pickTimer < pickInterval)
+        //{
+        //    Debug.Log(pickTimer + " : 딜레이");
+        //    return;
+        //}
+        if (Time.time < nextPickTime)
             return;
+
+        //nextPickTime = Time.time + pickInterval;
+        Debug.Log(nextPickTime + " : nextPickTime = 다음 선택 가능 시간");
 
         //pickTimer = 0f;
         Interact(this);
@@ -156,6 +170,7 @@ public class PlayerWork : MonoBehaviour
             {
                 humanTrashAction.DrobGarbage();
             }
+            controller.Calc_Speed();
             return;
         }
         if (bigTrashAction.IsHolding)
@@ -164,6 +179,7 @@ public class PlayerWork : MonoBehaviour
             {
                 bigTrashAction.DrobGarbage();
             }
+            controller.Calc_Speed();
             return;
         }
         if (target == null || target.Length == 0) return;
@@ -186,7 +202,7 @@ public class PlayerWork : MonoBehaviour
                 Debug.Log("IInteractable 컴포넌트가 없습니다.");
             }
             controller.Calc_Speed();
-            pickTimer = 0f;
+            nextPickTime = Time.time + pickInterval;
             uIManager.change_Value();
         }
         if (bigTrashAction.IsHolding|| humanTrashAction.IsHolding)
