@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8692475530034420810}
   - component: {fileID: 7973531805963370344}
   - component: {fileID: 4704777618930858766}
+  - component: {fileID: 2624395802496990533}
   m_Layer: 6
   m_Name: Bottled Water
   m_TagString: Untagged
@@ -159,6 +160,8 @@ MonoBehaviour:
   trashNum: 0
   trashData: {fileID: 4704777618930858766}
   trash_r: {fileID: -2749404094230558633}
+  trash_c: {fileID: 8692475530034420810}
+  trash_render: {fileID: 3636582444937212187}
 --- !u!114 &4704777618930858766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,3 +174,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrashData
+--- !u!114 &2624395802496990533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464567470610994551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447de1ffe67d0a74d9210b779a8d0c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmallTrashCollectable

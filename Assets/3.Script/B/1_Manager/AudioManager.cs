@@ -13,18 +13,45 @@ public class Sound
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance = null;
+    [SerializeField] private AudioMixer audioMixer;
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            AutoSetting();
         }
         else
         {
             Destroy(gameObject);
+            return;
         }
-        AutoSetting();
+    }
+
+    private void Start()
+    {
+        LoadAllVolumes();
+    }
+    private void AutoSetting()
+    {
+        BGM_Player = transform.GetChild(0).GetComponent<AudioSource>();
+        SFX_Player = transform.GetChild(1).GetComponents<AudioSource>();
+        sfx3DContainer = transform.GetChild(2);
+        SFX_3D_Player = transform.GetChild(2).GetComponentsInChildren<AudioSource>();
+
+        walkingPlayer = gameObject.AddComponent<AudioSource>();
+        walkingPlayer.playOnAwake = false;
+        walkingPlayer.loop = true; // 기본적으로 루프 활성
+        walkingPlayer.outputAudioMixerGroup = SFX; // SFX 믹서 그룹 할당
+    }
+
+    private void LoadAllVolumes()
+    {
+        SetVolume("Master", PlayerPrefs.GetFloat("volume_Master", defaultVolume));
+        SetVolume("BGM", PlayerPrefs.GetFloat("volume_BGM", defaultVolume));
+        SetVolume("SFX", PlayerPrefs.GetFloat("volume_SFX", defaultVolume));
     }
 
     [Header("AudioGroup")]
@@ -43,21 +70,31 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource BGM_Player;
     [SerializeField] private AudioSource[] SFX_Player;
     [SerializeField] private AudioSource[] SFX_3D_Player;
+    private AudioSource walkingPlayer; // 걷기 전용 플레이어
 
     [Space(50f)]
     [SerializeField] private float fadeDuration = 1.0f; // 페이드 속도 조절 변수
     private Coroutine bgmFadeCoroutine; // 현재 실행 중인 페이드 관리
 
     private Transform sfx3DContainer; //3D 플레이어 위치. 게임 오브젝트 파괴시 사라지는거 방지
+    private const float defaultVolume = 75f;
 
-    private void AutoSetting()
+    public void SetVolume(string parameter, float sliderValue)
     {
-        BGM_Player = transform.GetChild(0).GetComponent<AudioSource>();
-        SFX_Player = transform.GetChild(1).GetComponents<AudioSource>();
-        SFX_3D_Player = transform.GetChild(2).GetComponentsInChildren<AudioSource>();
-        sfx3DContainer = transform.GetChild(2);
+        // 1. 오디오 믹서 적용
+        float normalizeValue = Mathf.Clamp(sliderValue / 100f, 0.0001f, 1f);
+        float dB = Mathf.Log10(normalizeValue) * 20;
+        audioMixer.SetFloat(parameter, dB);
+
+        // 2. 데이터 저장
+        PlayerPrefs.SetFloat("volume_" + parameter, sliderValue);
     }
 
+    // 현재 저장된 볼륨 값을 가져오는 함수 (슬라이더 초기화용)
+    public float GetSavedVolume(string parameter)
+    {
+        return PlayerPrefs.GetFloat("volume_" + parameter, 75f);
+    }
     public void PlayBGM(string name)
     {
         foreach(Sound s in BGM_clip)
@@ -85,13 +122,18 @@ public class AudioManager : MonoBehaviour
     {
         if (BGM_Player.isPlaying) // 1. Fade Out
         {
+            float startVol = BGM_Player.volume; // 현재 볼륨 기억
             while (BGM_Player.volume > 0)
             {
-                BGM_Player.volume -= Time.deltaTime / fadeDuration;
+                // 그냥 1/fadeDuration을 빼면, 현재 볼륨이 0.5일 때 예상보다 빨리 꺼질 수 있음
+                // startVol을 곱해주는 것이 더 자연스러운 곡선을 만듭니다.
+                BGM_Player.volume -= startVol * Time.deltaTime / fadeDuration;
                 yield return null;
             }
         }
-        
+
+        BGM_Player.volume = 0;
+        BGM_Player.Stop();
         BGM_Player.clip = newClip; // 2. 클립 교체
         BGM_Player.outputAudioMixerGroup = BGM;
         BGM_Player.loop = true;
@@ -107,12 +149,35 @@ public class AudioManager : MonoBehaviour
 
     public void StopBGM()
     {
-        if (bgmFadeCoroutine != null) StopCoroutine(bgmFadeCoroutine); // 돌아가던 페이드도 멈춰줘야 함
+        // 1. 이미 페이드 로직이 돌아가고 있다면 중지
+        if (bgmFadeCoroutine != null)
+            StopCoroutine(bgmFadeCoroutine);
+
+        // 2. 부드럽게 꺼지는 페이드 아웃 코루틴 시작
+        bgmFadeCoroutine = StartCoroutine(FadeOutAndStopBGM());
+    }
+
+    private IEnumerator FadeOutAndStopBGM()
+    {
+        if (BGM_Player.isPlaying)
+        {
+            float startVolume = BGM_Player.volume;
+
+            // 현재 볼륨에서 0까지 fadeDuration에 걸쳐 감소
+            while (BGM_Player.volume > 0)
+            {
+                BGM_Player.volume -= startVolume * Time.deltaTime / fadeDuration;
+                yield return null;
+            }
+        }
+
+        // 완전히 멈춤 및 초기화
         BGM_Player.Stop();
         BGM_Player.clip = null;
-        BGM_Player.volume = 1.0f;
+        BGM_Player.volume = 1.0f; // 다음 재생을 위해 볼륨만 기본값으로 복구
+        bgmFadeCoroutine = null;
     }
-    
+
     public void PlaySFX(string name)
     {
         foreach(Sound s in SFX_clip)
@@ -138,7 +203,9 @@ public class AudioManager : MonoBehaviour
     public void Play3DSFX(string name, Transform gameobject) 
         //사용방식 AudioManager.instance.Play3DSFX("3D_SFX", this.transform);
     {
-        foreach(Sound s in SFX_3D_clip)
+        if (gameobject == null) return; // 타겟이 없으면 실행 안 함
+
+        foreach (Sound s in SFX_3D_clip)
         {
             if (s.name.Equals(name))
             {
@@ -166,25 +233,74 @@ public class AudioManager : MonoBehaviour
     private IEnumerator ResetAudioSourceParent(AudioSource source, float delay)
     {
         float timer = 0f;
+        // 1. 소리가 시작될 때의 부모를 기억합니다.
+        Transform currentTarget = source.transform.parent;
+
+        // 소리가 끝날 때까지 또는 설정된 clip 길이 동안 체크
         while (timer < delay || source.isPlaying)
         {
             timer += Time.deltaTime;
 
-            // 재생 도중 부모(몬스터 등)가 사라졌는지 체크
-            if (source.transform.parent == null || source.transform.parent.gameObject.activeInHierarchy == false)
+            // 2. 원래 부모가 사라졌거나(Destroy) 비활성화(Disable) 되었는지 체크
+            if (currentTarget == null || !currentTarget.gameObject.activeInHierarchy)
             {
-                // 부모가 사라졌다면 즉시 원래 컨테이너로 복귀시켜서 미아(분실) 방지
-                source.transform.SetParent(sfx3DContainer);
-                yield break;
+                // 부모가 사라진 순간!
+                if (source.transform.parent != sfx3DContainer)
+                {
+                    // 현재 월드 좌표를 유지하기 위해 위치를 기록
+                    Vector3 currentWorldPos = source.transform.position;
+
+                    // 3. 즉시 매니저의 컨테이너로 부모 변경 (좌표 유지를 위해 worldPositionStays: true)
+                    source.transform.SetParent(sfx3DContainer, true);
+
+                    // 만약 worldPositionStays가 불안정할 경우를 대비해 수동 재설정
+                    source.transform.position = currentWorldPos;
+                }
+
+                // 4. 이제 독립되었으므로 소리가 끝날 때까지만 대기하고 루프 종료
+                yield return new WaitWhile(() => source != null && source.isPlaying);
+                break;
             }
+
             yield return null;
         }
 
-        // 재생 완료 후 복귀
+        // 5. 모든 상황 종료 후 (소리 끝) 리셋 및 회수
         if (source != null)
         {
+            source.Stop();
+            source.clip = null; // 참조 해제
             source.transform.SetParent(sfx3DContainer);
-            source.transform.localPosition = Vector3.zero; // 위치 초기화
+            source.transform.localPosition = Vector3.zero; // 다음 사용을 위해 위치 초기화
+        }
+    }
+
+    // 걷기 사운드 시작
+    public void PlayWalkingSound(string name)
+    {
+        // walkingPlayer.clip이 null일 경우를 대비해 순서대로 체크
+        if (walkingPlayer.isPlaying && walkingPlayer.clip != null)
+        {
+            if (walkingPlayer.clip.name == name) return;
+        }
+
+        foreach (Sound s in SFX_clip)
+        {
+            if (s.name.Equals(name))
+            {
+                walkingPlayer.clip = s.clip;
+                walkingPlayer.Play();
+                return;
+            }
+        }
+    }
+
+    // 걷기 사운드 중지
+    public void StopWalkingSound()
+    {
+        if (walkingPlayer.isPlaying)
+        {
+            walkingPlayer.Stop();
         }
     }
 }

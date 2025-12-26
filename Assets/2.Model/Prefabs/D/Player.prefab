@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &395201073487915736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 581345728892394991}
+  m_Layer: 3
+  m_Name: humandata
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &581345728892394991
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395201073487915736}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.63452566, y: -0.51162755, z: 0.3252157, w: 0.479426}
+  m_LocalPosition: {x: 0.6200006, y: 0.86, z: 0.9700004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 6875371760015618421}
+  m_LocalEulerAnglesHint: {x: 344, y: 250, z: 91}
 --- !u!1 &2108719048966177613
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,6 +517,8 @@ GameObject:
   - component: {fileID: 6112121132361723296}
   - component: {fileID: 339537357279044413}
   - component: {fileID: 151181822787313401}
+  - component: {fileID: 4273967007487283107}
+  - component: {fileID: 323106060437921180}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -513,6 +546,7 @@ Transform:
   - {fileID: 1413791414137392988}
   - {fileID: 1854098231485128786}
   - {fileID: 3447716619705391381}
+  - {fileID: 581345728892394991}
   - {fileID: 6941614321219483863}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -779,8 +813,8 @@ MonoBehaviour:
   input: {fileID: 4076259103573898125}
   moveSpeed: 0
   walkSpeed: 5
-  runSpeed: 6.5
-  accelSpeed: 0
+  runSpeed: 10
+  accelSpeed: 25
   sensitive: 0.1
   cameraObject: {fileID: 4923363421550768917}
   cur_weight: 0
@@ -821,6 +855,7 @@ MonoBehaviour:
   input: {fileID: 4076259103573898125}
   smallTrashAction: {fileID: 151181822787313401}
   bigTrashAction: {fileID: 339537357279044413}
+  humanTrashAction: {fileID: 4273967007487283107}
 --- !u!114 &1467396829818393056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -845,12 +880,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1289bc3b4e436dd4fa88af3384584d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitPointState
-  catchSmall: {fileID: 0}
-  catchLarge: {fileID: 0}
-  catchHuman: {fileID: 0}
-  playerWork: {fileID: 8968073341749195394}
-  input: {fileID: 4076259103573898125}
-  TimebetGrab: 1.5
 --- !u!114 &8912951419528745372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -976,6 +1005,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a081acf500ca6104e840e70fd479873f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallTrashAction
+--- !u!114 &4273967007487283107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5653073563824068037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 553b7d92e193eff4eab498ed1eb2a0c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HumanTrashAction
+  liftCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  liftDuration: 0.5
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 1
+--- !u!114 &323106060437921180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5653073563824068037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 439ffeca2a0bc4044b482fc0bbac84d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ThashInfo
+  tooltipText: {fileID: 0}
+  checkDistance: 3
+  trashLayerMask:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1 &6265970743048524887
 GameObject:
   m_ObjectHideFlags: 0

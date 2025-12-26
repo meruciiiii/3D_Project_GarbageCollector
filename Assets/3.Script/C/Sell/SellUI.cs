@@ -22,6 +22,16 @@ public class SellUI : MonoBehaviour
     [SerializeField] private Button cancelButton;     // 취소 버튼
     [SerializeField] private Button confirmButton;    // 확인 버튼 (결과창 닫기)
 
+    public bool IsUIActive
+    {
+        get
+        {
+            bool isTradeOpen = tradePanel != null && tradePanel.activeSelf;
+            bool isResultOpen = resultPanel != null && resultPanel.activeSelf;
+            return isTradeOpen || isResultOpen;
+        }
+    }
+
     private void Awake()
     {
         // 1. 시작할 때 UI가 켜져있으면 안 되므로 모두 닫기

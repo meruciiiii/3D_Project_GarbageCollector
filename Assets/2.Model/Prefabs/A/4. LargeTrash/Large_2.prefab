@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 4381901954732507468}
   - component: {fileID: 1094607930625687926}
   - component: {fileID: -4116472134947653285}
-  - component: {fileID: 5961821346559171259}
   - component: {fileID: -8725222492218529253}
+  - component: {fileID: -2007628767846605597}
   m_Layer: 7
   m_Name: Large_2
   m_TagString: Untagged
@@ -155,26 +155,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Trash
-  size: 0
-  trashNum: 0
-  trashData: {fileID: 0}
-  trash_r: {fileID: 0}
---- !u!114 &5961821346559171259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7704796825697572423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Trash
-  size: 0
-  trashNum: 0
-  trashData: {fileID: 0}
-  trash_r: {fileID: 0}
+  size: 1
+  trashNum: 2
+  trashData: {fileID: -8725222492218529253}
+  trash_r: {fileID: 1094607930625687926}
+  trash_c: {fileID: 4381901954732507468}
+  trash_render: {fileID: 4894952502178524051}
 --- !u!114 &-8725222492218529253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,3 +173,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrashData
+--- !u!114 &-2007628767846605597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7704796825697572423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fc4037463a9f24cab292f9658d0225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BigTrashHoldable

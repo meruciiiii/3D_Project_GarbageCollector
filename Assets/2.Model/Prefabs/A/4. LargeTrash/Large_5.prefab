@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8084115790507373439}
   - component: {fileID: 5103980209954861558}
   - component: {fileID: -3874123293234869240}
+  - component: {fileID: 675680302991023715}
   m_Layer: 7
   m_Name: Large_5
   m_TagString: Untagged
@@ -155,12 +156,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Trash
-  size: 0
-  trashNum: 0
-  trashData: {fileID: 0}
-  trash_r: {fileID: 0}
-  trash_c: {fileID: 0}
-  trash_render: {fileID: 0}
+  size: 1
+  trashNum: 5
+  trashData: {fileID: -3874123293234869240}
+  trash_r: {fileID: 4605041491106030242}
+  trash_c: {fileID: 8084115790507373439}
+  trash_render: {fileID: 5535285915169207831}
 --- !u!114 &-3874123293234869240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,6 +174,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrashData
+--- !u!114 &675680302991023715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675429069109259068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57fc4037463a9f24cab292f9658d0225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BigTrashHoldable
 --- !u!1 &2564173252269815588
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 9104502732954065463}
   - component: {fileID: 291113362389813145}
   - component: {fileID: 5336135037696040573}
+  - component: {fileID: -1968570824866549396}
+  - component: {fileID: 784269290656374913}
   m_Layer: 6
   m_Name: Yogurt 1
   m_TagString: Untagged
@@ -141,8 +143,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallTrash
-  smallTrashNum: 2
-  outline_material: {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
+  size: 0
+  trashNum: 2
+  trashData: {fileID: -1968570824866549396}
+  trash_r: {fileID: 5336135037696040573}
+  trash_c: {fileID: 8899436875897293031}
+  trash_render: {fileID: 3528234842596225259}
 --- !u!54 &5336135037696040573
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -170,3 +176,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-1968570824866549396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900247491229821005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrashData
+--- !u!114 &784269290656374913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900247491229821005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447de1ffe67d0a74d9210b779a8d0c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmallTrashCollectable

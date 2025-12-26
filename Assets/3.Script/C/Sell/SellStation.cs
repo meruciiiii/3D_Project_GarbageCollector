@@ -9,44 +9,36 @@ public class SellStation : MonoBehaviour
     private bool isPlayerNearby = false;
     private PlayerInput targetInput;
 
-    private void Start()
-    {
-        if (guideText != null) guideText.SetActive(false);
-    }
     private void Update()
     {
-        // UI(상점/정산창)가 켜져 있으면 안내 문구를 강제로 끕니다.
-        if (sellUI != null && sellUI.gameObject.activeSelf)
+        // 매 프레임 상황을 체크해서 텍스트를 켤지 끌지 결정합니다.
+
+        // 1. UI가 켜져 있다면? -> 안내 문구 방해되니까 무조건 끔
+        if (sellUI != null && sellUI.IsUIActive)
         {
             if (guideText != null) guideText.SetActive(false);
         }
-        else if (isPlayerNearby) // UI가 꺼져있고 플레이어가 근처에 있으면 켭니다.
+        // 2. UI는 꺼져있는데, 플레이어가 근처에 있다면? -> 안내 문구 켬!
+        else if (isPlayerNearby)
         {
             if (guideText != null) guideText.SetActive(true);
         }
-    }
-
-    private void TryOpenShop()
-    {
-        if (GameManager.instance != null && GameManager.instance.isPaused)
+        // 3. 그 외 (플레이어가 멀리 있음) -> 끔
+        else
         {
-            return;
+            if (guideText != null) guideText.SetActive(false);
         }
-
-        if (sellUI != null) sellUI.OpenSellMenu();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            // 1. 안내 문구 켜기
-            if (guideText != null) guideText.SetActive(true);
+            // [핵심] 플레이어 입장 확인
+            isPlayerNearby = true;
 
-            // 2. 플레이어의 입력 스크립트(PlayerInput) 가져오기
+            // 입력 스크립트 연결
             targetInput = other.GetComponent<PlayerInput>();
-
-            // 3. 이벤트 구독 (이제 F키 누르면 TryOpenShop이 실행됨)
             if (targetInput != null)
             {
                 targetInput.onInteract += TryOpenShop;
@@ -54,28 +46,25 @@ public class SellStation : MonoBehaviour
         }
     }
 
-    // Trigger 영역 이탈 감지
     private void OnTriggerExit(Collider other)
     {
-        // 안내 문구 끄기
-        if (guideText != null) guideText.SetActive(false);
-
-        // 이벤트 구독 해제 (안 하면 멀리서도 상점이 열림)
-        if (targetInput != null)
+        if (other.CompareTag("Player"))
         {
-            targetInput.onInteract -= TryOpenShop;
-            targetInput = null; // 참조 비우기
-        }
+            // [핵심] 플레이어 퇴장 확인
+            isPlayerNearby = false;
 
-        // 3. 상점 UI 강제 종료
-        if (sellUI != null) sellUI.CloseAllPanels();
+            // 입력 연결 해제
+            if (targetInput != null)
+            {
+                targetInput.onInteract -= TryOpenShop;
+                targetInput = null;
+            }
+        }
     }
-    private void OnDisable()
+
+    private void TryOpenShop()
     {
-        if (targetInput != null)
-        {
-            targetInput.onInteract -= TryOpenShop;
-            targetInput = null;
-        }
+        if (GameManager.instance != null && GameManager.instance.isPaused) return;
+        if (sellUI != null) sellUI.OpenSellMenu();
     }
 }
