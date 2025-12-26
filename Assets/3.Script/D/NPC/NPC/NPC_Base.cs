@@ -4,11 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class NPC_Base : MonoBehaviour {
-	//쓰레기 생성 컴포넌트
-	[HideInInspector] public NPC_Create_Trash npc_create_trash;
-
-
-	[Header("범죄 확률")]
+[Header("범죄 확률")]
 	[Range(0,100)] public float percent;
 
 	[Header("이동 속도")]
@@ -19,28 +15,28 @@ public class NPC_Base : MonoBehaviour {
 	public Vector3 start_pos;
 	public Vector3 end_pos;
 
-	[Header("AreaManager")]
-	[SerializeField] protected AreaManager areaManager;
-
-	//NavMesh Agent
+	//[Header("컴포넌트 등록")]
+	[HideInInspector] public NPC_Random_Mesh npc_random_mesh;
+	[HideInInspector] public NPC_Create_Trash npc_create_trash;
 	[HideInInspector] public NavMeshAgent agent;
 
 	//State Pattern
 	public IState currentState;
-
 	public IState spawnState;
 	public IState moveState;
 	public IState setPosState;
 
-	// ---
 	//구역 이벤트 수신용
 	[SerializeField] protected bool isActive;
 
+	//애니메이터 추가
+	public Animator animator;
 	//-------------------------------------------------------------
 
 	protected virtual void Awake() {
 		TryGetComponent(out agent);
 		TryGetComponent(out npc_create_trash);
+		TryGetComponent(out npc_random_mesh);
 		agent.speed = NPC_speed;
 
 		spawnState = new SpawnState(this);
@@ -71,4 +67,9 @@ public class NPC_Base : MonoBehaviour {
 	}
 
 	protected virtual void Event_ChangeArea(int area) { }
+
+	public void Die() {
+		//래그돌로바꿔주세요
+		
+	}
 }

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -5302885375094464186}
   - component: {fileID: 2379373545107685793}
   - component: {fileID: -3571233060771945644}
+  - component: {fileID: -2789005665861761947}
   m_Layer: 7
   m_Name: Large_1
   m_TagString: Untagged
@@ -185,3 +186,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57fc4037463a9f24cab292f9658d0225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BigTrashHoldable
+--- !u!114 &-2789005665861761947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3156164406800135307}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

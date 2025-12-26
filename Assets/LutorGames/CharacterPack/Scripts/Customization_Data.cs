@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 namespace PrivateLT.CharacterCustomization
 {
     using System;
@@ -117,5 +116,3 @@ namespace PrivateLT.CharacterCustomization
 
     }
 }
-
-#endif

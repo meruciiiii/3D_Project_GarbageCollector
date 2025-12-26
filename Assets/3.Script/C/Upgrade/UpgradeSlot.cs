@@ -83,7 +83,7 @@ public class UpgradeSlot : MonoBehaviour
             if (GameManager.instance.P_Str < UpgradeManager.STR_ULTIMATE)
             {
                 if (btnBuy != null) btnBuy.interactable = false;
-                if (txtPrice != null) txtPrice.text = "힘 부족 (Lv.7 필요)";
+                if (txtPrice != null) txtPrice.text = "근력 Lv.7";
             }
         }
     }
