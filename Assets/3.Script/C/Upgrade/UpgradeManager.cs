@@ -27,6 +27,8 @@ public class UpgradeManager : MonoBehaviour
     public const float MIN_PICK_SPEED = 0.25f;
     public const int MAX_GRAB_LIMIT = 6;
 
+    private PlayerWork playerWork;
+
     public bool IsAllStatMaxed()
     {
         if (GameManager.instance == null) return false;
@@ -126,6 +128,14 @@ public class UpgradeManager : MonoBehaviour
         }
 
         GameManager.instance.SaveAllGamedata();
+
+        PlayerWork playerWork = FindAnyObjectByType<PlayerWork>();
+
+        if (playerWork != null)
+        {
+            playerWork.SetPickInterval();
+        }
+
         return true;
     }
 }
