@@ -99,8 +99,14 @@ public class Intro_Typing_Read : MonoBehaviour
             }
 
             text_component.text += letter;
-            AudioManager.instance.PlaySFX("SFX2");
-            yield return new WaitForSeconds(typingSpeed);
+            if (letter != ' ')
+            {
+                // 2. 약간의 피치(음높이) 랜덤성을 주어 기계적인 느낌 제거
+                // AudioManager에 PlaySFXVariation 같은 기능이 있다면 사용 권장
+                AudioManager.instance.PlaySFX("SFX2");
+            }
+            float randomSpeed = Random.Range(typingSpeed * 0.8f, typingSpeed * 1.2f);
+            yield return new WaitForSeconds(randomSpeed);
         }
     }
 
