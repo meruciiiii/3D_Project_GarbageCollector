@@ -61,7 +61,7 @@ public class UpgradeSlot : MonoBehaviour
         }
 
         // 4. 가격 및 버튼 상태
-        bool isMax = (currentLv >= maxLv);
+        bool isMax = (cost == 0) || (currentLv >= maxLv);
 
         if (isMax)
         {
@@ -97,7 +97,7 @@ public class UpgradeSlot : MonoBehaviour
         {
             case UpgradeType.Strength:
                 cur = GameManager.instance.P_Str;
-                max = UpgradeManager.STR_ULTIMATE; // 7
+                max = UpgradeManager.MAX_STR_NORMAL; // 7
                 break;
 
             case UpgradeType.BagWeight:
