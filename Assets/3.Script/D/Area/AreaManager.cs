@@ -4,25 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AreaManager : MonoBehaviour {
-	public Action onChangeArea;
+	public static AreaManager instance { get; private set; }
 
-	public void Event_ChangeArea(int area) {
-		switch(area) {
-			case 1:
-				//onStage1();
-				break;
-			case 2:
-				//onStage2();
-				break;
-			case 3:
-				//onStage3();
-				break;
-			case 4:
-				//onStage4();
-				break;
-			default:
-				Debug.LogWarning("[Area Error!!] Current Area : " + area);
-				break;
-		}
+	public event Action<int> onAreaChanged;
+
+	public int debug_area = 0;
+
+	private void Awake() {
+		if (instance == null) { instance = this; } 
+		else { Destroy(gameObject); }
+	}
+
+	public void ChangeArea(int area) {
+		debug_area = area;
+		GameManager.instance.Current_Area = area;
+		//이벤트 수신자들에게 area 값 전송
+
+		onAreaChanged.Invoke(area);
+		Debug.Log("보냈음요");
 	}
 }

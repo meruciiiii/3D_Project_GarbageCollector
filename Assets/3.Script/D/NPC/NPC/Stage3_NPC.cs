@@ -11,20 +11,15 @@ public class Stage3_NPC : NPC_Base {
 	[SerializeField] private float min_sec = 3;
 	[SerializeField] private float max_sec = 6;
 
-	public int debug_cnt = 0;
-
 	public void run_coroutine() {StartCoroutine(drop_trash());}
 	public void stop_coroutine() {StopCoroutine(drop_trash());}
 
 	private IEnumerator drop_trash() {
-		debug_cnt += 1;
-		Debug.Log(debug_cnt + "번 발동함. 2번이면 곱창난거");
-		Debug.Log("쓰레기 버리기 시작");
 		while (drop_cnt < max_drop_cnt) {
 			float maxTime = Random.Range(min_sec, max_sec);
 			float timer = 0f;
 
-			if (Random.Range(0, 101) <= percent) {
+			if (Random.Range(0, 101) <= percent && isActive) {
 				npc_create_trash.trash_Spawn();
 				drop_cnt++;
 			}
@@ -33,5 +28,10 @@ public class Stage3_NPC : NPC_Base {
 				yield return null;
 			}
 		}
+	}
+
+	protected override void Event_ChangeArea(int area) {
+		if (area.Equals(3)) { isActive = true; } 
+		else { isActive = false; }
 	}
 }

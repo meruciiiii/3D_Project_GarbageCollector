@@ -19,7 +19,8 @@ public class NPC_Base : MonoBehaviour {
 	public Vector3 start_pos;
 	public Vector3 end_pos;
 
-
+	[Header("AreaManager")]
+	[SerializeField] protected AreaManager areaManager;
 
 	//NavMesh Agent
 	[HideInInspector] public NavMeshAgent agent;
@@ -31,6 +32,9 @@ public class NPC_Base : MonoBehaviour {
 	public IState moveState;
 	public IState setPosState;
 
+	// ---
+	//구역 이벤트 수신용
+	[SerializeField] protected bool isActive;
 
 	//-------------------------------------------------------------
 
@@ -42,6 +46,8 @@ public class NPC_Base : MonoBehaviour {
 		spawnState = new SpawnState(this);
 		moveState = new MoveState(this);
 		setPosState = new SetPosState(this);
+
+		AreaManager.instance.onAreaChanged += Event_ChangeArea;
 	}
 
 	private void Update() {
@@ -63,4 +69,6 @@ public class NPC_Base : MonoBehaviour {
 		currentState = newState;
 		currentState.Enter();
 	}
+
+	protected virtual void Event_ChangeArea(int area) { }
 }
