@@ -12,6 +12,7 @@ public class ThrowTrashState : IState {
 		timer = 0f;
 		npc.agent.isStopped = true;
 		//쓰레기 투척 애니메이션 활성화!
+		npc.animator.SetTrigger("isThrow");
 		npc.transform.LookAt(npc.npc_create_trash.throw_vector.normalized + npc.transform.position);
 	}
 
