@@ -25,9 +25,9 @@ public class BigTrashAction : MonoBehaviour
         if (CanHold(trash.Data.getrequiredStrength(trash.TrashNum)))
             return;
         currentTrash = trash;
-        Debug.Log(transform.GetChild(trash.TrashNum + 1).gameObject.name+" 활성화?" +transform.GetChild(trash.TrashNum + 1).gameObject.activeSelf);
+        //Debug.Log(transform.GetChild(trash.TrashNum + 1).gameObject.name+" 활성화?" +transform.GetChild(trash.TrashNum + 1).gameObject.activeSelf);
         transform.GetChild(trash.TrashNum + 1).gameObject.SetActive(true);
-        Debug.Log(transform.GetChild(trash.TrashNum + 1).gameObject.name+" 활성화?" +transform.GetChild(trash.TrashNum + 1).gameObject.activeSelf);
+        //Debug.Log(transform.GetChild(trash.TrashNum + 1).gameObject.name+" 활성화?" +transform.GetChild(trash.TrashNum + 1).gameObject.activeSelf);
         GameManager.instance.BigGarbageWeight = trash.Data.getBigTrashWeight(trash.TrashNum);
         currentTrash.Trash_c.enabled = false;
         currentTrash.Trash_render.enabled = false;

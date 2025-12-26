@@ -55,7 +55,7 @@ public class ThashInfo : MonoBehaviour
     private void ShowInfo(Trash trash, GameObject obj)
     {
         // 1. 키 생성 로직 (CSV 데이터베이스 접근용)
-        int trashNum = trash.getTrashNum();
+        int trashNum = trash.TrashNum;
         string layerName = LayerMask.LayerToName(obj.layer);
 
         // 레이어 이름에 따라 접두사 결정 (기존 로직 준수)

@@ -124,6 +124,7 @@ public class PlayerWork : MonoBehaviour
     }
     private void Interact(PlayerWork player)
     {
+        
         if (humanTrashAction.IsHolding)
         {
             humanTrashAction.DrobGarbage();
