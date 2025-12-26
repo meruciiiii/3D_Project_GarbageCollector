@@ -124,15 +124,21 @@ public class PlayerWork : MonoBehaviour
     }
     private void Interact(PlayerWork player)
     {
+        
         if (humanTrashAction.IsHolding)
         {
-            humanTrashAction.DrobGarbage();
-            Debug.Log("실행했나요?");
+            if (!Cursor.visible)
+            {
+                humanTrashAction.DrobGarbage();
+            }
             return;
         }
         if (bigTrashAction.IsHolding)
         {
-            bigTrashAction.DrobGarbage();
+            if (!Cursor.visible)
+            {
+                bigTrashAction.DrobGarbage();
+            }
             return;
         }
         if (target == null || target.Length == 0) return;
