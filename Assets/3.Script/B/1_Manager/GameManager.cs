@@ -35,7 +35,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //민찬 - 추가 : 에리어 구분용
     public int Current_Area = 1;
 
     public void ChangeHP(int HPindecrease)
