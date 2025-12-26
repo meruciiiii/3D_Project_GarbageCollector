@@ -11,7 +11,7 @@ public class NPC_Create_Trash : MonoBehaviour {
 	private Quaternion randomRotation;
 
 	[Header("던지는 방향, 힘")]
-	[SerializeField] private Vector3 throw_vector;
+	public Vector3 throw_vector;
 	[SerializeField] private float throw_power;
 
 	public void trash_Spawn() {

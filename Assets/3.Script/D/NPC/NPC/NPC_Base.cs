@@ -65,4 +65,9 @@ public class NPC_Base : MonoBehaviour {
 	}
 
 	protected virtual void Event_ChangeArea(int area) { }
+
+	public void Die() {
+		//래그돌로바꿔주세요
+		
+	}
 }
