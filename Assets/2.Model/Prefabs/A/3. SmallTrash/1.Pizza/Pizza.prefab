@@ -13,8 +13,10 @@ GameObject:
   - component: {fileID: 1450108852061827515}
   - component: {fileID: 7619415319257025626}
   - component: {fileID: 7393743861784394015}
-  - component: {fileID: 6634981542582479243}
   - component: {fileID: -2596561750432035169}
+  - component: {fileID: 6634981542582479243}
+  - component: {fileID: 211947020334606097}
+  - component: {fileID: 3641500742736950287}
   m_Layer: 6
   m_Name: Pizza
   m_TagString: Untagged
@@ -71,11 +73,8 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 4474578618846804387, guid: e4baef6ddbaa24d49862e629f783082c, type: 3}
-  - {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
   - {fileID: -3399280609992867589, guid: e4baef6ddbaa24d49862e629f783082c, type: 3}
-  - {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
   - {fileID: -6050651322315956233, guid: e4baef6ddbaa24d49862e629f783082c, type: 3}
-  - {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -132,20 +131,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.28050947, y: 0.02250433, z: 0.2642095}
   m_Center: {x: -0.0023105145, y: 0.011252165, z: -0.002310872}
---- !u!114 &6634981542582479243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5106113012176776368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SmallTrash
-  smallTrashNum: 1
-  outline_material: {fileID: 2100000, guid: f17f6a0e007a0964997db2be18b71794, type: 2}
 --- !u!54 &-2596561750432035169
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -173,3 +158,45 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6634981542582479243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5106113012176776368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmallTrash
+  size: 0
+  trashNum: 1
+  trashData: {fileID: 211947020334606097}
+  trash_r: {fileID: -2596561750432035169}
+  trash_c: {fileID: 7393743861784394015}
+  trash_render: {fileID: 1450108852061827515}
+--- !u!114 &211947020334606097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5106113012176776368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrashData
+--- !u!114 &3641500742736950287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5106113012176776368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447de1ffe67d0a74d9210b779a8d0c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmallTrashCollectable

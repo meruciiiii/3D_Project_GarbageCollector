@@ -7,7 +7,7 @@ public class NPC_Spawner : MonoBehaviour {
 	[Header("NPC 프리팹")]
 	[SerializeField] protected GameObject NPC_prefabs;
 	public GameObject[] npc_pooling;
-	protected int pool_count = 10;
+	protected int pool_count = 0;
 	protected int pool_current = 0;
 
 	[Header("이동 경로 Vector")]
@@ -20,9 +20,10 @@ public class NPC_Spawner : MonoBehaviour {
 	protected WaitForSeconds seconds;
 
 	private void Awake() {
-		npc_pooling = new GameObject[pool_count];
+		pool_count = npc_pooling.Length;
+		//npc_pooling = new GameObject[pool_count];
 		for (int i = 0; i < pool_count; i++) {
-			npc_pooling[i] = Instantiate(NPC_prefabs);
+			//npc_pooling[i] = Instantiate(NPC_prefabs);
 			npc_pooling[i].SetActive(false);
 		}
 	}

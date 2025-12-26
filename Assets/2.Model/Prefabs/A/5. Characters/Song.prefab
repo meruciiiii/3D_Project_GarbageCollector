@@ -107,6 +107,9 @@ GameObject:
   - component: {fileID: 3545910310471721396}
   - component: {fileID: 7816822732388057388}
   - component: {fileID: 7109627973255718026}
+  - component: {fileID: -7707229135826050210}
+  - component: {fileID: -1454163357927840997}
+  - component: {fileID: 4636070690770445781}
   m_Layer: 7
   m_Name: Song
   m_TagString: Player
@@ -179,6 +182,48 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-7707229135826050210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684862356332327031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Trash
+  size: 2
+  trashNum: 6
+  trashData: {fileID: -1454163357927840997}
+  trash_r: {fileID: 7816822732388057388}
+  trash_c: {fileID: 0}
+  trash_render: {fileID: 0}
+--- !u!114 &-1454163357927840997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684862356332327031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrashData
+--- !u!114 &4636070690770445781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684862356332327031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 423db6b7f117222468790f236ed22b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HumanTrashHoldable
 --- !u!1 &776055540762757733
 GameObject:
   m_ObjectHideFlags: 0
