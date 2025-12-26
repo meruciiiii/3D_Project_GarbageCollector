@@ -10,8 +10,10 @@ public class BigTrashHoldable : MonoBehaviour, IInteractable
     {
         Trash trash;
         if (!TryGetComponent<Trash>(out trash)) return;
-        player.bigTrashAction.Hold(trash);
-        player.cleanPlayer.Clean(trash.Data.getBigTrashHpdecrease(trash.TrashNum));
+        if (player.bigTrashAction.Hold(trash))
+        {
+            player.cleanPlayer.Clean(trash.Data.getBigTrashHpdecrease(trash.TrashNum));
+        }
         //trash.gameObject.SetActive(false);
     }
 }

@@ -35,8 +35,8 @@ public class PlayerWork : MonoBehaviour
 
 
     private bool isPicking;
-    [SerializeField] private float pickInterval = 0.15f;
-    private float pickTimer;
+    [SerializeField] private float pickInterval;
+    private float nextPickTime;
 
 
     [SerializeField] private HitsSort sorting;
@@ -44,6 +44,8 @@ public class PlayerWork : MonoBehaviour
     [SerializeField] public SmallTrashAction smallTrashAction;
     [SerializeField] public BigTrashAction bigTrashAction;
     [SerializeField] public HumanTrashAction humanTrashAction;
+    [SerializeField] private PlayerController controller;
+    [SerializeField] private UIManager uIManager;
 
 
     public void Awake()
@@ -60,11 +62,24 @@ public class PlayerWork : MonoBehaviour
         }
         input.onPickUp += () => isPicking = true;
         input.offPickUp += () => isPicking = false;
-        input.onPickUp += () => Interact(this);
+        //input.onPickUp += () => Interact(this);
+        if (!TryGetComponent<PlayerController>(out controller))
+        {
+            //Debug.Log("Failed to call controller");
+            return;
+        }
+    }
+    private void Start()
+    {
+        pickInterval = (float)GameManager.instance.grab_speed;
+        Debug.Log(GameManager.instance.grab_speed + " : 스타트 딜레이");
+        pickInterval = 1.5f;
+        Debug.Log(pickInterval + " : 스타트 딜레이");
     }
     private void Update()
     {
         Detect();
+        HandleContinuousPick();
     }
     private void Detect()
     {
@@ -75,6 +90,26 @@ public class PlayerWork : MonoBehaviour
         hits = Physics.SphereCastAll(origin, radius, direction, Distance, interactionMask);
         UpdateAnchorPoint();
         SelectTargets();
+    }
+    private void HandleContinuousPick()
+    {
+        if (!isPicking)
+            return;
+
+        //pickTimer += Time.deltaTime;
+        //if (pickTimer < pickInterval)
+        //{
+        //    Debug.Log(pickTimer + " : 딜레이");
+        //    return;
+        //}
+        if (Time.time < nextPickTime)
+            return;
+
+        //nextPickTime = Time.time + pickInterval;
+        Debug.Log(nextPickTime + " : nextPickTime = 다음 선택 가능 시간");
+
+        //pickTimer = 0f;
+        Interact(this);
     }
     private void UpdateAnchorPoint()
     {
@@ -135,6 +170,7 @@ public class PlayerWork : MonoBehaviour
             {
                 humanTrashAction.DrobGarbage();
             }
+            controller.Calc_Speed();
             return;
         }
         if (bigTrashAction.IsHolding)
@@ -143,6 +179,7 @@ public class PlayerWork : MonoBehaviour
             {
                 bigTrashAction.DrobGarbage();
             }
+            controller.Calc_Speed();
             return;
         }
         if (target == null || target.Length == 0) return;
@@ -164,11 +201,22 @@ public class PlayerWork : MonoBehaviour
             {
                 Debug.Log("IInteractable 컴포넌트가 없습니다.");
             }
+            controller.Calc_Speed();
+            nextPickTime = Time.time + pickInterval;
+            uIManager.change_Value();
+        }
+        if (bigTrashAction.IsHolding|| humanTrashAction.IsHolding)
+        {
+            isPicking = false;
         }
     }
     public GameObject[] GetGameObject()
     {
         //Debug.Log("target ? " + target[0].name);
         return target;
+    }
+    public void SetPickInterval()
+    {
+        pickInterval = GameManager.instance.grab_speed;
     }
 }
