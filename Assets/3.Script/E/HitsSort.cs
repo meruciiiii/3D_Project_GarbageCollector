@@ -7,17 +7,17 @@ using UnityEngine;
 public class HitsSort : MonoBehaviour
 {
     private int grabLimit;
-    private RaycastHit[] currentHits;
-    private RaycastHit[] lastHits;
+    private RaycastHit[] currentHits = Array.Empty<RaycastHit>();
+    private RaycastHit[] lastHits = Array.Empty<RaycastHit>();
     private Trash trash;
-    public RaycastHit[] SortingHits(RaycastHit[] hits, Vector3 hitPoint, int layerNum)
+    public RaycastHit[] SortingHits(RaycastHit[] hits, RaycastHit hit, Vector3 hitPoint, int layerNum)
     {
-        if(layerNum.Equals(7)|| layerNum.Equals(9))
+        if (layerNum.Equals(7) || layerNum.Equals(9))
         {
             grabLimit = 1;
         }
         else
-        grabLimit = GameManager.instance.grab_limit;
+            grabLimit = GameManager.instance.grab_limit;
         if (hits == null || hits.Length == 0)
         {
             Debug.Log("RaycastHit에 입력된 대상이 없습니다.");
@@ -46,7 +46,8 @@ public class HitsSort : MonoBehaviour
         //Debug.Log("sameLayerHits 개수 : " + sameLayerHits.Length);
         //Debug.Log($"--- 결과 출력 (총 {finalCount}개) ---");
         RaycastHit[] finalCountLayerHits = new RaycastHit[finalCount];
-        for (int i = 0; i < finalCount; i++)
+        finalCountLayerHits[0] = hit;
+        for (int i = 1; i < finalCount; i++)
         {
             //Debug.Log($"{i + 1}위: {sameLayerHits[i].collider.gameObject.name}, 거리: {sameLayerHits[i].distance:F2}");
             finalCountLayerHits[i] = sameLayerHits[i];
@@ -74,18 +75,35 @@ public class HitsSort : MonoBehaviour
             }
             else
             {
-                currentHitsOnOutline();
                 lastHitsOffOutline();
+                currentHitsOnOutline();
             }
             lastHits = currentHits;
         }
     }
     public void currentHitsOnOutline()
     {
-        
+        for (int i = 0; i < currentHits.Length; i++)
+        {
+            if (currentHits[i].collider.gameObject.TryGetComponent<Outline>(out Outline outline))
+            {
+                outline.enabled = true;
+            }
+        }
     }
     public void lastHitsOffOutline()
     {
-        
+        for (int i = 0; i < lastHits.Length; i++)
+        {
+            if (lastHits[i].collider.gameObject.TryGetComponent<Outline>(out Outline outline))
+            {
+                outline.enabled = false;
+            }
+        }
+    }
+    public void CatchandEmpty()
+    {
+        currentHits = Array.Empty<RaycastHit>();
+        lastHits = Array.Empty<RaycastHit>();
     }
 }
