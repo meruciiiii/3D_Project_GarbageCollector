@@ -1,23 +1,25 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class ThashInfo : MonoBehaviour
 {
     [Header("UI 설정")]
-    [SerializeField] private Text tooltipText; // 정보를 띄울 텍스트
-    [SerializeField] private GameObject tooltipPanel;
+    // [변경] 판넬 변수는 삭제하고, 텍스트만 남깁니다.
+    [SerializeField] private Text tooltipText;
 
     [Header("감지 설정")]
-    [SerializeField] private float checkDistance = 3.0f; // 감지 거리 (PlayerWork와 비슷하게)
-    [SerializeField] private LayerMask trashLayerMask; // 쓰레기 레이어만 감지
+    [SerializeField] private float checkDistance = 5.0f;
+    [SerializeField] private LayerMask trashLayerMask;
 
     private Camera mainCamera;
-    private Transform currentTarget;
+    private Trash lastHitTrash = null;
 
     private void Start()
     {
         mainCamera = Camera.main;
-        HideTooltip(); // 시작할 땐 끔
+        HideInfo(); // 게임 시작 시 텍스트 숨기기
     }
 
     private void Update()
@@ -27,65 +29,66 @@ public class ThashInfo : MonoBehaviour
 
     private void CheckObjectInFront()
     {
+        if (mainCamera == null) return;
+
         Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
         RaycastHit hit;
 
-        // 1. 레이캐스트가 무언가에 맞았고 + 그게 쓰레기 레이어인가?
         if (Physics.Raycast(ray, out hit, checkDistance, trashLayerMask))
         {
-            // 2. 그 물체에 Trash 컴포넌트가 있는가?
-            if (hit.collider.TryGetComponent<Trash>(out Trash trash))
+            Trash trash = hit.collider.GetComponentInParent<Trash>();
+
+            if (trash != null)
             {
-                // 최적화: 이미 같은 대상을 보고 있고 + 그 대상이 파괴되지 않았다면 리턴
-                if (currentTarget == hit.transform) return;
-
-                // 새로운 쓰레기를 봄 -> 타겟 갱신 및 UI 표시
-                currentTarget = hit.transform;
-                ShowInfo(trash, hit.collider.gameObject);
-
-                // [중요] 쓰레기를 찾았으면 여기서 함수를 끝냅니다. 
-                // 아래의 HideTooltip()이 실행되지 않도록!
+                ShowInfo(trash);
                 return;
             }
         }
-        HideTooltip();
-        currentTarget = null;
+
+        HideInfo();
     }
 
-    private void ShowInfo(Trash trash, GameObject obj)
+    private void ShowInfo(Trash trash)
     {
-        // 1. 키 생성 로직 (CSV 데이터베이스 접근용)
-        int trashNum = trash.TrashNum;
-        string layerName = LayerMask.LayerToName(obj.layer);
+        // 텍스트 오브젝트가 이미 켜져 있고, 같은 쓰레기면 패스
+        if (tooltipText != null && tooltipText.gameObject.activeSelf && lastHitTrash == trash) return;
 
-        // 레이어 이름에 따라 접두사 결정 (기존 로직 준수)
-        // 유니티 에디터의 레이어 이름이 정확해야 합니다.
-        string keyPrefix = (layerName == "BigTrash") ? "large_" : "small_";
-        string key = keyPrefix + trashNum;
+        lastHitTrash = trash;
 
-        // 2. 데이터베이스에서 정보 가져오기
-        if (CSV_Database.instance != null)
+        // 키값 생성
+        string keyPrefix = "";
+        if (trash.Size == Trash.TrashSize.Small) keyPrefix = "small_";
+        else if (trash.Size == Trash.TrashSize.Large) keyPrefix = "large_";
+        else if (trash.Size == Trash.TrashSize.Human) keyPrefix = "human_";
+
+        string finalKey = keyPrefix + trash.TrashNum;
+
+        // CSV 데이터 가져오기
+        if (CSV_Database.instance != null && CSV_Database.instance.GarbageMap != null)
         {
-            string tName = CSV_Database.instance.getname(key);
-            int tWeight = CSV_Database.instance.getweight(key);
-
-            // 데이터가 비어있으면 키값이라도 출력 (디버깅용)
-            if (string.IsNullOrEmpty(tName)) tName = "Unknown";
-
-            // 3. UI 갱신
-            if (tooltipText != null)
+            if (CSV_Database.instance.GarbageMap.TryGetValue(finalKey, out Dictionary<string, object> data))
             {
-                tooltipText.text = $"{tName}\n<color=yellow>{tWeight} G</color>";
-            }
+                string tName = data.ContainsKey("name") ? data["name"].ToString() : "이름 없음";
+                int tWeight = data.ContainsKey("weight") ? int.Parse(data["weight"].ToString()) : 0;
 
-            if (tooltipPanel != null) tooltipPanel.SetActive(true);
-            if (tooltipText != null) tooltipText.gameObject.SetActive(true);
+                if (tooltipText != null)
+                {
+                    tooltipText.text = $"{tName}\n<color=yellow>{tWeight} g</color>";
+
+                    // [핵심 변경] 판넬 대신 텍스트 오브젝트 자체를 켭니다!
+                    tooltipText.gameObject.SetActive(true);
+                }
+            }
         }
     }
 
-    private void HideTooltip()
+    private void HideInfo()
     {
-        if (tooltipPanel != null) tooltipPanel.SetActive(false);
-        if (tooltipText != null) tooltipText.gameObject.SetActive(false);
+        // 텍스트 끄기
+        if (tooltipText != null && tooltipText.gameObject.activeSelf)
+        {
+            tooltipText.gameObject.SetActive(false);
+            lastHitTrash = null;
+        }
     }
 }
