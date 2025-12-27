@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public int P_Money = 0; //소지 돈
     public int P_Maxbag = 10000; //가방최대무게
 
-    public event Action OnWeightIncreased; // 무게가 늘어날 때만 쏴주는 전광판 신호
+    public event Action OnWeightIncreased; // 무게가 늘어날 때만 쏴주는 전광판 신호 aimcooldown에서 사용하겠습니다.
 
     private int p_Weight = 0; // 실제 데이터가 담기는 내부 저장소
     public int P_Weight
