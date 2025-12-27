@@ -121,6 +121,17 @@ public class AudioManager : MonoBehaviour
 
     private IEnumerator FadeBGM(AudioClip newClip)
     {
+        if (BGM_Player.clip == null)
+        {
+            BGM_Player.clip = newClip;
+            BGM_Player.outputAudioMixerGroup = BGM;
+            BGM_Player.loop = true;
+            BGM_Player.volume = 1.0f; // 볼륨을 즉시 1로 설정
+            BGM_Player.Play();
+            bgmFadeCoroutine = null;
+            yield break; // 코루틴 종료
+        }
+
         if (BGM_Player.isPlaying) // 1. Fade Out
         {
             float startVol = BGM_Player.volume; // 현재 볼륨 기억
@@ -146,6 +157,8 @@ public class AudioManager : MonoBehaviour
             yield return null;
         }
         BGM_Player.volume = 1.0f;
+        bgmFadeCoroutine = null; 
+        // 코루틴 참조 해제 다음번에 PlayBGM이 호출될 때 불필요한 StopCoroutine이 발생하지 않도록
     }
 
     public void StopBGM()
