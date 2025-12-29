@@ -360,13 +360,18 @@ public class AudioManager : MonoBehaviour
 
     public void PlayWalkingStep(string name)
     {
-        // 딕셔너리에서 먼저 찾는 것이 루프보다 훨씬 빠릅니다.
         if (sfxDictionary.TryGetValue(name, out AudioClip clip))
         {
-            // 발소리가 겹치지 않게 하려면 Play(), 
-            // 겹쳐서 풍성하게 들리게 하려면 PlayOneShot(clip)을 사용하세요.
-            walkingPlayer.pitch = UnityEngine.Random.Range(0.95f, 1.05f); // 약간의 변조로 자연스러움 추가
-            walkingPlayer.PlayOneShot(clip);
+            // clip이 바뀔 때만 새로 할당하여 성능 최적화
+            if (walkingPlayer.clip != clip)
+            {
+                walkingPlayer.clip = clip;
+            }
+
+            walkingPlayer.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+
+            // PlayOneShot 대신 Play 사용: 기존 재생 중인 동일 소스 소리를 끊고 새로 시작함
+            walkingPlayer.Play();
         }
     }
 

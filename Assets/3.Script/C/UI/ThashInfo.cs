@@ -97,27 +97,42 @@ public class ThashInfo : MonoBehaviour
             infoBuilder.Clear();
 
             // 무게
-            infoBuilder.AppendLine($"무게: {tWeight} g");
-
+            if (!GameManager.instance.P_isEnglish) infoBuilder.AppendLine($"무게: {tWeight} g");
+            else infoBuilder.AppendLine($"weight: {tWeight} g");
+            
             // 힘 요구량 비교 및 색상 처리
             if (currentStr >= reqStr)
             {
-                infoBuilder.AppendLine($"필요 힘: {reqStr}");
+                if (!GameManager.instance.P_isEnglish) infoBuilder.AppendLine($"필요 힘: {reqStr}");
+                else infoBuilder.AppendLine($"reqiure str: {reqStr}");
             }
             else
             {
-                // 부족할 때 빨간색 경고
-                infoBuilder.Append("<color=red>힘 부족! (");
-                infoBuilder.Append(currentStr);
-                infoBuilder.Append("/");
-                infoBuilder.Append(reqStr);
-                infoBuilder.AppendLine(")</color>");
+                    // 부족할 때 빨간색 경고
+                if (!GameManager.instance.P_isEnglish) 
+                {
+                    infoBuilder.Append("<color=red>힘 부족! (");
+                    infoBuilder.Append(currentStr);
+                    infoBuilder.Append("/");
+                    infoBuilder.Append(reqStr);
+                    infoBuilder.AppendLine(")</color>");
+                }
+                else
+                {
+                    infoBuilder.Append("<color=red>can't hold! (");
+                    infoBuilder.Append(currentStr);
+                    infoBuilder.Append("/");
+                    infoBuilder.Append(reqStr);
+                    infoBuilder.AppendLine(")</color>");
+                }
+                    
             }
 
             // 청결도 소모 (있는 경우만)
             if (hpCost > 0)
             {
-                infoBuilder.Append($"청결도 소모: <color=orange>-{hpCost}</color>");
+                if (!GameManager.instance.P_isEnglish) infoBuilder.Append($"청결도 소모: <color=orange>-{hpCost}</color>");
+                else infoBuilder.Append($"CP decrease: <color=orange>-{hpCost}</color>");
             }
 
             infoText.text = infoBuilder.ToString();
