@@ -21,7 +21,7 @@ public class ShowerSystem : MonoBehaviour
     [SerializeField] private PlayerIsDirty playerIsDirty;
 
     private PlayerInput targetInput;
-    private bool isWashing = false;
+    //private bool isWashing = false;
 
     // ... (Start, OnTriggerEnter 등 기존 코드 유지) ...
 
@@ -52,7 +52,7 @@ public class ShowerSystem : MonoBehaviour
 
     private IEnumerator ProcessShower()
     {
-        isWashing = true;
+        //isWashing = true;
 
         if (AudioManager.instance != null)
         {
@@ -93,7 +93,7 @@ public class ShowerSystem : MonoBehaviour
 
         // 6. 플레이어 녹이기
         SetPlayerFreeze(false);
-        isWashing = false;
+        //isWashing = false;
 
         // 아직 범위 안이면 텍스트 다시 켜기
         if (targetInput != null && guideText != null) guideText.SetActive(true);
