@@ -48,5 +48,6 @@ public class SmallTrashAction : MonoBehaviour
     public void Add(int weight)
     {
         GameManager.instance.P_Weight += weight;
+        //작은 쓰레기 소리 작업
     }
 }

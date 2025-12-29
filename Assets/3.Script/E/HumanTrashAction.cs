@@ -49,6 +49,7 @@ public class HumanTrashAction : MonoBehaviour
         GameManager.instance.BigGarbageWeight = trash.Data.getBigTrashWeight(trash.TrashNum);
         GameManager.instance.isGrabBigGarbage = true;
         //trash.Trash_r.constraints = RigidbodyConstraints.FreezeAll;
+        //큰 쓰레기 소리 작업
     }
     public bool CanHold(int strength)
     {
