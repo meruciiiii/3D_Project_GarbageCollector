@@ -4,20 +4,19 @@ using UnityEngine.UI;
 public class UpgradeSlot : MonoBehaviour
 {
     [Header("설정")]
-    public UpgradeType type;       // 이 슬롯이 어떤 업그레이드인지 (Strength, BagWeight 등)
-    public string displayName;     // 표시 이름 (예: 근력 강화)
+    public UpgradeType type;       // 이 슬롯이 어떤 업그레이드인지
+    public string displayName;     // 표시 이름
 
     [Header("UI 연결")]
-    [SerializeField] private Text txtName;      // 이름 텍스트
-    [SerializeField] private Text txtPrice;     // 가격 텍스트
-    [SerializeField] private Slider levelSlider; // 단계를 보여줄 슬라이더
-    [SerializeField] private Text txtLevelNum;  // (선택) "3 / 5" 숫자 표시용
+    [SerializeField] private Text txtName;      // 이름
+    [SerializeField] private Text txtPrice;     // 가격
+    [SerializeField] private Slider levelSlider; // 슬라이더
+    [SerializeField] private Text txtLevelNum;  // 숫자 (3 / 5)
     [SerializeField] private Button btnBuy;     // 구매 버튼
 
     private UpgradeManager manager;
     private UpgradeUI parentUI;
 
-    // 초기화
     public void Setup(UpgradeManager mgr, UpgradeUI ui)
     {
         manager = mgr;
@@ -25,7 +24,6 @@ public class UpgradeSlot : MonoBehaviour
 
         if (txtName != null) txtName.text = displayName;
 
-        // 버튼 클릭 시 구매 시도
         if (btnBuy != null)
         {
             btnBuy.onClick.RemoveAllListeners();
@@ -33,81 +31,102 @@ public class UpgradeSlot : MonoBehaviour
         }
     }
 
-    // 정보 갱신 (슬라이더 및 가격 업데이트)
     public void Refresh()
     {
         if (manager == null) return;
 
         int cost = manager.GetUpgradeCost(type);
         int currentLv = 0;
-        int maxLv = 10; // 기본값
+        int maxLv = 10;
 
-        // 1. 타입별로 현재 레벨과 만렙 계산 (슬라이더용)
+        // 1. 레벨 계산 (힘은 -1 처리하여 0부터 시작하게 함)
         CalculateLevelInfo(out currentLv, out maxLv);
 
-        // 2. 슬라이더 설정
+        // 2. 만렙(MAX) 여부 판단 로직 수정 [핵심 문제 해결 구간]
+        bool isMax = false;
+
+        if (type == UpgradeType.PickNPC)
+        {
+            // [히든 업그레이드] 비용이 0원이라고 MAX가 아님. 실제 레벨이 1이어야 MAX임.
+            // (UpgradeManager에서 잠금 상태일 때 비용을 0으로 주기 때문에 분리해야 함)
+            isMax = (currentLv >= maxLv);
+        }
+        else
+        {
+            // [일반 업그레이드] 레벨이 꽉 찼거나, 더 이상 비용이 없을 때(0원)
+            isMax = (currentLv >= maxLv) || (cost == 0);
+        }
+
+        // [힘 예외 처리] 히든 스탯(7)에 도달했으면 무조건 MAX 처리 및 슬라이더 고정
+        if (type == UpgradeType.Strength && GameManager.instance.P_Str >= UpgradeManager.STR_ULTIMATE)
+        {
+            isMax = true;
+            currentLv = maxLv; // 슬라이더가 뚫리지 않게 꽉 찬 상태로
+        }
+
+        // 3. 슬라이더 UI 적용
         if (levelSlider != null)
         {
             levelSlider.minValue = 0;
             levelSlider.maxValue = maxLv;
             levelSlider.value = currentLv;
-            levelSlider.wholeNumbers = true; // 정수 단위로 딱딱 끊어지게
+            levelSlider.wholeNumbers = true;
         }
 
-        // 3. 레벨 텍스트 (예: 3 / 7)
+        // 4. 텍스트 표시 로직 (중간엔 3/5, 끝날 때만 MAX)
         if (txtLevelNum != null)
         {
-            txtLevelNum.text = $"{currentLv} / {maxLv}";
+            if (isMax)
+            {
+                txtLevelNum.text = "MAX";
+                txtLevelNum.color = Color.red;
+            }
+            else
+            {
+                // 평소에는 "현재 / 최대" 표시
+                txtLevelNum.text = $"{currentLv} / {maxLv}";
+                txtLevelNum.color = Color.white;
+            }
         }
 
-        // 4. 가격 및 버튼 상태
-        bool isMax = (cost == 0) || (currentLv >= maxLv);
-
+        // 5. 버튼 및 가격 텍스트 상태 결정
         if (isMax)
         {
-            if (txtPrice != null) txtPrice.text = "MAX";
+            if (txtPrice != null) txtPrice.text = "Complete";
             if (btnBuy != null) btnBuy.interactable = false;
         }
         else
         {
-            if (txtPrice != null) txtPrice.text = $"{cost} G";
-
-            // 돈 부족하면 버튼 비활성화
-            if (txtPrice != null) txtPrice.text = $"{cost:N0} G";
-
-            bool canAfford = GameManager.instance.P_Money >= cost;
-            if (btnBuy != null) btnBuy.interactable = canAfford;
-            
-        }
-
-        // 히든(PickNPC) 특별 처리: 힘이 부족하면 잠금
-        if (type == UpgradeType.PickNPC)
-        {
-            // 아직 구매 안 했고(isMax == false), 조건도 충족 안 됐다면(!IsAllStatMaxed) -> 잠금
-            // 조건을 충족했다면 위의 'canAfford' 로직을 따라가서 구매 가능해짐
-            if (!isMax && !manager.IsAllStatMaxed())
+            // 히든 업그레이드(PickNPC)이면서 아직 해금이 안 된 경우 처리
+            if (type == UpgradeType.PickNPC && !manager.IsAllStatMaxed())
             {
-                if (btnBuy != null) btnBuy.interactable = false;
-                // 텍스트는 "잠김" 혹은 조건을 보여주는 것이 좋음
                 if (txtPrice != null) txtPrice.text = "Locked";
+                if (btnBuy != null) btnBuy.interactable = false;
+            }
+            else
+            {
+                // 일반적인 구매 가능 상태
+                if (txtPrice != null) txtPrice.text = $"{cost:N0} G";
+
+                bool canAfford = GameManager.instance.P_Money >= cost;
+                if (btnBuy != null) btnBuy.interactable = canAfford;
             }
         }
     }
 
-    // 실제 스탯을 "레벨(숫자)"로 변환하는 계산기
     private void CalculateLevelInfo(out int cur, out int max)
     {
-        cur = 0; max = 1; // 기본값
+        cur = 0; max = 1;
 
         switch (type)
         {
             case UpgradeType.Strength:
-                cur = GameManager.instance.P_Str;
-                max = UpgradeManager.MAX_STR_NORMAL; // 7
+                // 시작 힘이 1이어도 UI 상으로는 0(빈 칸)으로 보이게 -1 처리
+                cur = GameManager.instance.P_Str - 1;
+                max = UpgradeManager.MAX_STR_NORMAL - 1; // 6 - 1 = 5단계
                 break;
 
             case UpgradeType.BagWeight:
-                // 기본 10000, +5000씩 증가한다고 가정 시
                 int baseBag = 10000;
                 cur = (GameManager.instance.P_Maxbag - baseBag) / 5000;
                 max = (UpgradeManager.MAX_BAG_WEIGHT - baseBag) / 5000;
@@ -119,28 +138,33 @@ public class UpgradeSlot : MonoBehaviour
                 max = (UpgradeManager.MAX_HP_LIMIT - baseHP) / 80;
                 break;
 
-            case UpgradeType.PickSpeed: // 속도는 값이 줄어듦 (1.5 -> 0.25)
+            case UpgradeType.PickSpeed:
                 float baseSpd = 1.5f;
                 float minSpd = UpgradeManager.MIN_PICK_SPEED;
-                // 역순 계산 (작을수록 고렙)
                 float totalProgress = baseSpd - minSpd;
                 float currentProgress = baseSpd - GameManager.instance.grab_speed;
 
-                // 0~5단계로 환산
                 max = 5;
                 cur = Mathf.RoundToInt((currentProgress / totalProgress) * max);
                 break;
 
             case UpgradeType.MultiGrab:
-                cur = GameManager.instance.grab_limit - 1; // 기본 1개부터 시작
+                // 1개(기본) -> 0레벨로 취급
+                cur = GameManager.instance.grab_limit - 1;
                 max = UpgradeManager.MAX_GRAB_LIMIT - 1;
                 break;
 
             case UpgradeType.PickNPC:
+                // 힘이 궁극(7)이면 획득한 것(1), 아니면 0
                 cur = (GameManager.instance.P_Str == UpgradeManager.STR_ULTIMATE) ? 1 : 0;
                 max = 1;
                 break;
         }
+
+        // 방어 코드: 계산 결과가 음수가 되지 않도록
+        if (cur < 0) cur = 0;
+        // 방어 코드: 현재 레벨이 최대 레벨을 시각적으로 넘지 않도록 (단, Strength는 Refresh에서 별도 처리)
+        if (type != UpgradeType.Strength && cur > max) cur = max;
     }
 
     private void TryBuy()
@@ -149,11 +173,10 @@ public class UpgradeSlot : MonoBehaviour
 
         if (success)
         {
-            if(AudioManager.instance != null)
+            if (AudioManager.instance != null)
             {
                 AudioManager.instance.PlaySFX("SFX13");
             }
-            // [핵심] true를 넣어서 "돈 굴러가는 애니메이션 해줘!" 라고 요청
             parentUI.RefreshAll(true);
         }
     }
