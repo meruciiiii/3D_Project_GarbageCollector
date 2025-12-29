@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6384640615274326995
+--- !u!1 &6500696852232141403
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,53 +8,53 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2643601856367766012}
-  - component: {fileID: 5093422248893511737}
-  - component: {fileID: 5153691024387097963}
-  - component: {fileID: 6584326606013075148}
-  - component: {fileID: 6902837447953110425}
-  - component: {fileID: 5902415581251568941}
-  - component: {fileID: 7723752262872833500}
-  - component: {fileID: 7337973905668107728}
-  - component: {fileID: 1300664601716513187}
-  - component: {fileID: -8245237945186515126}
+  - component: {fileID: 6578592453092498869}
+  - component: {fileID: 5916563484221434398}
+  - component: {fileID: 4974644589942429828}
+  - component: {fileID: 6852362285988391638}
+  - component: {fileID: 1657187724132379479}
+  - component: {fileID: 7733058193231255890}
+  - component: {fileID: -6701401425063177772}
+  - component: {fileID: -3029930717366941249}
+  - component: {fileID: 4703388947301935891}
+  - component: {fileID: -4263530171617116273}
   m_Layer: 6
-  m_Name: Vase 11
+  m_Name: Bottle 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2643601856367766012
+--- !u!4 &6578592453092498869
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384640615274326995}
+  m_GameObject: {fileID: 6500696852232141403}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.8583994, y: -1.3292364, z: -11.533163}
+  m_LocalPosition: {x: -6.3094034, y: -1.3292351, z: -13.382369}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5093422248893511737
+--- !u!33 &5916563484221434398
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384640615274326995}
-  m_Mesh: {fileID: -5539357819512116934, guid: 65ebe5b19fea67a43aff972fc329476d, type: 3}
---- !u!23 &5153691024387097963
+  m_GameObject: {fileID: 6500696852232141403}
+  m_Mesh: {fileID: -5539357819512116934, guid: c52c2e12d8fcec14f858082b66ee4de7, type: 3}
+--- !u!23 &4974644589942429828
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384640615274326995}
+  m_GameObject: {fileID: 6500696852232141403}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -73,8 +73,11 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -9103484930961366303, guid: 65ebe5b19fea67a43aff972fc329476d, type: 3}
-  - {fileID: -8932566056945677694, guid: 65ebe5b19fea67a43aff972fc329476d, type: 3}
+  - {fileID: -8932566056945677694, guid: c52c2e12d8fcec14f858082b66ee4de7, type: 3}
+  - {fileID: -9103484930961366303, guid: c52c2e12d8fcec14f858082b66ee4de7, type: 3}
+  - {fileID: 441916079295038247, guid: c52c2e12d8fcec14f858082b66ee4de7, type: 3}
+  - {fileID: -2249960132812961191, guid: c52c2e12d8fcec14f858082b66ee4de7, type: 3}
+  - {fileID: 2646832279077371019, guid: c52c2e12d8fcec14f858082b66ee4de7, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,13 +100,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6584326606013075148
-MeshCollider:
+--- !u!65 &6852362285988391638
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384640615274326995}
+  m_GameObject: {fileID: 6500696852232141403}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -115,48 +118,47 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5539357819512116934, guid: 65ebe5b19fea67a43aff972fc329476d, type: 3}
---- !u!114 &6902837447953110425
+  serializedVersion: 3
+  m_Size: {x: 0.1395812, y: 0.3189754, z: 0.13977432}
+  m_Center: {x: -0.00024580956, y: 0.1594877, z: -0.00015062094}
+--- !u!114 &1657187724132379479
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384640615274326995}
+  m_GameObject: {fileID: 6500696852232141403}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5bfcb675901bc6468cd417ef699d90e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hided: 1
---- !u!114 &5902415581251568941
+--- !u!114 &7733058193231255890
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384640615274326995}
+  m_GameObject: {fileID: 6500696852232141403}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4bb8d998f21d8140b538fba170b002e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallTrash
   size: 0
-  trashNum: 7
-  trashData: {fileID: 1300664601716513187}
-  trash_r: {fileID: 7723752262872833500}
-  trash_c: {fileID: 6584326606013075148}
-  trash_render: {fileID: 5153691024387097963}
---- !u!54 &7723752262872833500
+  trashNum: 4
+  trashData: {fileID: -3029930717366941249}
+  trash_r: {fileID: -6701401425063177772}
+  trash_c: {fileID: 6852362285988391638}
+  trash_render: {fileID: 4974644589942429828}
+--- !u!54 &-6701401425063177772
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384640615274326995}
+  m_GameObject: {fileID: 6500696852232141403}
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
@@ -177,45 +179,45 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7337973905668107728
+--- !u!114 &-3029930717366941249
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384640615274326995}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 1
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 5
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &1300664601716513187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384640615274326995}
+  m_GameObject: {fileID: 6500696852232141403}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3d5e456200521242ae17c2142ceea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrashData
---- !u!114 &-8245237945186515126
+--- !u!114 &4703388947301935891
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384640615274326995}
+  m_GameObject: {fileID: 6500696852232141403}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 447de1ffe67d0a74d9210b779a8d0c05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallTrashCollectable
+--- !u!114 &-4263530171617116273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6500696852232141403}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
