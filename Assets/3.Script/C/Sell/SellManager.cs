@@ -60,9 +60,17 @@ public class SellManager : MonoBehaviour
             BigTrashAction catcher = FindAnyObjectByType<BigTrashAction>();
             if (catcher != null) catcher.SellHeldTrash();
 
+            HumanTrashAction humanCatcher = FindAnyObjectByType<HumanTrashAction>();
+            if (humanCatcher != null)
+            {
+                humanCatcher.SellHeldTrash();
+            }
+
             GameManager.instance.isGrabBigGarbage = false;
             GameManager.instance.BigGarbageWeight = 0;
         }
+
+
 
         if (totalEarnings > 0 && playerController != null)
         {
