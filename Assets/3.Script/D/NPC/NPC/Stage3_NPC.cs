@@ -14,7 +14,7 @@ public class Stage3_NPC : NPC_Base {
 	[SerializeField] private float max_sec = 6;
 
 	[Header("충돌 관련")]
-	[SerializeField] private float flyPower = 10f;
+	[SerializeField] private float flyPower = 25f;
 	public bool isClone = false;
 
 	//area 판정 확인
@@ -54,21 +54,21 @@ public class Stage3_NPC : NPC_Base {
 	}
 
 	private void OnTriggerEnter(Collider other) {
-		if(other.CompareTag("Car") && !isClone && inArea) {
+		if(other.CompareTag("Car") && !isClone && inArea && GameManager.instance.Current_Area.Equals(3)) {
 			CloneTrashRuntime(other.transform.position);
 		}
 	}
 
 	private void CloneTrashRuntime(Vector3 car_pos) {
 		GameObject cloneGO = Instantiate(gameObject);
-		if(cloneGO.TryGetComponent(out Trash cloneTrash)) {	CloneSetting(cloneTrash); }
-		if(cloneGO.TryGetComponent(out Stage3_NPC npc_script)) { npc_script.isClone = true; }
-		if(cloneGO.TryGetComponent(out Rigidbody cloneRB)) {
-			Vector3 fly_dir = (transform.position - car_pos) * flyPower;
-			fly_dir.y *= 0.25f;
-			cloneRB.AddForce(fly_dir, ForceMode.Impulse);
+		if(cloneGO.TryGetComponent(out Trash cloneTrash)) {	
+			CloneSetting(cloneTrash);
+			cloneTrash.isRuntimeInstance = true;
 		}
-		ChangeState(becomeTrashState);
+		if(cloneGO.TryGetComponent(out Stage3_NPC npc_script)) { 
+			npc_script.isClone = true; 
+		}
+		ChangeState(setPosState);
 	}
 
 	private void CloneSetting(Trash cloneTrash) {

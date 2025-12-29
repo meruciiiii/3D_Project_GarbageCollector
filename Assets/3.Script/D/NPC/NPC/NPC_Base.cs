@@ -63,7 +63,9 @@ public class NPC_Base : MonoBehaviour {
 		}
 
 		currentState = newState;
-		currentState.Enter();
+		if (currentState != null) {
+			currentState.Enter();
+		}
 	}
 
 	protected virtual void Event_ChangeArea(int area) { }

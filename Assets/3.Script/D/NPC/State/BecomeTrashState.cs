@@ -10,7 +10,7 @@ public class BecomeTrashState : IState {
 	}
 
 	public void Update() {
-		npc.ChangeState(npc.setPosState);
+		npc.ChangeState(null);
 	}
 
 	public void Exit() {
