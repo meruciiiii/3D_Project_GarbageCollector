@@ -171,10 +171,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 5079154196914684736, guid: 5eed33d985b965e46b56a89501ad7cf3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5248039777925738861, guid: 5eed33d985b965e46b56a89501ad7cf3, type: 3}
       propertyPath: m_Name
       value: MinimapCamera_Player
@@ -669,6 +665,10 @@ PrefabInstance:
     - target: {fileID: 1227669572972238987, guid: 112f2f76760e1dd45b4f45e953877a34, type: 3}
       propertyPath: m_Name
       value: Fullmap
+      objectReference: {fileID: 0}
+    - target: {fileID: 1227669572972238987, guid: 112f2f76760e1dd45b4f45e953877a34, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9153644234778657595, guid: 112f2f76760e1dd45b4f45e953877a34, type: 3}
       propertyPath: m_LocalPosition.x
