@@ -216,7 +216,7 @@ public class PlayerController : MonoBehaviour {
     }
 	#endregion
 	//-------------------------------------------------------------------
-	//충돌
+	#region 충돌
 	private void OnCollisionEnter(Collision collision) {
 		if(collision.transform.CompareTag("Car")) {
             if(!isStun) {
@@ -237,4 +237,5 @@ public class PlayerController : MonoBehaviour {
         transform.rotation = Quaternion.identity;
         isStun = false;
     }
+	#endregion
 }
