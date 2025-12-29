@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public int P_MaxHP = 100; //최대체력
     private int p_CurrentHP; //현재 체력
-    public int P_CurrentHP
+    public int P_CurrentHP //차량 부딫힐때 필요
     {
         get => p_CurrentHP;
         set
