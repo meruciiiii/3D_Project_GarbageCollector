@@ -10,22 +10,9 @@ public class AreaTrigger : MonoBehaviour {
 	[SerializeField] private int area;
 
 	private void OnTriggerEnter(Collider other) {
-		if (other.CompareTag("PlayerArea")) {
+		if (other.CompareTag("PlayerArea") && !area.Equals(GameManager.instance.Current_Area)) {
 			areaManager.ChangeArea(area);
 			//Debug.Log("Area º¯°æ!!");
-		} else if (other.CompareTag("NPC")) {
-			if (other.TryGetComponent(out Stage3_NPC npc_script)) {
-				npc_script.run_coroutine();
-			}
-		}
-	}
-
-	private void OnTriggerExit(Collider other) {
-		 if (other.CompareTag("PlayerArea")) {
-			if (other.TryGetComponent(out Stage3_NPC npc_script)) {
-				npc_script.stop_coroutine();
-				npc_script.drop_cnt = 0;
-			}
 		}
 	}
 }

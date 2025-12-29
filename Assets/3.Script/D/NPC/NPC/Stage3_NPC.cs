@@ -11,6 +11,9 @@ public class Stage3_NPC : NPC_Base {
 	[SerializeField] private float min_sec = 3;
 	[SerializeField] private float max_sec = 6;
 
+	//area 판정용
+	public bool inArea = false;
+
 	private Transform area_object;
 
 	protected override void Awake() {
@@ -19,9 +22,10 @@ public class Stage3_NPC : NPC_Base {
 		npc_create_trash.area = area_object;
 	}
 
+
+	//이걸 조절하는건 
 	public void run_coroutine() {StartCoroutine(drop_trash());}
 	public void stop_coroutine() {StopCoroutine(drop_trash());}
-
 	private IEnumerator drop_trash() {
 		while (drop_cnt < max_drop_cnt) {
 			float maxTime = Random.Range(min_sec, max_sec);
@@ -37,7 +41,6 @@ public class Stage3_NPC : NPC_Base {
 			}
 		}
 	}
-
 	protected override void Event_ChangeArea(int area) {
 		if (area.Equals(3)) { isActive = true; } 
 		else { isActive = false; }

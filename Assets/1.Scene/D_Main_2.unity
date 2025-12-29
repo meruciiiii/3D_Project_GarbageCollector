@@ -1792,22 +1792,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 477086612179912072, guid: d34fe02f20e76be4793b030a391251f4, type: 3}
+    - target: {fileID: 373921023972231109, guid: d34fe02f20e76be4793b030a391251f4, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 273951463}
     - target: {fileID: 671414110393351463, guid: d34fe02f20e76be4793b030a391251f4, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 871701433}
+    - target: {fileID: 671414110393351463, guid: d34fe02f20e76be4793b030a391251f4, type: 3}
+      propertyPath: m_VersionIndex
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 1874568498539311458, guid: d34fe02f20e76be4793b030a391251f4, type: 3}
       propertyPath: m_Name
       value: Area
       objectReference: {fileID: 0}
-    - target: {fileID: 3221968469689082625, guid: d34fe02f20e76be4793b030a391251f4, type: 3}
+    - target: {fileID: 2365588367728380055, guid: d34fe02f20e76be4793b030a391251f4, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 871701433}
     - target: {fileID: 3716116697556049842, guid: d34fe02f20e76be4793b030a391251f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1852,12 +1856,23 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1507687716}
+    - target: {fileID: 4855668817020084567, guid: d34fe02f20e76be4793b030a391251f4, type: 3}
+      propertyPath: m_VersionIndex
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731495386358418913, guid: d34fe02f20e76be4793b030a391251f4, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1507687716}
     - target: {fileID: 7422174690285443516, guid: d34fe02f20e76be4793b030a391251f4, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 273951463}
-    m_RemovedComponents:
-    - {fileID: 3221968469689082625, guid: d34fe02f20e76be4793b030a391251f4, type: 3}
+    - target: {fileID: 7422174690285443516, guid: d34fe02f20e76be4793b030a391251f4, type: 3}
+      propertyPath: m_VersionIndex
+      value: 16
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

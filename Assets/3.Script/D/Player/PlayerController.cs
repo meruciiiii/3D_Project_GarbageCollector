@@ -156,7 +156,7 @@ public class PlayerController : MonoBehaviour {
 
         //만약 내가 큰 쓰레기를 들었을 경우,,,
         if (GameManager.instance.isGrabBigGarbage) {
-            Debug.Log("설마 여기냐?");
+            //Debug.Log("설마 여기냐?");
             float half_reduction = 0.5f;
             int half_count = GameManager.instance.P_Str - GameManager.instance.BigGarbageWeight;
             for (int i = 0; i < half_count; i++) {
