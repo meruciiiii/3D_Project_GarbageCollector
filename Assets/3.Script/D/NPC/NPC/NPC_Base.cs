@@ -29,6 +29,8 @@ public class NPC_Base : MonoBehaviour {
 	//구역 이벤트 수신용
 	[SerializeField] protected bool isActive;
 
+	//애니메이터 추가
+	public Animator animator;
 	//-------------------------------------------------------------
 
 	protected virtual void Awake() {

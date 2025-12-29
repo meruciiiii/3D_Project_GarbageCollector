@@ -12,13 +12,14 @@ public class ThrowTrashState : IState {
 		timer = 0f;
 		npc.agent.isStopped = true;
 		//쓰레기 투척 애니메이션 활성화!
+		npc.animator.SetTrigger("isThrow");
 		npc.transform.LookAt(npc.npc_create_trash.throw_vector.normalized + npc.transform.position);
 	}
 
 	public void Update() {
 		//쓰레기 투척 방향 바라보기
 		timer += Time.deltaTime;
-		if(timer >= 2.0f) {
+		if(timer >= 1.0f) {
 			npc.npc_create_trash.trash_Spawn();
 			npc.ChangeState(npc.moveState);
 		}

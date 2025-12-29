@@ -31,6 +31,7 @@ namespace PrivateLT.CharacterCustomization
 
         public void Close()
         {
+
             CosmeticsData.OnShuffle -= Shuffle;
             CosmeticsData.OnRefresh -= Refresh;
             CosmeticsData.OnClear -= Clear;

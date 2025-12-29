@@ -35,7 +35,7 @@ public class PlayerWork : MonoBehaviour
 
 
     private bool isPicking;
-    [SerializeField] private float pickInterval;
+    private float pickInterval;
     private float nextPickTime;
 
 
@@ -72,9 +72,6 @@ public class PlayerWork : MonoBehaviour
     private void Start()
     {
         pickInterval = (float)GameManager.instance.grab_speed;
-        Debug.Log(GameManager.instance.grab_speed + " : 스타트 딜레이");
-        //pickInterval = 1.5f;
-        Debug.Log(pickInterval + " : 스타트 딜레이");
     }
     private void Update()
     {
@@ -131,7 +128,7 @@ public class PlayerWork : MonoBehaviour
     public void SelectTargets()
     {
         int layer;
-        if(hit.collider == null)
+        if (hit.collider == null)
         {
             sorting.lastHitsOffOutline();
             target = Array.Empty<GameObject>();
@@ -141,7 +138,7 @@ public class PlayerWork : MonoBehaviour
         {
             layer = hit.collider.gameObject.layer;
         }
-        hits = sorting.SortingHits(hits, HitPosition, layer);
+        hits = sorting.SortingHits(hits, hit, HitPosition, layer);
         if (hits.Length == 0)
         {
             sorting.lastHitsOffOutline();
@@ -157,7 +154,7 @@ public class PlayerWork : MonoBehaviour
     }
     private void Interact(PlayerWork player)
     {
-        
+
         if (humanTrashAction.IsHolding)
         {
             if (!Cursor.visible)
@@ -195,11 +192,13 @@ public class PlayerWork : MonoBehaviour
             {
                 Debug.Log("IInteractable 컴포넌트가 없습니다.");
             }
-            controller.Calc_Speed();
             nextPickTime = Time.time + pickInterval;
             uIManager.change_Value();
+            sorting.lastHitsOffOutline();
+            sorting.CatchandEmpty();
         }
-        if (bigTrashAction.IsHolding|| humanTrashAction.IsHolding)
+        controller.Calc_Speed();
+        if (bigTrashAction.IsHolding || humanTrashAction.IsHolding)
         {
             isPicking = false;
         }

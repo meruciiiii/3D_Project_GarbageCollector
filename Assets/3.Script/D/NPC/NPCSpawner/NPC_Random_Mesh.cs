@@ -59,10 +59,10 @@ public class NPC_Random_Mesh : MonoBehaviour {
 	}
 
 	// NPC가 파괴될 때도 깔끔하게 비워줍니다.
-	private void OnDestroy() {
-		if (_customizationParts == null) return;
-		foreach (var part in _customizationParts) {
-			part.Close();
-		}
-	}
+	//private void OnDestroy() {
+	//	if (_customizationParts == null) return;
+	//	foreach (var part in _customizationParts) {
+	//		part.Close();
+	//	}
+	//}
 }
