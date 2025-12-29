@@ -19,4 +19,11 @@ public class SmallTrashCollectable : MonoBehaviour, IInteractable
         //Debug.Log("trash.Data.getSmallTrashHpdecrease(trash.TrashNum) : " + trash.Data.getSmallTrashHpdecrease(trash.TrashNum));
         Destroy(gameObject);
     }
+    public int TrashWeight()
+    {
+        Trash trash;
+        if (!TryGetComponent<Trash>(out trash))
+            return -1;
+        return trash.Data.getSmallTrashWeight(trash.TrashNum);
+    }
 }

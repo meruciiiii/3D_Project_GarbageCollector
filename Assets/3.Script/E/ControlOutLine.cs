@@ -28,4 +28,5 @@ public class ControlOutLine : MonoBehaviour
         materials.Remove(outline_material);
         render.materials = materials.ToArray();
     }
+    
 }

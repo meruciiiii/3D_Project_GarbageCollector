@@ -56,10 +56,6 @@ public class HitsSort : MonoBehaviour
         lastHistCheck(finalCountLayerHits);
         return finalCountLayerHits;
     }
-    public void HumanCheck(RaycastHit[] hits)
-    {
-        lastHistCheck(hits);
-    }
     public void lastHistCheck(RaycastHit[] finalCountLayerHits)
     {
         currentHits = finalCountLayerHits;
@@ -83,10 +79,24 @@ public class HitsSort : MonoBehaviour
     }
     public void currentHitsOnOutline()
     {
+        int playerBag = GameManager.instance.P_Maxbag;
+        int nowWeight = GameManager.instance.P_Weight;
         for (int i = 0; i < currentHits.Length; i++)
         {
             if (currentHits[i].collider.gameObject.TryGetComponent<Outline>(out Outline outline))
             {
+                if (Checking(currentHits[i], playerBag, nowWeight))
+                {
+                    ChangeGray(outline);
+                    if (currentHits[i].collider.TryGetComponent<IInteractable>(out var interactable))
+                    {
+                        nowWeight += interactable.TrashWeight();
+                    }
+                }
+                else
+                {
+                    ChangeRed(outline);
+                }
                 outline.enabled = true;
             }
         }
@@ -105,5 +115,33 @@ public class HitsSort : MonoBehaviour
     {
         currentHits = Array.Empty<RaycastHit>();
         lastHits = Array.Empty<RaycastHit>();
+    }
+    public void ChangeRed(Outline outline)
+    {
+        outline.OutlineColor = new Color(130 / 255f, 0f, 0f);
+    }
+    public void ChangeGray(Outline outline)
+    {
+        outline.OutlineColor = new Color(130 / 255f, 130 / 255f, 130 / 255f);
+    }
+    public bool Checking(RaycastHit check, int Bag, int now)
+    {
+
+        if (check.collider.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable))
+        {
+            now += interactable.TrashWeight();
+        }
+        else
+        {
+            Debug.Log("IInteractable 컴포넌트가 없습니다.");
+        }
+        if (now < Bag)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
