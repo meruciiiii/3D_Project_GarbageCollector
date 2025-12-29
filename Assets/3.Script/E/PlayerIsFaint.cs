@@ -13,7 +13,7 @@ public class PlayerIsFaint : MonoBehaviour
     //[SerializeField] private ShowerSystem showerSystem;
     [SerializeField] private GameObject Sceneload_fade;
     [SerializeField] private VignetteController vignetteController;
-    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private PlayerWork playerWork;
     [SerializeField] private Camera camera;
     public void StartPassOutEffect()
     {
@@ -47,7 +47,7 @@ public class PlayerIsFaint : MonoBehaviour
         Sceneload_fade.SetActive(true);
         yield return new WaitForSeconds(1f);
         HandleResetPlayer();
-        playerInput.onPickUp();
+        playerWork.startPick();
         DoNotControl(false);
     }
 

@@ -73,6 +73,7 @@ public class HumanTrashAction : MonoBehaviour
         currentTrash.transform.SetParent(null);
         StartCoroutine(DropWithCurve());
         SetRagdollKinematic(false);
+        GameManager.instance.isGrabBigGarbage = false;
     }
     private IEnumerator LiftWithCurve()
     {
