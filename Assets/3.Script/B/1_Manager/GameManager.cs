@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     public bool GameClear = false;
 
     public int grab_limit = 1;//집을 수 있는 최댓수
-    public float grab_range = 1f;//집을 수 있는 범위 임의값 float 1f
+    public float grab_range = 0.1f;//집을 수 있는 범위 임의값 float 0.1f
     public float grab_speed = 1.5f;//집는 속도
 
     //큰 쓰레기 전용 값 3종류
@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
 
         grab_limit = 1;
         grab_speed = 1.5f;
-        grab_range = 1f;
+        grab_range = 0.1f;
 
         isGrabBigGarbage = false;
         BigGarbageWeight = 0;
