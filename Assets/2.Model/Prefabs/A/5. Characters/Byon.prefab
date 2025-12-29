@@ -3727,6 +3727,7 @@ GameObject:
   - component: {fileID: 4747258265839985119}
   - component: {fileID: 4441995523849403623}
   - component: {fileID: 3519299420117878398}
+  - component: {fileID: 6228164579484690353}
   m_Layer: 7
   m_Name: Byon
   m_TagString: Player
@@ -3788,7 +3789,7 @@ MonoBehaviour:
   trashNum: 6
   trashData: {fileID: 2400333377732253557}
   trash_r: {fileID: 4441995523849403623}
-  trash_c: {fileID: 0}
+  trash_c: {fileID: 6228164579484690353}
   trash_render: {fileID: 0}
 --- !u!114 &2400333377732253557
 MonoBehaviour:
@@ -3859,6 +3860,29 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!136 &6228164579484690353
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8356616362162210903}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.89
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.92, z: 0}
 --- !u!1 &8372826866646605958
 GameObject:
   m_ObjectHideFlags: 0
