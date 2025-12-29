@@ -90,7 +90,7 @@ public class ThashInfo : MonoBehaviour
             infoBuilder.AppendLine($"<b>{tName}</b>");
 
             // (2) 무게
-            infoBuilder.AppendLine($"무게: {tWeight} g");
+            infoBuilder.AppendLine($"\n무게: {tWeight} g");
 
             // (3) 힘 요구량 비교 및 색상 처리
             if (currentStr >= reqStr)
