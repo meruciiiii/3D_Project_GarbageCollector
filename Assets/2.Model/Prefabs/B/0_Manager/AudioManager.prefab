@@ -45,7 +45,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -53,8 +53,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2
-  MaxDistance: 20
+  MinDistance: 4
+  MaxDistance: 7
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -344,7 +344,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -352,8 +352,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2
-  MaxDistance: 20
+  MinDistance: 4
+  MaxDistance: 7
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -473,7 +473,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -481,8 +481,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2
-  MaxDistance: 20
+  MinDistance: 4
+  MaxDistance: 7
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -622,13 +622,13 @@ MonoBehaviour:
   - name: SFX3
     clip: {fileID: 8300000, guid: 103fb948e8dc9a54e8e4483440028d05, type: 3}
   - name: SFX4
-    clip: {fileID: 8300000, guid: 4fd0da2a8dbbacb4b85986c8774837c9, type: 3}
+    clip: {fileID: 8300000, guid: a666f88e85d37a0469245a512aa0f556, type: 3}
   - name: SFX5
     clip: {fileID: 8300000, guid: 1fbb1e4f338b9594592d51c96b0320f7, type: 3}
   - name: SFX6
     clip: {fileID: 8300000, guid: b009094082adc0940b1da13e20915d95, type: 3}
   - name: SFX7
-    clip: {fileID: 8300000, guid: c1b6113c3e7976647995d5b855bce0af, type: 3}
+    clip: {fileID: 8300000, guid: 7e63139e3c9486c46a7a4ff143d0b922, type: 3}
   - name: SFX8
     clip: {fileID: 8300000, guid: a52026bd01582de4ab6b9a942d943d0e, type: 3}
   - name: SFX9
@@ -636,7 +636,7 @@ MonoBehaviour:
   - name: SFX10
     clip: {fileID: 8300000, guid: 2974b4bf4a59b6642b7d801f459d930d, type: 3}
   - name: SFX11
-    clip: {fileID: 8300000, guid: 308f5556ac397c944a4620bccc6dad8d, type: 3}
+    clip: {fileID: 8300000, guid: 0b500256391f2d4498664010dc0d89ee, type: 3}
   - name: SFX12
     clip: {fileID: 8300000, guid: 8a5e943219fc90b49bf676c8a018abba, type: 3}
   - name: SFX13
@@ -647,7 +647,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: a53b05feb3eb3ee498659618e08ab5be, type: 3}
   SFX_3D_clip:
   - name: SFX3D1
-    clip: {fileID: 8300000, guid: 73cf5f471710c174fb7da305cb6d14ab, type: 3}
+    clip: {fileID: 8300000, guid: 6811677ea153c0f4094a1501d5caddc6, type: 3}
   BGM_Player: {fileID: 0}
   SFX_Player: []
   SFX_3D_Player: []
@@ -697,7 +697,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -705,8 +705,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2
-  MaxDistance: 20
+  MinDistance: 4
+  MaxDistance: 7
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -826,7 +826,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -834,8 +834,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2
-  MaxDistance: 20
+  MinDistance: 4
+  MaxDistance: 7
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -955,7 +955,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -963,8 +963,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2
-  MaxDistance: 20
+  MinDistance: 4
+  MaxDistance: 7
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1084,7 +1084,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1092,8 +1092,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2
-  MaxDistance: 20
+  MinDistance: 4
+  MaxDistance: 7
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1213,7 +1213,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1221,8 +1221,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2
-  MaxDistance: 20
+  MinDistance: 4
+  MaxDistance: 7
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -2353,7 +2353,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2361,8 +2361,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2
-  MaxDistance: 20
+  MinDistance: 4
+  MaxDistance: 7
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -2482,7 +2482,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2490,8 +2490,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2
-  MaxDistance: 20
+  MinDistance: 4
+  MaxDistance: 7
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

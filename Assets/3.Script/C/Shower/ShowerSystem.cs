@@ -54,6 +54,11 @@ public class ShowerSystem : MonoBehaviour
     {
         isWashing = true;
 
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX("SFX12");
+        }
+
         // 1. 플레이어 얼리기 (커서는 여전히 안 보여야 함!)
         SetPlayerFreeze(true);
 

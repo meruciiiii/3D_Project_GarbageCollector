@@ -14,4 +14,11 @@ public class HumanTrashHoldable : MonoBehaviour, IInteractable
         player.humanTrashAction.Hold(trash);
         player.cleanPlayer.Clean(trash.Data.getBigTrashHpdecrease(trash.TrashNum));
     }
+    public int TrashWeight()
+    {
+        Trash trash;
+        if (!TryGetComponent<Trash>(out trash))
+            return -1;
+        return trash.Data.getBigTrashWeight(trash.TrashNum);
+    }
 }
