@@ -18,6 +18,7 @@ public class Trash : MonoBehaviour
     [SerializeField] private Rigidbody trash_r;
     [SerializeField] private Collider trash_c;
     [SerializeField] private Renderer trash_render;
+    public bool isRuntimeInstance;
 
     public TrashSize Size => size;
     public int TrashNum => trashNum;

@@ -157,7 +157,7 @@ public class PlayerWork : MonoBehaviour
         }
         if (trashInfoUI != null && target.Length > 0)
         {
-            trashInfoUI.UpdateTooltip(target[0]);
+            trashInfoUI.UpdateTooltip(target);
         }
     }
     private void Interact(PlayerWork player)
