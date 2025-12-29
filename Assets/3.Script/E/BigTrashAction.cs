@@ -32,7 +32,7 @@ public class BigTrashAction : MonoBehaviour
         currentTrash.Trash_c.enabled = false;
         currentTrash.Trash_render.enabled = false;
         GameManager.instance.isGrabBigGarbage = true;
-        //큰 쓰레기 소리 작업
+        AudioManager.instance.PlaySFX("SFX7");//큰 쓰레기 소리 작업
         return true;
     }
     public bool CanHold(int strength)
