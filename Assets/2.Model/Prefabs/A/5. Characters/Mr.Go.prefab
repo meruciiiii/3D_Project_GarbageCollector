@@ -1061,6 +1061,7 @@ GameObject:
   - component: {fileID: -5896231619390339551}
   - component: {fileID: -4404303614177658086}
   - component: {fileID: -5264919904100348942}
+  - component: {fileID: 5099303738056324086}
   m_Layer: 7
   m_Name: Mr.Go
   m_TagString: Untagged
@@ -1122,7 +1123,7 @@ MonoBehaviour:
   trashNum: 7
   trashData: {fileID: 839862413180565789}
   trash_r: {fileID: -4404303614177658086}
-  trash_c: {fileID: 0}
+  trash_c: {fileID: 5099303738056324086}
   trash_render: {fileID: 0}
 --- !u!114 &839862413180565789
 MonoBehaviour:
@@ -1193,6 +1194,29 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!136 &5099303738056324086
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778250488404772834}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.89
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.92, z: 0}
 --- !u!1 &2049280730573642626
 GameObject:
   m_ObjectHideFlags: 0

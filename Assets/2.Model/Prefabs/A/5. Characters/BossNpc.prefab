@@ -1259,6 +1259,7 @@ GameObject:
   - component: {fileID: -5279868099692154973}
   - component: {fileID: 9769239461251092}
   - component: {fileID: 2154526803440309595}
+  - component: {fileID: 80089657005417981}
   m_Layer: 0
   m_Name: BossNpc
   m_TagString: Untagged
@@ -1320,7 +1321,7 @@ MonoBehaviour:
   trashNum: 6
   trashData: {fileID: -1092098769916165811}
   trash_r: {fileID: 9769239461251092}
-  trash_c: {fileID: 0}
+  trash_c: {fileID: 80089657005417981}
   trash_render: {fileID: 0}
 --- !u!114 &-1092098769916165811
 MonoBehaviour:
@@ -1391,6 +1392,29 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!136 &80089657005417981
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2182460276186851866}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.89
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.92, z: 0}
 --- !u!1 &2243087730840042345
 GameObject:
   m_ObjectHideFlags: 0
