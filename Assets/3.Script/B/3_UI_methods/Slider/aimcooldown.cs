@@ -20,6 +20,7 @@ public class aimcooldown : MonoBehaviour
 
     private void StartCooldown()
     {
+        if (!gameObject.activeInHierarchy) return;
         // 무게가 늘어났다는 신호가 올 때만 실행됨
         if (chargeCoroutine != null) StopCoroutine(chargeCoroutine);
         chargeCoroutine = StartCoroutine(CooldownRoutine());
@@ -41,6 +42,29 @@ public class aimcooldown : MonoBehaviour
         yield return new WaitForEndOfFrame();
         cooldownSlider.value = 0;
         chargeCoroutine = null;
+    }
+    private void ResetSlider()
+    {
+        if (cooldownSlider != null)
+        {
+            cooldownSlider.value = 0f;
+        }
+    }
+    private void OnEnable()
+    {
+        ResetSlider();
+    }
+
+    // 오브젝트가 비활성화될 때 호출 (에임이 꺼질 때)
+    private void OnDisable()
+    {
+        // 꺼질 때 코루틴 변수 참조를 정리하고 슬라이더를 초기화합니다.
+        if (chargeCoroutine != null)
+        {
+            StopCoroutine(chargeCoroutine);
+            chargeCoroutine = null;
+        }
+        ResetSlider();
     }
 
     private void OnDestroy()
