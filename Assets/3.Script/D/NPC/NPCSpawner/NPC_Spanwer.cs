@@ -28,7 +28,7 @@ public class NPC_Spanwer : MonoBehaviour {
 		for (int i = 0; i < pool_size; i++) {
 
 			//생성
-			npc = Instantiate(NPC_prefab);
+			npc = Instantiate(NPC_prefab, transform);
 			//비활성화
 			npc.SetActive(false);
 			//위치 임시로 잡아두기 (생성될때 NavMesh 배치 경고 메시지)

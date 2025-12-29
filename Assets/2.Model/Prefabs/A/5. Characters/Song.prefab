@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: -1454163357927840997}
   - component: {fileID: 4636070690770445781}
   - component: {fileID: 3357676562235195661}
+  - component: {fileID: 3271424170218775094}
   m_Layer: 7
   m_Name: Song
   m_TagString: Player
@@ -199,7 +200,7 @@ MonoBehaviour:
   trashNum: 6
   trashData: {fileID: -1454163357927840997}
   trash_r: {fileID: 7816822732388057388}
-  trash_c: {fileID: 0}
+  trash_c: {fileID: 3271424170218775094}
   trash_render: {fileID: 0}
 --- !u!114 &-1454163357927840997
 MonoBehaviour:
@@ -243,6 +244,29 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!136 &3271424170218775094
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684862356332327031}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.89
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.92, z: 0}
 --- !u!1 &776055540762757733
 GameObject:
   m_ObjectHideFlags: 0
