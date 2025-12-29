@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class HumanTrashAction : MonoBehaviour
 {
     private Trash currentTrash;
@@ -18,6 +18,7 @@ public class HumanTrashAction : MonoBehaviour
     [SerializeField] private AnimationCurve liftCurve;
     [SerializeField] private float liftDuration = 0.5f;
     [SerializeField] private LayerMask groundMask;
+    [SerializeField] private Rigidbody[] ragdollBodies;
     //public void TryInteractWithBigTrash(Trash trash)
     //{
     //    if (IsHolding)
@@ -34,10 +35,16 @@ public class HumanTrashAction : MonoBehaviour
         if (CanHold(trash.Data.getrequiredStrength(trash.TrashNum)))
             return;
         currentTrash = trash;
-
-        trash.Trash_c.enabled = false;
+        if (!trash.isRuntimeInstance)
+        {
+            currentTrash = CloneTrashRuntime();
+            currentTrash.isRuntimeInstance = true;
+        }
+        SetRagdollKinematic(true);
+        //trash.Trash_c.enabled = false;
         trash.Trash_r.isKinematic = true;
         trash.Trash_r.useGravity = false;
+        CloneSetting(currentTrash);
         StartCoroutine(LiftWithCurve());
         GameManager.instance.BigGarbageWeight = trash.Data.getBigTrashWeight(trash.TrashNum);
         GameManager.instance.isGrabBigGarbage = true;
@@ -56,15 +63,26 @@ public class HumanTrashAction : MonoBehaviour
         {
             return;
         }
+        if (currentTrash.TryGetComponent(out Animator Ani))
+        {
+            currentTrash.Trash_r.constraints = RigidbodyConstraints.None;
+            //currentTrash.Trash_r.constraints = RigidbodyConstraints.FreezePositionY;
+            Ani.enabled = false;
+        }
         StopCoroutine(DropWithCurve());
         currentTrash.transform.SetParent(null);
         StartCoroutine(DropWithCurve());
+        SetRagdollKinematic(false);
+        GameManager.instance.isGrabBigGarbage = false;
     }
     private IEnumerator LiftWithCurve()
     {
         Transform hand = transform.GetChild(7);
         Trash trash = currentTrash;
+        trash.transform.SetParent(null);
+        SetRagdollKinematic(true);
 
+        trash.transform.SetParent(hand, true);
         startPos = trash.transform.position;
         startRot = trash.transform.rotation;
 
@@ -89,7 +107,6 @@ public class HumanTrashAction : MonoBehaviour
         trash.transform.position = targetPos;
         trash.transform.rotation = targetRot;
         // 완전히 도착 후 Parent 설정
-        trash.transform.SetParent(hand);
         trash.transform.localPosition = Vector3.zero;
         trash.transform.localRotation = Quaternion.identity;
     }
@@ -141,5 +158,41 @@ public class HumanTrashAction : MonoBehaviour
             return;
         Destroy(currentTrash.gameObject);
         currentTrash = null;
+    }
+    public Trash CloneTrashRuntime()
+    {
+        GameObject cloneGO = Instantiate(currentTrash.gameObject);
+        Trash cloneTrash = cloneGO.GetComponent<Trash>();
+        currentTrash.gameObject.SetActive(false);
+        return cloneTrash;
+    }
+    private void CloneSetting(Trash cloneTrash)
+    {
+        if (cloneTrash.TryGetComponent(out NavMeshAgent Nav))
+        {
+            Nav.enabled = false;
+        }
+        if (cloneTrash.TryGetComponent(out Stage3_NPC stageNpc))
+        {
+            stageNpc.enabled = false;
+        }
+        if (cloneTrash.TryGetComponent(out NPC_Create_Trash create_Trash))
+        {
+            create_Trash.enabled = false;
+        }
+        if (cloneTrash.TryGetComponent(out NPC_Random_Mesh random_Mesh))
+        {
+            random_Mesh.enabled = false;
+        }
+        cloneTrash.Trash_r.constraints = RigidbodyConstraints.FreezeAll;
+        
+    }
+    private void SetRagdollKinematic(bool value)
+    {
+        foreach (var rb in ragdollBodies)
+        {
+            rb.isKinematic = value;
+            rb.useGravity = !value;
+        }
     }
 }
