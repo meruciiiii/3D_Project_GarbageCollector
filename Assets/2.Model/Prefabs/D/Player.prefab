@@ -751,7 +751,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -930,6 +930,8 @@ MonoBehaviour:
   accelSpeed: 25
   sensitive: 0.1
   cameraObject: {fileID: 4923363421550768917}
+  flyPower: 10
+  isStun: 0
   cur_weight: 0
   max_weight: 0
   slow_start_bag_weight: 0.5
@@ -971,6 +973,7 @@ MonoBehaviour:
   humanTrashAction: {fileID: 4273967007487283107}
   controller: {fileID: 3317103082146166114}
   uIManager: {fileID: 0}
+  trashInfoUI: {fileID: 0}
 --- !u!114 &1467396829818393056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1175,10 +1178,6 @@ MonoBehaviour:
   uiPanel: {fileID: 0}
   nameText: {fileID: 0}
   infoText: {fileID: 0}
-  checkDistance: 3
-  trashLayerMask:
-    serializedVersion: 2
-    m_Bits: 192
 --- !u!1 &6265970743048524887
 GameObject:
   m_ObjectHideFlags: 0
