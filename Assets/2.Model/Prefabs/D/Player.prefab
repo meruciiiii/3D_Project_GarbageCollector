@@ -647,8 +647,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6669429627068938223}
   - {fileID: 4769972499434062427}
@@ -923,6 +923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   input: {fileID: 4076259103573898125}
+  isCanRun: 1
   moveSpeed: 0
   walkSpeed: 5
   runSpeed: 10
@@ -963,7 +964,6 @@ MonoBehaviour:
   interactionMask:
     serializedVersion: 2
     m_Bits: 704
-  pickInterval: 0.15
   sorting: {fileID: 1467396829818393056}
   input: {fileID: 4076259103573898125}
   smallTrashAction: {fileID: 151181822787313401}
@@ -1172,7 +1172,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439ffeca2a0bc4044b482fc0bbac84d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThashInfo
-  tooltipText: {fileID: 0}
+  uiPanel: {fileID: 0}
+  nameText: {fileID: 0}
+  infoText: {fileID: 0}
   checkDistance: 3
   trashLayerMask:
     serializedVersion: 2
