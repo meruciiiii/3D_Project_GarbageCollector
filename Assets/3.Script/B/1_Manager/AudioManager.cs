@@ -245,17 +245,33 @@ public class AudioManager : MonoBehaviour
     {
         if (gameobject == null) return; // 타겟이 없으면 실행 안 함
 
-        // 추가된 체크: 이미 이 위치(targetTransform)에서 이 이름의 소리가 재생 중인지 확인
+        // 1. 이미 이 오브젝트에 할당되어 '재생 중'인 3D 플레이어가 있는지 전수 조사
+        AudioSource existingPlayer = null;
         foreach (var player in SFX_3D_Player)
         {
-            if (player.isPlaying && player.transform.parent == gameobject)
+            // 부모가 같고 현재 소리가 나고 있다면 (또는 루프 중이라면)
+            if (player.transform.parent == gameobject)
             {
-                // Sound 리스트에서 찾은 클립과 현재 재생 중인 클립이 같은지 확인
-                foreach (Sound s in SFX_3D_clip)
+                existingPlayer = player;
+                break;
+            }
+        }
+        //만약 이미 플레이어가 붙어있다면? -> 새로 할당 안 하고 '재사용'
+        if (existingPlayer != null)
+        {
+            // 다른 소리로 갈아끼우거나, 같은 소리를 처음부터 다시 재생
+            foreach (Sound s in SFX_3D_clip)
+            {
+                if (s.name.Equals(name))
                 {
-                    if (s.name == name && player.clip == s.clip) return; // 이미 재생 중이므로 중단
+                    existingPlayer.Stop(); // 기존 소리 중단 (중첩 방지)
+                    existingPlayer.clip = s.clip;
+                    existingPlayer.loop = isLoop;
+                    existingPlayer.Play();
+                    return; // 여기서 종료 (새 슬롯 소모 안 함)
                 }
             }
+            return;
         }
 
         foreach (Sound s in SFX_3D_clip)
@@ -302,6 +318,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    //현재 3DSFX는 비활성화되거나 Destroy되는게 없어서 현재로썬 미사용 코루틴입니다.
     private IEnumerator ResetAudioSourceParent(AudioSource source, float delay)
     {
         float timer = 0f;
