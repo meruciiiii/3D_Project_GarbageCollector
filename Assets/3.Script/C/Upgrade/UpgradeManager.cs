@@ -114,7 +114,7 @@ public class UpgradeManager : MonoBehaviour
 
             case UpgradeType.MultiGrab:
                 GameManager.instance.grab_limit += 1;
-                GameManager.instance.grab_range = 1f + ((GameManager.instance.grab_limit - 1) * 0.2f);
+                GameManager.instance.grab_range = 0.1f + ((GameManager.instance.grab_limit - 1) * 0.2f);
                 break;
 
             case UpgradeType.PickNPC:
