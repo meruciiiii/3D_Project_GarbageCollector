@@ -245,6 +245,19 @@ public class AudioManager : MonoBehaviour
     {
         if (gameobject == null) return; // 타겟이 없으면 실행 안 함
 
+        // 추가된 체크: 이미 이 위치(targetTransform)에서 이 이름의 소리가 재생 중인지 확인
+        foreach (var player in SFX_3D_Player)
+        {
+            if (player.isPlaying && player.transform.parent == gameobject)
+            {
+                // Sound 리스트에서 찾은 클립과 현재 재생 중인 클립이 같은지 확인
+                foreach (Sound s in SFX_3D_clip)
+                {
+                    if (s.name == name && player.clip == s.clip) return; // 이미 재생 중이므로 중단
+                }
+            }
+        }
+
         foreach (Sound s in SFX_3D_clip)
         {
             if (s.name.Equals(name))
