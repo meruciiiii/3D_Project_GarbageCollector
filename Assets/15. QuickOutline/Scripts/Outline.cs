@@ -211,7 +211,7 @@ public class Outline : MonoBehaviour {
 			}
 
 			if (skinnedMeshRenderer == null || skinnedMeshRenderer.sharedMesh == null) {
-				Debug.LogWarning(gameObject.name + "에 SkinnedMeshRenderer나 Mesh가 없습니다!");
+				//Debug.LogWarning(gameObject.name + "에 SkinnedMeshRenderer나 Mesh가 없습니다!");
 				return; // 에러를 내지 않고 함수를 종료합니다.
 			}
 
@@ -224,6 +224,9 @@ public class Outline : MonoBehaviour {
 	}
 
 	List<Vector3> SmoothNormals(Mesh mesh) {
+		if (mesh == null || mesh.vertices == null) {
+			return null;
+		}
 
 		// Group vertices by location
 		var groups = mesh.vertices.Select((vertex, index) => new KeyValuePair<Vector3, int>(vertex, index)).GroupBy(pair => pair.Key);

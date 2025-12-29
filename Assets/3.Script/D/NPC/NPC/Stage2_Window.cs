@@ -14,6 +14,9 @@ public class Stage2_Window : MonoBehaviour {
 	[SerializeField] private float max_sec;
 	//private WaitForSeconds seconds;
 
+	[Header("쓰레기 버리는중")]
+	[SerializeField] private bool isActive = false;
+
 	private Transform area_object;
 
 	private void Awake() {
@@ -29,8 +32,14 @@ public class Stage2_Window : MonoBehaviour {
 	//다른 애들은 isActive면서, 얘만 코루틴 실행 및 종료로 하는건
 	//혼자서 while문이 종료되지 않게 실행되고 있기 때문.
 	private void Event_ChangeArea(int area) {
-		if (area.Equals(2)) { StartCoroutine(throw_trash()); } 
-		else { StopCoroutine(throw_trash()); }
+		if (area.Equals(2)) { 
+			isActive = true;
+			StartCoroutine(throw_trash());
+		} 
+		else { 
+			isActive = false;
+			StopCoroutine(throw_trash());
+		}
 	}
 
 	private IEnumerator throw_trash() {
@@ -50,7 +59,7 @@ public class Stage2_Window : MonoBehaviour {
 
 		//- 그러니까...
 		//메모리 누수 (메모리 과부하) 영향은 가비지 컬렉터를 호출하냐 안하냐 차이.
-		while(true) {
+		while(isActive) {
 			float maxTime = Random.Range(min_sec, max_sec);
 			float timer = 0f;
 
