@@ -9,11 +9,11 @@ public class PlayerController : MonoBehaviour {
 
     //--------------------------------
     //이동 관련
-    private bool isCanRun = true;
+    [SerializeField] private bool isCanRun = true;
     //private bool isCanJump = true;
 
     [Header("플레이어 이동속도")]
-    public float moveSpeed;
+    [SerializeField] private float moveSpeed;
     private float current_mode_speed;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
@@ -142,7 +142,11 @@ public class PlayerController : MonoBehaviour {
         if (cur_weight > (max_weight * slow_start_bag_weight)) {
             //이동속도 = 플레이어속도 x (무게 비례 속도 저하 비율 + 최소속도)
             //         = 플레이어속도 x ((1 - 무게 비율) * 최저속도 비율) + 최소속도)
-            Speed = moveSpeed * ((1 - cur_weight / max_weight) * slow_percent + (1 - slow_percent));
+            Speed = current_mode_speed * ((1 - cur_weight / max_weight) * slow_percent + (1 - slow_percent));
+            Debug.Log("moveSpeed : " + moveSpeed);
+            Debug.Log("cur_weight : " + cur_weight);
+            Debug.Log("max_weight : " + max_weight);
+            Debug.Log("slow_percent : " + slow_percent);
             //isCanJump = false;
             isCanRun = false;
         } else {
@@ -152,6 +156,7 @@ public class PlayerController : MonoBehaviour {
 
         //만약 내가 큰 쓰레기를 들었을 경우,,,
         if (GameManager.instance.isGrabBigGarbage) {
+            Debug.Log("설마 여기냐?");
             float half_reduction = 0.5f;
             int half_count = GameManager.instance.P_Str - GameManager.instance.BigGarbageWeight;
             for (int i = 0; i < half_count; i++) {

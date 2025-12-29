@@ -192,12 +192,12 @@ public class PlayerWork : MonoBehaviour
             {
                 Debug.Log("IInteractable 컴포넌트가 없습니다.");
             }
-            controller.Calc_Speed();
             nextPickTime = Time.time + pickInterval;
             uIManager.change_Value();
             sorting.lastHitsOffOutline();
             sorting.CatchandEmpty();
         }
+        controller.Calc_Speed();
         if (bigTrashAction.IsHolding || humanTrashAction.IsHolding)
         {
             isPicking = false;
