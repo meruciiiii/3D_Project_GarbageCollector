@@ -18,12 +18,11 @@ public class SellStation : MonoBehaviour
         {
             if (guideText != null) guideText.SetActive(false);
         }
-        // 2. UI는 꺼져있는데, 플레이어가 근처에 있다면? -> 안내 문구 켬!
+        // 2. UI는 꺼져있는데, 플레이어가 근처에 있다면? -> 안내 문구 켬
         else if (isPlayerNearby)
         {
             if (guideText != null) guideText.SetActive(true);
         }
-        // 3. 그 외 (플레이어가 멀리 있음) -> 끔
         else
         {
             if (guideText != null) guideText.SetActive(false);
@@ -34,14 +33,11 @@ public class SellStation : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // [핵심] 플레이어 입장 확인
             isPlayerNearby = true;
-
-            // 입력 스크립트 연결
             targetInput = other.GetComponent<PlayerInput>();
             if (targetInput != null)
             {
-                targetInput.onInteract += TryOpenShop;
+                targetInput.onInteract += ToggleShop; // 이름 변경: TryOpen -> Toggle
             }
         }
     }
@@ -50,21 +46,36 @@ public class SellStation : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // [핵심] 플레이어 퇴장 확인
             isPlayerNearby = false;
-
-            // 입력 연결 해제
             if (targetInput != null)
             {
-                targetInput.onInteract -= TryOpenShop;
+                targetInput.onInteract -= ToggleShop;
                 targetInput = null;
+            }
+            // 멀어지면 강제로 닫기 (안전장치)
+            if (sellUI != null && sellUI.IsUIActive)
+            {
+                sellUI.CloseAllPanels();
             }
         }
     }
 
-    private void TryOpenShop()
+    private void ToggleShop()
     {
         if (GameManager.instance != null && GameManager.instance.isPaused) return;
-        if (sellUI != null) sellUI.OpenTradePanel();
+
+        if (sellUI != null)
+        {
+            if (sellUI.IsUIActive)
+            {
+                // 이미 켜져 있으면 -> 닫기
+                sellUI.CloseAllPanels();
+            }
+            else
+            {
+                // 꺼져 있으면 -> 열기
+                sellUI.OpenTradePanel();
+            }
+        }
     }
 }

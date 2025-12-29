@@ -10,6 +10,7 @@ public class Sceneload : MonoBehaviour
     [SerializeField] private float fadeDuration = 0.5f; // 페이드 아웃 시간
     [SerializeField] private Image fadeImage;          // 화면을 가릴 검은색 이미지
     [SerializeField] private string intro_name = "Main_intro";
+    [SerializeField] private bool introskip = false;
 
     public void SceneLoader(string scenename)
     {
@@ -25,7 +26,7 @@ public class Sceneload : MonoBehaviour
 
         string finalSceneName = scenename;
 
-        if (GameManager.instance != null && GameManager.instance.P_intro)
+        if (GameManager.instance != null && GameManager.instance.P_intro && !introskip)
         {
             finalSceneName = intro_name;
         }
