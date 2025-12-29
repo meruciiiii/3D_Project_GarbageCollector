@@ -18,7 +18,7 @@ public class EndingScene : MonoBehaviour
     {
         AudioManager.instance.StopBGM();
         yield return new WaitForSeconds(fallingsynctime);
-        //AudioManager.instance.PlaySFX(); ÈÖÀÌÀÌÀ× Åö ¶³¾îÁö´Â È¿°úÀ½
+        AudioManager.instance.PlaySFX("SFX16");// ÈÖÀÌÀÌÀ× Åö ¶³¾îÁö´Â È¿°úÀ½
         yield return new WaitForSeconds(load_wait_time);
         scene.SceneLoader(loadSceneString);
     }
