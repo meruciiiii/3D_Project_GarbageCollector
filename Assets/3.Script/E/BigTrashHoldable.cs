@@ -16,4 +16,11 @@ public class BigTrashHoldable : MonoBehaviour, IInteractable
         }
         //trash.gameObject.SetActive(false);
     }
+    public int TrashWeight()
+    {
+        Trash trash;
+        if (!TryGetComponent<Trash>(out trash))
+            return -1;
+        return trash.Data.getBigTrashWeight(trash.TrashNum);
+    }
 }
