@@ -16,57 +16,43 @@ public class ThashInfo : MonoBehaviour
     [Tooltip("무게, 힘, 청결도 등 상세 정보가 표시될 텍스트")]
     [SerializeField] private Text infoText;
 
-    [Header("감지 설정")]
-    [SerializeField] private float checkDistance = 5.0f;
-    [SerializeField] private LayerMask trashLayerMask;
-
-    private Camera mainCamera;
     private Trash lastHitTrash = null;
-
-    // [최적화] 문자열 할당(Garbage Collection)을 줄이기 위해 StringBuilder를 재사용합니다.
     private StringBuilder infoBuilder = new StringBuilder();
 
     private void Start()
     {
-        mainCamera = Camera.main;
         HideInfo();
     }
 
-    private void Update()
+    public void UpdateTooltip(GameObject targetObj)
     {
-        CheckObjectInFront();
-    }
-
-    private void CheckObjectInFront()
-    {
-        if (mainCamera == null) return;
-
-        Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, checkDistance, trashLayerMask))
+        // 1. 타겟이 없으면 숨기기
+        if (targetObj == null)
         {
-            // [성능 노트] GetComponentInParent는 가볍지 않으므로, 추후 최적화가 필요하다면 캐싱 방식을 고려할 수 있습니다.
-            Trash trash = hit.collider.GetComponentInParent<Trash>();
-
-            if (trash != null)
-            {
-                ShowInfo(trash);
-                return;
-            }
+            HideInfo();
+            return;
         }
 
-        HideInfo();
+        // 2. Trash 컴포넌트 확인 (최적화를 위해 GetComponent 캐싱 고려 가능하지만, UI 갱신 빈도상 유지)
+        Trash trash = targetObj.GetComponent<Trash>();
+        if (trash == null)
+        {
+            HideInfo();
+            return;
+        }
+
+        // 3. 정보 표시 실행
+        ShowInfo(trash);
     }
 
     private void ShowInfo(Trash trash)
     {
-        // 텍스트가 이미 켜져 있고, 바라보는 쓰레기가 같다면 연산을 건너뜁니다.
+        // 최적화: 이미 켜져 있고 같은 대상을 보고 있다면 UI 갱신 건너뜀
         if (uiPanel != null && uiPanel.activeSelf && lastHitTrash == trash) return;
 
         lastHitTrash = trash;
 
-        // 1. 키값 생성 로직
+        // 키값 생성
         string keyPrefix = "";
         switch (trash.Size)
         {
@@ -76,73 +62,53 @@ public class ThashInfo : MonoBehaviour
         }
         string finalKey = keyPrefix + trash.TrashNum;
 
-        // 2. 데이터 유효성 검사 (매니저들이 로드되지 않았을 경우 방어)
         if (CSV_Database.instance == null || GameManager.instance == null) return;
 
+        // 데이터 가져오기
         string tName = CSV_Database.instance.getname(finalKey);
         int tWeight = CSV_Database.instance.getweight(finalKey);
         int reqStr = CSV_Database.instance.getrequireStr(finalKey);
         int hpCost = CSV_Database.instance.getHpdecrease(finalKey);
         int currentStr = GameManager.instance.P_Str;
 
+        // 이름 설정
+        if (nameText != null) nameText.text = tName;
 
-        if (nameText != null)
-        {
-            nameText.text = tName;
-        }
-
-        // (B) 상세 정보 텍스트 설정 (StringBuilder 활용)
+        // 상세 정보 설정
         if (infoText != null)
         {
             infoBuilder.Clear();
+            bool isEng = GameManager.instance.P_isEnglish;
 
             // 무게
-            if (!GameManager.instance.P_isEnglish) infoBuilder.AppendLine($"무게: {tWeight} g");
-            else infoBuilder.AppendLine($"weight: {tWeight} g");
-            
-            // 힘 요구량 비교 및 색상 처리
+            infoBuilder.AppendLine(isEng ? $"weight: {tWeight} g" : $"무게: {tWeight} g");
+
+            // 힘 요구량
             if (currentStr >= reqStr)
             {
-                if (!GameManager.instance.P_isEnglish) infoBuilder.AppendLine($"필요 힘: {reqStr}");
-                else infoBuilder.AppendLine($"reqiure str: {reqStr}");
+                infoBuilder.AppendLine(isEng ? $"require str: {reqStr}" : $"필요 힘: {reqStr}");
             }
             else
             {
-                    // 부족할 때 빨간색 경고
-                if (!GameManager.instance.P_isEnglish) 
-                {
-                    infoBuilder.Append("<color=red>힘 부족! (");
-                    infoBuilder.Append(currentStr);
-                    infoBuilder.Append("/");
-                    infoBuilder.Append(reqStr);
-                    infoBuilder.AppendLine(")</color>");
-                }
-                else
-                {
-                    infoBuilder.Append("<color=red>can't hold! (");
-                    infoBuilder.Append(currentStr);
-                    infoBuilder.Append("/");
-                    infoBuilder.Append(reqStr);
-                    infoBuilder.AppendLine(")</color>");
-                }
-                    
+                // 붉은색 경고
+                string warning = isEng ? "can't hold!" : "힘 부족!";
+                infoBuilder.Append($"<color=red>{warning} ({currentStr}/{reqStr})</color>\n");
             }
 
-            // 청결도 소모 (있는 경우만)
+            // 청결도 소모
             if (hpCost > 0)
             {
-                if (!GameManager.instance.P_isEnglish) infoBuilder.Append($"청결도 : <color=orange>-{hpCost}</color>");
-                else infoBuilder.Append($"CP : <color=orange>-{hpCost}</color>");
+                string costText = isEng ? "CP" : "청결도";
+                infoBuilder.Append($"{costText}: <color=orange>-{hpCost}</color>");
             }
 
             infoText.text = infoBuilder.ToString();
         }
 
-        // (C) 패널 활성화
         if (uiPanel != null) uiPanel.SetActive(true);
     }
 
-    private void HideInfo()
+    public void HideInfo()
     {
         // 패널 전체를 끄면 자식 텍스트들도 같이 꺼집니다.
         if (uiPanel != null && uiPanel.activeSelf)
