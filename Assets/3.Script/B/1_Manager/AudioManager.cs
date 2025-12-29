@@ -305,15 +305,17 @@ public class AudioManager : MonoBehaviour
     {
         foreach (var player in SFX_3D_Player)
         {
-            // 1. 현재 재생 중이고
-            // 2. 클립 이름이 일치하며
-            // 3. 부모(Transform)가 요청한 오브젝트와 일치하는 경우만 중지
-            if (player.isPlaying && player.clip != null &&
-                player.clip.name == name && player.transform.parent == targetTransform)
+            // 1. 현재 이 플레이어가 우리가 찾던 오브젝트(스피커)에 붙어있는지 확인
+            // 2. 그리고 현재 소리가 나고 있는지 확인
+            if (player.transform.parent == targetTransform && player.isPlaying)
             {
                 player.Stop();
                 player.loop = false;
-                // 이후 처리는 ResetAudioSourceParent 코루틴이 담당
+                player.clip = null; // 클립 참조 해제
+
+                // 부모를 다시 매니저 컨테이너로 돌려보내기 (정리)
+                player.transform.SetParent(sfx3DContainer);
+                player.transform.localPosition = Vector3.zero;
             }
         }
     }
