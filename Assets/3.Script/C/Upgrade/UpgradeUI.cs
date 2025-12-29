@@ -12,6 +12,7 @@ public class UpgradeUI : MonoBehaviour
     [Header("UI 연결")]
     [SerializeField] private Text txtMyMoney; // 돈 표시 텍스트 (프리팹 안의 Text 연결)
     [SerializeField] private GameObject panel; // 전체 패널
+    [SerializeField] private Button closeButton;
 
     [Header("슬롯 목록")]
     [SerializeField] private List<UpgradeSlot> slots;
@@ -26,6 +27,11 @@ public class UpgradeUI : MonoBehaviour
     {
         if (playerController == null)
             playerController = FindAnyObjectByType<PlayerController>();
+
+        if (closeButton != null)
+        {
+            closeButton.onClick.AddListener(CloseShop);
+        }
 
         // 모든 슬롯 초기화
         foreach (var slot in slots)

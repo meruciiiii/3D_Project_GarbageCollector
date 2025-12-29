@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour {
 
     //--------------------------------
     //시점 관련
-
     [Header("플레이어 감도")]
     //추후 설정에서 감도 조절을 할 수 있어야 하기에, public으로 구현
     [Range(0, 1)] public float sensitive;
@@ -36,10 +35,19 @@ public class PlayerController : MonoBehaviour {
 
     //---------------------------------------------------------------
 
+    [Header("플레이어 충돌")]
+    public float flyPower = 15f;
+    public bool isStun = false;
+    private float recovery_time = 2.5f;
+    private WaitForSeconds wfs;
+
+    //------------------------------------------
+
     //사전 설정
     private void Awake() {
         TryGetComponent(out playerRB);
         Walk();
+        wfs = new WaitForSeconds(recovery_time);
     }
     //이벤트 등록
     private void Start() {
@@ -49,14 +57,16 @@ public class PlayerController : MonoBehaviour {
     }
     //움직임
     private void FixedUpdate() {
-        Move();
-
+        if(!isStun) {
+            Move();
+		}
     }
     //시야
     private void LateUpdate() {
         Rotate();
-    }
+	}
 
+    private Coroutine walkingsound_co;
     private void Move() {
 		#region 과거의 흔적
 		//플레이어 앞뒤(WS/Z축) + 좌우(AD/X축)에 이동속도 곱하기.
@@ -85,6 +95,43 @@ public class PlayerController : MonoBehaviour {
         targetVelocity.y = playerRB.linearVelocity.y;
         playerRB.linearVelocity = Vector3.MoveTowards(playerRB.linearVelocity, targetVelocity, accelSpeed * Time.deltaTime);
 
+        if (input.direction.sqrMagnitude > 0.01f) 
+        {
+            if (walkingsound_co == null) 
+            {
+                walkingsound_co = StartCoroutine(FootstepLoop());
+            }
+        } 
+        else 
+        {
+            if (walkingsound_co != null) 
+            {
+                StopCoroutine(walkingsound_co);
+                walkingsound_co = null;
+            }
+        }
+    }
+
+    private float lastStepTime;
+    private IEnumerator FootstepLoop()
+    {
+        while (true)
+        {
+            string soundName = "SFX14";
+
+            // 최소 쿨타임 체크
+            // 코루틴이 새로 시작되어도, 마지막으로 소리가 난 지 0.25초가 지나지 않았다면 스킵
+            if (Time.time - lastStepTime > 0.25f)
+            {
+                AudioManager.instance.PlayWalkingStep(soundName);
+                lastStepTime = Time.time;
+            }
+
+            // 발소리 간격 계산
+            float stepInterval = 1.8f / Mathf.Max(moveSpeed, 1.0f);
+
+            yield return new WaitForSeconds(Mathf.Clamp(stepInterval, 0.3f, 0.6f));
+        }
     }
     private void Rotate() {
         //플레이어 위아래 시점에 감도값 곱.
@@ -120,10 +167,10 @@ public class PlayerController : MonoBehaviour {
         Calc_Speed();
     }
 
-    //-------------------------------------------------------------------
-    //속도
+	//-------------------------------------------------------------------
+    # region 속도
 
-    [Header("무게 보기")]
+	[Header("무게 보기")]
     [SerializeField] private float cur_weight;
     [SerializeField] private float max_weight;
 
@@ -156,7 +203,7 @@ public class PlayerController : MonoBehaviour {
 
         //만약 내가 큰 쓰레기를 들었을 경우,,,
         if (GameManager.instance.isGrabBigGarbage) {
-            Debug.Log("설마 여기냐?");
+            //Debug.Log("설마 여기냐?");
             float half_reduction = 0.5f;
             int half_count = GameManager.instance.P_Str - GameManager.instance.BigGarbageWeight;
             for (int i = 0; i < half_count; i++) {
@@ -166,5 +213,28 @@ public class PlayerController : MonoBehaviour {
             Speed *= half_reduction;
         }
         moveSpeed = Speed;
+    }
+	#endregion
+	//-------------------------------------------------------------------
+	//충돌
+	private void OnCollisionEnter(Collision collision) {
+		if(collision.transform.CompareTag("Car")) {
+            if(!isStun) {
+                isStun = true;
+                Vector3 fly_dir = (transform.position - collision.transform.position) * flyPower;
+                fly_dir.y *= 0.25f;
+                playerRB.AddForce(fly_dir, ForceMode.Impulse);
+                playerRB.freezeRotation = false;
+                GameManager.instance.ChangeHP(-100);
+                StartCoroutine(Recovery_Stun());
+            }
+        }
+	}
+
+    private IEnumerator Recovery_Stun() {
+        yield return wfs;
+        playerRB.freezeRotation = true;
+        transform.rotation = Quaternion.identity;
+        isStun = false;
     }
 }

@@ -44,7 +44,7 @@ public class AudioManager : MonoBehaviour
 
         walkingPlayer = gameObject.AddComponent<AudioSource>();
         walkingPlayer.playOnAwake = false;
-        walkingPlayer.loop = true; // 기본적으로 루프 활성
+        walkingPlayer.loop = false; // 기본적으로 루프 활성
         walkingPlayer.outputAudioMixerGroup = SFX; // SFX 믹서 그룹 할당
     }
 
@@ -358,23 +358,20 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // 걷기 사운드 시작
-    public void PlayWalkingSound(string name)
+    public void PlayWalkingStep(string name)
     {
-        // walkingPlayer.clip이 null일 경우를 대비해 순서대로 체크
-        if (walkingPlayer.isPlaying && walkingPlayer.clip != null)
+        if (sfxDictionary.TryGetValue(name, out AudioClip clip))
         {
-            if (walkingPlayer.clip.name == name) return;
-        }
-
-        foreach (Sound s in SFX_clip)
-        {
-            if (s.name.Equals(name))
+            // clip이 바뀔 때만 새로 할당하여 성능 최적화
+            if (walkingPlayer.clip != clip)
             {
-                walkingPlayer.clip = s.clip;
-                walkingPlayer.Play();
-                return;
+                walkingPlayer.clip = clip;
             }
+
+            walkingPlayer.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+
+            // PlayOneShot 대신 Play 사용: 기존 재생 중인 동일 소스 소리를 끊고 새로 시작함
+            walkingPlayer.Play();
         }
     }
 

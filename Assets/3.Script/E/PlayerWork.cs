@@ -46,6 +46,8 @@ public class PlayerWork : MonoBehaviour
     [SerializeField] public HumanTrashAction humanTrashAction;
     [SerializeField] private PlayerController controller;
     [SerializeField] private UIManager uIManager;
+    [Header("UI 연결")]
+    [SerializeField] private ThashInfo trashInfoUI;
 
 
     public void Awake()
@@ -132,6 +134,7 @@ public class PlayerWork : MonoBehaviour
         {
             sorting.lastHitsOffOutline();
             target = Array.Empty<GameObject>();
+            if (trashInfoUI != null) trashInfoUI.HideInfo();
             return;
         }
         else
@@ -144,12 +147,17 @@ public class PlayerWork : MonoBehaviour
             sorting.lastHitsOffOutline();
             target = Array.Empty<GameObject>();
             Debug.Log("hits가 널이네요");
+            if (trashInfoUI != null) trashInfoUI.HideInfo();
             return;
         }
         target = new GameObject[hits.Length];
         for (int i = 0; i < hits.Length; i++)
         {
             target[i] = hits[i].collider.gameObject;
+        }
+        if (trashInfoUI != null && target.Length > 0)
+        {
+            trashInfoUI.UpdateTooltip(target);
         }
     }
     private void Interact(PlayerWork player)

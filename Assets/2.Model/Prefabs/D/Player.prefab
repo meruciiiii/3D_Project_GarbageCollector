@@ -647,8 +647,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6669429627068938223}
   - {fileID: 4769972499434062427}
@@ -751,7 +751,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -923,12 +923,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   input: {fileID: 4076259103573898125}
+  isCanRun: 1
   moveSpeed: 0
   walkSpeed: 5
   runSpeed: 10
   accelSpeed: 25
   sensitive: 0.1
   cameraObject: {fileID: 4923363421550768917}
+  flyPower: 10
+  isStun: 0
   cur_weight: 0
   max_weight: 0
   slow_start_bag_weight: 0.5
@@ -963,7 +966,6 @@ MonoBehaviour:
   interactionMask:
     serializedVersion: 2
     m_Bits: 704
-  pickInterval: 0.15
   sorting: {fileID: 1467396829818393056}
   input: {fileID: 4076259103573898125}
   smallTrashAction: {fileID: 151181822787313401}
@@ -971,6 +973,7 @@ MonoBehaviour:
   humanTrashAction: {fileID: 4273967007487283107}
   controller: {fileID: 3317103082146166114}
   uIManager: {fileID: 0}
+  trashInfoUI: {fileID: 0}
 --- !u!114 &1467396829818393056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1172,11 +1175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439ffeca2a0bc4044b482fc0bbac84d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThashInfo
-  tooltipText: {fileID: 0}
-  checkDistance: 3
-  trashLayerMask:
-    serializedVersion: 2
-    m_Bits: 192
+  uiPanel: {fileID: 0}
+  nameText: {fileID: 0}
+  infoText: {fileID: 0}
 --- !u!1 &6265970743048524887
 GameObject:
   m_ObjectHideFlags: 0

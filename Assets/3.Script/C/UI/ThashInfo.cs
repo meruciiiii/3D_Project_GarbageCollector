@@ -6,129 +6,152 @@ using System.Collections.Generic;
 
 public class ThashInfo : MonoBehaviour
 {
-    [Header("UI 설정")]
-    [SerializeField] private Text tooltipText; // 정보를 표시할 UI 텍스트
+    [Header("UI 연결 설정")]
+    [Tooltip("텍스트와 패널을 포함하는 부모 오브젝트 (배경 패널)")]
+    [SerializeField] private GameObject uiPanel;
 
-    [Header("감지 설정")]
-    [SerializeField] private float checkDistance = 5.0f;
-    [SerializeField] private LayerMask trashLayerMask;
+    [Tooltip("쓰레기 이름이 표시될 텍스트")]
+    [SerializeField] private Text nameText;
 
-    private Camera mainCamera;
-    private Trash lastHitTrash = null;
+    [Tooltip("무게, 힘, 청결도 등 상세 정보가 표시될 텍스트")]
+    [SerializeField] private Text infoText;
 
-    // [최적화] 문자열 할당(Garbage Collection)을 줄이기 위해 StringBuilder를 재사용합니다.
+    private GameObject[] currentTargets = null; // 현재 보고 있는 타겟 목록 저장
     private StringBuilder infoBuilder = new StringBuilder();
 
     private void Start()
     {
-        mainCamera = Camera.main;
         HideInfo();
     }
 
-    private void Update()
+    // [변경점] 매개변수를 GameObject 하나가 아니라 배열([])로 받습니다.
+    public void UpdateTooltip(GameObject[] targets)
     {
-        CheckObjectInFront();
-    }
-
-    private void CheckObjectInFront()
-    {
-        if (mainCamera == null) return;
-
-        Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, checkDistance, trashLayerMask))
+        // 1. 타겟이 없거나 비어있으면 숨기기
+        if (targets == null || targets.Length == 0)
         {
-            // [성능 노트] GetComponentInParent는 가볍지 않으므로, 추후 최적화가 필요하다면 캐싱 방식을 고려할 수 있습니다.
-            Trash trash = hit.collider.GetComponentInParent<Trash>();
-
-            if (trash != null)
-            {
-                ShowInfo(trash);
-                return;
-            }
+            HideInfo();
+            return;
         }
 
-        HideInfo();
+        // 2. 첫 번째 타겟이 유효한지 확인
+        if (targets[0] == null)
+        {
+            HideInfo();
+            return;
+        }
+
+        // 3. 정보 표시 실행
+        ShowInfo(targets);
     }
 
-    private void ShowInfo(Trash trash)
+    private void ShowInfo(GameObject[] targets)
     {
-        // 텍스트가 이미 켜져 있고, 바라보는 쓰레기가 같다면 연산을 건너뜁니다.
-        if (tooltipText != null && tooltipText.gameObject.activeSelf && lastHitTrash == trash) return;
+        // 최적화: 이미 켜져 있고 같은 배열 구성을 보고 있다면 UI 갱신 건너뜀 (참조 비교)
+        if (uiPanel != null && uiPanel.activeSelf && currentTargets == targets) return;
 
-        lastHitTrash = trash;
+        currentTargets = targets;
 
-        // 1. 키값 생성 로직
-        string keyPrefix = "";
-        switch (trash.Size)
-        {
-            case Trash.TrashSize.Small: keyPrefix = "small_"; break;
-            case Trash.TrashSize.Large: keyPrefix = "large_"; break;
-            case Trash.TrashSize.Human: keyPrefix = "human_"; break;
-        }
-        string finalKey = keyPrefix + trash.TrashNum;
-
-        // 2. 데이터 유효성 검사 (매니저들이 로드되지 않았을 경우 방어)
+        // --- 데이터 계산 로직 시작 ---
         if (CSV_Database.instance == null || GameManager.instance == null) return;
 
-        // 3. CSV 데이터 조회
-        string tName = CSV_Database.instance.getname(finalKey);
-        int tWeight = CSV_Database.instance.getweight(finalKey);
-        int reqStr = CSV_Database.instance.getrequireStr(finalKey);     // 요구 힘
-        int hpCost = CSV_Database.instance.getHpdecrease(finalKey);     // 청결도 감소치
+        int totalWeight = 0;
+        int maxReqStr = 0;
+        int totalHpCost = 0;
 
-        // 4. 플레이어 현재 스탯 조회
-        int currentStr = GameManager.instance.P_Str; // GameManager에서 현재 힘 가져오기
+        // 대표 이름용 (첫 번째 물체)
+        Trash firstTrash = targets[0].GetComponent<Trash>();
+        string firstTrashName = "";
 
-        // 5. UI 텍스트 조합 (StringBuilder 사용)
-        if (tooltipText != null)
+        // 배열을 순회하며 합산
+        foreach (GameObject obj in targets)
         {
-            infoBuilder.Clear(); // 기존 내용 초기화
+            if (obj == null) continue;
+            Trash trash = obj.GetComponent<Trash>();
+            if (trash == null) continue;
 
-            // (1) 이름
-            infoBuilder.AppendLine($"<b>{tName}</b>");
-
-            // (2) 무게
-            infoBuilder.AppendLine($"무게: {tWeight} g");
-
-            // (3) 힘 요구량 비교 및 색상 처리
-            if (currentStr >= reqStr)
+            // 키값 생성
+            string keyPrefix = "";
+            switch (trash.Size)
             {
-                // 힘이 충분함: 흰색(기본) 표시
-                // 예: "필요 힘: 5"
-                infoBuilder.AppendLine($"필요 힘: {reqStr}");
+                case Trash.TrashSize.Small: keyPrefix = "small_"; break;
+                case Trash.TrashSize.Large: keyPrefix = "large_"; break;
+                case Trash.TrashSize.Human: keyPrefix = "human_"; break;
+            }
+            string finalKey = keyPrefix + trash.TrashNum;
+
+            // 첫 번째 녀석 이름 가져오기
+            if (obj == targets[0])
+            {
+                firstTrashName = CSV_Database.instance.getname(finalKey);
+            }
+
+            // 데이터 누적
+            totalWeight += CSV_Database.instance.getweight(finalKey);
+            totalHpCost += CSV_Database.instance.getHpdecrease(finalKey);
+
+            // 힘은 최대값 찾기 (가장 무거운 걸 들 수 있어야 하므로)
+            int req = CSV_Database.instance.getrequireStr(finalKey);
+            if (req > maxReqStr) maxReqStr = req;
+        }
+
+        // --- UI 표시 로직 ---
+        int currentStr = GameManager.instance.P_Str;
+        bool isEng = GameManager.instance.P_isEnglish;
+
+        // 1. 이름 설정 (예: 유리병 외 2개)
+        if (nameText != null)
+        {
+            int extraCount = targets.Length - 1;
+            if (extraCount > 0)
+            {
+                nameText.text = isEng ? $"{firstTrashName} (+{extraCount})" : $"{firstTrashName} 외 {extraCount}개";
             }
             else
             {
-                // 힘이 부족함: 빨간색 경고 및 (현재/필요) 표시
-                // 예: "힘 부족! (1/5)"
-                infoBuilder.Append("<color=red>힘 부족! (");
-                infoBuilder.Append(currentStr);
-                infoBuilder.Append("/");
-                infoBuilder.Append(reqStr);
-                infoBuilder.AppendLine(")</color>");
+                nameText.text = firstTrashName;
             }
-
-            // (4) 청결도 소모 (값이 있을 때만 표시)
-            if (hpCost > 0)
-            {
-                // 주황색 등으로 경고
-                infoBuilder.Append($"청결도 소모: <color=orange>-{hpCost}</color>");
-            }
-
-            // 최종 적용 및 활성화
-            tooltipText.text = infoBuilder.ToString();
-            tooltipText.gameObject.SetActive(true);
         }
+
+        // 2. 상세 정보 설정
+        if (infoText != null)
+        {
+            infoBuilder.Clear();
+
+            // 총 무게
+            infoBuilder.AppendLine(isEng ? $"Total Weight: {totalWeight} g" : $"총 무게: {totalWeight} g");
+
+            // 필요 힘 (Max값)
+            if (currentStr >= maxReqStr)
+            {
+                infoBuilder.AppendLine(isEng ? $"Req Str: {maxReqStr}" : $"필요 힘: {maxReqStr}");
+            }
+            else
+            {
+                // 붉은색 경고
+                string warning = isEng ? "Can't hold!" : "힘 부족!";
+                infoBuilder.Append($"<color=red>{warning} ({currentStr}/{maxReqStr})</color>\n");
+            }
+
+            // 총 청결도 소모
+            if (totalHpCost > 0)
+            {
+                string costText = isEng ? "Total CP Loss" : "총 청결도 소모";
+                infoBuilder.Append($"{costText}: <color=orange>-{totalHpCost}</color>");
+            }
+
+            infoText.text = infoBuilder.ToString();
+        }
+
+        if (uiPanel != null) uiPanel.SetActive(true);
     }
 
-    private void HideInfo()
+    public void HideInfo()
     {
-        if (tooltipText != null && tooltipText.gameObject.activeSelf)
+        if (uiPanel != null && uiPanel.activeSelf)
         {
-            tooltipText.gameObject.SetActive(false);
-            lastHitTrash = null;
+            uiPanel.SetActive(false);
+            currentTargets = null;
         }
     }
 }
