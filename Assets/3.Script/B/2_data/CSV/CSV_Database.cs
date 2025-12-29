@@ -106,4 +106,20 @@ public class CSV_Database : MonoBehaviour
         else Debug.Log("key가 없음");
         return value;
     }
+
+    public int getrequireStr(string key)
+    {
+        int value = 0;
+        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = (int)data["requireSrt"];
+        else Debug.Log("key가 없음");
+        return value;
+    }
+
+    public int getHpdecrease(string key)
+    {
+        int value = 0;
+        if (GarbageMap.TryGetValue(key, out Dictionary<string, object> data)) value = (int)data["Hpdecrease"];
+        else Debug.Log("key가 없음");
+        return value;
+    }
 }
