@@ -42,16 +42,20 @@ public class AreaTextUI : MonoBehaviour
         switch (area)
         {
             case 1:
-                if (isEnglish) areaname = "1EN";
-                else areaname = "1KR";
+                if (isEnglish) areaname = "Backyard";
+                else areaname = "µÞ¸¶´ç";
                 break;
             case 2:
-                if (isEnglish) areaname = "2EN";
-                else areaname = "2KR";
+                if (isEnglish) areaname = "Back Street";
+                else areaname = "µÞ°ñ¸ñ";
                 break;
             case 3:
-                if (isEnglish) areaname = "3EN";
-                else areaname = "3KR";
+                if (isEnglish) areaname = "Main Street";
+                else areaname = "¹øÈ­°¡";
+                break;
+            case 4:
+                if (isEnglish) areaname = "Parking Lot";
+                else areaname = "ÁÖÂ÷Àå";
                 break;
             default:
                 if (isEnglish) areaname = "Unknown Area";
