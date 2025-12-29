@@ -47,6 +47,11 @@ public class SellUI : MonoBehaviour
         if (resultPanel != null) resultPanel.SetActive(false);
         if (tradePanel != null) tradePanel.SetActive(true);
 
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySFX("SFX11");
+        }
+
         if (sellManager != null)
         {
             int smallEarn = sellManager.GetSmallTrashEarnings();
@@ -72,6 +77,11 @@ public class SellUI : MonoBehaviour
     {
         if (sellManager != null)
         {
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.PlaySFX("SFX10");
+            }
+
             int earnings = sellManager.SellAllTrash();
             ShowResult(earnings);
         }

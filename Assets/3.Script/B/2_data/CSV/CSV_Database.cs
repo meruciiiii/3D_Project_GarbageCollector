@@ -106,7 +106,6 @@ public class CSV_Database : MonoBehaviour
         else Debug.Log("key°¡ ¾øÀ½");
         return value;
     }
-
     public int getrequireStr(string key)
     {
         int value = 0;
