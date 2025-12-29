@@ -57,6 +57,8 @@ public class PlayerController : MonoBehaviour {
         Rotate();
     }
 
+
+    private Coroutine walkingsound_co;
     private void Move() {
 		#region 과거의 흔적
 		//플레이어 앞뒤(WS/Z축) + 좌우(AD/X축)에 이동속도 곱하기.
@@ -85,6 +87,40 @@ public class PlayerController : MonoBehaviour {
         targetVelocity.y = playerRB.linearVelocity.y;
         playerRB.linearVelocity = Vector3.MoveTowards(playerRB.linearVelocity, targetVelocity, accelSpeed * Time.deltaTime);
 
+        if (input.direction.sqrMagnitude > 0.01f) 
+        {
+            if (walkingsound_co == null) 
+            {
+                walkingsound_co = StartCoroutine(FootstepLoop());
+            }
+        } 
+        else 
+        {
+            if (walkingsound_co != null) 
+            {
+                StopCoroutine(walkingsound_co);
+                walkingsound_co = null;
+            }
+        }
+    }
+    private IEnumerator FootstepLoop()
+    {
+        while (true)
+        {
+            // 1. 현재 상태에 맞는 사운드 이름 결정
+            // Walk_Sound, Run_Sound 등 AudioManager 딕셔너리에 등록된 이름 사용
+            string soundName = "SFX14";
+
+            // 2. 사운드 재생
+            AudioManager.instance.PlayWalkingStep(soundName);
+
+            // 3. 발소리 간격 계산
+            // moveSpeed가 낮아지면(무거워지면) interval이 길어져 천천히 걷는 소리가 납니다.
+            float stepInterval = 1.8f / Mathf.Max(moveSpeed, 1.0f);
+
+            // 0.4초 클립의 길이를 고려하여 최소/최대 간격 제한 (너무 빠르거나 느리지 않게)
+            yield return new WaitForSeconds(Mathf.Clamp(stepInterval, 0.25f, 0.6f));
+        }
     }
     private void Rotate() {
         //플레이어 위아래 시점에 감도값 곱.
