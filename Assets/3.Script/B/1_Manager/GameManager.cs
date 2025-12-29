@@ -6,7 +6,22 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public int P_MaxHP = 100; //최대체력
-    public int P_CurrentHP; //현재체력
+    private int p_CurrentHP; //현재 체력
+    public int P_CurrentHP
+    {
+        get => p_CurrentHP;
+        set
+        {
+            // 체력 제한 로직을 여기에, ChangeHP대용, 음수값 제한도 여기서 처리됌
+            p_CurrentHP = Mathf.Clamp(value, 0, P_MaxHP);
+
+            // 값이 바뀔 때마다 UIManager에 알림
+            if (UIManager.instance != null)
+            {
+                UIManager.instance.change_Value();
+            }
+        }
+    }
     public int P_Str = 1; //힘
     public int P_Spd = 5; //속도
 
@@ -61,7 +76,7 @@ public class GameManager : MonoBehaviour
 
     public void ChangeHP(int HPindecrease)
     {
-        P_CurrentHP = Mathf.Clamp(P_CurrentHP + HPindecrease, 0, P_MaxHP);//최대 최소 체력 제한
+        P_CurrentHP += HPindecrease;
     }
 
     public bool LoadComplete { get; private set; } = false;
