@@ -131,8 +131,8 @@ public class ThashInfo : MonoBehaviour
             // 청결도 소모 (있는 경우만)
             if (hpCost > 0)
             {
-                if (!GameManager.instance.P_isEnglish) infoBuilder.Append($"청결도 소모: <color=orange>-{hpCost}</color>");
-                else infoBuilder.Append($"CP decrease: <color=orange>-{hpCost}</color>");
+                if (!GameManager.instance.P_isEnglish) infoBuilder.Append($"청결도 : <color=orange>-{hpCost}</color>");
+                else infoBuilder.Append($"CP : <color=orange>-{hpCost}</color>");
             }
 
             infoText.text = infoBuilder.ToString();
