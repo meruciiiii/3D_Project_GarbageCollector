@@ -172,12 +172,29 @@ public class GameManager : MonoBehaviour
         BigGarbageWeight = 0;
 
         P_intro = true;
-        // P_isEnglish는 설정값이므로 유지하거나 필요시 초기화하세요.
 
         Debug.Log("모든 게임 데이터가 초기값으로 설정되었습니다.");
 
-        // (선택 사항) 초기화된 값을 바로 파일에도 저장하고 싶다면 아래 코드 추가
         SaveAllGamedata(); 
+    }
+
+    public void Cheatdata()
+    {
+        P_MaxHP = 100;
+        P_CurrentHP = 100;
+        P_Str = 1;
+        P_Spd = 5;
+        P_Money = 999999999;
+        P_Maxbag = 10000;
+        P_Weight = 0;
+
+        grab_limit = 1;
+        grab_speed = 1.5f;
+        grab_range = 0.15f;
+
+        Debug.Log("cheat.");
+
+        SaveAllGamedata();
     }
 
     private void OnApplicationPause(bool pause)

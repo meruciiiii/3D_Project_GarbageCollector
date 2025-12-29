@@ -7,21 +7,36 @@ public class SellUI : MonoBehaviour
 {
     [Header("매니저 연결")]
     [SerializeField] private SellManager sellManager;
-
-    [Header("플레이어 연결")]
     [SerializeField] private PlayerController playerController;
 
     [Header("UI 패널 연결")]
-    [SerializeField] private GameObject tradePanel;   // 거래 전 견적서 창
-    [SerializeField] private GameObject resultPanel;  // 거래 후 결과 창
+    [SerializeField] private GameObject tradePanel;   // 견적서
+    [SerializeField] private GameObject resultPanel;  // 결과창
 
-    [Header("UI 요소 연결")]
-    [SerializeField] private Text CurrentMoney;       // [UI] 현재 돈을 보여줄 텍스트 (여기에 값 넣음)
-    [SerializeField] private Text infoText;           // 상세 내역
-    [SerializeField] private Text resultText;         // 결과
+    [Header("메인 HUD 연결 (추가됨)")]
+    [Tooltip("상점 이용 중에 숨길 메인 HUD (체력바, 미니맵, 우상단 돈 등)")]
+    [SerializeField] private GameObject mainHudPanel;
+
+    [Header("돈 텍스트 연결")]
+    [Tooltip("결과 창 안에 있는 '총 보유 금액' 텍스트 (애니메이션용)")]
+    [SerializeField] private Text txtResultTotalMoney;
+
+    // (선택) 견적서에 있는 돈 텍스트
+    [SerializeField] private Text txtTradeCurrentMoney;
+
+    [Header("기타 UI 요소")]
+    [SerializeField] private Text infoText;
+    [SerializeField] private Text resultText;
+
+    [Header("버튼 연결")]
     [SerializeField] private Button sellButton;
     [SerializeField] private Button cancelButton;
     [SerializeField] private Button confirmButton;
+
+    [Header("연출 설정")]
+    [SerializeField] private float animationDuration = 1.0f;
+
+    private Coroutine moneyCoroutine;
 
     public bool IsUIActive
     {
@@ -35,22 +50,24 @@ public class SellUI : MonoBehaviour
 
     private void Awake()
     {
+        // 시작 시 초기화
         CloseAllPanels();
+
         if (sellButton != null) sellButton.onClick.AddListener(OnClickSell);
         if (cancelButton != null) cancelButton.onClick.AddListener(OnClickCancel);
         if (confirmButton != null) confirmButton.onClick.AddListener(OnClickConfirm);
     }
 
-    // 1. 견적서 열기
+    // 1. 상점 열기
     public void OpenTradePanel()
     {
         if (resultPanel != null) resultPanel.SetActive(false);
         if (tradePanel != null) tradePanel.SetActive(true);
 
-        if (AudioManager.instance != null)
-        {
-            AudioManager.instance.PlaySFX("SFX11");
-        }
+        // [추가] 상점 이용 중에는 메인 HUD를 숨겨서 화면을 깔끔하게 합니다.
+        if (mainHudPanel != null) mainHudPanel.SetActive(false);
+
+        if (AudioManager.instance != null) AudioManager.instance.PlaySFX("SFX11");
 
         if (sellManager != null)
         {
@@ -58,8 +75,9 @@ public class SellUI : MonoBehaviour
             int bigEarn = sellManager.GetBigTrashEarnings();
             int totalEarn = smallEarn + bigEarn;
 
-            // [핵심] GameManager에서 돈을 가져와서 UI에 표시
-            UpdateMoneyUI();
+            // 견적서 창의 돈 텍스트 갱신
+            if (txtTradeCurrentMoney != null && GameManager.instance != null)
+                txtTradeCurrentMoney.text = $"{GameManager.instance.P_Money:N0}";
 
             if (infoText != null)
             {
@@ -77,57 +95,81 @@ public class SellUI : MonoBehaviour
     {
         if (sellManager != null)
         {
-            if (AudioManager.instance != null)
-            {
-                AudioManager.instance.PlaySFX("SFX10");
-            }
+            if (AudioManager.instance != null) AudioManager.instance.PlaySFX("SFX10");
 
+            // [A] 시작 금액 (현재 돈)
+            int startMoney = 0;
+            if (GameManager.instance != null) startMoney = GameManager.instance.P_Money;
+
+            // [B] 실제 판매 처리 (돈 증가)
             int earnings = sellManager.SellAllTrash();
-            ShowResult(earnings);
+
+            // [C] 목표 금액 (늘어난 돈)
+            int targetMoney = startMoney + earnings;
+
+            // [D] 결과창 띄우기 (애니메이션 포함)
+            ShowResult(earnings, startMoney, targetMoney);
         }
     }
 
-    // 3. 결과창 보여주기
-    private void ShowResult(int earnedMoney)
+    private void ShowResult(int earnedMoney, int startMoney, int targetMoney)
     {
         if (tradePanel != null) tradePanel.SetActive(false);
         if (resultPanel != null) resultPanel.SetActive(true);
 
-        // 결과창에서도 갱신된 돈을 보여주고 싶다면 호출 (선택사항)
-        // UpdateMoneyUI(); 
+        // [확인] 여기서도 HUD는 계속 꺼져있어야 합니다. (OpenTradePanel에서 이미 껐음)
+        if (mainHudPanel != null) mainHudPanel.SetActive(false);
 
+        // "+ 1500 G" 텍스트
         if (resultText != null)
-        {
             resultText.text = $"Success!\n<size=60><color=yellow>+ {earnedMoney:N0} G</color></size>";
+
+        // 결과창 내부 총 보유액 애니메이션
+        if (txtResultTotalMoney != null)
+        {
+            if (moneyCoroutine != null) StopCoroutine(moneyCoroutine);
+            moneyCoroutine = StartCoroutine(AnimateResultMoney(startMoney, targetMoney));
         }
     }
 
-    // [중요] GameManager에서 돈을 가져오는 전용 함수
-    private void UpdateMoneyUI()
+    // 결과창 전용 돈 애니메이션
+    private IEnumerator AnimateResultMoney(int start, int target)
     {
-        // 1. 텍스트 UI가 연결되어 있고
-        // 2. GameManager가 존재한다면
-        if (CurrentMoney != null && GameManager.instance != null)
+        float elapsed = 0f;
+
+        if (txtResultTotalMoney != null) txtResultTotalMoney.text = $"{start:N0}";
+
+        while (elapsed < animationDuration)
         {
-            // GameManager의 P_Money 값을 가져와서 텍스트로 변환
-            // N0 포맷은 3자리마다 콤마를 찍어줍니다. (예: 15,000)
-            CurrentMoney.text = $"{GameManager.instance.P_Money:N0}";
+            elapsed += Time.unscaledDeltaTime;
+            float t = elapsed / animationDuration;
+            t = Mathf.Sin(t * Mathf.PI * 0.5f); // EaseOut
+
+            int currentDisplay = (int)Mathf.Lerp(start, target, t);
+
+            if (txtResultTotalMoney != null)
+                txtResultTotalMoney.text = $"{currentDisplay:N0}";
+
+            yield return null;
         }
-        else
-        {
-            // 예외 처리 (디버깅용)
-            // Debug.LogWarning("CurrentMoney UI 연결 안됨 또는 GameManager 없음");
-        }
+
+        if (txtResultTotalMoney != null) txtResultTotalMoney.text = $"{target:N0}";
     }
 
-    // ... (나머지 닫기 및 컨트롤 함수들은 기존과 동일) ...
-    private void OnClickCancel() => CloseAllPanels();
+    // 3. 확인 버튼 & 닫기
     private void OnClickConfirm() => CloseAllPanels();
+    private void OnClickCancel() => CloseAllPanels();
 
     public void CloseAllPanels()
     {
+        if (moneyCoroutine != null) StopCoroutine(moneyCoroutine);
+
         if (tradePanel != null) tradePanel.SetActive(false);
         if (resultPanel != null) resultPanel.SetActive(false);
+
+        // [추가] 상점을 완전히 나갈 때 HUD를 다시 켜줍니다.
+        if (mainHudPanel != null) mainHudPanel.SetActive(true);
+
         SetPlayerControl(true);
     }
 
@@ -135,6 +177,8 @@ public class SellUI : MonoBehaviour
     {
         if (playerController != null)
         {
+            playerController.enabled = isActive;
+
             if (!isActive)
             {
                 Rigidbody rb = playerController.GetComponent<Rigidbody>();
@@ -144,7 +188,6 @@ public class SellUI : MonoBehaviour
                     rb.angularVelocity = Vector3.zero;
                 }
             }
-            playerController.enabled = isActive;
         }
 
         if (isActive)
