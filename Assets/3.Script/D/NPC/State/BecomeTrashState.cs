@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class BecomeTrashState : IState {
 	private NPC_Base npc;
@@ -17,6 +14,6 @@ public class BecomeTrashState : IState {
 	}
 
 	public void Exit() {
-		npc.agent.isStopped = false;
+
 	}
 }

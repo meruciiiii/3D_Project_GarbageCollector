@@ -20,6 +20,7 @@ public class AreaTrigger_forNPC : MonoBehaviour {
 					//Trigger 충돌이 난다면, 구역 안으로 들어온다는 의미.
 					if(area.Equals(GameManager.instance.Current_Area)) {
 						//그런데 플레이어가 구역 내에 있을 때만!!
+						npc_script.inArea = true;
 						npc_script.run_coroutine();
 					}
 				}

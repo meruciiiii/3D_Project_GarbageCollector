@@ -44,7 +44,7 @@ public class HumanTrashAction : MonoBehaviour
         //trash.Trash_c.enabled = false;
         trash.Trash_r.isKinematic = true;
         trash.Trash_r.useGravity = false;
-        CloneSetting(currentTrash);
+        currentTrash.Trash_r.constraints = RigidbodyConstraints.FreezeAll;
         StartCoroutine(LiftWithCurve());
         GameManager.instance.BigGarbageWeight = trash.Data.getBigTrashWeight(trash.TrashNum);
         GameManager.instance.isGrabBigGarbage = true;
@@ -163,7 +163,10 @@ public class HumanTrashAction : MonoBehaviour
     {
         GameObject cloneGO = Instantiate(currentTrash.gameObject);
         Trash cloneTrash = cloneGO.GetComponent<Trash>();
-        currentTrash.gameObject.SetActive(false);
+        CloneSetting(cloneTrash);
+        if (currentTrash.gameObject.TryGetComponent(out Stage3_NPC npc_script)) {
+            npc_script.ChangeState(npc_script.becomeTrashState);
+        }
         return cloneTrash;
     }
     private void CloneSetting(Trash cloneTrash)
@@ -184,7 +187,6 @@ public class HumanTrashAction : MonoBehaviour
         {
             random_Mesh.enabled = false;
         }
-        cloneTrash.Trash_r.constraints = RigidbodyConstraints.FreezeAll;
         
     }
     private void SetRagdollKinematic(bool value)
