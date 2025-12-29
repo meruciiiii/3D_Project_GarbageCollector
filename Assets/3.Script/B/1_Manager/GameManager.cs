@@ -13,7 +13,28 @@ public class GameManager : MonoBehaviour
     public int P_Money = 0; //소지 돈
     public int P_Maxbag = 10000; //가방최대무게
 
-    public int P_Weight = 0; //현재 무게
+    public event Action OnWeightIncreased; // 무게가 늘어날 때만 쏴주는 전광판 신호 aimcooldown에서 사용하겠습니다.
+
+    private int p_Weight = 0; // 실제 데이터가 담기는 내부 저장소
+    public int P_Weight
+    {
+        get => p_Weight; // 누군가 무게를 물어보면 p_Weight 값을 알려줌
+        set
+        {
+            // +=, -=, = 등으로 값이 들어오면 무조건 여기(set)를 거칩니다.
+            if (value > p_Weight)
+            {
+                // 값이 이전보다 커졌다면(줍기 성공)
+                p_Weight = value;
+                OnWeightIncreased?.Invoke(); // 구독 중인 UI들에게 "게이지 틀어!"라고 신호 보냄
+            }
+            else
+            {
+                // 값이 줄어들거나(정산) 같으면 그냥 값만 저장
+                p_Weight = value;
+            }
+        }
+    }
 
     public bool P_isEnglish; //한 영문전환
     public bool P_intro = true; //게임 첫 시작시 intro

@@ -85,9 +85,12 @@ public class Intro_Typing_Read : MonoBehaviour
         fadeImage.color = finalColor;
     }
 
+    private int characterCounter = 0; // 글자 수를 세는 변수
+
     private IEnumerator TypeText(string message)
     {
         text_component.text = ""; // 텍스트 초기화
+        characterCounter = 0;    // 카운터 초기화
 
         foreach (char letter in message.ToCharArray())
         {
@@ -101,9 +104,14 @@ public class Intro_Typing_Read : MonoBehaviour
             text_component.text += letter;
             if (letter != ' ')
             {
-                // 2. 약간의 피치(음높이) 랜덤성을 주어 기계적인 느낌 제거
-                // AudioManager에 PlaySFXVariation 같은 기능이 있다면 사용 권장
-                AudioManager.instance.PlaySFX("SFX2");
+                characterCounter++;
+
+                // 카운터가 지정한 간격이 되면 소리 재생
+                if (characterCounter >= Random.Range(2, 4)) // 2글자 혹은 3글자마다 랜덤하게 재생
+                {
+                    AudioManager.instance.PlaySFX("SFX2");
+                    characterCounter = 0;
+                }
             }
             float randomSpeed = Random.Range(typingSpeed * 0.8f, typingSpeed * 1.2f);
             yield return new WaitForSeconds(randomSpeed);

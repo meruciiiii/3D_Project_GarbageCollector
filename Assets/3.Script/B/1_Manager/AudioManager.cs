@@ -121,6 +121,17 @@ public class AudioManager : MonoBehaviour
 
     private IEnumerator FadeBGM(AudioClip newClip)
     {
+        if (BGM_Player.clip == null)
+        {
+            BGM_Player.clip = newClip;
+            BGM_Player.outputAudioMixerGroup = BGM;
+            BGM_Player.loop = true;
+            BGM_Player.volume = 1.0f; // 볼륨을 즉시 1로 설정
+            BGM_Player.Play();
+            bgmFadeCoroutine = null;
+            yield break; // 코루틴 종료
+        }
+
         if (BGM_Player.isPlaying) // 1. Fade Out
         {
             float startVol = BGM_Player.volume; // 현재 볼륨 기억
@@ -146,6 +157,8 @@ public class AudioManager : MonoBehaviour
             yield return null;
         }
         BGM_Player.volume = 1.0f;
+        bgmFadeCoroutine = null; 
+        // 코루틴 참조 해제 다음번에 PlayBGM이 호출될 때 불필요한 StopCoroutine이 발생하지 않도록
     }
 
     public void StopBGM()
@@ -227,10 +240,23 @@ public class AudioManager : MonoBehaviour
         }
     }
     
-    public void Play3DSFX(string name, Transform gameobject) 
+    public void Play3DSFX(string name, Transform gameobject, bool isLoop = false) 
         //사용방식 AudioManager.instance.Play3DSFX("3D_SFX", this.transform);
     {
         if (gameobject == null) return; // 타겟이 없으면 실행 안 함
+
+        // 추가된 체크: 이미 이 위치(targetTransform)에서 이 이름의 소리가 재생 중인지 확인
+        foreach (var player in SFX_3D_Player)
+        {
+            if (player.isPlaying && player.transform.parent == gameobject)
+            {
+                // Sound 리스트에서 찾은 클립과 현재 재생 중인 클립이 같은지 확인
+                foreach (Sound s in SFX_3D_clip)
+                {
+                    if (s.name == name && player.clip == s.clip) return; // 이미 재생 중이므로 중단
+                }
+            }
+        }
 
         foreach (Sound s in SFX_3D_clip)
         {
@@ -245,7 +271,9 @@ public class AudioManager : MonoBehaviour
                         SFX_3D_Player[i].transform.localPosition = Vector3.zero;
                         SFX_3D_Player[i].clip = s.clip;
                         SFX_3D_Player[i].outputAudioMixerGroup = SFX;
+                        SFX_3D_Player[i].loop = isLoop; // 루프 설정
                         SFX_3D_Player[i].Play();
+
                         StartCoroutine(ResetAudioSourceParent(SFX_3D_Player[i], s.clip.length));
                         return;
                     }
@@ -257,6 +285,23 @@ public class AudioManager : MonoBehaviour
         Debug.Log($"해당 name:[{name}] key를 가진 3DSFX가 없습니다.");
     }
 
+    public void Stop3DSFX(string name, Transform targetTransform)
+    {
+        foreach (var player in SFX_3D_Player)
+        {
+            // 1. 현재 재생 중이고
+            // 2. 클립 이름이 일치하며
+            // 3. 부모(Transform)가 요청한 오브젝트와 일치하는 경우만 중지
+            if (player.isPlaying && player.clip != null &&
+                player.clip.name == name && player.transform.parent == targetTransform)
+            {
+                player.Stop();
+                player.loop = false;
+                // 이후 처리는 ResetAudioSourceParent 코루틴이 담당
+            }
+        }
+    }
+
     private IEnumerator ResetAudioSourceParent(AudioSource source, float delay)
     {
         float timer = 0f;
@@ -264,7 +309,7 @@ public class AudioManager : MonoBehaviour
         Transform currentTarget = source.transform.parent;
 
         // 소리가 끝날 때까지 또는 설정된 clip 길이 동안 체크
-        while (timer < delay || source.isPlaying)
+        while (source.loop || timer < delay || source.isPlaying)
         {
             timer += Time.deltaTime;
 
@@ -284,10 +329,20 @@ public class AudioManager : MonoBehaviour
                     source.transform.position = currentWorldPos;
                 }
 
+                if (source.loop)
+                {
+                    source.loop = false;
+                    source.Stop();
+                    break;
+                }
+
                 // 4. 이제 독립되었으므로 소리가 끝날 때까지만 대기하고 루프 종료
                 yield return new WaitWhile(() => source != null && source.isPlaying);
                 break;
             }
+
+            // Stop3DSFX 등으로 루프가 풀리고 소리가 멈췄다면 루프 탈출
+            if (!source.loop && !source.isPlaying && timer > 0.1f) break;
 
             yield return null;
         }
@@ -297,6 +352,7 @@ public class AudioManager : MonoBehaviour
         {
             source.Stop();
             source.clip = null; // 참조 해제
+            source.loop = false;
             source.transform.SetParent(sfx3DContainer);
             source.transform.localPosition = Vector3.zero; // 다음 사용을 위해 위치 초기화
         }
