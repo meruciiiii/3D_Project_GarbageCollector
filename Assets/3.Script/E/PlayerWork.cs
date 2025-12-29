@@ -168,6 +168,7 @@ public class PlayerWork : MonoBehaviour
             if (!Cursor.visible)
             {
                 humanTrashAction.DrobGarbage();
+
             }
             controller.Calc_Speed();
             return;
@@ -219,5 +220,9 @@ public class PlayerWork : MonoBehaviour
     public void SetPickInterval()
     {
         pickInterval = GameManager.instance.grab_speed;
+    }
+    public void startPick()
+    {
+        HandleContinuousPick();
     }
 }
