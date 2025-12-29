@@ -111,23 +111,26 @@ public class PlayerController : MonoBehaviour {
             }
         }
     }
+
+    private float lastStepTime;
     private IEnumerator FootstepLoop()
     {
         while (true)
         {
-            // 1. 현재 상태에 맞는 사운드 이름 결정
-            // Walk_Sound, Run_Sound 등 AudioManager 딕셔너리에 등록된 이름 사용
             string soundName = "SFX14";
 
-            // 2. 사운드 재생
-            AudioManager.instance.PlayWalkingStep(soundName);
+            // 최소 쿨타임 체크
+            // 코루틴이 새로 시작되어도, 마지막으로 소리가 난 지 0.25초가 지나지 않았다면 스킵
+            if (Time.time - lastStepTime > 0.25f)
+            {
+                AudioManager.instance.PlayWalkingStep(soundName);
+                lastStepTime = Time.time;
+            }
 
-            // 3. 발소리 간격 계산
-            // moveSpeed가 낮아지면(무거워지면) interval이 길어져 천천히 걷는 소리가 납니다.
+            // 발소리 간격 계산
             float stepInterval = 1.8f / Mathf.Max(moveSpeed, 1.0f);
 
-            // 0.4초 클립의 길이를 고려하여 최소/최대 간격 제한 (너무 빠르거나 느리지 않게)
-            yield return new WaitForSeconds(Mathf.Clamp(stepInterval, 0.25f, 0.6f));
+            yield return new WaitForSeconds(Mathf.Clamp(stepInterval, 0.3f, 0.6f));
         }
     }
     private void Rotate() {
