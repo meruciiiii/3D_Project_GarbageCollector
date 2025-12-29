@@ -73,17 +73,23 @@ public class UpgradeSlot : MonoBehaviour
             if (txtPrice != null) txtPrice.text = $"{cost} G";
 
             // 돈 부족하면 버튼 비활성화
+            if (txtPrice != null) txtPrice.text = $"{cost:N0} G";
+
             bool canAfford = GameManager.instance.P_Money >= cost;
             if (btnBuy != null) btnBuy.interactable = canAfford;
+            
         }
 
         // 히든(PickNPC) 특별 처리: 힘이 부족하면 잠금
         if (type == UpgradeType.PickNPC)
         {
-            if (GameManager.instance.P_Str < UpgradeManager.STR_ULTIMATE)
+            // 아직 구매 안 했고(isMax == false), 조건도 충족 안 됐다면(!IsAllStatMaxed) -> 잠금
+            // 조건을 충족했다면 위의 'canAfford' 로직을 따라가서 구매 가능해짐
+            if (!isMax && !manager.IsAllStatMaxed())
             {
                 if (btnBuy != null) btnBuy.interactable = false;
-                if (txtPrice != null) txtPrice.text = "근력 Lv.7";
+                // 텍스트는 "잠김" 혹은 조건을 보여주는 것이 좋음
+                if (txtPrice != null) txtPrice.text = "Locked";
             }
         }
     }
@@ -108,10 +114,9 @@ public class UpgradeSlot : MonoBehaviour
                 break;
 
             case UpgradeType.MaxHP:
-                // 기본 100, +40씩 증가
                 int baseHP = 100;
-                cur = (GameManager.instance.P_MaxHP - baseHP) / 40;
-                max = (UpgradeManager.MAX_HP_LIMIT - baseHP) / 40;
+                cur = (GameManager.instance.P_MaxHP - baseHP) / 80;
+                max = (UpgradeManager.MAX_HP_LIMIT - baseHP) / 80;
                 break;
 
             case UpgradeType.PickSpeed: // 속도는 값이 줄어듦 (1.5 -> 0.25)
@@ -132,7 +137,7 @@ public class UpgradeSlot : MonoBehaviour
                 break;
 
             case UpgradeType.PickNPC:
-                cur = manager.IsAllStatMaxed() ? 1 : 0; // 0 or 1 (단일 업글)
+                cur = (GameManager.instance.P_Str == UpgradeManager.STR_ULTIMATE) ? 1 : 0;
                 max = 1;
                 break;
         }

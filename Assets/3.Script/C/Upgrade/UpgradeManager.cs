@@ -21,7 +21,7 @@ public class UpgradeManager : MonoBehaviour
 
     // [최대치 상수]
     public const int MAX_BAG_WEIGHT = 30000;
-    public const int MAX_HP_LIMIT = 300;     // [변경] 200 -> 300 (탱커급 체력)
+    public const int MAX_HP_LIMIT = 500;
     public const int MAX_STR_NORMAL = 6;
     public const int STR_ULTIMATE = 7;
     public const float MIN_PICK_SPEED = 0.25f;
@@ -61,12 +61,7 @@ public class UpgradeManager : MonoBehaviour
 
             case UpgradeType.MaxHP:
                 if (GameManager.instance.P_MaxHP >= MAX_HP_LIMIT) return 0;
-
-                // [변경] 레벨 계산식: (현재 - 100) / 40
-                // 100일 때 0렙, 140일 때 1렙...
-                level = (GameManager.instance.P_MaxHP - 100) / 40;
-
-                // 가격: 5000 + (단계 * 20,000) -> 유지
+                level = (GameManager.instance.P_MaxHP - 100) / 80;
                 return baseMaxHPCost + (level * 20000);
 
             case UpgradeType.PickSpeed:
@@ -107,8 +102,7 @@ public class UpgradeManager : MonoBehaviour
                 break;
 
             case UpgradeType.MaxHP:
-                // [변경] 한 번에 +40씩 시원하게 증가 (5회 마스터)
-                GameManager.instance.P_MaxHP += 40;
+                GameManager.instance.P_MaxHP += 80;
                 GameManager.instance.P_CurrentHP = GameManager.instance.P_MaxHP;
                 break;
 
