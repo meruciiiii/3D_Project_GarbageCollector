@@ -61,6 +61,7 @@ public class ThashInfo : MonoBehaviour
 
         // 대표 이름용 (첫 번째 물체)
         Trash firstTrash = targets[0].GetComponent<Trash>();
+
         string firstTrashName = "";
 
         // 배열을 순회하며 합산
@@ -71,14 +72,37 @@ public class ThashInfo : MonoBehaviour
             if (trash == null) continue;
 
             // 키값 생성
-            string keyPrefix = "";
+
+            string finalKey = "";
+
             switch (trash.Size)
             {
-                case Trash.TrashSize.Small: keyPrefix = "small_"; break;
-                case Trash.TrashSize.Large: keyPrefix = "large_"; break;
-                case Trash.TrashSize.Human: keyPrefix = "human_"; break;
+                case Trash.TrashSize.Small:
+                    finalKey = "small_" + trash.TrashNum;
+                    break;
+
+                case Trash.TrashSize.Large:
+                    finalKey = "large_" + trash.TrashNum;
+                    break;
+
+                case Trash.TrashSize.Human:
+                    // [여기가 수정됨!] 이름으로 2종류 구분하기
+
+                    // 조건: 오브젝트 이름에 특정 단어(예: "Boss", "Type2", "Gen")가 포함되어 있다면?
+                    // (사용자분의 두 번째 NPC 프리팹 이름에 들어가는 단어를 아래 따옴표 안에 넣으세요)
+                    if (obj.name.Contains("Mr.Go"))
+                    {
+                        // 두 번째 NPC -> CSV의 'large_7'(MR.GO) 데이터 사용
+                        finalKey = "large_7";
+                    }
+                    else
+                    {
+                        // 그 외 일반 NPC -> CSV의 'large_6'(사람) 데이터 사용
+                        finalKey = "large_6";
+                    }
+                    break;
             }
-            string finalKey = keyPrefix + trash.TrashNum;
+
 
             // 첫 번째 녀석 이름 가져오기
             if (obj == targets[0])
