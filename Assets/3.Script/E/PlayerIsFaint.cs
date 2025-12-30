@@ -14,7 +14,7 @@ public class PlayerIsFaint : MonoBehaviour
     [SerializeField] private GameObject Sceneload_fade;
     [SerializeField] private VignetteController vignetteController;
     [SerializeField] private PlayerWork playerWork;
-    [SerializeField] private Camera camera;
+    [SerializeField] private Camera _camera;
     public void StartPassOutEffect()
     {
         DoNotControl(true);
@@ -55,7 +55,7 @@ public class PlayerIsFaint : MonoBehaviour
     {
         transform.localPosition = new Vector3(-1.22f, -0.69f, -13.496f);
         transform.localRotation = Quaternion.Euler(0,-90f,0);
-        camera.transform.rotation = Quaternion.Euler(0, 0, 0);
+        _camera.transform.rotation = Quaternion.Euler(0, 0, 0);
         GameManager.instance.P_CurrentHP = GameManager.instance.P_MaxHP;
         GameManager.instance.P_Weight = 0;
         vignetteController.OnWash();
