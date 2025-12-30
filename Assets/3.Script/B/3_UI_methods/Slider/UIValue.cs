@@ -53,8 +53,8 @@ public class UIValue : MonoBehaviour
         if (moneytext != null) moneytext.text = $"{currentDisplayMoney:N0}";
 
         // 무게 즉시 갱신
-        float targetWeight = GameManager.instance.P_Weight / 100.0f;
-        float maxWeight = GameManager.instance.P_Maxbag / 100.0f;
+        float targetWeight = GameManager.instance.P_Weight / 1000.0f;
+        float maxWeight = GameManager.instance.P_Maxbag / 1000.0f;
         if (weightSlider != null)
         {
             weightSlider.maxValue = maxWeight;
@@ -95,8 +95,8 @@ public class UIValue : MonoBehaviour
         moneycoroutine = StartCoroutine(AnimateMoney(targetMoney));
 
         // 무게도 동일하게 100.0f로 나누어 소수점 두 자리를 표현
-        float targetWeight = GameManager.instance.P_Weight / 100.0f;
-        float maxWeight = GameManager.instance.P_Maxbag / 100.0f;
+        float targetWeight = GameManager.instance.P_Weight / 1000.0f;
+        float maxWeight = GameManager.instance.P_Maxbag / 1000.0f;
 
         if (weightSlider != null) weightSlider.maxValue = maxWeight;
 

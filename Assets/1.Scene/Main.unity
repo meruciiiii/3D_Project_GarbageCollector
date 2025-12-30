@@ -294,7 +294,38 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2413964933470396443, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 1328552994614333502, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 3784904270508648753, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 2902323756598773097, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 4611619728259681591, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 7582706587700794576, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 4030544831676177302, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 8606971419887885810, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 2961866830786127611, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 3717048889082127468, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 2415409673122080337, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 2048443131188365480, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 4833651275672939408, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 110238105472894774, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 5863352835011077039, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 7353567100332500896, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 4869697110539807510, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 678769382053314719, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 6256364210015177093, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 8794401725580456440, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 7349220272170987912, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 5868647088687271144, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 8216141258348903684, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 1621197788818848353, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 4971021997746542010, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 7380709119691275929, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 3546734007204855300, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 94967301531511169, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 8207015865503183680, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 7545012034262865450, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
+    - {fileID: 7037311985764058594, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b444e606494ead64188c8216bce9a3fd, type: 3}
@@ -1511,6 +1542,10 @@ PrefabInstance:
     - target: {fileID: 3329395357691407457, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
       propertyPath: baseBagCost
       value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3329395357691407457, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: pickNpcCost
+      value: 500000
       objectReference: {fileID: 0}
     - target: {fileID: 3329395357691407457, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
       propertyPath: baseMaxHPCost
@@ -4400,6 +4435,18 @@ PrefabInstance:
     - target: {fileID: 2188179300742592206, guid: 2af119bc682878a47810b9d317957377, type: 3}
       propertyPath: m_LocalPosition.z
       value: -14.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2193234013588833061, guid: 2af119bc682878a47810b9d317957377, type: 3}
+      propertyPath: m_Size.y
+      value: 12.557446
+      objectReference: {fileID: 0}
+    - target: {fileID: 2193234013588833061, guid: 2af119bc682878a47810b9d317957377, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2193234013588833061, guid: 2af119bc682878a47810b9d317957377, type: 3}
+      propertyPath: m_Center.y
+      value: 3.6462774
       objectReference: {fileID: 0}
     - target: {fileID: 2211848120028379010, guid: 2af119bc682878a47810b9d317957377, type: 3}
       propertyPath: m_Layer

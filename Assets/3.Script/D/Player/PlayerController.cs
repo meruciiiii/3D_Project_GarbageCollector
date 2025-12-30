@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour {
     private float rotateBoundary = 80f;
 
     //---------------------------------------------------------------
+    //충돌 관련
 
     [Header("플레이어 충돌")]
     public float flyPower = 15f;
@@ -41,11 +42,14 @@ public class PlayerController : MonoBehaviour {
     private float recovery_time = 2.5f;
     private WaitForSeconds wfs;
 
+    private PlayerIsFaint faint;
+
     //------------------------------------------
 
     //사전 설정
     private void Awake() {
         TryGetComponent(out playerRB);
+        TryGetComponent(out faint);
         Walk();
         wfs = new WaitForSeconds(recovery_time);
     }
@@ -226,6 +230,9 @@ public class PlayerController : MonoBehaviour {
                 playerRB.AddForce(fly_dir, ForceMode.Impulse);
                 playerRB.freezeRotation = false;
                 GameManager.instance.ChangeHP(-100);
+                if(GameManager.instance.P_CurrentHP <= 0) {
+                    faint.StartPassOutEffect();
+				}
                 StartCoroutine(Recovery_Stun());
             }
         }
