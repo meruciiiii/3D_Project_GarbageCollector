@@ -109,6 +109,12 @@ public class ThashInfo : MonoBehaviour
             if (req > maxReqStr) maxReqStr = req;
         }
 
+        if (totalWeight <= 0)
+        {
+            HideInfo(); // 혹시 켜져있다면 끄기
+            return;     // UI 갱신 로직 실행 안 하고 종료
+        }
+
         // --- UI 표시 로직 (기존과 동일) ---
         int currentStr = GameManager.instance.P_Str;
         bool isEng = GameManager.instance.P_isEnglish;
