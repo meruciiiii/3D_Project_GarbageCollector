@@ -24,6 +24,7 @@ public class BigTrashAction : MonoBehaviour
     {
         if (CanHold(trash.Data.getrequiredStrength(trash.TrashNum)))
             return false;
+        AudioManager.instance.PlaySFX("SFX7");//큰 쓰레기 소리 작업
         currentTrash = trash;
         //Debug.Log(transform.GetChild(trash.TrashNum + 1).gameObject.name+" 활성화?" +transform.GetChild(trash.TrashNum + 1).gameObject.activeSelf);
         transform.GetChild(trash.TrashNum + 1).gameObject.SetActive(true);
@@ -36,7 +37,6 @@ public class BigTrashAction : MonoBehaviour
             children_r.enabled = false;
         }
         GameManager.instance.isGrabBigGarbage = true;
-        AudioManager.instance.PlaySFX("SFX7");//큰 쓰레기 소리 작업
         return true;
     }
     public bool CanHold(int strength)
