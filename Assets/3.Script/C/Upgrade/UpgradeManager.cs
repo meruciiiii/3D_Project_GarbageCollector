@@ -20,7 +20,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private int pickNpcCost = 150000;     // 히든
 
     // [최대치 상수]
-    public const int MAX_BAG_WEIGHT = 30000;
+    public const int MAX_BAG_WEIGHT = 50000;
     public const int MAX_HP_LIMIT = 500;
     public const int MAX_STR_NORMAL = 6;
     public const int STR_ULTIMATE = 7;
@@ -56,8 +56,8 @@ public class UpgradeManager : MonoBehaviour
 
             case UpgradeType.BagWeight:
                 if (GameManager.instance.P_Maxbag >= MAX_BAG_WEIGHT) return 0;
-                level = (GameManager.instance.P_Maxbag - 5000) / 5000;
-                return baseBagCost + (level * 25000);
+                level = (GameManager.instance.P_Maxbag - 10000) / 8000;
+                return baseBagCost + (level * 20000);
 
             case UpgradeType.MaxHP:
                 if (GameManager.instance.P_MaxHP >= MAX_HP_LIMIT) return 0;
@@ -98,7 +98,7 @@ public class UpgradeManager : MonoBehaviour
                 break;
 
             case UpgradeType.BagWeight:
-                GameManager.instance.P_Maxbag += 5000;
+                GameManager.instance.P_Maxbag += 8000;
                 break;
 
             case UpgradeType.MaxHP:

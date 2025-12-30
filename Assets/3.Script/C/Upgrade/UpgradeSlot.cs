@@ -127,9 +127,11 @@ public class UpgradeSlot : MonoBehaviour
                 break;
 
             case UpgradeType.BagWeight:
+                // [수정] 시작값을 10,000으로 고정, 증가폭 8,000
                 int baseBag = 10000;
-                cur = (GameManager.instance.P_Maxbag - baseBag) / 5000;
-                max = (UpgradeManager.MAX_BAG_WEIGHT - baseBag) / 5000;
+                int stepBag = 8000;
+                cur = (GameManager.instance.P_Maxbag - baseBag) / stepBag;
+                max = (UpgradeManager.MAX_BAG_WEIGHT - baseBag) / stepBag;
                 break;
 
             case UpgradeType.MaxHP:
