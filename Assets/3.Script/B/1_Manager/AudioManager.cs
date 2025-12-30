@@ -171,6 +171,11 @@ public class AudioManager : MonoBehaviour
         bgmFadeCoroutine = StartCoroutine(FadeOutAndStopBGM());
     }
 
+    public void SetBGMloop(bool setloop)
+    {
+        BGM_Player.loop = setloop;
+    }
+
     private IEnumerator FadeOutAndStopBGM()
     {
         if (BGM_Player.isPlaying)
