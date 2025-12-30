@@ -171,6 +171,7 @@ public class PlayerWork : MonoBehaviour
 
             }
             controller.Calc_Speed();
+            nextPickTime = Time.time + pickInterval;
             return;
         }
         if (bigTrashAction.IsHolding)
@@ -180,6 +181,7 @@ public class PlayerWork : MonoBehaviour
                 bigTrashAction.DrobGarbage();
             }
             controller.Calc_Speed();
+            nextPickTime = Time.time + pickInterval;
             return;
         }
         if (target == null || target.Length == 0) return;

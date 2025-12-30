@@ -16,6 +16,10 @@ public class Stage2_Window : MonoBehaviour {
 
 	private Transform area_object;
 
+	[Header("세팅")]
+	public bool isActive = false;
+	public bool isStartScene = false;
+
 	private void Awake() {
 		TryGetComponent(out npc_create_trash);
 		area_object = GameObject.FindGameObjectWithTag("Area02").transform;
@@ -23,14 +27,26 @@ public class Stage2_Window : MonoBehaviour {
 	}
 
 	private void Start() {
-		AreaManager.instance.onAreaChanged += Event_ChangeArea;
+		if(AreaManager.instance != null) {
+			AreaManager.instance.onAreaChanged += Event_ChangeArea;
+		}
+
+		if(isStartScene) {
+			StartCoroutine(throw_trash());
+		}
 	}
 
 	//다른 애들은 isActive면서, 얘만 코루틴 실행 및 종료로 하는건
 	//혼자서 while문이 종료되지 않게 실행되고 있기 때문.
 	private void Event_ChangeArea(int area) {
-		if (area.Equals(2)) { StartCoroutine(throw_trash()); } 
-		else { StopCoroutine(throw_trash()); }
+		if (area.Equals(2)) { 
+			isActive = true;
+			StartCoroutine(throw_trash());
+		} 
+		else {
+			isActive = false;
+			StopCoroutine(throw_trash()); 
+		}
 	}
 
 	private IEnumerator throw_trash() {
@@ -50,7 +66,7 @@ public class Stage2_Window : MonoBehaviour {
 
 		//- 그러니까...
 		//메모리 누수 (메모리 과부하) 영향은 가비지 컬렉터를 호출하냐 안하냐 차이.
-		while(true) {
+		while(isActive) {
 			float maxTime = Random.Range(min_sec, max_sec);
 			float timer = 0f;
 
