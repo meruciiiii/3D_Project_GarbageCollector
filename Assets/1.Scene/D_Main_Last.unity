@@ -968,9 +968,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fullmap
       objectReference: {fileID: 0}
+    - target: {fileID: 1227669572972238987, guid: 112f2f76760e1dd45b4f45e953877a34, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9153644234778657595, guid: 112f2f76760e1dd45b4f45e953877a34, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9153644234778657595, guid: 112f2f76760e1dd45b4f45e953877a34, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1147,6 +1151,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 188346424}
     m_Modifications:
+    - target: {fileID: 163438855954446048, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 185976997093101012, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -692966974, guid: b9b819745a89eb844be50ce8aed090c6, type: 3}
     - target: {fileID: 2561573111184878301, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
       propertyPath: sellUI
       value: 
@@ -1159,9 +1171,41 @@ PrefabInstance:
       propertyPath: minimap
       value: 
       objectReference: {fileID: 860129282}
+    - target: {fileID: 3693800102245823462, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679457797990049499, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1680345472, guid: b9b819745a89eb844be50ce8aed090c6, type: 3}
+    - target: {fileID: 4913485109414000026, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5031898622970937475, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260651480267021591, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5302026856618652459, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
       propertyPath: m_Name
       value: Pause_ob
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607714204671763234, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -692966974, guid: b9b819745a89eb844be50ce8aed090c6, type: 3}
+    - target: {fileID: 7178088427560581683, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329606120011067673, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8609995893780747151, guid: 9cc19415097a9c14fa921368154074d1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1526,14 +1570,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1888669851}
     - target: {fileID: 2329628952549521008, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
-      propertyPath: _camera
-      value: 
-      objectReference: {fileID: 1366834445}
-    - target: {fileID: 2329628952549521008, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
-      propertyPath: playerWork
-      value: 
-      objectReference: {fileID: 1671242584}
-    - target: {fileID: 2329628952549521008, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
       propertyPath: Sceneload_fade
       value: 
       objectReference: {fileID: 1302507334}
@@ -1559,7 +1595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6875371760015618421, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.7
+      value: 39.22
       objectReference: {fileID: 0}
     - target: {fileID: 6875371760015618421, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1567,7 +1603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6875371760015618421, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.3
+      value: -5.09
       objectReference: {fileID: 0}
     - target: {fileID: 6875371760015618421, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1609,7 +1645,8 @@ PrefabInstance:
       propertyPath: trashInfoUI
       value: 
       objectReference: {fileID: 1671242577}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 440305980709591236, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1736,11 +1773,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2092c57215ad744aff99d651a267ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VignetteController
---- !u!20 &1366834445 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 4923363421550768917, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
-  m_PrefabInstance: {fileID: 1075056160}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1384280988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2551,17 +2583,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439ffeca2a0bc4044b482fc0bbac84d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThashInfo
---- !u!114 &1671242584 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8968073341749195394, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
-  m_PrefabInstance: {fileID: 1075056160}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52f8c1b3304a9e428500efefdeb9952, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerWork
 --- !u!1001 &1710634432
 PrefabInstance:
   m_ObjectHideFlags: 0

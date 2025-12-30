@@ -24,61 +24,75 @@ public class ThashInfo : MonoBehaviour
         HideInfo();
     }
 
-    // [변경점] 매개변수를 GameObject 하나가 아니라 배열([])로 받습니다.
     public void UpdateTooltip(GameObject[] targets)
     {
-        // 1. 타겟이 없거나 비어있으면 숨기기
         if (targets == null || targets.Length == 0)
         {
             HideInfo();
             return;
         }
 
-        // 2. 첫 번째 타겟이 유효한지 확인
         if (targets[0] == null)
         {
             HideInfo();
             return;
         }
 
-        // 3. 정보 표시 실행
         ShowInfo(targets);
     }
 
     private void ShowInfo(GameObject[] targets)
     {
-        // 최적화: 이미 켜져 있고 같은 배열 구성을 보고 있다면 UI 갱신 건너뜀 (참조 비교)
         if (uiPanel != null && uiPanel.activeSelf && currentTargets == targets) return;
 
         currentTargets = targets;
 
-        // --- 데이터 계산 로직 시작 ---
         if (CSV_Database.instance == null || GameManager.instance == null) return;
 
         int totalWeight = 0;
         int maxReqStr = 0;
         int totalHpCost = 0;
 
-        // 대표 이름용 (첫 번째 물체)
         Trash firstTrash = targets[0].GetComponent<Trash>();
         string firstTrashName = "";
 
-        // 배열을 순회하며 합산
+        // [핵심 변경] 키값 생성 로직 수정
+        string finalKey = "";
+
         foreach (GameObject obj in targets)
         {
             if (obj == null) continue;
             Trash trash = obj.GetComponent<Trash>();
             if (trash == null) continue;
 
-            // 키값 생성
-            string keyPrefix = "";
+            // 키값 생성 (스위치문으로 분기)
             switch (trash.Size)
             {
-                case Trash.TrashSize.Small: keyPrefix = "small_"; break;
-                case Trash.TrashSize.Large: keyPrefix = "large_"; break;
-                case Trash.TrashSize.Human: keyPrefix = "human_"; break;
+                case Trash.TrashSize.Small:
+                    finalKey = "small_" + trash.TrashNum;
+                    break;
+
+                case Trash.TrashSize.Large:
+                    finalKey = "large_" + trash.TrashNum;
+                    break;
+
+                case Trash.TrashSize.Human:
+                    // [여기가 수정됨!] 이름으로 2종류 구분하기
+
+                    // 조건: 오브젝트 이름에 특정 단어(예: "Boss", "Type2", "Gen")가 포함되어 있다면?
+                    // (사용자분의 두 번째 NPC 프리팹 이름에 들어가는 단어를 아래 따옴표 안에 넣으세요)
+                    if (obj.name.Contains("Mr.Go"))
+                    {
+                        // 두 번째 NPC -> CSV의 'large_7'(MR.GO) 데이터 사용
+                        finalKey = "large_7";
+                    }
+                    else
+                    {
+                        // 그 외 일반 NPC -> CSV의 'large_6'(사람) 데이터 사용
+                        finalKey = "large_6";
+                    }
+                    break;
             }
-            string finalKey = keyPrefix + trash.TrashNum;
 
             // 첫 번째 녀석 이름 가져오기
             if (obj == targets[0])
@@ -90,16 +104,15 @@ public class ThashInfo : MonoBehaviour
             totalWeight += CSV_Database.instance.getweight(finalKey);
             totalHpCost += CSV_Database.instance.getHpdecrease(finalKey);
 
-            // 힘은 최대값 찾기 (가장 무거운 걸 들 수 있어야 하므로)
+            // 힘은 최대값 찾기
             int req = CSV_Database.instance.getrequireStr(finalKey);
             if (req > maxReqStr) maxReqStr = req;
         }
 
-        // --- UI 표시 로직 ---
+        // --- UI 표시 로직 (기존과 동일) ---
         int currentStr = GameManager.instance.P_Str;
         bool isEng = GameManager.instance.P_isEnglish;
 
-        // 1. 이름 설정 (예: 유리병 외 2개)
         if (nameText != null)
         {
             int extraCount = targets.Length - 1;
@@ -113,7 +126,6 @@ public class ThashInfo : MonoBehaviour
             }
         }
 
-        // 2. 상세 정보 설정
         if (infoText != null)
         {
             infoBuilder.Clear();
@@ -128,7 +140,6 @@ public class ThashInfo : MonoBehaviour
             }
             else
             {
-                // 붉은색 경고
                 string warning = isEng ? "Can't hold!" : "힘 부족!";
                 infoBuilder.Append($"<color=red>{warning} ({currentStr}/{maxReqStr})</color>\n");
             }
