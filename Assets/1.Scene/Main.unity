@@ -1385,6 +1385,26 @@ PrefabInstance:
       propertyPath: minimap
       value: 
       objectReference: {fileID: 860129282}
+    - target: {fileID: 3329395357691407457, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: baseBagCost
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3329395357691407457, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: baseMaxHPCost
+      value: 8000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3329395357691407457, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: baseSpeedCost
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3329395357691407457, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: baseStrengthCost
+      value: 15000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3329395357691407457, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: baseMultiGrabCost
+      value: 6000
+      objectReference: {fileID: 0}
     - target: {fileID: 3829980228216351429, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1406,9 +1426,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1075056161}
     - target: {fileID: 6335749311304309509, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: pricePerWeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6335749311304309509, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 1075056161}
+    - target: {fileID: 6335749311304309509, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
+      propertyPath: bigTrashMultiplier
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 6861872121488826736, guid: e17dd1549a3f563439bc81e9e5da2d48, type: 3}
       propertyPath: aim
       value: 
