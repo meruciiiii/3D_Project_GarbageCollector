@@ -37,6 +37,10 @@ public class HumanTrashAction : MonoBehaviour
         currentTrash = trash;
         if (!trash.isRuntimeInstance)
         {
+            if (currentTrash.gameObject.TryGetComponent(out Outline outline))
+            {
+                outline.enabled = false;
+            }
             currentTrash = CloneTrashRuntime();
             currentTrash.isRuntimeInstance = true;
         }
