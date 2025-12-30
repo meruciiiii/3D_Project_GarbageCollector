@@ -42,6 +42,8 @@ public class Car_Controller : MonoBehaviour {
             return;
         }
 
+        //사운드 가져오기
+
         // 스플라인의 전체 길이를 계산합니다.
         splineLength = route.CalculateLength();
     }
@@ -106,4 +108,16 @@ public class Car_Controller : MonoBehaviour {
             this.meshRenderer.sharedMaterials = meshRenderer.sharedMaterials;
         }
     }
+
+	private void OnCollisionEnter(Collision collision) {
+		if(collision.transform.CompareTag("Player")) {
+            //플레이어가 부딫혔을 때, 사운드 출력
+		}
+	}
+
+	private void OnTriggerEnter(Collider other) {
+		if(other.CompareTag("NPC")) {
+            //NPC가 부딫혔을 때, 사운드 출력
+		}
+	}
 }

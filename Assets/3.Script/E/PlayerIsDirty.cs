@@ -12,7 +12,7 @@ public class PlayerIsDirty : MonoBehaviour
     //연출이 끝나면 위치를 시작지점으로 전환하고(위치 회전)
     //현재 보유하고 있는 쓰레기를 제거한다.
     //(작은 쓰레기는 사라짐, 큰 쓰레기는 떨어트림)
-    [SerializeField] private Camera camera;
+    [SerializeField] private Camera _camera;
     [SerializeField] private float zoominFov = 59f;
     [SerializeField] private float zoomoutFov = 60f;
     [SerializeField] private float zoomDuration = 0.2f;
@@ -28,8 +28,8 @@ public class PlayerIsDirty : MonoBehaviour
 
     private void Awake()
     {
-        if (camera == null)
-            camera = Camera.main;
+        if (_camera == null)
+            _camera = Camera.main;
         isDirtyEffectActive = false;
         maxBeat = 2f;
         minBeat = 0.46f;
@@ -62,20 +62,20 @@ public class PlayerIsDirty : MonoBehaviour
             float normalizedTime = elapsedTime / zoomDuration;
             float curveValue = zoomCurve.Evaluate(normalizedTime);
             float currentFov = Mathf.Lerp(fromFov, toFov, curveValue);
-            camera.fieldOfView = currentFov;
-            //Debug.Log($"Camera.fieldOfView: {Camera.fieldOfView}");
+            _camera.fieldOfView = currentFov;
+            //Debug.Log($"_camera.fieldOfView: {_camera.fieldOfView}");
             yield return null;
         }
-        camera.fieldOfView = toFov;
+        _camera.fieldOfView = toFov;
         //ZoomOut();
     }
     private IEnumerator zoomDelay_co()
     {
         while (isDirtyEffectActive)    // 세척 후 청결도가 올라가면 코루틴을 정지시킨다.
         {
-            yield return StartCoroutine(ChangeFovWithCurve(camera.fieldOfView, zoominFov));
+            yield return StartCoroutine(ChangeFovWithCurve(_camera.fieldOfView, zoominFov));
             yield return new WaitForSeconds(0.05f);
-            yield return StartCoroutine(ChangeFovWithCurve(camera.fieldOfView, zoomoutFov));
+            yield return StartCoroutine(ChangeFovWithCurve(_camera.fieldOfView, zoomoutFov));
             float elapsed = 0f;
             while (elapsed < delay)
             {

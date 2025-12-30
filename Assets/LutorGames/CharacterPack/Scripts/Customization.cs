@@ -133,7 +133,7 @@ namespace PrivateLT.CharacterCustomization
 
         private static void EditorUpdate()
         {
-            Customization[] scripts = FindObjectsOfType<Customization>();
+            Customization[] scripts = FindObjectsByType<Customization>(FindObjectsSortMode.None);
 
             foreach (var script in scripts)
             {
