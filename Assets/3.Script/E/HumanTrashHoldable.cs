@@ -21,4 +21,11 @@ public class HumanTrashHoldable : MonoBehaviour, IInteractable
             return -1;
         return trash.Data.getBigTrashWeight(trash.TrashNum);
     }
+    public int TrashStr()
+    {
+        Trash trash;
+        if (!TryGetComponent<Trash>(out trash))
+            return -1;
+        return trash.Data.getrequiredStrength(trash.TrashNum);
+    }
 }
