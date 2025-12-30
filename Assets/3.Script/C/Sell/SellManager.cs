@@ -82,7 +82,7 @@ public class SellManager : MonoBehaviour
         {
             GameManager.instance.P_Money += totalEarnings;
             GameManager.instance.SaveAllGamedata();
-            Debug.Log($"정산 완료: 소형({smallEarn}) + 대형({bigEarn}) = {totalEarnings}원");
+            //Debug.Log($"정산 완료: 소형({smallEarn}) + 대형({bigEarn}) = {totalEarnings}원");
         }
 
         return totalEarnings;

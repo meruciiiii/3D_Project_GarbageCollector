@@ -85,7 +85,7 @@ public class UpgradeSlot : MonoBehaviour
             {
                 // 평소에는 "현재 / 최대" 표시
                 txtLevelNum.text = $"{currentLv} / {maxLv}";
-                txtLevelNum.color = Color.white;
+                txtLevelNum.color = Color.black;
             }
         }
 

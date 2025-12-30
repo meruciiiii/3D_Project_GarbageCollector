@@ -26,7 +26,7 @@ public class CSV_Database : MonoBehaviour
         }
         else
         {
-            Debug.Log("이미 CSV_Database가 존재합니다.");
+            //Debug.Log("이미 CSV_Database가 존재합니다.");
             Destroy(gameObject);
         }
     }

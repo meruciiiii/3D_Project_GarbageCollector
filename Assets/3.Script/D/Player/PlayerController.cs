@@ -205,10 +205,10 @@ public class PlayerController : MonoBehaviour {
         if (GameManager.instance.isGrabBigGarbage) {
             //Debug.Log("설마 여기냐?");
             float half_reduction = 0.5f;
-            int half_count = GameManager.instance.P_Str - GameManager.instance.BigGarbageWeight;
+            int half_count = GameManager.instance.P_Str - GameManager.instance.BigneedStr;
             for (int i = 0; i < half_count; i++) {
                 //힘 스탯이 현재 든 물건보다 half_count만큼 높을때, 속도 반감을 반감
-                half_reduction *= 0.5f;
+                half_reduction += (half_reduction * 0.5f);
             }
             Speed *= half_reduction;
         }
