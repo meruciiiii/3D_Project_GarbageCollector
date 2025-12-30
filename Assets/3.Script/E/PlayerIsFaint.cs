@@ -41,13 +41,11 @@ public class PlayerIsFaint : MonoBehaviour
             transform.localRotation = Quaternion.Slerp(startRot, targetRot, t);
             yield return null;
         }
-
-
         Debug.Log("연출 끝: 리스폰 로직 실행");
         Sceneload_fade.SetActive(true);
         yield return new WaitForSeconds(1f);
+        ResetControl();
         HandleResetPlayer();
-        playerWork.startPick();
         DoNotControl(false);
     }
 
@@ -75,5 +73,10 @@ public class PlayerIsFaint : MonoBehaviour
         playerController.enabled = !isFaint;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+    private void ResetControl()
+    {
+        playerWork.startPick();
+        playerWork.controller.Calc_Speed();
     }
 }
