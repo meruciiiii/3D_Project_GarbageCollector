@@ -512,6 +512,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5065853463334940260, guid: f353ead4b7db6a84d9d1382790a7e427, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5414325532609417121, guid: f353ead4b7db6a84d9d1382790a7e427, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1767,6 +1771,14 @@ PrefabInstance:
       propertyPath: Sceneload_fade
       value: 
       objectReference: {fileID: 1302507334}
+    - target: {fileID: 3317103082146166114, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+      propertyPath: runSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3317103082146166114, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
+      propertyPath: slow_percent
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4923363421550768917, guid: 0147845c29df5e34ca8cc2a9e5c16f43, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 16127

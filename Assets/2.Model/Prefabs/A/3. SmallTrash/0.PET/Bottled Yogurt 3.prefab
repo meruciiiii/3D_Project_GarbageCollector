@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2131662901492085140}
   - component: {fileID: -1320341852191968567}
   - component: {fileID: 9176858093606058155}
+  - component: {fileID: -4514272594736674762}
   m_Layer: 6
   m_Name: Bottled Yogurt 3
   m_TagString: Untagged
@@ -162,6 +163,7 @@ MonoBehaviour:
   trash_r: {fileID: 487653045512838159}
   trash_c: {fileID: 9045643181518638907}
   trash_render: {fileID: 5329724027531773375}
+  isRuntimeInstance: 0
 --- !u!114 &-1320341852191968567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,3 +188,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447de1ffe67d0a74d9210b779a8d0c05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallTrashCollectable
+--- !u!114 &-4514272594736674762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3384549075965560091}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

@@ -84,6 +84,9 @@ public class SellManager : MonoBehaviour
             GameManager.instance.SaveAllGamedata();
             //Debug.Log($"정산 완료: 소형({smallEarn}) + 대형({bigEarn}) = {totalEarnings}원");
         }
+        if(playerController.TryGetComponent(out HitsSort hitsort)) {
+            hitsort.CatchandEmpty();
+        }
 
         return totalEarnings;
     }

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4723816839134040371}
   - component: {fileID: 7609881876838217101}
   - component: {fileID: -2608274143172756477}
+  - component: {fileID: 2380622723216260655}
   m_Layer: 6
   m_Name: Mineral Water Bottle
   m_TagString: Untagged
@@ -162,6 +163,7 @@ MonoBehaviour:
   trash_r: {fileID: -472964355489401504}
   trash_c: {fileID: 8360478349995642432}
   trash_render: {fileID: 6171954074562169288}
+  isRuntimeInstance: 0
 --- !u!114 &7609881876838217101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,3 +188,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447de1ffe67d0a74d9210b779a8d0c05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmallTrashCollectable
+--- !u!114 &2380622723216260655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743392534779629890}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
