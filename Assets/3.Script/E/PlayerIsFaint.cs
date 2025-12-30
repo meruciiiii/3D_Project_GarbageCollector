@@ -41,7 +41,7 @@ public class PlayerIsFaint : MonoBehaviour
             transform.localRotation = Quaternion.Slerp(startRot, targetRot, t);
             yield return null;
         }
-        Debug.Log("연출 끝: 리스폰 로직 실행");
+        //Debug.Log("연출 끝: 리스폰 로직 실행");
         Sceneload_fade.SetActive(true);
         yield return new WaitForSeconds(1f);
         ResetControl();
