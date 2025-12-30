@@ -37,10 +37,13 @@ public class BigTrashAction : MonoBehaviour
     }
     public bool CanHold(int strength)
     {
-        if (GameManager.instance.P_Str < strength)
-            return true; //들 수 있다.
+        if (GameManager.instance.P_Str < strength) 
+            return true; //들 수 없다.
         else
-            return false; //들 수 없다.
+        {
+            GameManager.instance.BigneedStr = strength;
+            return false; //들 수 있다.
+        }
     }
     public void DrobGarbage()                                                                //수정해야 할 것
     {

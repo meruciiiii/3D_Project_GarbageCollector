@@ -11,11 +11,12 @@ public class Sceneload : MonoBehaviour
     [SerializeField] private Image fadeImage;          // 화면을 가릴 검은색 이미지
     [SerializeField] private string intro_name = "Main_intro";
     [SerializeField] private bool introskip = false;
+    [SerializeField] private bool SFXSkip = false;
 
     public void SceneLoader(string scenename)
     {
         if (Time.timeScale.Equals(0)) Time.timeScale = 1f;
-        AudioManager.instance.PlaySFX("SFX1");
+        if(SFXSkip)AudioManager.instance.PlaySFX("SFX1");
         StartCoroutine(LoadAsync(scenename));
     }
 
