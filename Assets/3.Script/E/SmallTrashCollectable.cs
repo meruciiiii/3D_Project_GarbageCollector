@@ -26,4 +26,8 @@ public class SmallTrashCollectable : MonoBehaviour, IInteractable
             return -1;
         return trash.Data.getSmallTrashWeight(trash.TrashNum);
     }
+    public int TrashStr()
+    {
+        return 0;
+    }
 }

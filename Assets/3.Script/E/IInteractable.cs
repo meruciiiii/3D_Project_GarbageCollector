@@ -8,4 +8,5 @@ public interface IInteractable
 {
     void Interact(PlayerWork player);
     int TrashWeight();
+    int TrashStr();
 }

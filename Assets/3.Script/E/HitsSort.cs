@@ -81,11 +81,12 @@ public class HitsSort : MonoBehaviour
     {
         int playerBag = GameManager.instance.P_Maxbag;
         int nowWeight = GameManager.instance.P_Weight;
+        int playerStr = GameManager.instance.P_Str;
         for (int i = 0; i < currentHits.Length; i++)
         {
-            if (currentHits[i].collider.gameObject.TryGetComponent<Outline>(out Outline outline))
+            if (currentHits[i].collider.gameObject.TryGetComponent(out Outline outline))
             {
-                if (Checking(currentHits[i], playerBag, nowWeight))
+                if (Checking(currentHits[i], playerBag, nowWeight, playerStr))
                 {
                     ChangeGray(outline);
                     if (currentHits[i].collider.TryGetComponent<IInteractable>(out var interactable))
@@ -124,20 +125,37 @@ public class HitsSort : MonoBehaviour
     {
         outline.OutlineColor = new Color(130 / 255f, 130 / 255f, 130 / 255f);
     }
-    public bool Checking(RaycastHit check, int Bag, int now)
+    public bool Checking(RaycastHit check, int Bag, int now, int str)
     {
-
-        if (check.collider.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable))
+        int needStr = 0;
+        if (check.collider.gameObject.TryGetComponent(out IInteractable interactable))
         {
             now += interactable.TrashWeight();
+            needStr = interactable.TrashStr();
         }
         else
         {
-            Debug.Log("IInteractable 컴포넌트가 없습니다.");
+            //Debug.Log("IInteractable 컴포넌트가 없습니다.");
         }
         if (now < Bag)
         {
-            return true;
+            if (!check.collider.gameObject.layer.Equals(6)&&str >= needStr)
+            {
+
+                //Debug.Log("통과 str" + str);
+                //Debug.Log("통과 needStr" + needStr);
+                return true;
+            }
+            else if(check.collider.gameObject.layer.Equals(6))
+            {
+                //Debug.Log("통과x str" + str);
+                //Debug.Log("통과x needStr" + needStr);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {

@@ -99,7 +99,7 @@ public class PlayerWork : MonoBehaviour
             return;
 
         //nextPickTime = Time.time + pickInterval;
-        Debug.Log(nextPickTime + " : nextPickTime = 다음 선택 가능 시간");
+        //Debug.Log(nextPickTime + " : nextPickTime = 다음 선택 가능 시간");
 
         //pickTimer = 0f;
         Interact(this);
@@ -146,7 +146,7 @@ public class PlayerWork : MonoBehaviour
         {
             sorting.lastHitsOffOutline();
             target = Array.Empty<GameObject>();
-            Debug.Log("hits가 널이네요");
+            //Debug.Log("hits가 널이네요");
             if (trashInfoUI != null) trashInfoUI.HideInfo();
             return;
         }
@@ -201,7 +201,7 @@ public class PlayerWork : MonoBehaviour
             }
             else
             {
-                Debug.Log("IInteractable 컴포넌트가 없습니다.");
+                //Debug.Log("IInteractable 컴포넌트가 없습니다.");
             }
             nextPickTime = Time.time + pickInterval;
             uIManager.change_Value();

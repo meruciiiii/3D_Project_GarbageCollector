@@ -31,6 +31,10 @@ public class BigTrashAction : MonoBehaviour
         GameManager.instance.BigGarbageWeight = trash.Data.getBigTrashWeight(trash.TrashNum);
         currentTrash.Trash_c.enabled = false;
         currentTrash.Trash_render.enabled = false;
+        foreach (var children_r in currentTrash.GetComponentsInChildren<Renderer>(true))
+        {
+            children_r.enabled = false;
+        }
         GameManager.instance.isGrabBigGarbage = true;
         AudioManager.instance.PlaySFX("SFX7");//큰 쓰레기 소리 작업
         return true;
@@ -56,6 +60,10 @@ public class BigTrashAction : MonoBehaviour
         trashRotation.position = transform.position + direction * 1.5f;
         trashRotation.rotation = transform.rotation;
         //trash.gameObject.SetActive(true);                                                                //수정해야 할 것
+        foreach (var children_r in trash.GetComponentsInChildren<Renderer>(true))
+        {
+            children_r.enabled = true;
+        }
         trash.Trash_r.isKinematic = false;
         trash.Trash_r.useGravity = true;
         trash.Trash_r.AddForce(direction * 1f, ForceMode.Impulse);
