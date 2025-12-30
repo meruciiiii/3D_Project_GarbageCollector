@@ -6,7 +6,7 @@ public class ExitGame : MonoBehaviour
     {
         AudioManager.instance.PlaySFX("SFX1");
         if (Time.timeScale.Equals(0)) Time.timeScale = 1f;
-        Debug.Log("exitGame!!");
+        //Debug.Log("exitGame!!");
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
