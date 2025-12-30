@@ -212,7 +212,7 @@ public class PlayerController : MonoBehaviour {
             int half_count = GameManager.instance.P_Str - GameManager.instance.BigneedStr;
             for (int i = 0; i < half_count; i++) {
                 //힘 스탯이 현재 든 물건보다 half_count만큼 높을때, 속도 반감을 반감
-                half_reduction += (half_reduction * 0.5f);
+                half_reduction += (float)(1 - (half_reduction * 0.5));
             }
             Speed *= half_reduction;
         }
