@@ -44,7 +44,7 @@ public class PlayerWork : MonoBehaviour
     [SerializeField] public SmallTrashAction smallTrashAction;
     [SerializeField] public BigTrashAction bigTrashAction;
     [SerializeField] public HumanTrashAction humanTrashAction;
-    [SerializeField] private PlayerController controller;
+    [SerializeField] public PlayerController controller;
     [SerializeField] private UIManager uIManager;
     [Header("UI ¿¬°á")]
     [SerializeField] private ThashInfo trashInfoUI;
@@ -223,6 +223,6 @@ public class PlayerWork : MonoBehaviour
     }
     public void startPick()
     {
-        HandleContinuousPick();
+        Interact(this);
     }
 }
