@@ -45,8 +45,10 @@ public class NPC_Spanwer : MonoBehaviour {
 	}
 
 	private IEnumerator spawn_NPC() {
-		WaitForSeconds wfs = new WaitForSeconds(3f);
 		while (pool_cnt < pool_size) {
+			float maxTime = Random.Range(2, 5);
+			float timer = 0f;
+
 			npc = npc_pooling[pool_cnt];
 
 			if (npc.TryGetComponent(out NPC_Base npc_script)) {
@@ -54,8 +56,11 @@ public class NPC_Spanwer : MonoBehaviour {
 				npc_script.ChangeState(npc_script.setPosState);
 			}
 
+			while (timer < maxTime) {
+				timer += Time.deltaTime;
+				yield return null;
+			}
 			pool_cnt += 1;
-			yield return wfs;
 		}
 	}
 }
