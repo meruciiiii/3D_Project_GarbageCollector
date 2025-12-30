@@ -244,7 +244,8 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
-    
+
+    private List<Coroutine> active3DCoroutines = new List<Coroutine>();
     public void Play3DSFX(string name, Transform gameobject, bool isLoop = false) 
         //사용방식 AudioManager.instance.Play3DSFX("3D_SFX", this.transform);
     {
@@ -295,7 +296,8 @@ public class AudioManager : MonoBehaviour
                         SFX_3D_Player[i].loop = isLoop; // 루프 설정
                         SFX_3D_Player[i].Play();
 
-                        StartCoroutine(ResetAudioSourceParent(SFX_3D_Player[i], s.clip.length));
+                        Coroutine co = StartCoroutine(ResetAudioSourceParent(SFX_3D_Player[i], s.clip.length));
+                        active3DCoroutines.Add(co);
                         return;
                     }
                 }
@@ -329,43 +331,31 @@ public class AudioManager : MonoBehaviour
     private IEnumerator ResetAudioSourceParent(AudioSource source, float delay)
     {
         float timer = 0f;
+
+        if (source == null) yield break;
+
         // 1. 소리가 시작될 때의 부모를 기억합니다.
         Transform currentTarget = source.transform.parent;
 
         // 소리가 끝날 때까지 또는 설정된 clip 길이 동안 체크
-        while (source.loop || timer < delay || source.isPlaying)
+        while (source != null && (source.loop || timer < delay || source.isPlaying))
         {
             timer += Time.deltaTime;
 
-            // 2. 원래 부모가 사라졌거나(Destroy) 비활성화(Disable) 되었는지 체크
-            if (currentTarget == null || !currentTarget.gameObject.activeInHierarchy)
+            // 부모가 씬 전환으로 인해 파괴되었는지 체크
+            if (currentTarget == null)
             {
-                // 부모가 사라진 순간!
-                if (source.transform.parent != sfx3DContainer)
+                if (source != null)
                 {
-                    // 현재 월드 좌표를 유지하기 위해 위치를 기록
-                    Vector3 currentWorldPos = source.transform.position;
-
-                    // 3. 즉시 매니저의 컨테이너로 부모 변경 (좌표 유지를 위해 worldPositionStays: true)
+                    // 소스라도 살아있다면 안전한 곳(AudioManager)으로 회수
                     source.transform.SetParent(sfx3DContainer, true);
-
-                    // 만약 worldPositionStays가 불안정할 경우를 대비해 수동 재설정
-                    source.transform.position = currentWorldPos;
                 }
-
-                if (source.loop)
-                {
-                    source.loop = false;
-                    source.Stop();
-                    break;
-                }
-
-                // 4. 이제 독립되었으므로 소리가 끝날 때까지만 대기하고 루프 종료
-                yield return new WaitWhile(() => source != null && source.isPlaying);
                 break;
             }
 
-            // Stop3DSFX 등으로 루프가 풀리고 소리가 멈췄다면 루프 탈출
+            // 3. 씬 로드 중 source가 파괴될 수 있으므로 매번 체크
+            if (source == null) yield break;
+
             if (!source.loop && !source.isPlaying && timer > 0.1f) break;
 
             yield return null;
@@ -406,5 +396,11 @@ public class AudioManager : MonoBehaviour
         {
             walkingPlayer.Stop();
         }
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        active3DCoroutines.Clear();
     }
 }
