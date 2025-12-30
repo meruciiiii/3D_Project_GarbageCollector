@@ -95,7 +95,7 @@ namespace PrivateLT.CharacterCustomization
     {
         public Transform Rotatable;
         public Camera Camera;
-        public CharacterCustomizationPanel CustomizationPanel { set; get; }
+        //public CharacterCustomizationPanel CustomizationPanel { set; get; }
 
         public Customization_Data CustomizationData;
         [SerializeField] private GameObject _character;
@@ -105,6 +105,7 @@ namespace PrivateLT.CharacterCustomization
 
         private float rotationSpeed = 25f;
 
+        /*
         public void Initialise(CharacterCustomizationPanel customizationPanel)
         {
             foreach (var part in _customizationParts)
@@ -116,7 +117,7 @@ namespace PrivateLT.CharacterCustomization
 
             Shuffle();
         }
-
+        */
         public void Close()
         {
             foreach (var part in _customizationParts)
@@ -125,12 +126,12 @@ namespace PrivateLT.CharacterCustomization
             }
         }
 
+        /*
         static Customization()
         {
 
             EditorApplication.update += EditorUpdate;
         }
-
         private static void EditorUpdate()
         {
             Customization[] scripts = FindObjectsByType<Customization>(FindObjectsSortMode.None);
@@ -143,7 +144,7 @@ namespace PrivateLT.CharacterCustomization
                 }
             }
         }
-
+        */
         public void CustomUpdate()
         {
             Rotate();
