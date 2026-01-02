@@ -760,7 +760,7 @@ RectTransform:
   m_Father: {fileID: 4678536311543475113}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2144,7 +2144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SellManager
   pricePerWeight: 1
-  bigTrashMultiplier: 1
+  bigTrashMultiplier: 0.7
   playerController: {fileID: 0}
 --- !u!114 &8892845127071251726
 MonoBehaviour:
@@ -2517,7 +2517,7 @@ RectTransform:
   m_Father: {fileID: 5371963489925523415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3129,7 +3129,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Cancle
+  m_Text: Cancel
 --- !u!1 &3698988582190939225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3676,7 +3676,7 @@ RectTransform:
   m_Father: {fileID: 6125357102958170184}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4704,7 +4704,7 @@ RectTransform:
   m_Father: {fileID: 1015370878400866438}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5034,12 +5034,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8bae762e83fa94e8fffc008eabb204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeManager
-  baseStrengthCost: 5000
-  baseBagCost: 5000
-  baseMaxHPCost: 5000
+  baseStrengthCost: 15000
+  baseBagCost: 7000
+  baseMaxHPCost: 8000
   baseSpeedCost: 5000
-  baseMultiGrabCost: 10000
-  pickNpcCost: 150000
+  baseMultiGrabCost: 6000
+  pickNpcCost: 500000
 --- !u!114 &75284994897638241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6256,7 +6256,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Cancle
+  m_Text: Cancel
 --- !u!1 &7208685417325696559
 GameObject:
   m_ObjectHideFlags: 0
@@ -7397,7 +7397,7 @@ RectTransform:
   m_Father: {fileID: 617515471109748898}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7472,7 +7472,7 @@ RectTransform:
   m_Father: {fileID: 4399516099023509267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
