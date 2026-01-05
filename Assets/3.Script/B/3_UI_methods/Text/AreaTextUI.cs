@@ -14,6 +14,7 @@ public class AreaTextUI : MonoBehaviour
         {
             AreaManager.instance.onAreaChanged += UpdaeAreaText;
         }
+        UpdaeAreaText(GameManager.instance.Current_Area);
     }
 
     private void Start()
