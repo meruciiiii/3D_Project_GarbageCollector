@@ -137,12 +137,12 @@ public class ThashInfo : MonoBehaviour
             infoBuilder.Clear();
 
             // ÃÑ ¹«°Ô
-            infoBuilder.AppendLine(isEng ? $"Total Weight: {totalWeight} g" : $"ÃÑ ¹«°Ô: {totalWeight} g");
+            infoBuilder.AppendLine(isEng ? $"Total: {totalWeight} g" : $"ÃÑ ¹«°Ô: {totalWeight} g");
 
             // ÇÊ¿ä Èû (Max°ª)
             if (currentStr >= maxReqStr)
             {
-                infoBuilder.AppendLine(isEng ? $"Req Str: {maxReqStr}" : $"ÇÊ¿ä Èû: {maxReqStr}");
+                infoBuilder.AppendLine(isEng ? $"Str: {maxReqStr}" : $"ÇÊ¿ä Èû: {maxReqStr}");
             }
             else
             {
@@ -153,7 +153,7 @@ public class ThashInfo : MonoBehaviour
             // ÃÑ Ã»°áµµ ¼Ò¸ð
             if (totalHpCost > 0)
             {
-                string costText = isEng ? "Total CP Loss" : "ÃÑ Ã»°áµµ ¼Ò¸ð";
+                string costText = isEng ? "CP Loss" : "ÃÑ Ã»°áµµ ¼Ò¸ð";
                 infoBuilder.Append($"{costText}: <color=orange>-{totalHpCost}</color>");
             }
 
